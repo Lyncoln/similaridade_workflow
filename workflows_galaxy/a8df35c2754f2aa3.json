@@ -1,0 +1,181 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "MGEScan - identifying long terminal repeats (LTR) and non-LTR retroelements in eukaryotic genomic sequences",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Input Dataset"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 202,
+                "top": 525
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "ltr-preprocessing-scaffold",
+            "errors": "Tool is not installed",
+            "id": 1,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "ltr-preprocessing-scaffold",
+            "outputs": [],
+            "position": {
+                "left": 433,
+                "top": 220
+            },
+            "post_job_actions": {},
+            "tool_id": "ltr-preprocessing-scaffold",
+            "tool_state": "{}",
+            "tool_version": null,
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "mgescan-nonltr",
+            "errors": "Tool is not installed",
+            "id": 2,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "mgescan-nonltr",
+            "outputs": [],
+            "position": {
+                "left": 433,
+                "top": 735
+            },
+            "post_job_actions": {},
+            "tool_id": "mgescan-nonltr",
+            "tool_state": "{}",
+            "tool_version": null,
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "repeatmasker",
+            "errors": "Tool is not installed",
+            "id": 3,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "repeatmasker",
+            "outputs": [],
+            "position": {
+                "left": 490.5,
+                "top": 324
+            },
+            "post_job_actions": {},
+            "tool_id": "repeatmasker",
+            "tool_state": "{}",
+            "tool_version": null,
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "find-ltr",
+            "errors": "Tool is not installed",
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 3,
+                    "output_name": "genome sequences"
+                },
+                "input2": {
+                    "id": 3,
+                    "output_name": "repeatmasker results"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "find-ltr",
+            "outputs": [],
+            "position": {
+                "left": 558,
+                "top": 453
+            },
+            "post_job_actions": {},
+            "tool_id": "find-ltr",
+            "tool_state": "{}",
+            "tool_version": null,
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "ltr-gff",
+            "errors": "Tool is not installed",
+            "id": 5,
+            "input_connections": {
+                "input": {
+                    "id": 4,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "ltr-gff",
+            "outputs": [],
+            "position": {
+                "left": 615.5,
+                "top": 584
+            },
+            "post_job_actions": {},
+            "tool_id": "ltr-gff",
+            "tool_state": "{}",
+            "tool_version": null,
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [],
+    "version": 0
+}

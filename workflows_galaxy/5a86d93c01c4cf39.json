@@ -1,0 +1,286 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "RNA-Seq_C_Analysis - Differential Expression",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Zea mays gtf Filtered Gene Set"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 203.99998474121094,
+                "top": 149.45453643798828
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Reads_WT_aligned"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 207.63636779785156,
+                "top": 272.18180084228516
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Reads_MUT_aligned"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 208.8181915283203,
+                "top": 362.4545211791992
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "cuffdiff",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "group_analysis|aligned_reads1": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "group_analysis|aligned_reads2": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "gtf_input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Cuffdiff",
+            "outputs": [
+                {
+                    "name": "isoforms_read_group",
+                    "type": "tabular"
+                },
+                {
+                    "name": "genes_read_group",
+                    "type": "tabular"
+                },
+                {
+                    "name": "cds_read_group",
+                    "type": "tabular"
+                },
+                {
+                    "name": "tss_groups_read_group",
+                    "type": "tabular"
+                },
+                {
+                    "name": "read_group_info",
+                    "type": "txt"
+                },
+                {
+                    "name": "run_info",
+                    "type": "txt"
+                },
+                {
+                    "name": "splicing_diff",
+                    "type": "tabular"
+                },
+                {
+                    "name": "promoters_diff",
+                    "type": "tabular"
+                },
+                {
+                    "name": "cds_diff",
+                    "type": "tabular"
+                },
+                {
+                    "name": "cds_exp_fpkm_tracking",
+                    "type": "tabular"
+                },
+                {
+                    "name": "cds_fpkm_tracking",
+                    "type": "tabular"
+                },
+                {
+                    "name": "cds_count_tracking",
+                    "type": "tabular"
+                },
+                {
+                    "name": "tss_groups_exp",
+                    "type": "tabular"
+                },
+                {
+                    "name": "tss_groups_fpkm_tracking",
+                    "type": "tabular"
+                },
+                {
+                    "name": "tss_groups_count_tracking",
+                    "type": "tabular"
+                },
+                {
+                    "name": "genes_exp",
+                    "type": "tabular"
+                },
+                {
+                    "name": "genes_fpkm_tracking",
+                    "type": "tabular"
+                },
+                {
+                    "name": "genes_count_tracking",
+                    "type": "tabular"
+                },
+                {
+                    "name": "isoforms_exp",
+                    "type": "tabular"
+                },
+                {
+                    "name": "isoforms_fpkm_tracking",
+                    "type": "tabular"
+                },
+                {
+                    "name": "isoforms_count_tracking",
+                    "type": "tabular"
+                },
+                {
+                    "name": "output_cummerbund",
+                    "type": "sqlite"
+                }
+            ],
+            "position": {
+                "left": 564.9090728759766,
+                "top": 145.81817626953125
+            },
+            "post_job_actions": {
+                "HideDatasetActioncds_diff": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "cds_diff"
+                },
+                "HideDatasetActioncds_exp_fpkm_tracking": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "cds_exp_fpkm_tracking"
+                },
+                "HideDatasetActioncds_fpkm_tracking": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "cds_fpkm_tracking"
+                },
+                "HideDatasetActionpromoters_diff": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "promoters_diff"
+                },
+                "HideDatasetActionsplicing_diff": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "splicing_diff"
+                },
+                "HideDatasetActiontss_groups_exp": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "tss_groups_exp"
+                },
+                "HideDatasetActiontss_groups_fpkm_tracking": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "tss_groups_fpkm_tracking"
+                },
+                "RenameDatasetActiongenes_exp": {
+                    "action_arguments": {
+                        "newname": "WT_vs_MUT_genes_exp"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "genes_exp"
+                },
+                "RenameDatasetActiongenes_fpkm_tracking": {
+                    "action_arguments": {
+                        "newname": "WT_vs_MUT_genes_fpkm_tracking"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "genes_fpkm_tracking"
+                },
+                "RenameDatasetActionisoforms_exp": {
+                    "action_arguments": {
+                        "newname": "WT_vs_MUT_isoforms_exp"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "isoforms_exp"
+                },
+                "RenameDatasetActionisoforms_fpkm_tracking": {
+                    "action_arguments": {
+                        "newname": "WT_vs_MUT_isoforms_fpkm_tracking"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "isoforms_fpkm_tracking"
+                }
+            },
+            "tool_id": "cuffdiff",
+            "tool_shed_repository": {
+                "changeset_revision": "43221aef70e2",
+                "name": "cuffdiff",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"bias_correction\": {\"do_bias_correction\": \"No\", \"__current_case__\": 1}, \"chromInfo\": \"/home/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\", \"do_normalization\": \"No\", \"fdr\": \"0.05\", \"group_analysis\": {\"aligned_reads1\": null, \"aligned_reads2\": null, \"__current_case__\": 1, \"do_groups\": \"No\"}, \"gtf_input\": null, \"min_alignment_count\": \"1000\", \"singlePaired\": {\"sPaired\": \"No\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.0.5",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [],
+    "version": 0
+}

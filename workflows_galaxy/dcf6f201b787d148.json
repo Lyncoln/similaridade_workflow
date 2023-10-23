@@ -1,0 +1,509 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "RNAseq: Reference-based by nekrut",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Condition 1 list of paired reads"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "left": 200,
+                "top": 200
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null, \"collection_type\": \"list:paired\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "c1785855-ff46-43e9-9b7b-6cd0cc189fdd",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "566f5243-812f-49cd-a716-bdd3e37555af"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Condition 2 list of paired reads"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "left": 200,
+                "top": 285
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null, \"collection_type\": \"list:paired\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "b1fbc6ee-dada-4fd6-850c-9f4824af6318",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "138eeb0c-3945-4eb7-bb6f-c9f724804c18"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Reference Genome GFF/GTF"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 200,
+                "top": 370
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "8d0d6ff7-32f4-4cec-841a-69c6b58a8ef1",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "8c7342d3-1e2e-4dd9-b735-9559493790b1"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/tophat2/tophat2/2.1.0",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "singlePaired|input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool TopHat",
+                    "name": "singlePaired"
+                }
+            ],
+            "label": null,
+            "name": "TopHat",
+            "outputs": [
+                {
+                    "name": "align_summary",
+                    "type": "txt"
+                },
+                {
+                    "name": "insertions",
+                    "type": "bed"
+                },
+                {
+                    "name": "deletions",
+                    "type": "bed"
+                },
+                {
+                    "name": "junctions",
+                    "type": "bed"
+                },
+                {
+                    "name": "accepted_hits",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 465,
+                "top": 200
+            },
+            "post_job_actions": {
+                "HideDatasetActionaccepted_hits": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "accepted_hits"
+                },
+                "HideDatasetActionalign_summary": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "align_summary"
+                },
+                "HideDatasetActiondeletions": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "deletions"
+                },
+                "HideDatasetActionfusions": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "fusions"
+                },
+                "HideDatasetActioninsertions": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "insertions"
+                },
+                "HideDatasetActionjunctions": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "junctions"
+                },
+                "HideDatasetActionunmapped": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "unmapped"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/tophat2/tophat2/2.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "0849fa93eadb",
+                "name": "tophat2",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__job_resource\": {\"__job_resource__select\": \"no\", \"__current_case__\": 0}, \"params\": {\"settingsType\": \"full\", \"__current_case__\": 1, \"read_realign_edit_dist\": \"1000\", \"read_edit_dist\": \"2\", \"library_type\": \"fr-firststrand\", \"read_mismatches\": \"2\", \"bowtie_n\": \"No\", \"anchor_length\": \"8\", \"splice_mismatches\": \"0\", \"min_intron_length\": \"70\", \"max_intron_length\": \"500000\", \"indel_search\": {\"allow_indel_search\": \"Yes\", \"__current_case__\": 1, \"max_insertion_length\": \"3\", \"max_deletion_length\": \"3\"}, \"max_multihits\": \"20\", \"min_segment_intron\": \"50\", \"max_segment_intron\": \"500000\", \"seg_mismatches\": \"2\", \"seg_length\": \"25\", \"output_unmapped\": false, \"own_junctions\": {\"use_junctions\": \"No\", \"__current_case__\": 1}, \"coverage_search\": {\"use_search\": \"auto\", \"__current_case__\": 0}, \"microexon_search\": \"No\", \"fusion_search\": {\"do_search\": \"No\", \"__current_case__\": 0}, \"bowtie2_settings\": {\"b2_settings\": \"No\", \"__current_case__\": 0}}, \"readGroup\": {\"specReadGroup\": \"no\", \"__current_case__\": 1}, \"refGenomeSource\": {\"genomeSource\": \"indexed\", \"__current_case__\": 0, \"index\": \"dm3\"}, \"singlePaired\": {\"sPaired\": \"paired_collection\", \"__current_case__\": 2, \"input\": {\"__class__\": \"RuntimeValue\"}, \"mate_inner_distance\": \"28\", \"mate_std_dev\": \"20\", \"report_discordant_pairs\": \"Yes\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.0",
+            "type": "tool",
+            "uuid": "6dada519-1a8a-4da7-84c9-844c7f31f7a6",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/tophat2/tophat2/2.1.0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "singlePaired|input": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool TopHat",
+                    "name": "singlePaired"
+                }
+            ],
+            "label": null,
+            "name": "TopHat",
+            "outputs": [
+                {
+                    "name": "align_summary",
+                    "type": "txt"
+                },
+                {
+                    "name": "insertions",
+                    "type": "bed"
+                },
+                {
+                    "name": "deletions",
+                    "type": "bed"
+                },
+                {
+                    "name": "junctions",
+                    "type": "bed"
+                },
+                {
+                    "name": "accepted_hits",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 465,
+                "top": 508
+            },
+            "post_job_actions": {
+                "HideDatasetActionaccepted_hits": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "accepted_hits"
+                },
+                "HideDatasetActionalign_summary": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "align_summary"
+                },
+                "HideDatasetActiondeletions": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "deletions"
+                },
+                "HideDatasetActionfusions": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "fusions"
+                },
+                "HideDatasetActioninsertions": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "insertions"
+                },
+                "HideDatasetActionjunctions": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "junctions"
+                },
+                "HideDatasetActionunmapped": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "unmapped"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/tophat2/tophat2/2.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "0849fa93eadb",
+                "name": "tophat2",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__job_resource\": {\"__job_resource__select\": \"no\", \"__current_case__\": 0}, \"params\": {\"settingsType\": \"full\", \"__current_case__\": 1, \"read_realign_edit_dist\": \"1000\", \"read_edit_dist\": \"2\", \"library_type\": \"fr-firststrand\", \"read_mismatches\": \"2\", \"bowtie_n\": \"No\", \"anchor_length\": \"8\", \"splice_mismatches\": \"0\", \"min_intron_length\": \"70\", \"max_intron_length\": \"500000\", \"indel_search\": {\"allow_indel_search\": \"Yes\", \"__current_case__\": 1, \"max_insertion_length\": \"3\", \"max_deletion_length\": \"3\"}, \"max_multihits\": \"20\", \"min_segment_intron\": \"50\", \"max_segment_intron\": \"500000\", \"seg_mismatches\": \"2\", \"seg_length\": \"25\", \"output_unmapped\": false, \"own_junctions\": {\"use_junctions\": \"No\", \"__current_case__\": 1}, \"coverage_search\": {\"use_search\": \"auto\", \"__current_case__\": 0}, \"microexon_search\": \"No\", \"fusion_search\": {\"do_search\": \"No\", \"__current_case__\": 0}, \"bowtie2_settings\": {\"b2_settings\": \"No\", \"__current_case__\": 0}}, \"readGroup\": {\"specReadGroup\": \"no\", \"__current_case__\": 1}, \"refGenomeSource\": {\"genomeSource\": \"indexed\", \"__current_case__\": 0, \"index\": \"dm3\"}, \"singlePaired\": {\"sPaired\": \"paired_collection\", \"__current_case__\": 2, \"input\": {\"__class__\": \"RuntimeValue\"}, \"mate_inner_distance\": \"28\", \"mate_std_dev\": \"20\", \"report_discordant_pairs\": \"Yes\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.0",
+            "type": "tool",
+            "uuid": "43a9774d-646d-4b7f-83db-4cd8838242d8",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/lparsons/htseq_count/htseq_count/0.6.1galaxy1",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "gfffile": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "samfile": {
+                    "id": 3,
+                    "output_name": "accepted_hits"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool htseq-count",
+                    "name": "gfffile"
+                },
+                {
+                    "description": "runtime parameter for tool htseq-count",
+                    "name": "samfile"
+                }
+            ],
+            "label": null,
+            "name": "htseq-count",
+            "outputs": [
+                {
+                    "name": "counts",
+                    "type": "tabular"
+                },
+                {
+                    "name": "othercounts",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 727,
+                "top": 200
+            },
+            "post_job_actions": {
+                "HideDatasetActioncounts": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "counts"
+                },
+                "HideDatasetActionothercounts": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "othercounts"
+                },
+                "HideDatasetActionsamoutfile": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "samoutfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/lparsons/htseq_count/htseq_count/0.6.1galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "a6dcb86af112",
+                "name": "htseq_count",
+                "owner": "lparsons",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"featuretype\": \"exon\", \"force_sort\": false, \"gfffile\": {\"__class__\": \"RuntimeValue\"}, \"idattr\": \"gene_id\", \"minaqual\": \"10\", \"mode\": \"union\", \"samfile\": {\"__class__\": \"RuntimeValue\"}, \"samout_conditional\": {\"samout\": false, \"__current_case__\": 1}, \"stranded\": \"yes\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.6.1galaxy1",
+            "type": "tool",
+            "uuid": "a91a2a81-d936-4385-87e6-d22f6ec77b8b",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/lparsons/htseq_count/htseq_count/0.6.1galaxy1",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "gfffile": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "samfile": {
+                    "id": 4,
+                    "output_name": "accepted_hits"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool htseq-count",
+                    "name": "gfffile"
+                },
+                {
+                    "description": "runtime parameter for tool htseq-count",
+                    "name": "samfile"
+                }
+            ],
+            "label": null,
+            "name": "htseq-count",
+            "outputs": [
+                {
+                    "name": "counts",
+                    "type": "tabular"
+                },
+                {
+                    "name": "othercounts",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 727,
+                "top": 436
+            },
+            "post_job_actions": {
+                "HideDatasetActioncounts": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "counts"
+                },
+                "HideDatasetActionothercounts": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "othercounts"
+                },
+                "HideDatasetActionsamoutfile": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "samoutfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/lparsons/htseq_count/htseq_count/0.6.1galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "a6dcb86af112",
+                "name": "htseq_count",
+                "owner": "lparsons",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"featuretype\": \"exon\", \"force_sort\": false, \"gfffile\": {\"__class__\": \"RuntimeValue\"}, \"idattr\": \"gene_id\", \"minaqual\": \"10\", \"mode\": \"union\", \"samfile\": {\"__class__\": \"RuntimeValue\"}, \"samout_conditional\": {\"samout\": false, \"__current_case__\": 1}, \"stranded\": \"yes\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.6.1galaxy1",
+            "type": "tool",
+            "uuid": "40882657-c8c1-4ce4-88bf-34b43517ee4b",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.1.8.3",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "rep_factorName_0|rep_factorLevel_0|countsFile": {
+                    "id": 5,
+                    "output_name": "counts"
+                },
+                "rep_factorName_0|rep_factorLevel_1|countsFile": {
+                    "id": 6,
+                    "output_name": "counts"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "DESeq2",
+            "outputs": [
+                {
+                    "name": "deseq_out",
+                    "type": "tabular"
+                },
+                {
+                    "name": "plots",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "left": 956,
+                "top": 200
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.1.8.3",
+            "tool_shed_repository": {
+                "changeset_revision": "8702e49e68b6",
+                "name": "deseq2",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"auto_mean_filter_off\": false, \"fit_type\": \"1\", \"many_contrasts\": false, \"outlier_filter_off\": false, \"outlier_replace_off\": false, \"pdf\": true, \"rep_factorName\": [{\"__index__\": 0, \"factorName\": \"FactorName\", \"rep_factorLevel\": [{\"__index__\": 0, \"factorLevel\": \"FactorLevel\", \"countsFile\": {\"__class__\": \"RuntimeValue\"}}, {\"__index__\": 1, \"factorLevel\": \"FactorLevel\", \"countsFile\": {\"__class__\": \"RuntimeValue\"}}]}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.8.3",
+            "type": "tool",
+            "uuid": "0880cbe2-8ad7-49f3-9f28-5ed1b2e710d0",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "split_output",
+                    "uuid": "4f03bc04-50d8-47e3-9e48-9c91e5be152a"
+                },
+                {
+                    "label": null,
+                    "output_name": "plots",
+                    "uuid": "871c1f34-0495-402e-88bb-3beaa0be81e1"
+                },
+                {
+                    "label": null,
+                    "output_name": "deseq_out",
+                    "uuid": "93bb2da9-bc1f-4d51-9f75-2e8350be5641"
+                }
+            ]
+        }
+    },
+    "tags": [],
+    "uuid": "6a9f4493-f87b-4f8e-a488-e165ee8d9189",
+    "version": 4
+}

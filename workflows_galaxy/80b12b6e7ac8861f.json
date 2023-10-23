@@ -1,0 +1,263 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "Viral Variant Calling",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1",
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Map with BWA-MEM",
+                    "name": "fastq_input"
+                },
+                {
+                    "description": "runtime parameter for tool Map with BWA-MEM",
+                    "name": "fastq_input"
+                },
+                {
+                    "description": "runtime parameter for tool Map with BWA-MEM",
+                    "name": "reference_source"
+                }
+            ],
+            "label": null,
+            "name": "Map with BWA-MEM",
+            "outputs": [
+                {
+                    "name": "bam_output",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 200,
+                "top": 200
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1",
+            "tool_shed_repository": {
+                "changeset_revision": "3fe632431b68",
+                "name": "bwa",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__job_resource\": {\"__job_resource__select\": \"no\", \"__current_case__\": 0}, \"analysis_type\": {\"analysis_type_selector\": \"illumina\", \"__current_case__\": 0}, \"fastq_input\": {\"fastq_input_selector\": \"paired\", \"__current_case__\": 0, \"fastq_input1\": {\"__class__\": \"RuntimeValue\"}, \"fastq_input2\": {\"__class__\": \"RuntimeValue\"}, \"iset_stats\": \"\"}, \"reference_source\": {\"reference_source_selector\": \"history\", \"__current_case__\": 1, \"ref_file\": {\"__class__\": \"RuntimeValue\"}, \"index_a\": \"auto\"}, \"rg\": {\"rg_selector\": \"do_not_set\", \"__current_case__\": 3}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.7.17.1",
+            "type": "tool",
+            "uuid": "298f7b38-c035-4f24-a1de-b7ae89eca2e9",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "bam_output",
+                    "uuid": "af0d8c5a-97d5-41fb-a7d9-a70f9dd340dc"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.1",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "inputFile": {
+                    "id": 0,
+                    "output_name": "bam_output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "MarkDuplicates",
+            "outputs": [
+                {
+                    "name": "metrics_file",
+                    "type": "txt"
+                },
+                {
+                    "name": "outFile",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 504.5,
+                "top": 238
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.1",
+            "tool_shed_repository": {
+                "changeset_revision": "f6ced08779c4",
+                "name": "picard",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"assume_sorted\": true, \"barcode_tag\": \"\", \"comments\": [], \"duplicate_scoring_strategy\": \"SUM_OF_BASE_QUALITIES\", \"inputFile\": {\"__class__\": \"ConnectedValue\"}, \"optical_duplicate_pixel_distance\": \"100\", \"read_name_regex\": \"\", \"remove_duplicates\": false, \"validation_stringency\": \"LENIENT\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.18.2.1",
+            "type": "tool",
+            "uuid": "8f62760c-0932-4d39-bc2b-d2dee528169f",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "metrics_file",
+                    "uuid": "74df33ad-71a0-41f8-823c-48ea2a6a9017"
+                },
+                {
+                    "label": null,
+                    "output_name": "outFile",
+                    "uuid": "23f9a8ef-3219-4e5c-8bd9-3c107ea67705"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/freebayes/freebayes/1.1.0.46-0",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "reference_source|batchmode|input_bams": {
+                    "id": 0,
+                    "output_name": "bam_output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool FreeBayes",
+                    "name": "reference_source"
+                }
+            ],
+            "label": null,
+            "name": "FreeBayes",
+            "outputs": [
+                {
+                    "name": "output_vcf",
+                    "type": "vcf"
+                }
+            ],
+            "position": {
+                "left": 616,
+                "top": 552
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/freebayes/freebayes/1.1.0.46-0",
+            "tool_shed_repository": {
+                "changeset_revision": "156b60c1530f",
+                "name": "freebayes",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__job_resource\": {\"__job_resource__select\": \"no\", \"__current_case__\": 0}, \"options_type\": {\"options_type_selector\": \"simple\", \"__current_case__\": 1}, \"reference_source\": {\"reference_source_selector\": \"history\", \"__current_case__\": 1, \"batchmode\": {\"processmode\": \"individual\", \"__current_case__\": 0, \"input_bams\": {\"__class__\": \"ConnectedValue\"}}, \"ref_file\": {\"__class__\": \"RuntimeValue\"}}, \"target_limit_type\": {\"target_limit_type_selector\": \"do_not_limit\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0.46-0",
+            "type": "tool",
+            "uuid": "abad9c78-3fe5-4971-8bf6-3c7cfb470356",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_vcf",
+                    "uuid": "fb9c77e5-494f-467d-bca8-db692ce30143"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtools_mpileup/samtools_mpileup/2.1.4",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "reference_source|input_bam": {
+                    "id": 1,
+                    "output_name": "outFile"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool samtools mpileup",
+                    "name": "reference_source"
+                }
+            ],
+            "label": null,
+            "name": "samtools mpileup",
+            "outputs": [
+                {
+                    "name": "output_file_pu",
+                    "type": "pileup"
+                }
+            ],
+            "position": {
+                "left": 192,
+                "top": 488
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtools_mpileup/samtools_mpileup/2.1.4",
+            "tool_shed_repository": {
+                "changeset_revision": "fa7ad9b89f4a",
+                "name": "samtools_mpileup",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"advanced_options\": {\"advanced_options_selector\": \"default\", \"__current_case__\": 0}, \"output_options_cond\": {\"output_options_selector\": \"default\", \"__current_case__\": 0}, \"reference_source\": {\"reference_source_selector\": \"history\", \"__current_case__\": 1, \"input_bam\": {\"__class__\": \"ConnectedValue\"}, \"ref_file\": {\"__class__\": \"RuntimeValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.4",
+            "type": "tool",
+            "uuid": "c32b87b3-a479-4c8d-a4c9-e0e8ea869380",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_file_pu",
+                    "uuid": "0f3bedcc-4ac2-4a21-a7a4-1f2f7c7378bf"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/varscan_version_2/varscan/2.4.2",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 3,
+                    "output_name": "output_file_pu"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "VarScan",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "vcf"
+                }
+            ],
+            "position": {
+                "left": 428,
+                "top": 659
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/varscan_version_2/varscan/2.4.2",
+            "tool_shed_repository": {
+                "changeset_revision": "bc1e0cd41241",
+                "name": "varscan_version_2",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"cmd\": \"mpileup2snp\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"min_avg_qual\": \"15\", \"min_coverage\": \"8\", \"min_freq_for_hom\": \"0.75\", \"min_supporting_reads\": \"2\", \"min_var_freq\": \"0.01\", \"p_value\": \"0.99\", \"sample_names\": \"\", \"strand_filter\": \"no\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.4.2",
+            "type": "tool",
+            "uuid": "1bf8bf5d-9894-4488-8227-c9b358a889ca",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "7525d56e-1a37-419e-8ae0-6209e668444f"
+                }
+            ]
+        }
+    },
+    "tags": [],
+    "uuid": "3105aaac-634d-4549-a7d2-df5d0f5b7311",
+    "version": 6
+}

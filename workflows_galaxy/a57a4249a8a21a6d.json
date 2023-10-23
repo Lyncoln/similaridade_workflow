@@ -1,0 +1,115 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "TnSeq Processing",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.5",
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Cutadapt",
+                    "name": "library"
+                }
+            ],
+            "label": "1) Cutadapt Trimming",
+            "name": "Cutadapt",
+            "outputs": [
+                {
+                    "name": "out1",
+                    "type": "fastqsanger"
+                }
+            ],
+            "position": {
+                "left": 200,
+                "top": 207
+            },
+            "post_job_actions": {
+                "HideDatasetActionout1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out1"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.5",
+            "tool_shed_repository": {
+                "changeset_revision": "49370cb85f0f",
+                "name": "cutadapt",
+                "owner": "lparsons",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__job_resource\": {\"__job_resource__select\": \"no\", \"__current_case__\": 0}, \"adapter_options\": {\"error_rate\": \"0.1\", \"no_indels\": false, \"count\": \"1\", \"overlap\": \"3\", \"match_read_wildcards\": \" \", \"no_trim\": false, \"mask_adapter\": false}, \"filter_options\": {\"discard\": false, \"discard_untrimmed\": true, \"min\": \"25\", \"max\": \"0\", \"max_n\": null, \"pair_filter\": \"any\"}, \"library\": {\"type\": \"single\", \"__current_case__\": 0, \"input_1\": {\"__class__\": \"RuntimeValue\"}, \"r1\": {\"adapters\": [{\"__index__\": 0, \"adapter_source\": {\"adapter_source_list\": \"user\", \"__current_case__\": 0, \"adapter_name\": \"3'Adapter\", \"adapter\": \"GTCGTGGTAT\"}}], \"front_adapters\": [{\"__index__\": 0, \"front_adapter_source\": {\"front_adapter_source_list\": \"user\", \"__current_case__\": 0, \"front_adapter_name\": \"Himmer3Out\", \"front_adapter\": \"ACTTATCAGCCAACCTGT\"}}], \"anywhere_adapters\": [], \"cut\": \"0\"}}, \"output_options\": {\"report\": false, \"info_file\": false, \"rest_file\": false, \"wildcard_file\": false, \"too_short_file\": false, \"too_long_file\": false, \"untrimmed_file\": false, \"multiple_output\": false}, \"read_mod_options\": {\"quality_cutoff\": \"25\", \"nextseq_trim\": \"0\", \"trim_n\": false, \"prefix\": \"\", \"suffix\": \"\", \"strip_suffix\": \"\", \"length\": \"0\", \"length_tag\": \"\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.16.5",
+            "type": "tool",
+            "uuid": "1e5b77ff-2bb6-41fc-95c0-07cc4b091c94",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.3.4.2",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "library|input_1": {
+                    "id": 0,
+                    "output_name": "out1"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Bowtie2",
+                    "name": "reference_genome"
+                }
+            ],
+            "label": "2) Bowtie2 Mapping",
+            "name": "Bowtie2",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "bam"
+                },
+                {
+                    "name": "mapping_stats",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 473.66668701171875,
+                "top": 205
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.3.4.2",
+            "tool_shed_repository": {
+                "changeset_revision": "17062a0decb7",
+                "name": "bowtie2",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__job_resource\": {\"__job_resource__select\": \"no\", \"__current_case__\": 0}, \"analysis_type\": {\"analysis_type_selector\": \"simple\", \"__current_case__\": 0, \"presets\": \"no_presets\"}, \"library\": {\"type\": \"single\", \"__current_case__\": 0, \"input_1\": {\"__class__\": \"ConnectedValue\"}, \"unaligned_file\": false, \"aligned_file\": false}, \"reference_genome\": {\"source\": \"history\", \"__current_case__\": 1, \"own_file\": {\"__class__\": \"RuntimeValue\"}}, \"rg\": {\"rg_selector\": \"do_not_set\", \"__current_case__\": 3}, \"sam_options\": {\"sam_options_selector\": \"no\", \"__current_case__\": 1}, \"save_mapping_stats\": true, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.3.4.2",
+            "type": "tool",
+            "uuid": "896ed8f1-3e44-4b28-9d01-a62f72987011",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "fac23273-0967-46c5-ae96-e267bd6b212f"
+                },
+                {
+                    "label": null,
+                    "output_name": "mapping_stats",
+                    "uuid": "ce6eabab-42cc-4ed6-909c-9525f107e735"
+                }
+            ]
+        }
+    },
+    "tags": [],
+    "uuid": "52b24277-da8f-4af9-82e8-99120ce848d8",
+    "version": 12
+}

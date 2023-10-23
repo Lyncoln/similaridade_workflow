@@ -1,0 +1,205 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "From peaks to genes",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "GENES"
+                }
+            ],
+            "label": "GENES",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 362.9281116832386,
+                "height": 67.0999755859375,
+                "left": 483.38068181818176,
+                "right": 703.3806818181818,
+                "top": 295.8281360973011,
+                "width": 220,
+                "x": 483.38068181818176,
+                "y": 295.8281360973011
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "c8b30187-cb71-4917-bb5a-33ab54d3cea2",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "d4d1d660-d514-43e8-84a7-c9f12304280d"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "GSE37268_mof3.out.hpeak.txt.gz"
+                }
+            ],
+            "label": "GSE37268_mof3.out.hpeak.txt.gz",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 505.9281366521662,
+                "height": 111.10000610351562,
+                "left": 483.38068181818176,
+                "right": 703.3806818181818,
+                "top": 394.82813054865056,
+                "width": 220,
+                "x": 483.38068181818176,
+                "y": 394.82813054865056
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "6ca9a694-e456-4377-a3ca-f08e5a7d3128",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "269d7cd1-8e13-4567-ae9c-e4a99771e437"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/intersect/gops_intersect_1/1.0.0",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input1": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "input2": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Intersect",
+                    "name": "input1"
+                },
+                {
+                    "description": "runtime parameter for tool Intersect",
+                    "name": "input2"
+                }
+            ],
+            "label": null,
+            "name": "Intersect",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 423.02813720703125,
+                "height": 134.20001220703125,
+                "left": 761.3806707208806,
+                "right": 981.3807317560369,
+                "top": 288.828125,
+                "width": 220.00006103515625,
+                "x": 761.3806707208806,
+                "y": 288.828125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/intersect/gops_intersect_1/1.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "69c10b56f46d",
+                "name": "intersect",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input1\": {\"__class__\": \"RuntimeValue\"}, \"input2\": {\"__class__\": \"RuntimeValue\"}, \"min\": \"1\", \"returntype\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "6d0469c1-462e-4ebd-ab67-46f866c36651",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "50ea2df9-0b4e-4bf3-a425-79f8ed717ece"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "Grouping1",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input1": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Group",
+                    "name": "input1"
+                }
+            ],
+            "label": null,
+            "name": "Group",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 423.01250665838063,
+                "height": 101.20001220703125,
+                "left": 1039.3806596235795,
+                "right": 1259.3806596235795,
+                "top": 321.8124944513494,
+                "width": 220,
+                "x": 1039.3806596235795,
+                "y": 321.8124944513494
+            },
+            "post_job_actions": {},
+            "tool_id": "Grouping1",
+            "tool_state": "{\"groupcol\": \"1\", \"ignorecase\": false, \"ignorelines\": null, \"input1\": {\"__class__\": \"RuntimeValue\"}, \"operations\": [{\"__index__\": 0, \"optype\": \"length\", \"opcol\": \"1\", \"opround\": \"no\", \"opdefault\": null}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.4",
+            "type": "tool",
+            "uuid": "97018933-12a2-4376-8f2a-2a2923af7711",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "86219637-9da6-4b62-bf7d-a2ce0e4b1e72"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "name:suhasini"
+    ],
+    "uuid": "c35b4a8d-9f70-4abb-917e-b76a3d20dc80",
+    "version": 2
+}

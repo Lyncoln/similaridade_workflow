@@ -1,0 +1,1833 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "BamCoveragePlot",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Input Dataset:bam"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 200,
+                "top": 199
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Input Dataset:bed"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 200,
+                "top": 320
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Input Dataset:txt"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 200,
+                "top": 440
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "sam_pileup",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "refOrHistory|input1": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Generate pileup",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 507,
+                "top": 184
+            },
+            "post_job_actions": {},
+            "tool_id": "sam_pileup",
+            "tool_shed_repository": {
+                "changeset_revision": "a3b4ad6858ff",
+                "name": "sam_pileup",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"c\": {\"consensus\": \"no\", \"__current_case__\": 0}, \"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"indels\": \"no\", \"lastCol\": \"no\", \"mapCap\": \"60\", \"refOrHistory\": {\"reference\": \"indexed\", \"__current_case__\": 0, \"input1\": null}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "gops_basecoverage_1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input1": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Base Coverage",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 420,
+                "top": 320
+            },
+            "post_job_actions": {},
+            "tool_id": "gops_basecoverage_1",
+            "tool_shed_repository": {
+                "changeset_revision": "0a3e3133b09d",
+                "name": "basecoverage",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"input1\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "Add_a_column1",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input": {
+                    "id": 3,
+                    "output_name": "output1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Compute",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 860,
+                "top": 200
+            },
+            "post_job_actions": {},
+            "tool_id": "Add_a_column1",
+            "tool_shed_repository": {
+                "changeset_revision": "6595517c2dd8",
+                "name": "column_maker",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"cond\": \"c2-1\", \"input\": null, \"round\": \"yes\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "Cut1",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input": {
+                    "id": 5,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Cut",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1085,
+                "top": 206
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionout_file1": {
+                    "action_arguments": {
+                        "newtype": "interval"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Cut1",
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"columnList\": \"c1,c7,c2,c4\", \"delimiter\": \"T\", \"input\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.1",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "gops_intersect_1",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input1": {
+                    "id": 6,
+                    "output_name": "out_file1"
+                },
+                "input2": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Intersect",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1276,
+                "top": 171
+            },
+            "post_job_actions": {},
+            "tool_id": "gops_intersect_1",
+            "tool_shed_repository": {
+                "changeset_revision": "8ddabc73af92",
+                "name": "intersect",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"input1\": null, \"input2\": null, \"min\": \"1\", \"returntype\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "gops_basecoverage_1",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input1": {
+                    "id": 7,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Base Coverage",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 1520,
+                "top": 200
+            },
+            "post_job_actions": {},
+            "tool_id": "gops_basecoverage_1",
+            "tool_shed_repository": {
+                "changeset_revision": "0a3e3133b09d",
+                "name": "basecoverage",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"input1\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "input": {
+                    "id": 7,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1520,
+                "top": 320
+            },
+            "post_job_actions": {},
+            "tool_id": "Filter1",
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"cond\": \"c4 >= 5\", \"input\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "Paste1",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "input1": {
+                    "id": 4,
+                    "output_name": "output"
+                },
+                "input2": {
+                    "id": 8,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Paste",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1740,
+                "top": 200
+            },
+            "post_job_actions": {},
+            "tool_id": "Paste1",
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"delimiter\": \"T\", \"input1\": null, \"input2\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "gops_basecoverage_1",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "input1": {
+                    "id": 9,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Base Coverage",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 1740,
+                "top": 320
+            },
+            "post_job_actions": {},
+            "tool_id": "gops_basecoverage_1",
+            "tool_shed_repository": {
+                "changeset_revision": "0a3e3133b09d",
+                "name": "basecoverage",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"input1\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "input": {
+                    "id": 9,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1740,
+                "top": 440
+            },
+            "post_job_actions": {},
+            "tool_id": "Filter1",
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"cond\": \"c4 >= 10\", \"input\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "13": {
+            "annotation": "",
+            "content_id": "Paste1",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "input1": {
+                    "id": 4,
+                    "output_name": "output"
+                },
+                "input2": {
+                    "id": 11,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Paste",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1960,
+                "top": 200
+            },
+            "post_job_actions": {},
+            "tool_id": "Paste1",
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"delimiter\": \"T\", \"input1\": null, \"input2\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "14": {
+            "annotation": "",
+            "content_id": "gops_basecoverage_1",
+            "errors": null,
+            "id": 14,
+            "input_connections": {
+                "input1": {
+                    "id": 12,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Base Coverage",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 1960,
+                "top": 320
+            },
+            "post_job_actions": {},
+            "tool_id": "gops_basecoverage_1",
+            "tool_shed_repository": {
+                "changeset_revision": "0a3e3133b09d",
+                "name": "basecoverage",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"input1\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "15": {
+            "annotation": "",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 15,
+            "input_connections": {
+                "input": {
+                    "id": 12,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1960,
+                "top": 440
+            },
+            "post_job_actions": {},
+            "tool_id": "Filter1",
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"cond\": \"c4 >= 20\", \"input\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "16": {
+            "annotation": "",
+            "content_id": "Paste1",
+            "errors": null,
+            "id": 16,
+            "input_connections": {
+                "input1": {
+                    "id": 4,
+                    "output_name": "output"
+                },
+                "input2": {
+                    "id": 14,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Paste",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 2180,
+                "top": 200
+            },
+            "post_job_actions": {},
+            "tool_id": "Paste1",
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"delimiter\": \"T\", \"input1\": null, \"input2\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "17": {
+            "annotation": "",
+            "content_id": "gops_basecoverage_1",
+            "errors": null,
+            "id": 17,
+            "input_connections": {
+                "input1": {
+                    "id": 15,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Base Coverage",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 2180,
+                "top": 320
+            },
+            "post_job_actions": {},
+            "tool_id": "gops_basecoverage_1",
+            "tool_shed_repository": {
+                "changeset_revision": "0a3e3133b09d",
+                "name": "basecoverage",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"input1\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "18": {
+            "annotation": "",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 18,
+            "input_connections": {
+                "input": {
+                    "id": 15,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 2180,
+                "top": 440
+            },
+            "post_job_actions": {},
+            "tool_id": "Filter1",
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"cond\": \"c4 >= 30\", \"input\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "19": {
+            "annotation": "",
+            "content_id": "Paste1",
+            "errors": null,
+            "id": 19,
+            "input_connections": {
+                "input1": {
+                    "id": 4,
+                    "output_name": "output"
+                },
+                "input2": {
+                    "id": 17,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Paste",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 2400,
+                "top": 200
+            },
+            "post_job_actions": {},
+            "tool_id": "Paste1",
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"delimiter\": \"T\", \"input1\": null, \"input2\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "20": {
+            "annotation": "",
+            "content_id": "gops_basecoverage_1",
+            "errors": null,
+            "id": 20,
+            "input_connections": {
+                "input1": {
+                    "id": 18,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Base Coverage",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 2417,
+                "top": 321
+            },
+            "post_job_actions": {},
+            "tool_id": "gops_basecoverage_1",
+            "tool_shed_repository": {
+                "changeset_revision": "0a3e3133b09d",
+                "name": "basecoverage",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"input1\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "21": {
+            "annotation": "",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 21,
+            "input_connections": {
+                "input": {
+                    "id": 18,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 2400,
+                "top": 440
+            },
+            "post_job_actions": {},
+            "tool_id": "Filter1",
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"cond\": \"c4 >= 40\", \"input\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "22": {
+            "annotation": "",
+            "content_id": "Paste1",
+            "errors": null,
+            "id": 22,
+            "input_connections": {
+                "input1": {
+                    "id": 4,
+                    "output_name": "output"
+                },
+                "input2": {
+                    "id": 20,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Paste",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 2620,
+                "top": 200
+            },
+            "post_job_actions": {},
+            "tool_id": "Paste1",
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"delimiter\": \"T\", \"input1\": null, \"input2\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "23": {
+            "annotation": "",
+            "content_id": "gops_basecoverage_1",
+            "errors": null,
+            "id": 23,
+            "input_connections": {
+                "input1": {
+                    "id": 21,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Base Coverage",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 2620,
+                "top": 320
+            },
+            "post_job_actions": {},
+            "tool_id": "gops_basecoverage_1",
+            "tool_shed_repository": {
+                "changeset_revision": "0a3e3133b09d",
+                "name": "basecoverage",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"input1\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "24": {
+            "annotation": "",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 24,
+            "input_connections": {
+                "input": {
+                    "id": 21,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 2620,
+                "top": 440
+            },
+            "post_job_actions": {},
+            "tool_id": "Filter1",
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"cond\": \"c4 >= 60\", \"input\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "25": {
+            "annotation": "",
+            "content_id": "Paste1",
+            "errors": null,
+            "id": 25,
+            "input_connections": {
+                "input1": {
+                    "id": 4,
+                    "output_name": "output"
+                },
+                "input2": {
+                    "id": 23,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Paste",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 2840,
+                "top": 200
+            },
+            "post_job_actions": {},
+            "tool_id": "Paste1",
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"delimiter\": \"T\", \"input1\": null, \"input2\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "26": {
+            "annotation": "",
+            "content_id": "gops_basecoverage_1",
+            "errors": null,
+            "id": 26,
+            "input_connections": {
+                "input1": {
+                    "id": 24,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Base Coverage",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 2840,
+                "top": 320
+            },
+            "post_job_actions": {},
+            "tool_id": "gops_basecoverage_1",
+            "tool_shed_repository": {
+                "changeset_revision": "0a3e3133b09d",
+                "name": "basecoverage",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"input1\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "27": {
+            "annotation": "",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 27,
+            "input_connections": {
+                "input": {
+                    "id": 24,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 2840,
+                "top": 440
+            },
+            "post_job_actions": {},
+            "tool_id": "Filter1",
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"cond\": \"c4 >= 80\", \"input\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "28": {
+            "annotation": "",
+            "content_id": "Paste1",
+            "errors": null,
+            "id": 28,
+            "input_connections": {
+                "input1": {
+                    "id": 4,
+                    "output_name": "output"
+                },
+                "input2": {
+                    "id": 26,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Paste",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 3060,
+                "top": 200
+            },
+            "post_job_actions": {},
+            "tool_id": "Paste1",
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"delimiter\": \"T\", \"input1\": null, \"input2\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "29": {
+            "annotation": "",
+            "content_id": "gops_basecoverage_1",
+            "errors": null,
+            "id": 29,
+            "input_connections": {
+                "input1": {
+                    "id": 27,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Base Coverage",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 3060,
+                "top": 320
+            },
+            "post_job_actions": {},
+            "tool_id": "gops_basecoverage_1",
+            "tool_shed_repository": {
+                "changeset_revision": "0a3e3133b09d",
+                "name": "basecoverage",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"input1\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "30": {
+            "annotation": "",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 30,
+            "input_connections": {
+                "input": {
+                    "id": 27,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 3060,
+                "top": 440
+            },
+            "post_job_actions": {},
+            "tool_id": "Filter1",
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"cond\": \"c4 >= 120\", \"input\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "31": {
+            "annotation": "",
+            "content_id": "Paste1",
+            "errors": null,
+            "id": 31,
+            "input_connections": {
+                "input1": {
+                    "id": 4,
+                    "output_name": "output"
+                },
+                "input2": {
+                    "id": 29,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Paste",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 3280,
+                "top": 200
+            },
+            "post_job_actions": {},
+            "tool_id": "Paste1",
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"delimiter\": \"T\", \"input1\": null, \"input2\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "32": {
+            "annotation": "",
+            "content_id": "gops_basecoverage_1",
+            "errors": null,
+            "id": 32,
+            "input_connections": {
+                "input1": {
+                    "id": 30,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Base Coverage",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 3280,
+                "top": 320
+            },
+            "post_job_actions": {},
+            "tool_id": "gops_basecoverage_1",
+            "tool_shed_repository": {
+                "changeset_revision": "0a3e3133b09d",
+                "name": "basecoverage",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"input1\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "33": {
+            "annotation": "",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 33,
+            "input_connections": {
+                "input": {
+                    "id": 30,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 3280,
+                "top": 440
+            },
+            "post_job_actions": {},
+            "tool_id": "Filter1",
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"cond\": \"c4 >= 160\", \"input\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "34": {
+            "annotation": "",
+            "content_id": "Paste1",
+            "errors": null,
+            "id": 34,
+            "input_connections": {
+                "input1": {
+                    "id": 4,
+                    "output_name": "output"
+                },
+                "input2": {
+                    "id": 32,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Paste",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 3500,
+                "top": 200
+            },
+            "post_job_actions": {},
+            "tool_id": "Paste1",
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"delimiter\": \"T\", \"input1\": null, \"input2\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "35": {
+            "annotation": "",
+            "content_id": "gops_basecoverage_1",
+            "errors": null,
+            "id": 35,
+            "input_connections": {
+                "input1": {
+                    "id": 33,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Base Coverage",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 3500,
+                "top": 320
+            },
+            "post_job_actions": {},
+            "tool_id": "gops_basecoverage_1",
+            "tool_shed_repository": {
+                "changeset_revision": "0a3e3133b09d",
+                "name": "basecoverage",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"input1\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "36": {
+            "annotation": "",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 36,
+            "input_connections": {
+                "input": {
+                    "id": 33,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 3500,
+                "top": 440
+            },
+            "post_job_actions": {},
+            "tool_id": "Filter1",
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"cond\": \"c4 >= 180\", \"input\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "37": {
+            "annotation": "",
+            "content_id": "Paste1",
+            "errors": null,
+            "id": 37,
+            "input_connections": {
+                "input1": {
+                    "id": 4,
+                    "output_name": "output"
+                },
+                "input2": {
+                    "id": 35,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Paste",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 3720,
+                "top": 200
+            },
+            "post_job_actions": {},
+            "tool_id": "Paste1",
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"delimiter\": \"T\", \"input1\": null, \"input2\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "38": {
+            "annotation": "",
+            "content_id": "gops_basecoverage_1",
+            "errors": null,
+            "id": 38,
+            "input_connections": {
+                "input1": {
+                    "id": 36,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Base Coverage",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 3720,
+                "top": 320
+            },
+            "post_job_actions": {},
+            "tool_id": "gops_basecoverage_1",
+            "tool_shed_repository": {
+                "changeset_revision": "0a3e3133b09d",
+                "name": "basecoverage",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"input1\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "39": {
+            "annotation": "",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 39,
+            "input_connections": {
+                "input": {
+                    "id": 36,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 3720,
+                "top": 440
+            },
+            "post_job_actions": {},
+            "tool_id": "Filter1",
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"cond\": \"c4 >= 200\", \"input\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "40": {
+            "annotation": "",
+            "content_id": "Paste1",
+            "errors": null,
+            "id": 40,
+            "input_connections": {
+                "input1": {
+                    "id": 4,
+                    "output_name": "output"
+                },
+                "input2": {
+                    "id": 38,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Paste",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 3940,
+                "top": 200
+            },
+            "post_job_actions": {},
+            "tool_id": "Paste1",
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"delimiter\": \"T\", \"input1\": null, \"input2\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "41": {
+            "annotation": "",
+            "content_id": "gops_basecoverage_1",
+            "errors": null,
+            "id": 41,
+            "input_connections": {
+                "input1": {
+                    "id": 39,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Base Coverage",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 3940,
+                "top": 320
+            },
+            "post_job_actions": {},
+            "tool_id": "gops_basecoverage_1",
+            "tool_shed_repository": {
+                "changeset_revision": "0a3e3133b09d",
+                "name": "basecoverage",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"input1\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "42": {
+            "annotation": "",
+            "content_id": "Paste1",
+            "errors": null,
+            "id": 42,
+            "input_connections": {
+                "input1": {
+                    "id": 4,
+                    "output_name": "output"
+                },
+                "input2": {
+                    "id": 41,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Paste",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 4160,
+                "top": 200
+            },
+            "post_job_actions": {},
+            "tool_id": "Paste1",
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"delimiter\": \"T\", \"input1\": null, \"input2\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "43": {
+            "annotation": "",
+            "content_id": "cat1",
+            "errors": null,
+            "id": 43,
+            "input_connections": {
+                "input1": {
+                    "id": 10,
+                    "output_name": "out_file1"
+                },
+                "queries_0|input2": {
+                    "id": 13,
+                    "output_name": "out_file1"
+                },
+                "queries_10|input2": {
+                    "id": 42,
+                    "output_name": "out_file1"
+                },
+                "queries_1|input2": {
+                    "id": 16,
+                    "output_name": "out_file1"
+                },
+                "queries_2|input2": {
+                    "id": 19,
+                    "output_name": "out_file1"
+                },
+                "queries_3|input2": {
+                    "id": 22,
+                    "output_name": "out_file1"
+                },
+                "queries_4|input2": {
+                    "id": 25,
+                    "output_name": "out_file1"
+                },
+                "queries_5|input2": {
+                    "id": 28,
+                    "output_name": "out_file1"
+                },
+                "queries_6|input2": {
+                    "id": 31,
+                    "output_name": "out_file1"
+                },
+                "queries_7|input2": {
+                    "id": 34,
+                    "output_name": "out_file1"
+                },
+                "queries_8|input2": {
+                    "id": 37,
+                    "output_name": "out_file1"
+                },
+                "queries_9|input2": {
+                    "id": 40,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Concatenate datasets",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 4380,
+                "top": 200
+            },
+            "post_job_actions": {},
+            "tool_id": "cat1",
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"input1\": null, \"queries\": [{\"__index__\": 0, \"input2\": null}, {\"__index__\": 1, \"input2\": null}, {\"__index__\": 2, \"input2\": null}, {\"__index__\": 3, \"input2\": null}, {\"__index__\": 4, \"input2\": null}, {\"__index__\": 5, \"input2\": null}, {\"__index__\": 6, \"input2\": null}, {\"__index__\": 7, \"input2\": null}, {\"__index__\": 8, \"input2\": null}, {\"__index__\": 9, \"input2\": null}, {\"__index__\": 10, \"input2\": null}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "44": {
+            "annotation": "",
+            "content_id": "Convert characters1",
+            "errors": null,
+            "id": 44,
+            "input_connections": {
+                "input": {
+                    "id": 43,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Convert",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 4600,
+                "top": 200
+            },
+            "post_job_actions": {},
+            "tool_id": "Convert characters1",
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"convert_from\": \"s\", \"input\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "45": {
+            "annotation": "",
+            "content_id": "Add_a_column1",
+            "errors": null,
+            "id": 45,
+            "input_connections": {
+                "input": {
+                    "id": 44,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Compute",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 4820,
+                "top": 200
+            },
+            "post_job_actions": {},
+            "tool_id": "Add_a_column1",
+            "tool_shed_repository": {
+                "changeset_revision": "6595517c2dd8",
+                "name": "column_maker",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"cond\": \"(c2/c1)*100\", \"input\": null, \"round\": \"no\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "46": {
+            "annotation": "",
+            "content_id": "Cut1",
+            "errors": null,
+            "id": 46,
+            "input_connections": {
+                "input": {
+                    "id": 45,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Cut",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 5040,
+                "top": 200
+            },
+            "post_job_actions": {},
+            "tool_id": "Cut1",
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"columnList\": \"c3\", \"delimiter\": \"T\", \"input\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.1",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "47": {
+            "annotation": "",
+            "content_id": "Paste1",
+            "errors": null,
+            "id": 47,
+            "input_connections": {
+                "input1": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "input2": {
+                    "id": 46,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Paste",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 5260,
+                "top": 200
+            },
+            "post_job_actions": {},
+            "tool_id": "Paste1",
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"delimiter\": \"T\", \"input1\": null, \"input2\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "48": {
+            "annotation": "",
+            "content_id": "XY_Plot_1",
+            "errors": null,
+            "id": 48,
+            "input_connections": {
+                "series_0|input": {
+                    "id": 47,
+                    "output_name": "out_file1"
+                },
+                "series_1|input": {
+                    "id": 47,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Plotting tool",
+            "outputs": [
+                {
+                    "name": "out_file_pdf",
+                    "type": "pdf"
+                },
+                {
+                    "name": "out_file_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 5480,
+                "top": 200
+            },
+            "post_job_actions": {},
+            "tool_id": "XY_Plot_1",
+            "tool_shed_repository": {
+                "changeset_revision": "ecb437f1d298",
+                "name": "xy_plot",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/website/galaxy.msi.umn.edu/PRODUCTION/tool-data/shared/ucsc/chrom/hg19.len\", \"main\": \"Percent of Bases vs Coverage\", \"series\": [{\"__index__\": 0, \"input\": null, \"xcol\": \"1\", \"ycol\": \"2\", \"series_type\": {\"type\": \"line\", \"__current_case__\": 0, \"lty\": \"1\", \"col\": \"2\", \"lwd\": \"1.0\"}}, {\"__index__\": 1, \"input\": null, \"xcol\": \"1\", \"ycol\": \"2\", \"series_type\": {\"type\": \"points\", \"__current_case__\": 1, \"pch\": \"1\", \"col\": \"4\", \"cex\": \"1.0\"}}], \"xlab\": \"Coverage\", \"ylab\": \"Percent of Bases\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.1",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [],
+    "version": 0
+}

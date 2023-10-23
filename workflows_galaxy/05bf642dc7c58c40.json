@@ -1,0 +1,1326 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "Read alignment and variant calling procedure",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Input Dataset"
+                }
+            ],
+            "label": "Input dataset - Read 1",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 267,
+                "top": 476.65625
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "336e18ca-54e7-407c-b9d0-3339910931a5",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "2badcbcd-d6b3-4559-a81f-aecb66a59afa"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Input DatasetRead"
+                }
+            ],
+            "label": "Input dataset - Read 2",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 267,
+                "top": 572.328125
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "e1634f2c-1b47-412b-a27a-b7c773bf9c1b",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "8bf43040-f045-4727-9f73-9aeb3e07422d"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Input Dataset"
+                }
+            ],
+            "label": "Input dataset-BED file",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 2145,
+                "top": 938
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "fc5b38dd-7290-4312-b081-34828c1b354f",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "97206c9d-db1b-4b5f-a2fb-35b8f41700df"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.65",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input_file": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool FastQC",
+                    "name": "contaminants"
+                },
+                {
+                    "description": "runtime parameter for tool FastQC",
+                    "name": "input_file"
+                },
+                {
+                    "description": "runtime parameter for tool FastQC",
+                    "name": "limits"
+                }
+            ],
+            "label": null,
+            "name": "FastQC",
+            "outputs": [
+                {
+                    "name": "html_file",
+                    "type": "html"
+                },
+                {
+                    "name": "text_file",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 529.3125,
+                "top": 288.3125
+            },
+            "post_job_actions": {
+                "HideDatasetActiontext_file": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "text_file"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.65",
+            "tool_shed_repository": {
+                "changeset_revision": "3fdc1a74d866",
+                "name": "fastqc",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"contaminants\": {\"__class__\": \"RuntimeValue\"}, \"input_file\": {\"__class__\": \"RuntimeValue\"}, \"limits\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.65",
+            "type": "tool",
+            "uuid": "726bd70d-c6be-48f7-976b-d9e756891825",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "html_file",
+                    "uuid": "3199da32-cdb4-4080-a227-d697f494ae79"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.65",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input_file": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool FastQC",
+                    "name": "contaminants"
+                },
+                {
+                    "description": "runtime parameter for tool FastQC",
+                    "name": "input_file"
+                },
+                {
+                    "description": "runtime parameter for tool FastQC",
+                    "name": "limits"
+                }
+            ],
+            "label": null,
+            "name": "FastQC",
+            "outputs": [
+                {
+                    "name": "html_file",
+                    "type": "html"
+                },
+                {
+                    "name": "text_file",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 523.3125,
+                "top": 727.65625
+            },
+            "post_job_actions": {
+                "HideDatasetActiontext_file": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "text_file"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.65",
+            "tool_shed_repository": {
+                "changeset_revision": "3fdc1a74d866",
+                "name": "fastqc",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"contaminants\": {\"__class__\": \"RuntimeValue\"}, \"input_file\": {\"__class__\": \"RuntimeValue\"}, \"limits\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.65",
+            "type": "tool",
+            "uuid": "a2ac5835-c701-4268-a11f-09292afac7d7",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "html_file",
+                    "uuid": "bbf5e830-5787-41fe-ad09-576ef7b8b771"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.32.3",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "paired_end|paired_input_type_conditional|fastq_r1_in": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "paired_end|paired_input_type_conditional|fastq_r2_in": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Trimmomatic",
+                    "name": "illuminaclip"
+                },
+                {
+                    "description": "runtime parameter for tool Trimmomatic",
+                    "name": "illuminaclip"
+                },
+                {
+                    "description": "runtime parameter for tool Trimmomatic",
+                    "name": "illuminaclip"
+                },
+                {
+                    "description": "runtime parameter for tool Trimmomatic",
+                    "name": "illuminaclip"
+                }
+            ],
+            "label": null,
+            "name": "Trimmomatic",
+            "outputs": [
+                {
+                    "name": "fastq_out_r1_paired",
+                    "type": "fastqsanger"
+                },
+                {
+                    "name": "fastq_out_r2_paired",
+                    "type": "fastqsanger"
+                },
+                {
+                    "name": "fastq_out_r1_unpaired",
+                    "type": "fastqsanger"
+                },
+                {
+                    "name": "fastq_out_r2_unpaired",
+                    "type": "fastqsanger"
+                }
+            ],
+            "position": {
+                "left": 806.3125,
+                "top": 462
+            },
+            "post_job_actions": {
+                "HideDatasetActionfastq_out": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "fastq_out"
+                },
+                "HideDatasetActionfastq_out_paired": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "fastq_out_paired"
+                },
+                "HideDatasetActionfastq_out_r1_paired": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "fastq_out_r1_paired"
+                },
+                "HideDatasetActionfastq_out_r1_unpaired": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "fastq_out_r1_unpaired"
+                },
+                "HideDatasetActionfastq_out_r2_paired": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "fastq_out_r2_paired"
+                },
+                "HideDatasetActionfastq_out_r2_unpaired": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "fastq_out_r2_unpaired"
+                },
+                "HideDatasetActionfastq_out_unpaired": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "fastq_out_unpaired"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.32.3",
+            "tool_shed_repository": {
+                "changeset_revision": "f8a9a5eaca8a",
+                "name": "trimmomatic",
+                "owner": "pjbriggs",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"illuminaclip\": {\"do_illuminaclip\": true, \"__current_case__\": 0, \"adapter_fasta\": {\"__class__\": \"RuntimeValue\"}, \"seed_mismatches\": {\"__class__\": \"RuntimeValue\"}, \"palindrome_clip_threshold\": {\"__class__\": \"RuntimeValue\"}, \"simple_clip_threshold\": {\"__class__\": \"RuntimeValue\"}}, \"operations\": [{\"__index__\": 0, \"operation\": {\"name\": \"SLIDINGWINDOW\", \"__current_case__\": 0, \"window_size\": {\"__class__\": \"RuntimeValue\"}, \"required_quality\": {\"__class__\": \"RuntimeValue\"}}}, {\"__index__\": 1, \"operation\": {\"name\": \"MINLEN\", \"__current_case__\": 1, \"minlen\": {\"__class__\": \"RuntimeValue\"}}}, {\"__index__\": 2, \"operation\": {\"name\": \"LEADING\", \"__current_case__\": 2, \"leading\": {\"__class__\": \"RuntimeValue\"}}}, {\"__index__\": 3, \"operation\": {\"name\": \"TRAILING\", \"__current_case__\": 3, \"trailing\": {\"__class__\": \"RuntimeValue\"}}}], \"paired_end\": {\"is_paired_end\": true, \"__current_case__\": 1, \"paired_input_type_conditional\": {\"paired_input_type\": \"pair_of_files\", \"__current_case__\": 0, \"fastq_r1_in\": {\"__class__\": \"RuntimeValue\"}, \"fastq_r2_in\": {\"__class__\": \"RuntimeValue\"}}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.32.3",
+            "type": "tool",
+            "uuid": "57ff0923-f280-4176-9229-e4db34a06018",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.65",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input_file": {
+                    "id": 5,
+                    "output_name": "fastq_out_r1_paired"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool FastQC",
+                    "name": "contaminants"
+                },
+                {
+                    "description": "runtime parameter for tool FastQC",
+                    "name": "input_file"
+                },
+                {
+                    "description": "runtime parameter for tool FastQC",
+                    "name": "limits"
+                }
+            ],
+            "label": null,
+            "name": "FastQC",
+            "outputs": [
+                {
+                    "name": "html_file",
+                    "type": "html"
+                },
+                {
+                    "name": "text_file",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 1106.65625,
+                "top": 328.3125
+            },
+            "post_job_actions": {
+                "HideDatasetActiontext_file": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "text_file"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.65",
+            "tool_shed_repository": {
+                "changeset_revision": "3fdc1a74d866",
+                "name": "fastqc",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"contaminants\": {\"__class__\": \"RuntimeValue\"}, \"input_file\": {\"__class__\": \"RuntimeValue\"}, \"limits\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.65",
+            "type": "tool",
+            "uuid": "f0153539-1597-4e94-b2aa-b8f5e1f81d63",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "html_file",
+                    "uuid": "833d8484-1d22-467c-94b7-21a076a59709"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa_wrappers/bwa_wrapper/1.2.3",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "paired|input1": {
+                    "id": 5,
+                    "output_name": "fastq_out_r1_paired"
+                },
+                "paired|input2": {
+                    "id": 5,
+                    "output_name": "fastq_out_r2_paired"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Map with BWA for Illumina",
+                    "name": "genomeSource"
+                },
+                {
+                    "description": "runtime parameter for tool Map with BWA for Illumina",
+                    "name": "paired"
+                },
+                {
+                    "description": "runtime parameter for tool Map with BWA for Illumina",
+                    "name": "paired"
+                },
+                {
+                    "description": "runtime parameter for tool Map with BWA for Illumina",
+                    "name": "suppressHeader"
+                }
+            ],
+            "label": null,
+            "name": "Map with BWA for Illumina",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "sam"
+                }
+            ],
+            "position": {
+                "left": 1199.65625,
+                "top": 568
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa_wrappers/bwa_wrapper/1.2.3",
+            "tool_shed_repository": {
+                "changeset_revision": "b4427dbb6ced",
+                "name": "bwa_wrappers",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__job_resource\": {\"__job_resource__select\": \"no\", \"__current_case__\": 0}, \"genomeSource\": {\"refGenomeSource\": \"indexed\", \"__current_case__\": 0, \"indices\": {\"__class__\": \"RuntimeValue\"}}, \"paired\": {\"sPaired\": \"paired\", \"__current_case__\": 1, \"input1\": {\"__class__\": \"RuntimeValue\"}, \"input2\": {\"__class__\": \"RuntimeValue\"}}, \"params\": {\"source_select\": \"pre_set\", \"__current_case__\": 0}, \"suppressHeader\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.2.3",
+            "type": "tool",
+            "uuid": "cbd31db2-6dc4-4fc0-bad7-bbcf92ed532b",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.65",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input_file": {
+                    "id": 5,
+                    "output_name": "fastq_out_r2_paired"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool FastQC",
+                    "name": "contaminants"
+                },
+                {
+                    "description": "runtime parameter for tool FastQC",
+                    "name": "input_file"
+                },
+                {
+                    "description": "runtime parameter for tool FastQC",
+                    "name": "limits"
+                }
+            ],
+            "label": null,
+            "name": "FastQC",
+            "outputs": [
+                {
+                    "name": "html_file",
+                    "type": "html"
+                },
+                {
+                    "name": "text_file",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 1098.65625,
+                "top": 786.65625
+            },
+            "post_job_actions": {
+                "HideDatasetActiontext_file": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "text_file"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.65",
+            "tool_shed_repository": {
+                "changeset_revision": "3fdc1a74d866",
+                "name": "fastqc",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"contaminants\": {\"__class__\": \"RuntimeValue\"}, \"input_file\": {\"__class__\": \"RuntimeValue\"}, \"limits\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.65",
+            "type": "tool",
+            "uuid": "26b0d4b9-4fd1-40bf-8dea-f6dcda34ff50",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "html_file",
+                    "uuid": "c80b5e1d-4264-4680-b73c-2de5b3a38553"
+                }
+            ]
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_AddOrReplaceReadGroups/1.136.0",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "inputFile": {
+                    "id": 7,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool AddOrReplaceReadGroups",
+                    "name": "CN"
+                },
+                {
+                    "description": "runtime parameter for tool AddOrReplaceReadGroups",
+                    "name": "DS"
+                },
+                {
+                    "description": "runtime parameter for tool AddOrReplaceReadGroups",
+                    "name": "DT"
+                },
+                {
+                    "description": "runtime parameter for tool AddOrReplaceReadGroups",
+                    "name": "PI"
+                },
+                {
+                    "description": "runtime parameter for tool AddOrReplaceReadGroups",
+                    "name": "PL"
+                },
+                {
+                    "description": "runtime parameter for tool AddOrReplaceReadGroups",
+                    "name": "PU"
+                },
+                {
+                    "description": "runtime parameter for tool AddOrReplaceReadGroups",
+                    "name": "inputFile"
+                },
+                {
+                    "description": "runtime parameter for tool AddOrReplaceReadGroups",
+                    "name": "read_group_id_conditional"
+                },
+                {
+                    "description": "runtime parameter for tool AddOrReplaceReadGroups",
+                    "name": "read_group_lb_conditional"
+                },
+                {
+                    "description": "runtime parameter for tool AddOrReplaceReadGroups",
+                    "name": "read_group_sm_conditional"
+                },
+                {
+                    "description": "runtime parameter for tool AddOrReplaceReadGroups",
+                    "name": "validation_stringency"
+                }
+            ],
+            "label": null,
+            "name": "AddOrReplaceReadGroups",
+            "outputs": [
+                {
+                    "name": "outFile",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 1489,
+                "top": 568.328125
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutFile": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "outFile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_AddOrReplaceReadGroups/1.136.0",
+            "tool_shed_repository": {
+                "changeset_revision": "efc56ee1ade4",
+                "name": "picard",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"CN\": {\"__class__\": \"RuntimeValue\"}, \"DS\": {\"__class__\": \"RuntimeValue\"}, \"DT\": {\"__class__\": \"RuntimeValue\"}, \"PI\": {\"__class__\": \"RuntimeValue\"}, \"PL\": {\"__class__\": \"RuntimeValue\"}, \"PU\": {\"__class__\": \"RuntimeValue\"}, \"inputFile\": {\"__class__\": \"RuntimeValue\"}, \"read_group_id_conditional\": {\"do_auto_name\": false, \"__current_case__\": 1, \"ID\": {\"__class__\": \"RuntimeValue\"}}, \"read_group_lb_conditional\": {\"do_auto_name\": false, \"__current_case__\": 1, \"LB\": {\"__class__\": \"RuntimeValue\"}}, \"read_group_sm_conditional\": {\"do_auto_name\": false, \"__current_case__\": 1, \"SM\": {\"__class__\": \"RuntimeValue\"}}, \"validation_stringency\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.136.0",
+            "type": "tool",
+            "uuid": "3e1713e0-4b78-41da-be2d-21eeea92b416",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_SortSam/1.136.1",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "inputFile": {
+                    "id": 9,
+                    "output_name": "outFile"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool SortSam",
+                    "name": "inputFile"
+                },
+                {
+                    "description": "runtime parameter for tool SortSam",
+                    "name": "sort_order"
+                },
+                {
+                    "description": "runtime parameter for tool SortSam",
+                    "name": "validation_stringency"
+                }
+            ],
+            "label": null,
+            "name": "SortSam",
+            "outputs": [
+                {
+                    "name": "outFile",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 1798.328125,
+                "top": 567.328125
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutFile": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "outFile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_SortSam/1.136.1",
+            "tool_shed_repository": {
+                "changeset_revision": "efc56ee1ade4",
+                "name": "picard",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"inputFile\": {\"__class__\": \"RuntimeValue\"}, \"sort_order\": {\"__class__\": \"RuntimeValue\"}, \"validation_stringency\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.136.1",
+            "type": "tool",
+            "uuid": "f5d0320a-51f8-4a29-b1be-a1ffe2a142c3",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtools_flagstat/samtools_flagstat/2.0",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "input1": {
+                    "id": 10,
+                    "output_name": "outFile"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Flagstat",
+                    "name": "input1"
+                }
+            ],
+            "label": null,
+            "name": "Flagstat",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 2091.65625,
+                "top": 323.3125
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output1"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtools_flagstat/samtools_flagstat/2.0",
+            "tool_shed_repository": {
+                "changeset_revision": "0072bf593791",
+                "name": "samtools_flagstat",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input1\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.0",
+            "type": "tool",
+            "uuid": "52299a67-c690-4462-950a-2e3ad7dd4ab1",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtool_filter2/samtool_filter2/1.1.2",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "input1": {
+                    "id": 10,
+                    "output_name": "outFile"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM",
+                    "name": "bed_file"
+                },
+                {
+                    "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM",
+                    "name": "flag"
+                },
+                {
+                    "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM",
+                    "name": "flag"
+                },
+                {
+                    "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM",
+                    "name": "header"
+                },
+                {
+                    "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM",
+                    "name": "input1"
+                },
+                {
+                    "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM",
+                    "name": "library"
+                },
+                {
+                    "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM",
+                    "name": "mapq"
+                },
+                {
+                    "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM",
+                    "name": "outputtype"
+                },
+                {
+                    "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM",
+                    "name": "possibly_select_inverse"
+                },
+                {
+                    "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM",
+                    "name": "read_group"
+                },
+                {
+                    "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM",
+                    "name": "regions"
+                }
+            ],
+            "label": null,
+            "name": "Filter SAM or BAM, output SAM or BAM",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "sam"
+                }
+            ],
+            "position": {
+                "left": 2119.65625,
+                "top": 563.65625
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output1"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtool_filter2/samtool_filter2/1.1.2",
+            "tool_shed_repository": {
+                "changeset_revision": "dc6ff68ea5e8",
+                "name": "samtool_filter2",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"bed_file\": {\"__class__\": \"RuntimeValue\"}, \"flag\": {\"filter\": \"yes\", \"__current_case__\": 1, \"reqBits\": {\"__class__\": \"RuntimeValue\"}, \"skipBits\": {\"__class__\": \"RuntimeValue\"}}, \"header\": {\"__class__\": \"RuntimeValue\"}, \"input1\": {\"__class__\": \"RuntimeValue\"}, \"library\": {\"__class__\": \"RuntimeValue\"}, \"mapq\": {\"__class__\": \"RuntimeValue\"}, \"outputtype\": {\"__class__\": \"RuntimeValue\"}, \"possibly_select_inverse\": {\"__class__\": \"RuntimeValue\"}, \"read_group\": {\"__class__\": \"RuntimeValue\"}, \"regions\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.2",
+            "type": "tool",
+            "uuid": "3c6ed302-1407-4e05-9d90-cd86afa9beda",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "13": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtools_flagstat/samtools_flagstat/2.0",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "input1": {
+                    "id": 12,
+                    "output_name": "output1"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Flagstat",
+                    "name": "input1"
+                }
+            ],
+            "label": null,
+            "name": "Flagstat",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 2395,
+                "top": 318.3125
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output1"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtools_flagstat/samtools_flagstat/2.0",
+            "tool_shed_repository": {
+                "changeset_revision": "0072bf593791",
+                "name": "samtools_flagstat",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input1\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.0",
+            "type": "tool",
+            "uuid": "9a322cf7-2c8d-4e4a-a1c1-447f0c6a249c",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "14": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/1.136.0",
+            "errors": null,
+            "id": 14,
+            "input_connections": {
+                "inputFile": {
+                    "id": 12,
+                    "output_name": "output1"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool MarkDuplicates",
+                    "name": "assume_sorted"
+                },
+                {
+                    "description": "runtime parameter for tool MarkDuplicates",
+                    "name": "duplicate_scoring_strategy"
+                },
+                {
+                    "description": "runtime parameter for tool MarkDuplicates",
+                    "name": "inputFile"
+                },
+                {
+                    "description": "runtime parameter for tool MarkDuplicates",
+                    "name": "optical_duplicate_pixel_distance"
+                },
+                {
+                    "description": "runtime parameter for tool MarkDuplicates",
+                    "name": "read_name_regex"
+                },
+                {
+                    "description": "runtime parameter for tool MarkDuplicates",
+                    "name": "remove_duplicates"
+                },
+                {
+                    "description": "runtime parameter for tool MarkDuplicates",
+                    "name": "validation_stringency"
+                }
+            ],
+            "label": null,
+            "name": "MarkDuplicates",
+            "outputs": [
+                {
+                    "name": "metrics_file",
+                    "type": "txt"
+                },
+                {
+                    "name": "outFile",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 2459,
+                "top": 574.65625
+            },
+            "post_job_actions": {
+                "HideDatasetActionmetrics_file": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "metrics_file"
+                },
+                "HideDatasetActionoutFile": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "outFile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/1.136.0",
+            "tool_shed_repository": {
+                "changeset_revision": "efc56ee1ade4",
+                "name": "picard",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"assume_sorted\": {\"__class__\": \"RuntimeValue\"}, \"comments\": [], \"duplicate_scoring_strategy\": {\"__class__\": \"RuntimeValue\"}, \"inputFile\": {\"__class__\": \"RuntimeValue\"}, \"optical_duplicate_pixel_distance\": {\"__class__\": \"RuntimeValue\"}, \"read_name_regex\": {\"__class__\": \"RuntimeValue\"}, \"remove_duplicates\": {\"__class__\": \"RuntimeValue\"}, \"validation_stringency\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.136.0",
+            "type": "tool",
+            "uuid": "17bc4cd8-3da4-4f96-be56-33fe2bf75806",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "15": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtools_flagstat/samtools_flagstat/2.0",
+            "errors": null,
+            "id": 15,
+            "input_connections": {
+                "input1": {
+                    "id": 14,
+                    "output_name": "outFile"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Flagstat",
+                    "name": "input1"
+                }
+            ],
+            "label": null,
+            "name": "Flagstat",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 2711.328125,
+                "top": 322.3125
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output1"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtools_flagstat/samtools_flagstat/2.0",
+            "tool_shed_repository": {
+                "changeset_revision": "0072bf593791",
+                "name": "samtools_flagstat",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input1\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.0",
+            "type": "tool",
+            "uuid": "f8c397f0-8911-4175-bd1f-c2ddfc29c33e",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "16": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_coveragebed/2.22.1",
+            "errors": null,
+            "id": 16,
+            "input_connections": {
+                "inputA": {
+                    "id": 14,
+                    "output_name": "outFile"
+                },
+                "inputB": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Compute both the depth and breadth of coverage",
+                    "name": "d"
+                },
+                {
+                    "description": "runtime parameter for tool Compute both the depth and breadth of coverage",
+                    "name": "hist"
+                },
+                {
+                    "description": "runtime parameter for tool Compute both the depth and breadth of coverage",
+                    "name": "inputA"
+                },
+                {
+                    "description": "runtime parameter for tool Compute both the depth and breadth of coverage",
+                    "name": "inputB"
+                },
+                {
+                    "description": "runtime parameter for tool Compute both the depth and breadth of coverage",
+                    "name": "split"
+                },
+                {
+                    "description": "runtime parameter for tool Compute both the depth and breadth of coverage",
+                    "name": "strandedness"
+                }
+            ],
+            "label": null,
+            "name": "Compute both the depth and breadth of coverage",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "bed"
+                }
+            ],
+            "position": {
+                "left": 2879.328125,
+                "top": 575.65625
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_coveragebed/2.22.1",
+            "tool_shed_repository": {
+                "changeset_revision": "2cd7e321d259",
+                "name": "bedtools",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"d\": {\"__class__\": \"RuntimeValue\"}, \"hist\": {\"__class__\": \"RuntimeValue\"}, \"inputA\": {\"__class__\": \"RuntimeValue\"}, \"inputB\": {\"__class__\": \"RuntimeValue\"}, \"split\": {\"__class__\": \"RuntimeValue\"}, \"strandedness\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.22.1",
+            "type": "tool",
+            "uuid": "554fa8d9-71fc-4b99-8042-8a61c1d7c60f",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "17": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/freebayes/freebayes/0.4.1",
+            "errors": null,
+            "id": 17,
+            "input_connections": {
+                "reference_source|input_bams_0|input_bam": {
+                    "id": 14,
+                    "output_name": "outFile"
+                },
+                "target_limit_type|input_target_bed": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool FreeBayes",
+                    "name": "options_type"
+                },
+                {
+                    "description": "runtime parameter for tool FreeBayes",
+                    "name": "reference_source"
+                },
+                {
+                    "description": "runtime parameter for tool FreeBayes",
+                    "name": "target_limit_type"
+                }
+            ],
+            "label": null,
+            "name": "FreeBayes",
+            "outputs": [
+                {
+                    "name": "output_vcf",
+                    "type": "vcf"
+                }
+            ],
+            "position": {
+                "left": 3000.328125,
+                "top": 814
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_failed_alleles_bed": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_failed_alleles_bed"
+                },
+                "HideDatasetActionoutput_trace": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_trace"
+                },
+                "HideDatasetActionoutput_vcf": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_vcf"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/freebayes/freebayes/0.4.1",
+            "tool_shed_repository": {
+                "changeset_revision": "99684adf84de",
+                "name": "freebayes",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"options_type\": {\"options_type_selector\": \"simple_w_filters\", \"__current_case__\": 2, \"min_coverage\": {\"__class__\": \"RuntimeValue\"}}, \"reference_source\": {\"reference_source_selector\": \"cached\", \"__current_case__\": 0, \"input_bams\": [{\"__index__\": 0, \"input_bam\": {\"__class__\": \"RuntimeValue\"}}], \"ref_file\": {\"__class__\": \"RuntimeValue\"}}, \"target_limit_type\": {\"target_limit_type_selector\": \"limit_by_target_file\", \"__current_case__\": 1, \"input_target_bed\": {\"__class__\": \"RuntimeValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.4.1",
+            "type": "tool",
+            "uuid": "e4e9cd9f-77e2-42b3-b938-2259f6aed73c",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "18": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/vcffilter/vcffilter2/1.0.0_rc1.0",
+            "errors": null,
+            "id": 18,
+            "input_connections": {
+                "input1": {
+                    "id": 17,
+                    "output_name": "output_vcf"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool VCFfilter:",
+                    "name": "input1"
+                }
+            ],
+            "label": null,
+            "name": "VCFfilter:",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "vcf"
+                }
+            ],
+            "position": {
+                "left": 3331.65625,
+                "top": 792.328125
+            },
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/vcffilter/vcffilter2/1.0.0_rc1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "fa24bf0598f4",
+                "name": "vcffilter",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"filterList\": {\"__class__\": \"RuntimeValue\"}, \"input1\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0_rc1.0",
+            "type": "tool",
+            "uuid": "5019c2a4-84c5-42ec-a4e2-2d1194cafa08",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "19": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.0.0",
+            "errors": null,
+            "id": 19,
+            "input_connections": {
+                "input": {
+                    "id": 18,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool SnpEff eff:",
+                    "name": "annotations"
+                },
+                {
+                    "description": "runtime parameter for tool SnpEff eff:",
+                    "name": "chr"
+                },
+                {
+                    "description": "runtime parameter for tool SnpEff eff:",
+                    "name": "filterOut"
+                },
+                {
+                    "description": "runtime parameter for tool SnpEff eff:",
+                    "name": "generate_stats"
+                },
+                {
+                    "description": "runtime parameter for tool SnpEff eff:",
+                    "name": "input"
+                },
+                {
+                    "description": "runtime parameter for tool SnpEff eff:",
+                    "name": "intervals"
+                },
+                {
+                    "description": "runtime parameter for tool SnpEff eff:",
+                    "name": "noLog"
+                },
+                {
+                    "description": "runtime parameter for tool SnpEff eff:",
+                    "name": "offset"
+                },
+                {
+                    "description": "runtime parameter for tool SnpEff eff:",
+                    "name": "snpDb"
+                },
+                {
+                    "description": "runtime parameter for tool SnpEff eff:",
+                    "name": "spliceSiteSize"
+                },
+                {
+                    "description": "runtime parameter for tool SnpEff eff:",
+                    "name": "transcripts"
+                },
+                {
+                    "description": "runtime parameter for tool SnpEff eff:",
+                    "name": "udLength"
+                }
+            ],
+            "label": null,
+            "name": "SnpEff eff:",
+            "outputs": [
+                {
+                    "name": "snpeff_output",
+                    "type": "vcf"
+                },
+                {
+                    "name": "csvFile",
+                    "type": "csv"
+                }
+            ],
+            "position": {
+                "left": 3571,
+                "top": 791.328125
+            },
+            "post_job_actions": {
+                "HideDatasetActionsnpeff_output": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "snpeff_output"
+                },
+                "HideDatasetActionstatsFile": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "statsFile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "5b80f544c67f",
+                "name": "snpeff",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"annotations\": {\"__class__\": \"RuntimeValue\"}, \"chr\": {\"__class__\": \"RuntimeValue\"}, \"filter\": {\"specificEffects\": \"no\", \"__current_case__\": 0}, \"filterOut\": {\"__class__\": \"RuntimeValue\"}, \"generate_stats\": {\"__class__\": \"RuntimeValue\"}, \"input\": {\"__class__\": \"RuntimeValue\"}, \"inputFormat\": \"vcf\", \"intervals\": {\"__class__\": \"RuntimeValue\"}, \"noLog\": {\"__class__\": \"RuntimeValue\"}, \"offset\": {\"__class__\": \"RuntimeValue\"}, \"outputConditional\": {\"outputFormat\": \"vcf\", \"__current_case__\": 0}, \"snpDb\": {\"genomeSrc\": \"cached\", \"__current_case__\": 0, \"genomeVersion\": {\"__class__\": \"RuntimeValue\"}}, \"spliceSiteSize\": {\"__class__\": \"RuntimeValue\"}, \"transcripts\": {\"__class__\": \"RuntimeValue\"}, \"udLength\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "4.0.0",
+            "type": "tool",
+            "uuid": "6e0fb2dd-52ca-464d-a68f-4840a5162c56",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [],
+    "uuid": "a7f814ae-44fe-4336-9a51-aec2ae07648f",
+    "version": 3
+}

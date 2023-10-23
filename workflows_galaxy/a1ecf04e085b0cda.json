@@ -1,0 +1,469 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "Cost Analysis: DNA Variant Benchmark Workflow",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "FASTQ Dataset"
+                }
+            ],
+            "label": "FASTQ Dataset",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 298.25,
+                "height": 61.19999694824219,
+                "left": 200.5,
+                "right": 400.5,
+                "top": 237.0500030517578,
+                "width": 200,
+                "x": 200.5,
+                "y": 237.0500030517578
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "bb242596-8e18-4838-a4be-c43fbf19fa15",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "HG38ref"
+                }
+            ],
+            "label": "HG38ref",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 200.6999969482422,
+                "height": 61.19999694824219,
+                "left": 349.5,
+                "right": 549.5,
+                "top": 139.5,
+                "width": 200,
+                "x": 349.5,
+                "y": 139.5
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "0a5f5914-9a57-4ba4-8723-3a10b72143dc",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.2+galaxy0",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "library|input_1": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "reference_genome|own_file": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Bowtie2",
+                    "name": "library"
+                },
+                {
+                    "description": "runtime parameter for tool Bowtie2",
+                    "name": "reference_genome"
+                }
+            ],
+            "label": null,
+            "name": "Bowtie2",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "bottom": 420.5,
+                "height": 184,
+                "left": 424.183349609375,
+                "right": 624.183349609375,
+                "top": 236.5,
+                "width": 200,
+                "x": 424.183349609375,
+                "y": 236.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "09b2cdb7ace5",
+                "name": "bowtie2",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__job_resource\": {\"__job_resource__select\": \"no\", \"__current_case__\": 0}, \"analysis_type\": {\"analysis_type_selector\": \"simple\", \"__current_case__\": 0, \"presets\": \"no_presets\"}, \"library\": {\"type\": \"single\", \"__current_case__\": 0, \"input_1\": {\"__class__\": \"RuntimeValue\"}, \"unaligned_file\": false, \"aligned_file\": false}, \"reference_genome\": {\"source\": \"history\", \"__current_case__\": 1, \"own_file\": {\"__class__\": \"RuntimeValue\"}}, \"rg\": {\"rg_selector\": \"do_not_set\", \"__current_case__\": 3}, \"sam_options\": {\"sam_options_selector\": \"no\", \"__current_case__\": 1}, \"save_mapping_stats\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.4.2+galaxy0",
+            "type": "tool",
+            "uuid": "94ae0a47-1763-48e0-9a92-e039f8827ca0",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Bowtie2 on input dataset(s): alignments",
+                    "output_name": "output",
+                    "uuid": "de2f9dad-6fd0-4901-aa90-dfec24518d57"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtools_sort/samtools_sort/2.0.3",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input1": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Samtools sort",
+                    "name": "input1"
+                }
+            ],
+            "label": null,
+            "name": "Samtools sort",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "bottom": 340.6999969482422,
+                "height": 133.1999969482422,
+                "left": 654.5,
+                "right": 854.5,
+                "top": 207.5,
+                "width": 200,
+                "x": 654.5,
+                "y": 207.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtools_sort/samtools_sort/2.0.3",
+            "tool_shed_repository": {
+                "changeset_revision": "e613c1ad4c4c",
+                "name": "samtools_sort",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__job_resource\": {\"__job_resource__select\": \"no\", \"__current_case__\": 0}, \"input1\": {\"__class__\": \"RuntimeValue\"}, \"prim_key_cond\": {\"prim_key_select\": \"\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.0.3",
+            "type": "tool",
+            "uuid": "0eba28fa-bcef-4655-8617-2bba704841c6",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output1",
+                    "uuid": "bfc3f983-0a6a-4a17-92a5-6477ade4536a"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/freebayes/freebayes/1.3.1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "reference_source|batchmode|input_bams": {
+                    "id": 3,
+                    "output_name": "output1"
+                },
+                "reference_source|ref_file": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "FreeBayes",
+            "outputs": [
+                {
+                    "name": "output_vcf",
+                    "type": "vcf"
+                }
+            ],
+            "position": {
+                "bottom": 290.1000061035156,
+                "height": 163.60000610351562,
+                "left": 894.5,
+                "right": 1094.5,
+                "top": 126.5,
+                "width": 200,
+                "x": 894.5,
+                "y": 126.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/freebayes/freebayes/1.3.1",
+            "tool_shed_repository": {
+                "changeset_revision": "ef2c525bd8cd",
+                "name": "freebayes",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__job_resource\": {\"__job_resource__select\": \"no\", \"__current_case__\": 0}, \"coverage_options\": {\"coverage_options_selector\": \"do_not_set\", \"__current_case__\": 1}, \"options_type\": {\"options_type_selector\": \"simple\", \"__current_case__\": 1}, \"reference_source\": {\"reference_source_selector\": \"history\", \"__current_case__\": 1, \"batchmode\": {\"processmode\": \"individual\", \"__current_case__\": 0, \"input_bams\": {\"__class__\": \"ConnectedValue\"}}, \"ref_file\": {\"__class__\": \"ConnectedValue\"}}, \"target_limit_type\": {\"target_limit_type_selector\": \"do_not_limit\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.3.1",
+            "type": "tool",
+            "uuid": "a6675475-29aa-4ab6-a3bd-016aa048295d",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "FreeBayes on input dataset(s) (variants)",
+                    "output_name": "output_vcf",
+                    "uuid": "5fbf7fcf-d859-4987-a57f-cab45c7fbb38"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtools_flagstat/samtools_flagstat/2.0.3",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input1": {
+                    "id": 3,
+                    "output_name": "output1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Samtools flagstat",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "bottom": 411.3000030517578,
+                "height": 112.80000305175781,
+                "left": 891.5,
+                "right": 1091.5,
+                "top": 298.5,
+                "width": 200,
+                "x": 891.5,
+                "y": 298.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtools_flagstat/samtools_flagstat/2.0.3",
+            "tool_shed_repository": {
+                "changeset_revision": "22970df7a40e",
+                "name": "samtools_flagstat",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input1\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.0.3",
+            "type": "tool",
+            "uuid": "9fe37dac-ce97-4dbc-942b-5fd37862c8ae",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output1",
+                    "uuid": "8205deaa-10b1-43b8-a1b7-fcdd7f7abffc"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_coverage/deeptools_bam_coverage/3.3.2.0.0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "bamInput": {
+                    "id": 3,
+                    "output_name": "output1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "bamCoverage",
+            "outputs": [
+                {
+                    "name": "outFileName",
+                    "type": "bigwig"
+                }
+            ],
+            "position": {
+                "bottom": 544.3000030517578,
+                "height": 112.80000305175781,
+                "left": 891.5,
+                "right": 1091.5,
+                "top": 431.5,
+                "width": 200,
+                "x": 891.5,
+                "y": 431.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_coverage/deeptools_bam_coverage/3.3.2.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "bb1e4f63e0e6",
+                "name": "deeptools_bam_coverage",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__job_resource\": {\"__job_resource__select\": \"no\", \"__current_case__\": 0}, \"advancedOpt\": {\"showAdvancedOpt\": \"no\", \"__current_case__\": 0}, \"bamInput\": {\"__class__\": \"ConnectedValue\"}, \"binSize\": \"50\", \"exactScaling\": false, \"outFileFormat\": \"bigwig\", \"region\": \"\", \"scaling\": {\"type\": \"1x\", \"__current_case__\": 4, \"effectiveGenomeSize\": {\"effectiveGenomeSize_opt\": \"2685511504\", \"__current_case__\": 4}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.3.2.0.0",
+            "type": "tool",
+            "uuid": "ffc35a64-5215-442b-99d4-48716c3e78f6",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outFileName",
+                    "uuid": "8856341f-7e98-476f-a1eb-92b7e888d153"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_filter/bcftools_filter/1.10",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input_file": {
+                    "id": 4,
+                    "output_name": "output_vcf"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "bcftools filter",
+            "outputs": [
+                {
+                    "name": "output_file",
+                    "type": "vcf"
+                }
+            ],
+            "position": {
+                "bottom": 337.3000030517578,
+                "height": 112.80000305175781,
+                "left": 1157,
+                "right": 1357,
+                "top": 224.5,
+                "width": 200,
+                "x": 1157,
+                "y": 224.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_filter/bcftools_filter/1.10",
+            "tool_shed_repository": {
+                "changeset_revision": "33bd9301568c",
+                "name": "bcftools_filter",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_file\": {\"__class__\": \"ConnectedValue\"}, \"output_type\": \"b\", \"sec_filter\": {\"SnpGap\": null, \"IndelGap\": null, \"mode\": null, \"soft_filter\": \"\", \"select_set_GTs\": null}, \"sec_restrict\": {\"regions\": {\"regions_src\": \"__none__\", \"__current_case__\": 0}, \"targets\": {\"targets_src\": \"__none__\", \"__current_case__\": 0}, \"include\": \"\", \"exclude\": \"\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.10",
+            "type": "tool",
+            "uuid": "fbd3ceb0-3d11-4c0e-b33a-0b660e29446e",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_file",
+                    "uuid": "de1896bc-f103-4735-9f68-d8a667e3b22b"
+                }
+            ]
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_stats/bcftools_stats/1.10+galaxy1",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input_file": {
+                    "id": 7,
+                    "output_name": "output_file"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool bcftools stats",
+                    "name": "inputB_file"
+                },
+                {
+                    "description": "runtime parameter for tool bcftools stats",
+                    "name": "sec_default"
+                },
+                {
+                    "description": "runtime parameter for tool bcftools stats",
+                    "name": "sec_restrict"
+                }
+            ],
+            "label": null,
+            "name": "bcftools stats",
+            "outputs": [
+                {
+                    "name": "output_file",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "bottom": 446.5,
+                "height": 204,
+                "left": 1446,
+                "right": 1646,
+                "top": 242.5,
+                "width": 200,
+                "x": 1446,
+                "y": 242.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_stats/bcftools_stats/1.10+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "c636e58df612",
+                "name": "bcftools_stats",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"inputB_file\": {\"__class__\": \"RuntimeValue\"}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"plot_title\": \"\", \"sec_default\": {\"first_allele_only\": false, \"depth\": {\"set_depth\": \"no\", \"__current_case__\": 0}, \"reference_source\": {\"reference_source_selector\": \"\", \"__current_case__\": 0}, \"exons_file\": {\"__class__\": \"RuntimeValue\"}, \"split_by_ID\": false, \"user_tstv\": \"\", \"afbins\": {\"afbins_select\": \"default\", \"__current_case__\": 0}, \"af_tag\": \"\", \"verbose\": false}, \"sec_restrict\": {\"samples\": \"\", \"invert_samples\": false, \"samples_file\": {\"__class__\": \"RuntimeValue\"}, \"invert_samples_file\": false, \"apply_filters\": \"\", \"collapse\": null, \"regions\": {\"regions_src\": \"__none__\", \"__current_case__\": 0}, \"targets\": {\"targets_src\": \"__none__\", \"__current_case__\": 0}, \"include\": \"\", \"exclude\": \"\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.10+galaxy1",
+            "type": "tool",
+            "uuid": "9bdebe3b-530f-400d-9468-5dcf4f428a81",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_file",
+                    "uuid": "44c432b3-168f-48c5-9438-2b3d5010286a"
+                }
+            ]
+        }
+    },
+    "tags": [],
+    "uuid": "6bc1223c-b8eb-4530-9c1b-02ff8d99053f",
+    "version": 9
+}

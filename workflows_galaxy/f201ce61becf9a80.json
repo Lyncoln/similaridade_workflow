@@ -1,0 +1,182 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "demo to edit",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Input Dataset"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 127,
+                "top": 226
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "fastq_stats",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "input_file": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "FASTQ Summary Statistics",
+            "outputs": [
+                {
+                    "name": "output_file",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 398,
+                "top": 230
+            },
+            "post_job_actions": {},
+            "tool_id": "fastq_stats",
+            "tool_shed_repository": {
+                "changeset_revision": "daaf552153fe",
+                "name": "fastq_stats",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_file\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bowtie_wrappers/bowtie_wrapper/1.1.2",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "singlePaired|sInput1": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Map with Bowtie for Illumina",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "sam"
+                }
+            ],
+            "position": {
+                "left": 290,
+                "top": 366
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bowtie_wrappers/bowtie_wrapper/1.1.2",
+            "tool_shed_repository": {
+                "changeset_revision": "42c4463baaad",
+                "name": "bowtie_wrappers",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"refGenomeSource\": {\"genomeSource\": \"indexed\", \"__current_case__\": 0, \"index\": \"/galaxy/data/hg19/bowtie_index/hg19\"}, \"singlePaired\": {\"sPaired\": \"single\", \"__current_case__\": 0, \"sInput1\": null, \"sParams\": {\"sSettingsType\": \"preSet\", \"__current_case__\": 0}}, \"suppressHeader\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.2",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "sam_to_bam",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "source|input1": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "SAM-to-BAM",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 607,
+                "top": 422
+            },
+            "post_job_actions": {},
+            "tool_id": "sam_to_bam",
+            "tool_shed_repository": {
+                "changeset_revision": "9bd1568619cd",
+                "name": "sam_to_bam",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"source\": {\"index_source\": \"cached\", \"input1\": null, \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.2",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/PicardASMetrics/1.56.0",
+            "errors": "Tool is not installed",
+            "id": 4,
+            "input_connections": {
+                "input_file": {
+                    "id": 3,
+                    "output_name": "output1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "toolshed.g2.bx.psu.edu/repos/devteam/picard/PicardASMetrics/1.56.0",
+            "outputs": [],
+            "position": {
+                "left": 690,
+                "top": 202
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/PicardASMetrics/1.56.0",
+            "tool_state": "{\"adaptors\": \"\\\"\\\"\", \"bisulphite\": \"\\\"False\\\"\", \"genomeSource\": \"{\\\"index\\\": {\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": null}, \\\"refGenomeSource\\\": \\\"default\\\", \\\"__current_case__\\\": 0}\", \"input_file\": \"null\", \"maxinsert\": \"\\\"100000\\\"\", \"out_prefix\": \"\\\"Picard Alignment Summary Metrics\\\"\", \"sorted\": \"\\\"True\\\"\"}",
+            "tool_version": "1.56.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [],
+    "version": 1
+}

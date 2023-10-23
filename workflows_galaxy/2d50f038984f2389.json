@@ -1,0 +1,367 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "Workflow constructed from history 'Galaxy 101_Katya'",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "SNPs"
+                }
+            ],
+            "label": "SNPs",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 430.3833312988281,
+                "height": 58.76666259765625,
+                "left": -644.4833374023438,
+                "right": -456.98333740234375,
+                "top": 371.6166687011719,
+                "width": 187.5,
+                "x": -644.4833374023438,
+                "y": 371.6166687011719
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "ad842385-238b-4b35-a4c9-c7fd236294b2",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "c2aff908-5823-48f8-bcab-968be5e2013d"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "EXONS"
+                }
+            ],
+            "label": "EXONS",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 256.3833312988281,
+                "height": 58.76666259765625,
+                "left": -731.4833374023438,
+                "right": -543.9833374023438,
+                "top": 197.61666870117188,
+                "width": 187.5,
+                "x": -731.4833374023438,
+                "y": 197.61666870117188
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "b30feb77-5ce1-4eb0-8c90-9e0a4e0c6f79",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "9e568d1d-db3d-4319-a187-99f4e88326b0"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "inputA": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "reduce_or_iterate|inputB": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool bedtools Intersect intervals",
+                    "name": "inputA"
+                },
+                {
+                    "description": "runtime parameter for tool bedtools Intersect intervals",
+                    "name": "reduce_or_iterate"
+                }
+            ],
+            "label": null,
+            "name": "bedtools Intersect intervals",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 264.78334045410156,
+                "height": 137.1666717529297,
+                "left": -411.48333740234375,
+                "right": -223.98333740234375,
+                "top": 127.61666870117188,
+                "width": 187.5,
+                "x": -411.48333740234375,
+                "y": 127.61666870117188
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0",
+            "tool_shed_repository": {
+                "changeset_revision": "fe5b4cb8356c",
+                "name": "bedtools",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"bed\": false, \"count\": false, \"fraction_cond\": {\"fraction_select\": \"default\", \"__current_case__\": 0}, \"header\": false, \"inputA\": {\"__class__\": \"RuntimeValue\"}, \"invert\": false, \"once\": false, \"overlap_mode\": [\"-wb\"], \"reduce_or_iterate\": {\"reduce_or_iterate_selector\": \"iterate\", \"__current_case__\": 0, \"inputB\": {\"__class__\": \"RuntimeValue\"}}, \"sorted\": false, \"split\": false, \"strand\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.30.0",
+            "type": "tool",
+            "uuid": "e1de3348-4c51-4bf8-b9a1-fddedd134c7c",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "524a13a8-29e4-4128-961b-d6645bc37179"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "in_file": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Datamash",
+                    "name": "in_file"
+                }
+            ],
+            "label": null,
+            "name": "Datamash",
+            "outputs": [
+                {
+                    "name": "out_file",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 467.6499938964844,
+                "height": 108.0333251953125,
+                "left": -203.48333740234375,
+                "right": -15.98333740234375,
+                "top": 359.6166687011719,
+                "width": 187.5,
+                "x": -203.48333740234375,
+                "y": 359.6166687011719
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "562f3c677828",
+                "name": "datamash_ops",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"grouping\": \"4\", \"header_in\": false, \"header_out\": false, \"ignore_case\": false, \"in_file\": {\"__class__\": \"RuntimeValue\"}, \"need_sort\": false, \"operations\": [{\"__index__\": 0, \"op_name\": \"countunique\", \"op_column\": \"10\"}], \"print_full_line\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "5d475583-f50a-49a3-9bf1-a824a839f1ad",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file",
+                    "uuid": "0e780cb5-feb6-4ed4-85cb-f43aef79b540"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "sort1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 3,
+                    "output_name": "out_file"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Sort",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "Sort",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 458.51666259765625,
+                "height": 88.89999389648438,
+                "left": 89.51666259765625,
+                "right": 277.01666259765625,
+                "top": 369.6166687011719,
+                "width": 187.5,
+                "x": 89.51666259765625,
+                "y": 369.6166687011719
+            },
+            "post_job_actions": {},
+            "tool_id": "sort1",
+            "tool_state": "{\"column\": \"2\", \"column_set\": [], \"header_lines\": \"0\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"order\": \"DESC\", \"style\": \"num\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.2.0",
+            "type": "tool",
+            "uuid": "f567da78-be20-4e4a-85f9-a606bcb84110",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "5bcb2c05-467d-4fcd-8bf7-fae5426154d9"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "Show beginning1",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input": {
+                    "id": 4,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Select first",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "Select first",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 218.51666259765625,
+                "height": 88.89999389648438,
+                "left": 240.51666259765625,
+                "right": 428.01666259765625,
+                "top": 129.61666870117188,
+                "width": 187.5,
+                "x": 240.51666259765625,
+                "y": 129.61666870117188
+            },
+            "post_job_actions": {},
+            "tool_id": "Show beginning1",
+            "tool_state": "{\"header\": false, \"input\": {\"__class__\": \"RuntimeValue\"}, \"lineNum\": \"5\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.1",
+            "type": "tool",
+            "uuid": "1678b401-d640-4e60-a90d-759141fcf1aa",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "18e1ec2b-b259-4c3a-b21b-8831e357f951"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "comp1",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input1": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "input2": {
+                    "id": 5,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Compare two Datasets",
+                    "name": "input1"
+                },
+                {
+                    "description": "runtime parameter for tool Compare two Datasets",
+                    "name": "input2"
+                }
+            ],
+            "label": null,
+            "name": "Compare two Datasets",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 350.78334045410156,
+                "height": 137.1666717529297,
+                "left": 526.5166625976562,
+                "right": 714.0166625976562,
+                "top": 213.61666870117188,
+                "width": 187.5,
+                "x": 526.5166625976562,
+                "y": 213.61666870117188
+            },
+            "post_job_actions": {},
+            "tool_id": "comp1",
+            "tool_state": "{\"field1\": \"4\", \"field2\": \"1\", \"input1\": {\"__class__\": \"RuntimeValue\"}, \"input2\": {\"__class__\": \"RuntimeValue\"}, \"mode\": \"N\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "de042b0d-64b9-401b-821a-2fb6f80a794a",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "c72be555-e5ed-4088-bae3-efdb0f64c1c9"
+                }
+            ]
+        }
+    },
+    "tags": [],
+    "uuid": "9134ce6f-1810-4628-b776-6e6668ef0b1f",
+    "version": 1
+}

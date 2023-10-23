@@ -1,0 +1,476 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "Exploring Iris dataset with statistics and scatterplots",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "iris.csv"
+                }
+            ],
+            "label": "iris.csv",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 342.78125,
+                "height": 61.78125,
+                "left": 681,
+                "right": 881,
+                "top": 281,
+                "width": 200,
+                "x": 681,
+                "y": 281
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "0cbb209c-e7d0-43bf-a850-3c360880a4a4",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "csv_to_tabular",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "csv": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Convert CSV to tabular",
+                    "name": "csv"
+                }
+            ],
+            "label": null,
+            "name": "Convert CSV to tabular",
+            "outputs": [
+                {
+                    "name": "tabular",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 414.953125,
+                "height": 133.953125,
+                "left": 901,
+                "right": 1101,
+                "top": 281,
+                "width": 200,
+                "x": 901,
+                "y": 281
+            },
+            "post_job_actions": {},
+            "tool_id": "csv_to_tabular",
+            "tool_state": "{\"csv\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "5e4b73c2-1cc2-422c-b4eb-41f64f3d2280",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "tabular",
+                    "uuid": "ffccdb2d-2513-4c13-88ef-e0201b38e742"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "Remove beginning1",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "tabular"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Remove beginning",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "Remove beginning",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 394.5625,
+                "height": 113.5625,
+                "left": 1121,
+                "right": 1321,
+                "top": 281,
+                "width": 200,
+                "x": 1121,
+                "y": 281
+            },
+            "post_job_actions": {},
+            "tool_id": "Remove beginning1",
+            "tool_state": "{\"input\": {\"__class__\": \"RuntimeValue\"}, \"num_lines\": \"1\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "35a16e7a-eb2b-4ad1-b846-e17e0a677e6a",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "e76e2235-5590-4a8a-b57c-bf818575d4c2"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "in_file": {
+                    "id": 1,
+                    "output_name": "tabular"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Datamash",
+                    "name": "in_file"
+                }
+            ],
+            "label": null,
+            "name": "Datamash",
+            "outputs": [
+                {
+                    "name": "out_file",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 514.5625,
+                "height": 113.5625,
+                "left": 1121,
+                "right": 1321,
+                "top": 401,
+                "width": 200,
+                "x": 1121,
+                "y": 401
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "562f3c677828",
+                "name": "datamash_ops",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"grouping\": \"5\", \"header_in\": true, \"header_out\": true, \"ignore_case\": true, \"in_file\": {\"__class__\": \"RuntimeValue\"}, \"need_sort\": true, \"operations\": [{\"__index__\": 0, \"op_name\": \"mean\", \"op_column\": \"1\"}, {\"__index__\": 1, \"op_name\": \"sstdev\", \"op_column\": \"1\"}, {\"__index__\": 2, \"op_name\": \"mean\", \"op_column\": \"2\"}, {\"__index__\": 3, \"op_name\": \"sstdev\", \"op_column\": \"2\"}, {\"__index__\": 4, \"op_name\": \"mean\", \"op_column\": \"3\"}, {\"__index__\": 5, \"op_name\": \"sstdev\", \"op_column\": \"3\"}, {\"__index__\": 6, \"op_name\": \"mean\", \"op_column\": \"4\"}, {\"__index__\": 7, \"op_name\": \"sstdev\", \"op_column\": \"4\"}], \"print_full_line\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "5a48d7d4-1229-4708-9683-3d810a9934fe",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file",
+                    "uuid": "68e892c9-b583-4a40-aaa2-cc7475b26a85"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 2,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Advanced Cut",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "Advanced Cut",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 374.171875,
+                "height": 93.171875,
+                "left": 1341,
+                "right": 1541,
+                "top": 281,
+                "width": 200,
+                "x": 1341,
+                "y": 281
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "ddf54b12c295",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"complement\": \"\", \"cut_type_options\": {\"cut_element\": \"-f\", \"__current_case__\": 0, \"list\": \"5\"}, \"delimiter\": \"\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "c74908e2-1056-42dd-bdcb-2a972d5d1b9a",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "64ece0d7-7ed7-4c55-a0be-957850bb873a"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "Grouping1",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input1": {
+                    "id": 2,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Group",
+                    "name": "input1"
+                }
+            ],
+            "label": null,
+            "name": "Group",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 494.171875,
+                "height": 93.171875,
+                "left": 1341,
+                "right": 1541,
+                "top": 401,
+                "width": 200,
+                "x": 1341,
+                "y": 401
+            },
+            "post_job_actions": {},
+            "tool_id": "Grouping1",
+            "tool_state": "{\"groupcol\": \"5\", \"ignorecase\": false, \"ignorelines\": null, \"input1\": {\"__class__\": \"RuntimeValue\"}, \"operations\": [], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.4",
+            "type": "tool",
+            "uuid": "a4936e0a-9767-40f7-ba76-2e0534e527db",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "d056cbfb-9773-4bed-b3e5-1a816ea9a660"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "Grouping1",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input1": {
+                    "id": 2,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Group",
+                    "name": "input1"
+                }
+            ],
+            "label": null,
+            "name": "Group",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 614.171875,
+                "height": 93.171875,
+                "left": 1341,
+                "right": 1541,
+                "top": 521,
+                "width": 200,
+                "x": 1341,
+                "y": 521
+            },
+            "post_job_actions": {},
+            "tool_id": "Grouping1",
+            "tool_state": "{\"groupcol\": \"5\", \"ignorecase\": false, \"ignorelines\": null, \"input1\": {\"__class__\": \"RuntimeValue\"}, \"operations\": [{\"__index__\": 0, \"optype\": \"length\", \"opcol\": \"1\", \"opround\": \"no\", \"opdefault\": null}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.4",
+            "type": "tool",
+            "uuid": "179e00cc-76a3-4cfa-b39b-75d6b5698905",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "cf25fb68-77f5-48d7-bc7a-5c3d82e8c756"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/3.3.5+galaxy0",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input1": {
+                    "id": 2,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Scatterplot with ggplot2",
+                    "name": "input1"
+                }
+            ],
+            "label": null,
+            "name": "Scatterplot with ggplot2",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "png"
+                },
+                {
+                    "name": "output2",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "bottom": 886.90625,
+                "height": 245.90625,
+                "left": 1341,
+                "right": 1541,
+                "top": 641,
+                "width": 200,
+                "x": 1341,
+                "y": 641
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/3.3.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "1acf88921176",
+                "name": "ggplot2_point",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"type_conditional\": {\"type_options\": \"points\", \"__current_case__\": 0, \"points\": {\"pointoptions\": \"defined\", \"__current_case__\": 1, \"size\": \"2.0\", \"alpha\": \"1.0\", \"pointcolor\": \"black\"}}, \"factor\": {\"factoring\": \"Single\", \"__current_case__\": 1, \"factorcol\": \"5\", \"colors\": \"Set2\", \"colororder\": \"1\"}, \"axis_title_customization\": {\"axis_customization\": \"default\", \"__current_case__\": 0}, \"axis_text_customization\": {\"axis_customization\": \"default\", \"__current_case__\": 0}, \"plot_title_customization\": {\"axis_customization\": \"default\", \"__current_case__\": 0}, \"gridlinecust\": \"default\", \"transform\": \"none\", \"scaling\": {\"plot_scaling\": \"Automatic\", \"__current_case__\": 0}, \"theme\": \"bw\", \"legend\": \"yes\"}, \"input1\": {\"__class__\": \"RuntimeValue\"}, \"out\": {\"unit_output_dim\": \"in\", \"width_output_dim\": \"7.0\", \"height_output_dim\": \"7.0\", \"dpi_output_dim\": \"300.0\", \"additional_output_format\": \"pdf\"}, \"title\": \"Sepal length as a function of sepal width\", \"xlab\": \"Sepal length\", \"xplot\": \"1\", \"ylab\": \"Sepal width\", \"yplot\": \"2\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.3.5+galaxy0",
+            "type": "tool",
+            "uuid": "d8d299cf-40a3-4793-a51f-ca12e9fbf96d",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output1",
+                    "uuid": "42e83617-10ab-4026-b785-495796764775"
+                },
+                {
+                    "label": null,
+                    "output_name": "output2",
+                    "uuid": "8364cb66-984b-47bc-8967-71f36edec6e6"
+                }
+            ]
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sorted_uniq/1.1.0",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "infile": {
+                    "id": 4,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Unique",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 394.5625,
+                "height": 113.5625,
+                "left": 1561,
+                "right": 1761,
+                "top": 281,
+                "width": 200,
+                "x": 1561,
+                "y": 281
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sorted_uniq/1.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "ddf54b12c295",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"tabular\", \"adv_opts\": {\"adv_opts_selector\": \"basic\", \"__current_case__\": 0}, \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"ignore_case\": false, \"infile\": {\"__class__\": \"ConnectedValue\"}, \"is_numeric\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "bafd4c9e-482e-4ade-9e77-04613e5876a6",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outfile",
+                    "uuid": "f82a6a47-8796-4f8f-a921-f53c0dd71860"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "name:iris",
+        "name:Groups",
+        "Scatterplot"
+    ],
+    "uuid": "ede60783-a4b8-44ca-8e02-5548479b3546",
+    "version": 12
+}

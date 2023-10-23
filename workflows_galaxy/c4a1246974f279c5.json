@@ -1,0 +1,561 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "SSM Variant Detection",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "RevPaired.fastqsanger"
+                }
+            ],
+            "label": "RevPaired.fastqsanger",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 200,
+                "top": 355.578125
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "d66eb4db-a5d7-411f-aa9f-eddb932d4534",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "FwdPaired.fastqsanger"
+                }
+            ],
+            "label": "FwdPaired.fastqsanger",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 200,
+                "top": 475.578125
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "1d75ab36-056e-4b8e-a869-3fcc6638c9df",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "WS220.64_chr.fa"
+                }
+            ],
+            "label": "WS220.64_chr.fa",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 200,
+                "top": 595.578125
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "aad6fdcb-8c32-4259-be4e-fd8521e3600a",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa_wrappers/bwa_wrapper/1.2.3",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "genomeSource|ownFile": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "paired|input1": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "paired|input2": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Map with BWA for Illumina",
+                    "name": "genomeSource"
+                },
+                {
+                    "description": "runtime parameter for tool Map with BWA for Illumina",
+                    "name": "paired"
+                },
+                {
+                    "description": "runtime parameter for tool Map with BWA for Illumina",
+                    "name": "paired"
+                }
+            ],
+            "label": null,
+            "name": "Map with BWA for Illumina",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "sam"
+                }
+            ],
+            "position": {
+                "left": 420,
+                "top": 355.578125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa_wrappers/bwa_wrapper/1.2.3",
+            "tool_shed_repository": {
+                "changeset_revision": "b4427dbb6ced",
+                "name": "bwa_wrappers",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__job_resource\": {\"__job_resource__select\": \"no\", \"__current_case__\": 0}, \"__workflow_invocation_uuid__\": \"6baabad6db8e11e7aac4005056ba2773\", \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"genomeSource\": {\"refGenomeSource\": \"history\", \"__current_case__\": 1, \"ownFile\": {\"__class__\": \"RuntimeValue\"}}, \"paired\": {\"sPaired\": \"paired\", \"__current_case__\": 1, \"input1\": {\"__class__\": \"RuntimeValue\"}, \"input2\": {\"__class__\": \"RuntimeValue\"}}, \"params\": {\"source_select\": \"full\", \"__current_case__\": 1, \"maxEditDist\": \"0\", \"fracMissingAligns\": \"0.04\", \"maxGapOpens\": \"1\", \"maxGapExtens\": \"-1\", \"disallowLongDel\": \"16\", \"disallowIndel\": \"5\", \"seed\": \"-1\", \"maxEditDistSeed\": \"2\", \"mismatchPenalty\": \"3\", \"gapOpenPenalty\": \"11\", \"gapExtensPenalty\": \"4\", \"suboptAlign\": null, \"noIterSearch\": false, \"outputTopN\": \"3\", \"outputTopNDisc\": \"10\", \"maxInsertSize\": \"500\", \"maxOccurPairing\": \"100000\", \"readGroup\": {\"specReadGroup\": \"no\", \"__current_case__\": 1}}, \"suppressHeader\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.2.3",
+            "type": "tool",
+            "uuid": "5e261889-21a6-49cf-a3df-6b327d1ba797",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/sam_bitwise_flag_filter/sam_bw_filter/1.0.0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input1": {
+                    "id": 3,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Filter SAM",
+                    "name": "input1"
+                }
+            ],
+            "label": null,
+            "name": "Filter SAM",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "sam"
+                }
+            ],
+            "position": {
+                "left": 640,
+                "top": 355.578125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/sam_bitwise_flag_filter/sam_bw_filter/1.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "0b2424a404d9",
+                "name": "sam_bitwise_flag_filter",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__workflow_invocation_uuid__\": \"6baabad6db8e11e7aac4005056ba2773\", \"bits\": [{\"__index__\": 0, \"flags\": \"--0x0001\", \"states\": \"1\"}, {\"__index__\": 1, \"flags\": \"--0x0002\", \"states\": \"1\"}], \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"input1\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "3282e0dd-8328-4249-be89-5899bfe32e69",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/sam_to_bam/sam_to_bam/1.1.2",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "source|input1": {
+                    "id": 4,
+                    "output_name": "out_file1"
+                },
+                "source|ref_file": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "SAM-to-BAM",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 860,
+                "top": 355.578125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/sam_to_bam/sam_to_bam/1.1.2",
+            "tool_shed_repository": {
+                "changeset_revision": "9bd1568619cd",
+                "name": "sam_to_bam",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__workflow_invocation_uuid__\": \"6baabad6db8e11e7aac4005056ba2773\", \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"source\": {\"__current_case__\": 1, \"index_source\": \"history\", \"input1\": {\"__class__\": \"RuntimeValue\"}, \"ref_file\": {\"__class__\": \"RuntimeValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.2",
+            "type": "tool",
+            "uuid": "ecce8433-bcbd-4179-8f89-051b4cafe614",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_ARRG/1.56.0",
+            "errors": "Tool is not installed",
+            "id": 6,
+            "input_connections": {
+                "inputFile": {
+                    "id": 5,
+                    "output_name": "output1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_ARRG/1.56.0",
+            "outputs": [],
+            "position": {
+                "left": 1080,
+                "top": 355.578125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_ARRG/1.56.0",
+            "tool_state": "{\"__workflow_invocation_uuid__\": \"6baabad6db8e11e7aac4005056ba2773\", \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"inputFile\": {\"__class__\": \"RuntimeValue\"}, \"outputFormat\": \"true\", \"readGroupOpts\": {\"__current_case__\": 0, \"rgOpts\": \"preSet\"}, \"rgid\": \"1\", \"rglb\": \"rgLB\", \"rgpl\": \"illumina\", \"rgpu\": \"rgPU\", \"rgsm\": \"rgSM\"}",
+            "tool_version": "1.56.0",
+            "type": "tool",
+            "uuid": "cf895204-b37e-4e3a-995a-4283cf261901",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/realigner_target_creator/gatk_realigner_target_creator/0.0.4",
+            "errors": "Tool is not installed",
+            "id": 7,
+            "input_connections": {
+                "reference_source|input_bam": {
+                    "id": 6,
+                    "output_name": "outFile"
+                },
+                "reference_source|ref_file": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "toolshed.g2.bx.psu.edu/repos/devteam/realigner_target_creator/gatk_realigner_target_creator/0.0.4",
+            "outputs": [],
+            "position": {
+                "left": 1300,
+                "top": 355.578125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/realigner_target_creator/gatk_realigner_target_creator/0.0.4",
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"__workflow_invocation_uuid__\": \"6baabad6db8e11e7aac4005056ba2773\", \"analysis_param_type\": {\"__current_case__\": 0, \"analysis_param_type_selector\": \"basic\"}, \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"gatk_param_type\": {\"__current_case__\": 0, \"gatk_param_type_selector\": \"basic\"}, \"reference_source\": {\"__current_case__\": 1, \"input_bam\": {\"__class__\": \"RuntimeValue\"}, \"ref_file\": {\"__class__\": \"RuntimeValue\"}, \"reference_source_selector\": \"history\"}, \"rod_bind\": []}",
+            "tool_version": "0.0.4",
+            "type": "tool",
+            "uuid": "e8e3267d-6a48-4f86-9e09-27d6a478c12a",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/indel_realigner/gatk_indel_realigner/0.0.6",
+            "errors": "Tool is not installed",
+            "id": 8,
+            "input_connections": {
+                "reference_source|input_bam": {
+                    "id": 6,
+                    "output_name": "outFile"
+                },
+                "reference_source|ref_file": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "target_intervals": {
+                    "id": 7,
+                    "output_name": "output_interval"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "toolshed.g2.bx.psu.edu/repos/devteam/indel_realigner/gatk_indel_realigner/0.0.6",
+            "outputs": [],
+            "position": {
+                "left": 1520,
+                "top": 355.578125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/indel_realigner/gatk_indel_realigner/0.0.6",
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"__workflow_invocation_uuid__\": \"6baabad6db8e11e7aac4005056ba2773\", \"analysis_param_type\": {\"__current_case__\": 0, \"analysis_param_type_selector\": \"basic\"}, \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"gatk_param_type\": {\"__current_case__\": 0, \"gatk_param_type_selector\": \"basic\"}, \"knowns_only\": \"false\", \"lod_threshold\": \"5.0\", \"reference_source\": {\"__current_case__\": 1, \"input_bam\": {\"__class__\": \"RuntimeValue\"}, \"ref_file\": {\"__class__\": \"RuntimeValue\"}, \"reference_source_selector\": \"history\"}, \"rod_bind\": [], \"target_intervals\": {\"__class__\": \"RuntimeValue\"}}",
+            "tool_version": "0.0.6",
+            "type": "tool",
+            "uuid": "464d001b-fd7f-4745-a905-a008a3fcf29d",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/rgPicardMarkDups/1.56.0",
+            "errors": "Tool is not installed",
+            "id": 9,
+            "input_connections": {
+                "input_file": {
+                    "id": 8,
+                    "output_name": "output_bam"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "toolshed.g2.bx.psu.edu/repos/devteam/picard/rgPicardMarkDups/1.56.0",
+            "outputs": [],
+            "position": {
+                "left": 1740,
+                "top": 355.578125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/rgPicardMarkDups/1.56.0",
+            "tool_state": "{\"__workflow_invocation_uuid__\": \"6baabad6db8e11e7aac4005056ba2773\", \"assumeSorted\": \"true\", \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"input_file\": {\"__class__\": \"RuntimeValue\"}, \"optDupeDist\": \"100\", \"out_prefix\": \"Mark_Dups_Alignment file (BAM)\", \"readRegex\": \"[a-zA-Z0-9]+:[0-9]:([0-9]+):([0-9]+):([0-9]+).*\", \"remDups\": \"true\"}",
+            "tool_version": "1.56.0",
+            "type": "tool",
+            "uuid": "03ebcefa-1ea7-4df3-b2b9-e7cc3447cc4b",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/sam_pileup/sam_pileup/1.1.2",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "refOrHistory|input1": {
+                    "id": 9,
+                    "output_name": "out_file"
+                },
+                "refOrHistory|ownFile": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Generate pileup",
+                    "name": "refOrHistory"
+                },
+                {
+                    "description": "runtime parameter for tool Generate pileup",
+                    "name": "refOrHistory"
+                }
+            ],
+            "label": null,
+            "name": "Generate pileup",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1976,
+                "top": 348.578125
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput1": {
+                    "action_arguments": {
+                        "newtype": "pileup"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output1"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/sam_pileup/sam_pileup/1.1.2",
+            "tool_shed_repository": {
+                "changeset_revision": "a3b4ad6858ff",
+                "name": "sam_pileup",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"c\": {\"consensus\": \"no\", \"__current_case__\": 0}, \"indels\": \"no\", \"lastCol\": \"no\", \"mapCap\": \"30\", \"refOrHistory\": {\"reference\": \"history\", \"__current_case__\": 1, \"input1\": {\"__class__\": \"RuntimeValue\"}, \"ownFile\": {\"__class__\": \"RuntimeValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.2",
+            "type": "tool",
+            "uuid": "a8b831ff-e6ef-4556-b6ed-7dc0840a226d",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/varscan_version_2/varscan/2.4.2",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "input": {
+                    "id": 10,
+                    "output_name": "output1"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool VarScan",
+                    "name": "input"
+                }
+            ],
+            "label": "Varscan_SNPs",
+            "name": "VarScan",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "vcf"
+                }
+            ],
+            "position": {
+                "left": 2236,
+                "top": 268.578125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/varscan_version_2/varscan/2.4.2",
+            "tool_shed_repository": {
+                "changeset_revision": "bc1e0cd41241",
+                "name": "varscan_version_2",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"cmd\": \"mpileup2snp\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"min_avg_qual\": \"24\", \"min_coverage\": \"8\", \"min_freq_for_hom\": \"1.0\", \"min_supporting_reads\": \"1\", \"min_var_freq\": \"1.0\", \"p_value\": \"0.99\", \"sample_names\": \"\", \"strand_filter\": \"no\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.4.2",
+            "type": "tool",
+            "uuid": "4559da28-4d99-4cc1-90a9-75687f6b40da",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/varscan_version_2/varscan/2.4.2",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "input": {
+                    "id": 10,
+                    "output_name": "output1"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool VarScan",
+                    "name": "input"
+                }
+            ],
+            "label": "Varscan_INDELs",
+            "name": "VarScan",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "vcf"
+                }
+            ],
+            "position": {
+                "left": 2241,
+                "top": 480.578125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/varscan_version_2/varscan/2.4.2",
+            "tool_shed_repository": {
+                "changeset_revision": "bc1e0cd41241",
+                "name": "varscan_version_2",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"cmd\": \"mpileup2indel\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"min_avg_qual\": \"24\", \"min_coverage\": \"8\", \"min_freq_for_hom\": \"1.0\", \"min_supporting_reads\": \"1\", \"min_var_freq\": \"1.0\", \"p_value\": \"0.99\", \"sample_names\": \"\", \"strand_filter\": \"no\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.4.2",
+            "type": "tool",
+            "uuid": "fd3b3cd9-a5ab-43fd-9bff-a855e5f48d5b",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "13": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/vcfcombine/vcfcombine/1.0.0_rc1+galaxy0",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "input_vcfs": [
+                    {
+                        "id": 12,
+                        "output_name": "output"
+                    },
+                    {
+                        "id": 11,
+                        "output_name": "output"
+                    }
+                ]
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool VCFcombine:",
+                    "name": "input_vcfs"
+                }
+            ],
+            "label": "VCFcombine_SNPs_&_INDELs",
+            "name": "VCFcombine:",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "vcf"
+                }
+            ],
+            "position": {
+                "left": 2478.796875,
+                "top": 363.421875
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/vcfcombine/vcfcombine/1.0.0_rc1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "53edb91ed051",
+                "name": "vcfcombine",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_vcfs\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0_rc1+galaxy0",
+            "type": "tool",
+            "uuid": "b68c918b-303f-43df-b886-edbef561199f",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [],
+    "uuid": "d03c9647-89c3-4b9b-8e10-32ad20bf7500",
+    "version": 2
+}

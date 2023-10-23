@@ -1,0 +1,205 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "RNA-Seq_Analysis - Long CuffDiff",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": "fastq_groomer",
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [],
+            "label": null,
+            "name": "FASTQ Groomer",
+            "outputs": [
+                {
+                    "name": "output_file",
+                    "type": "fastqsanger"
+                }
+            ],
+            "position": {
+                "left": 295.20001220703125,
+                "top": 541.2000122070312
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput_file": {
+                    "action_arguments": {
+                        "newname": "FASTQ Sanger Converted"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_file"
+                }
+            },
+            "tool_id": "fastq_groomer",
+            "tool_shed_repository": {
+                "changeset_revision": "1298445c852b",
+                "name": "fastq_groomer",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_file\": null, \"input_type\": \"sanger\", \"options_type\": {\"options_type_selector\": \"basic\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.4",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "tophat",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "input1": {
+                    "id": 0,
+                    "output_name": "output_file"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "TopHat for Illumina",
+            "outputs": [
+                {
+                    "name": "insertions",
+                    "type": "bed"
+                },
+                {
+                    "name": "deletions",
+                    "type": "bed"
+                },
+                {
+                    "name": "junctions",
+                    "type": "bed"
+                },
+                {
+                    "name": "accepted_hits",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 439.20001220703125,
+                "top": 235.20001220703125
+            },
+            "post_job_actions": {},
+            "tool_id": "tophat",
+            "tool_shed_repository": {
+                "changeset_revision": "2ad64c5bb5f4",
+                "name": "tophat",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input1\": null, \"refGenomeSource\": {\"genomeSource\": \"history\", \"__current_case__\": 1, \"ownFile\": null}, \"singlePaired\": {\"sPaired\": \"single\", \"__current_case__\": 0, \"sParams\": {\"sSettingsType\": \"preSet\", \"__current_case__\": 0}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.5.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "cufflinks",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "accepted_hits"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Cufflinks",
+            "outputs": [
+                {
+                    "name": "genes_expression",
+                    "type": "tabular"
+                },
+                {
+                    "name": "transcripts_expression",
+                    "type": "tabular"
+                },
+                {
+                    "name": "assembled_isoforms",
+                    "type": "gtf"
+                },
+                {
+                    "name": "total_map_mass",
+                    "type": "txt"
+                },
+                {
+                    "name": "skipped",
+                    "type": "gtf"
+                }
+            ],
+            "position": {
+                "left": 763.800048828125,
+                "top": 261.00001525878906
+            },
+            "post_job_actions": {},
+            "tool_id": "cufflinks",
+            "tool_shed_repository": {
+                "changeset_revision": "d080005cffe1",
+                "name": "cufflinks",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"bias_correction\": {\"do_bias_correction\": \"Yes\", \"__current_case__\": 0, \"seq_source\": {\"index_source\": \"history\", \"__current_case__\": 1, \"ref_file\": null}}, \"do_normalization\": \"No\", \"global_model\": null, \"input\": null, \"max_intron_len\": \"300000\", \"min_isoform_fraction\": \"0.05\", \"pre_mrna_fraction\": \"0.05\", \"reference_annotation\": {\"use_ref\": \"No\", \"__current_case__\": 0}, \"singlePaired\": {\"sPaired\": \"No\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.0.5",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "cuffcompare",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "first_input": {
+                    "id": 2,
+                    "output_name": "assembled_isoforms"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Cuffcompare",
+            "outputs": [
+                {
+                    "name": "transcripts_accuracy",
+                    "type": "txt"
+                },
+                {
+                    "name": "input1_tmap",
+                    "type": "tabular"
+                },
+                {
+                    "name": "transcripts_combined",
+                    "type": "gtf"
+                }
+            ],
+            "position": {
+                "left": 843.6000366210938,
+                "top": 546.0000305175781
+            },
+            "post_job_actions": {},
+            "tool_id": "cuffcompare",
+            "tool_shed_repository": {
+                "changeset_revision": "9a3f7a890da6",
+                "name": "cuffcompare",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"annotation\": {\"use_ref_annotation\": \"No\", \"__current_case__\": 1}, \"first_input\": null, \"input_files\": [], \"seq_data\": {\"use_seq_data\": \"Yes\", \"__current_case__\": 1, \"seq_source\": {\"index_source\": \"history\", \"__current_case__\": 1, \"ref_file\": null}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.0.5",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [],
+    "version": 16
+}

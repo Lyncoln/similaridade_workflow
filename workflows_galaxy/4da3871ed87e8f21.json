@@ -1,0 +1,112 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "SNP calls (bwa-unified genotyper)",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa_wrappers/bwa_wrapper/1.2.3",
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [],
+            "label": null,
+            "name": "Map with BWA for Illumina",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "sam"
+                }
+            ],
+            "position": {
+                "left": 134.90625,
+                "top": 135.421875
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa_wrappers/bwa_wrapper/1.2.3",
+            "tool_shed_repository": {
+                "changeset_revision": "b4427dbb6ced",
+                "name": "bwa_wrappers",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__job_resource\": {\"__job_resource__select\": \"no\", \"__current_case__\": 0}, \"genomeSource\": {\"refGenomeSource\": \"indexed\", \"__current_case__\": 0, \"indices\": \"/galaxy/data/hg19/bwa_index/hg19.fa\"}, \"paired\": {\"sPaired\": \"single\", \"__current_case__\": 0, \"input1\": null}, \"params\": {\"source_select\": \"full\", \"__current_case__\": 1, \"maxEditDist\": \"0\", \"fracMissingAligns\": \"0.04\", \"maxGapOpens\": \"1\", \"maxGapExtens\": \"-1\", \"disallowLongDel\": \"16\", \"disallowIndel\": \"5\", \"seed\": \"-1\", \"maxEditDistSeed\": \"2\", \"mismatchPenalty\": \"3\", \"gapOpenPenalty\": \"11\", \"gapExtensPenalty\": \"4\", \"suboptAlign\": null, \"noIterSearch\": false, \"outputTopN\": \"3\", \"outputTopNDisc\": \"10\", \"maxInsertSize\": \"500\", \"maxOccurPairing\": \"100000\", \"readGroup\": {\"specReadGroup\": \"yes\", \"__current_case__\": 0, \"rgid\": \"fake123\", \"rgcn\": \"\", \"rgds\": \"\", \"rgdt\": \"\", \"rgfo\": \"\", \"rgks\": \"\", \"rglb\": \"foo\", \"rgpg\": \"\", \"rgpi\": \"\", \"rgpl\": \"ILLUMINA\", \"rgpu\": \"\", \"rgsm\": \"foo\"}}, \"suppressHeader\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.2.3",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/sam_to_bam/sam_to_bam/1.1.3",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "source|input1": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "SAM-to-BAM",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 433.46875,
+                "top": 179.46875
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/sam_to_bam/sam_to_bam/1.1.3",
+            "tool_shed_repository": {
+                "changeset_revision": "ab4c4e07eb3c",
+                "name": "sam_to_bam",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"source\": {\"index_source\": \"cached\", \"__current_case__\": 0, \"input1\": null, \"index\": null}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.3",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/unified_genotyper/gatk_unified_genotyper/0.0.6",
+            "errors": "Tool is not installed",
+            "id": 2,
+            "input_connections": {
+                "reference_source|input_bams_0|input_bam": {
+                    "id": 1,
+                    "output_name": "output1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "toolshed.g2.bx.psu.edu/repos/devteam/unified_genotyper/gatk_unified_genotyper/0.0.6",
+            "outputs": [],
+            "position": {
+                "left": 699.40625,
+                "top": 177.4375
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/unified_genotyper/gatk_unified_genotyper/0.0.6",
+            "tool_state": "{\"analysis_param_type\": \"{\\\"analysis_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"gatk_param_type\": \"{\\\"gatk_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"genotype_likelihoods_model\": \"\\\"BOTH\\\"\", \"reference_source\": \"{\\\"ref_file\\\": null, \\\"reference_source_selector\\\": \\\"history\\\", \\\"input_bams\\\": [{\\\"__index__\\\": 0, \\\"input_bam\\\": null}], \\\"__current_case__\\\": 1}\", \"rod_bind\": \"[]\", \"standard_min_confidence_threshold_for_calling\": \"\\\"30.0\\\"\", \"standard_min_confidence_threshold_for_emitting\": \"\\\"30.0\\\"\"}",
+            "tool_version": "0.0.6",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [],
+    "uuid": "97a74172-eb10-45b4-b7ee-fd4e6586af46",
+    "version": 0
+}

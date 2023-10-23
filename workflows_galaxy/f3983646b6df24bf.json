@@ -1,0 +1,1506 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "CloudMap",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "FASTQ reads (Illumina 1.8)"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 289,
+                "top": 694
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Filtered mapping strain VCF (e.g. 103,346 Hawaiian SNPs)"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 729,
+                "top": 374
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Fasta reference genome"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 728,
+                "top": 522
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 3,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "FASTQ reads (Illumina 1.8)"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 224,
+                "top": 1245
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 4,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Unfiltered mapping strain VCF (e.g. 112,061 Hawaiian SNPs)"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 1723,
+                "top": 1043
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastq_stats/fastq_stats/1.0.0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input_file": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "FASTQ Summary Statistics",
+            "outputs": [
+                {
+                    "name": "output_file",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 506,
+                "top": 888
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_file": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_file"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastq_stats/fastq_stats/1.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "daaf552153fe",
+                "name": "fastq_stats",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_file\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa_wrappers/bwa_wrapper/1.2.3",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "genomeSource|ownFile": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "paired|input1": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "paired|input2": {
+                    "id": 3,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Map with BWA for Illumina",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "sam"
+                }
+            ],
+            "position": {
+                "left": 916,
+                "top": 779
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa_wrappers/bwa_wrapper/1.2.3",
+            "tool_shed_repository": {
+                "changeset_revision": "b4427dbb6ced",
+                "name": "bwa_wrappers",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/galaxy/home/g2test/galaxy_test/tool-data/shared/ucsc/chrom/ce10.len\", \"genomeSource\": {\"refGenomeSource\": \"history\", \"__current_case__\": 1, \"ownFile\": null}, \"paired\": {\"sPaired\": \"paired\", \"__current_case__\": 1, \"input1\": null, \"input2\": null}, \"params\": {\"source_select\": \"full\", \"__current_case__\": 1, \"maxEditDist\": \"0\", \"fracMissingAligns\": \"0.04\", \"maxGapOpens\": \"1\", \"maxGapExtens\": \"-1\", \"disallowLongDel\": \"16\", \"disallowIndel\": \"5\", \"seed\": \"-1\", \"maxEditDistSeed\": \"2\", \"mismatchPenalty\": \"3\", \"gapOpenPenalty\": \"11\", \"gapExtensPenalty\": \"4\", \"suboptAlign\": null, \"noIterSearch\": false, \"outputTopN\": \"3\", \"outputTopNDisc\": \"10\", \"maxInsertSize\": \"500\", \"maxOccurPairing\": \"100000\", \"readGroup\": {\"specReadGroup\": \"no\", \"__current_case__\": 1}}, \"suppressHeader\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.2.3",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastq_stats/fastq_stats/1.0.0",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input_file": {
+                    "id": 3,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "FASTQ Summary Statistics",
+            "outputs": [
+                {
+                    "name": "output_file",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 517,
+                "top": 1521
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_file": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_file"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastq_stats/fastq_stats/1.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "daaf552153fe",
+                "name": "fastq_stats",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_file\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "qual_stats_boxplot",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input_file": {
+                    "id": 5,
+                    "output_name": "output_file"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Boxplot",
+            "outputs": [
+                {
+                    "name": "output_file",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 516,
+                "top": 1041
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput_file": {
+                    "action_arguments": {
+                        "newname": "FASTQ quality statistics (box plot)"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_file"
+                }
+            },
+            "tool_id": "qual_stats_boxplot",
+            "tool_state": "{\"graph_size\": \"2048,768\", \"input_file\": null, \"lwcol\": \"11\", \"medcol\": \"8\", \"q1col\": \"7\", \"q3col\": \"9\", \"rwcol\": \"12\", \"title\": \"Box plot in Galaxy\", \"use_outliers\": {\"use_outliers_type\": \"use_outliers\", \"__current_case__\": 0, \"outliercol\": \"13\"}, \"xcol\": \"1\", \"xlabel\": \"X Axis Label\", \"ylabel\": \"Score Value\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_file",
+                    "uuid": null
+                }
+            ]
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/sam_bitwise_flag_filter/sam_bw_filter/1.0.0",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "input1": {
+                    "id": 6,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter SAM",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "sam"
+                }
+            ],
+            "position": {
+                "left": 1159,
+                "top": 777
+            },
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/sam_bitwise_flag_filter/sam_bw_filter/1.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "0b2424a404d9",
+                "name": "sam_bitwise_flag_filter",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"bits\": [{\"__index__\": 0, \"flags\": \"--0x0004\", \"states\": \"0\"}], \"chromInfo\": \"/galaxy/home/g2test/galaxy_test/tool-data/shared/ucsc/chrom/ce10.len\", \"input1\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "qual_stats_boxplot",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "input_file": {
+                    "id": 7,
+                    "output_name": "output_file"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Boxplot",
+            "outputs": [
+                {
+                    "name": "output_file",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 523,
+                "top": 1735
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_file": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_file"
+                }
+            },
+            "tool_id": "qual_stats_boxplot",
+            "tool_state": "{\"graph_size\": \"2048,768\", \"input_file\": null, \"lwcol\": \"11\", \"medcol\": \"8\", \"q1col\": \"7\", \"q3col\": \"9\", \"rwcol\": \"12\", \"title\": \"Box plot in Galaxy\", \"use_outliers\": {\"use_outliers_type\": \"use_outliers\", \"__current_case__\": 0, \"outliercol\": \"13\"}, \"xcol\": \"1\", \"xlabel\": \"X Axis Label\", \"ylabel\": \"Score Value\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/sam_to_bam/sam_to_bam/1.1.2",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "source|input1": {
+                    "id": 9,
+                    "output_name": "out_file1"
+                },
+                "source|ref_file": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "SAM-to-BAM",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 1236,
+                "top": 642
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output1"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/sam_to_bam/sam_to_bam/1.1.2",
+            "tool_shed_repository": {
+                "changeset_revision": "9bd1568619cd",
+                "name": "sam_to_bam",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/galaxy/home/g2test/galaxy_test/tool-data/shared/ucsc/chrom/ce10.len\", \"source\": {\"index_source\": \"history\", \"ref_file\": null, \"input1\": null, \"__current_case__\": 1}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.2",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_ARRG/1.56.0",
+            "errors": "Tool is not installed",
+            "id": 12,
+            "input_connections": {
+                "inputFile": {
+                    "id": 11,
+                    "output_name": "output1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_ARRG/1.56.0",
+            "outputs": [],
+            "position": {
+                "left": 1456,
+                "top": 642
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutFile": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "outFile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_ARRG/1.56.0",
+            "tool_state": "{\"chromInfo\": \"\\\"/galaxy/home/g2test/galaxy_test/tool-data/shared/ucsc/chrom/ce10.len\\\"\", \"inputFile\": \"null\", \"outputFormat\": \"\\\"True\\\"\", \"readGroupOpts\": \"{\\\"rgOpts\\\": \\\"preSet\\\", \\\"__current_case__\\\": 0}\", \"rgid\": \"\\\"1\\\"\", \"rglb\": \"\\\"rgLB\\\"\", \"rgpl\": \"\\\"illumina\\\"\", \"rgpu\": \"\\\"rgPU\\\"\", \"rgsm\": \"\\\"rgSM\\\"\"}",
+            "tool_version": "1.56.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "13": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/realigner_target_creator/gatk_realigner_target_creator/0.0.4",
+            "errors": "Tool is not installed",
+            "id": 13,
+            "input_connections": {
+                "reference_source|input_bam": {
+                    "id": 12,
+                    "output_name": "outFile"
+                },
+                "reference_source|ref_file": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "toolshed.g2.bx.psu.edu/repos/devteam/realigner_target_creator/gatk_realigner_target_creator/0.0.4",
+            "outputs": [],
+            "position": {
+                "left": 1677,
+                "top": 642
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_interval": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_interval"
+                },
+                "HideDatasetActionoutput_log": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_log"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/realigner_target_creator/gatk_realigner_target_creator/0.0.4",
+            "tool_state": "{\"analysis_param_type\": \"{\\\"analysis_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"chromInfo\": \"\\\"/galaxy/home/g2test/galaxy_test/tool-data/shared/ucsc/chrom/ce10.len\\\"\", \"gatk_param_type\": \"{\\\"gatk_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"reference_source\": \"{\\\"ref_file\\\": null, \\\"reference_source_selector\\\": \\\"history\\\", \\\"input_bam\\\": null, \\\"__current_case__\\\": 1}\", \"rod_bind\": \"[]\"}",
+            "tool_version": "0.0.4",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "14": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/indel_realigner/gatk_indel_realigner/0.0.6",
+            "errors": "Tool is not installed",
+            "id": 14,
+            "input_connections": {
+                "reference_source|input_bam": {
+                    "id": 12,
+                    "output_name": "outFile"
+                },
+                "reference_source|ref_file": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "target_intervals": {
+                    "id": 13,
+                    "output_name": "output_interval"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "toolshed.g2.bx.psu.edu/repos/devteam/indel_realigner/gatk_indel_realigner/0.0.6",
+            "outputs": [],
+            "position": {
+                "left": 1894,
+                "top": 642
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_bam": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_bam"
+                },
+                "HideDatasetActionoutput_log": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_log"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/indel_realigner/gatk_indel_realigner/0.0.6",
+            "tool_state": "{\"analysis_param_type\": \"{\\\"analysis_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"chromInfo\": \"\\\"/galaxy/home/g2test/galaxy_test/tool-data/shared/ucsc/chrom/ce10.len\\\"\", \"gatk_param_type\": \"{\\\"gatk_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"knowns_only\": \"\\\"False\\\"\", \"lod_threshold\": \"\\\"5.0\\\"\", \"reference_source\": \"{\\\"ref_file\\\": null, \\\"reference_source_selector\\\": \\\"history\\\", \\\"input_bam\\\": null, \\\"__current_case__\\\": 1}\", \"rod_bind\": \"[]\", \"target_intervals\": \"null\"}",
+            "tool_version": "0.0.6",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "15": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/rgPicardMarkDups/1.56.0",
+            "errors": "Tool is not installed",
+            "id": 15,
+            "input_connections": {
+                "input_file": {
+                    "id": 14,
+                    "output_name": "output_bam"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "toolshed.g2.bx.psu.edu/repos/devteam/picard/rgPicardMarkDups/1.56.0",
+            "outputs": [],
+            "position": {
+                "left": 2118,
+                "top": 642
+            },
+            "post_job_actions": {
+                "HideDatasetActionhtml_file": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "html_file"
+                },
+                "RenameDatasetActionout_file": {
+                    "action_arguments": {
+                        "newname": "Alignment file (BAM)"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/rgPicardMarkDups/1.56.0",
+            "tool_state": "{\"assumeSorted\": \"\\\"True\\\"\", \"chromInfo\": \"\\\"/galaxy/home/g2test/galaxy_test/tool-data/shared/ucsc/chrom/ce10.len\\\"\", \"input_file\": \"null\", \"optDupeDist\": \"\\\"100\\\"\", \"out_prefix\": \"\\\"Alignment file (BAM)\\\"\", \"readRegex\": \"\\\"[a-zA-Z0-9]+:[0-9]:([0-9]+):([0-9]+):([0-9]+).*\\\"\", \"remDups\": \"\\\"True\\\"\"}",
+            "tool_version": "1.56.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file",
+                    "uuid": null
+                }
+            ]
+        },
+        "16": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/unified_genotyper/gatk_unified_genotyper/0.0.6",
+            "errors": "Tool is not installed",
+            "id": 16,
+            "input_connections": {
+                "analysis_param_type|genotyping_mode_type|input_alleles_rod": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "reference_source|input_bams_0|input_bam": {
+                    "id": 15,
+                    "output_name": "out_file"
+                },
+                "reference_source|ref_file": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "toolshed.g2.bx.psu.edu/repos/devteam/unified_genotyper/gatk_unified_genotyper/0.0.6",
+            "outputs": [],
+            "position": {
+                "left": 2118,
+                "top": 322
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_log": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_log"
+                },
+                "HideDatasetActionoutput_metrics": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_metrics"
+                },
+                "HideDatasetActionoutput_vcf": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_vcf"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/unified_genotyper/gatk_unified_genotyper/0.0.6",
+            "tool_state": "{\"analysis_param_type\": \"{\\\"max_alternate_alleles\\\": \\\"5\\\", \\\"doContextDependentGapPenalties\\\": \\\"False\\\", \\\"indelGapOpenPenalty\\\": \\\"45.0\\\", \\\"indelGapContinuationPenalty\\\": \\\"10.0\\\", \\\"min_base_quality_score\\\": \\\"17\\\", \\\"max_deletion_fraction\\\": \\\"0.05\\\", \\\"group\\\": null, \\\"p_nonref_model\\\": \\\"EXACT\\\", \\\"output_mode\\\": \\\"EMIT_ALL_SITES\\\", \\\"analysis_param_type_selector\\\": \\\"advanced\\\", \\\"multiallelic\\\": \\\"False\\\", \\\"pcr_error_rate\\\": \\\"0.0001\\\", \\\"genotyping_mode_type\\\": {\\\"genotyping_mode\\\": \\\"GENOTYPE_GIVEN_ALLELES\\\", \\\"input_alleles_rod\\\": null, \\\"__current_case__\\\": 1}, \\\"min_indel_count_for_genotyping\\\": \\\"5\\\", \\\"annotation\\\": null, \\\"additional_annotations\\\": [], \\\"exclude_annotations\\\": null, \\\"indel_heterozygosity\\\": \\\"0.000125\\\", \\\"heterozygosity\\\": \\\"0.001\\\", \\\"__current_case__\\\": 1, \\\"indelHaplotypeSize\\\": \\\"80\\\", \\\"compute_SLOD\\\": \\\"False\\\"}\", \"gatk_param_type\": \"{\\\"gatk_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"genotype_likelihoods_model\": \"\\\"BOTH\\\"\", \"reference_source\": \"{\\\"ref_file\\\": null, \\\"reference_source_selector\\\": \\\"history\\\", \\\"input_bams\\\": [{\\\"__index__\\\": 0, \\\"input_bam\\\": null}], \\\"__current_case__\\\": 1}\", \"rod_bind\": \"[]\", \"standard_min_confidence_threshold_for_calling\": \"\\\"30.0\\\"\", \"standard_min_confidence_threshold_for_emitting\": \"\\\"30.0\\\"\"}",
+            "tool_version": "0.0.6",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "17": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/unified_genotyper/gatk_unified_genotyper/0.0.6",
+            "errors": "Tool is not installed",
+            "id": 17,
+            "input_connections": {
+                "reference_source|input_bams_0|input_bam": {
+                    "id": 15,
+                    "output_name": "out_file"
+                },
+                "reference_source|ref_file": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "toolshed.g2.bx.psu.edu/repos/devteam/unified_genotyper/gatk_unified_genotyper/0.0.6",
+            "outputs": [],
+            "position": {
+                "left": 2035,
+                "top": 1210
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_log": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_log"
+                },
+                "HideDatasetActionoutput_metrics": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_metrics"
+                },
+                "HideDatasetActionoutput_vcf": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_vcf"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/unified_genotyper/gatk_unified_genotyper/0.0.6",
+            "tool_state": "{\"analysis_param_type\": \"{\\\"max_alternate_alleles\\\": \\\"5\\\", \\\"doContextDependentGapPenalties\\\": \\\"False\\\", \\\"indelGapOpenPenalty\\\": \\\"45.0\\\", \\\"indelGapContinuationPenalty\\\": \\\"10.0\\\", \\\"min_base_quality_score\\\": \\\"17\\\", \\\"max_deletion_fraction\\\": \\\"0.05\\\", \\\"group\\\": null, \\\"p_nonref_model\\\": \\\"EXACT\\\", \\\"output_mode\\\": \\\"EMIT_VARIANTS_ONLY\\\", \\\"analysis_param_type_selector\\\": \\\"advanced\\\", \\\"multiallelic\\\": \\\"False\\\", \\\"pcr_error_rate\\\": \\\"0.0001\\\", \\\"genotyping_mode_type\\\": {\\\"genotyping_mode\\\": \\\"DISCOVERY\\\", \\\"__current_case__\\\": 0}, \\\"min_indel_count_for_genotyping\\\": \\\"5\\\", \\\"annotation\\\": {\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": null}, \\\"additional_annotations\\\": [], \\\"exclude_annotations\\\": {\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": null}, \\\"indel_heterozygosity\\\": \\\"0.000125\\\", \\\"heterozygosity\\\": \\\"0.001\\\", \\\"__current_case__\\\": 1, \\\"indelHaplotypeSize\\\": \\\"80\\\", \\\"compute_SLOD\\\": \\\"False\\\"}\", \"chromInfo\": \"\\\"/galaxy/home/g2test/galaxy_test/tool-data/shared/ucsc/chrom/ce10.len\\\"\", \"gatk_param_type\": \"{\\\"gatk_param_type_selector\\\": \\\"advanced\\\", \\\"pedigree_string_repeat\\\": [], \\\"disable_experimental_low_memory_sharding\\\": \\\"False\\\", \\\"pedigree_validation_type\\\": \\\"STRICT\\\", \\\"pedigree\\\": [], \\\"input_interval_repeat\\\": [], \\\"baq\\\": \\\"OFF\\\", \\\"input_exclude_interval_repeat\\\": [], \\\"default_base_qualities\\\": \\\"-1\\\", \\\"downsampling_type\\\": {\\\"downsampling_type_selector\\\": \\\"NONE\\\", \\\"__current_case__\\\": 0}, \\\"interval_merging\\\": \\\"ALL\\\", \\\"interval_set_rule\\\": \\\"UNION\\\", \\\"non_deterministic_random_seed\\\": \\\"False\\\", \\\"__current_case__\\\": 1, \\\"read_filter\\\": [{\\\"__index__\\\": 0, \\\"read_filter_type\\\": {\\\"read_filter_type_selector\\\": \\\"MappingQuality\\\", \\\"__current_case__\\\": 5, \\\"min_mapping_quality_score\\\": \\\"10\\\"}}], \\\"validation_strictness\\\": \\\"STRICT\\\", \\\"baq_gap_open_penalty\\\": \\\"40.0\\\", \\\"read_group_black_list_repeat\\\": [], \\\"use_original_qualities\\\": \\\"False\\\"}\", \"genotype_likelihoods_model\": \"\\\"BOTH\\\"\", \"reference_source\": \"{\\\"ref_file\\\": null, \\\"reference_source_selector\\\": \\\"history\\\", \\\"input_bams\\\": [{\\\"__index__\\\": 0, \\\"input_bam\\\": null}], \\\"__current_case__\\\": 1}\", \"rod_bind\": \"[]\", \"standard_min_confidence_threshold_for_calling\": \"\\\"30.0\\\"\", \"standard_min_confidence_threshold_for_emitting\": \"\\\"30.0\\\"\"}",
+            "tool_version": "0.0.6",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "18": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/unified_genotyper/gatk_unified_genotyper/0.0.6",
+            "errors": "Tool is not installed",
+            "id": 18,
+            "input_connections": {
+                "reference_source|input_bams_0|input_bam": {
+                    "id": 15,
+                    "output_name": "out_file"
+                },
+                "reference_source|ref_file": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "toolshed.g2.bx.psu.edu/repos/devteam/unified_genotyper/gatk_unified_genotyper/0.0.6",
+            "outputs": [],
+            "position": {
+                "left": 2472,
+                "top": 534
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_log": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_log"
+                },
+                "HideDatasetActionoutput_metrics": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_metrics"
+                },
+                "HideDatasetActionoutput_vcf": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_vcf"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/unified_genotyper/gatk_unified_genotyper/0.0.6",
+            "tool_state": "{\"analysis_param_type\": \"{\\\"max_alternate_alleles\\\": \\\"5\\\", \\\"doContextDependentGapPenalties\\\": \\\"False\\\", \\\"indelGapOpenPenalty\\\": \\\"45.0\\\", \\\"indelGapContinuationPenalty\\\": \\\"10.0\\\", \\\"min_base_quality_score\\\": \\\"30\\\", \\\"max_deletion_fraction\\\": \\\"0.05\\\", \\\"group\\\": null, \\\"p_nonref_model\\\": \\\"EXACT\\\", \\\"output_mode\\\": \\\"EMIT_VARIANTS_ONLY\\\", \\\"analysis_param_type_selector\\\": \\\"advanced\\\", \\\"multiallelic\\\": \\\"False\\\", \\\"pcr_error_rate\\\": \\\"0.0001\\\", \\\"genotyping_mode_type\\\": {\\\"genotyping_mode\\\": \\\"DISCOVERY\\\", \\\"__current_case__\\\": 0}, \\\"min_indel_count_for_genotyping\\\": \\\"5\\\", \\\"annotation\\\": {\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": null}, \\\"additional_annotations\\\": [], \\\"exclude_annotations\\\": {\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": null}, \\\"indel_heterozygosity\\\": \\\"0.000125\\\", \\\"heterozygosity\\\": \\\"0.001\\\", \\\"__current_case__\\\": 1, \\\"indelHaplotypeSize\\\": \\\"80\\\", \\\"compute_SLOD\\\": \\\"False\\\"}\", \"chromInfo\": \"\\\"/galaxy/home/g2test/galaxy_test/tool-data/shared/ucsc/chrom/ce10.len\\\"\", \"gatk_param_type\": \"{\\\"gatk_param_type_selector\\\": \\\"advanced\\\", \\\"pedigree_string_repeat\\\": [], \\\"disable_experimental_low_memory_sharding\\\": \\\"False\\\", \\\"pedigree_validation_type\\\": \\\"STRICT\\\", \\\"pedigree\\\": [], \\\"input_interval_repeat\\\": [], \\\"baq\\\": \\\"OFF\\\", \\\"input_exclude_interval_repeat\\\": [], \\\"default_base_qualities\\\": \\\"-1\\\", \\\"downsampling_type\\\": {\\\"downsampling_type_selector\\\": \\\"NONE\\\", \\\"__current_case__\\\": 0}, \\\"interval_merging\\\": \\\"ALL\\\", \\\"interval_set_rule\\\": \\\"UNION\\\", \\\"non_deterministic_random_seed\\\": \\\"False\\\", \\\"__current_case__\\\": 1, \\\"read_filter\\\": [{\\\"__index__\\\": 0, \\\"read_filter_type\\\": {\\\"read_filter_type_selector\\\": \\\"MappingQuality\\\", \\\"__current_case__\\\": 5, \\\"min_mapping_quality_score\\\": \\\"30\\\"}}], \\\"validation_strictness\\\": \\\"STRICT\\\", \\\"baq_gap_open_penalty\\\": \\\"40.0\\\", \\\"read_group_black_list_repeat\\\": [], \\\"use_original_qualities\\\": \\\"False\\\"}\", \"genotype_likelihoods_model\": \"\\\"BOTH\\\"\", \"reference_source\": \"{\\\"ref_file\\\": null, \\\"reference_source_selector\\\": \\\"history\\\", \\\"input_bams\\\": [{\\\"__index__\\\": 0, \\\"input_bam\\\": null}], \\\"__current_case__\\\": 1}\", \"rod_bind\": \"[]\", \"standard_min_confidence_threshold_for_calling\": \"\\\"30.0\\\"\", \"standard_min_confidence_threshold_for_emitting\": \"\\\"30.0\\\"\"}",
+            "tool_version": "0.0.6",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "19": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/aaronquinlan/bedtools/bedtools_genomecoveragebed_bedgraph/0.1.0",
+            "errors": null,
+            "id": 19,
+            "input_connections": {
+                "input": {
+                    "id": 15,
+                    "output_name": "out_file"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Create a BedGraph of genome coverage",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "bedgraph"
+                }
+            ],
+            "position": {
+                "left": 2335,
+                "top": 1002
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/aaronquinlan/bedtools/bedtools_genomecoveragebed_bedgraph/0.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "41bba3e648d1",
+                "name": "bedtools",
+                "owner": "aaronquinlan",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/galaxy/home/g2test/galaxy_test/tool-data/shared/ucsc/chrom/ce10.len\", \"input\": null, \"scale\": \"\", \"split\": false, \"strand\": \"\", \"zero_regions\": true, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "20": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/depth_of_coverage/gatk_depth_of_coverage/0.0.2",
+            "errors": "Tool is not installed",
+            "id": 20,
+            "input_connections": {
+                "reference_source|input_bams_0|input_bam": {
+                    "id": 15,
+                    "output_name": "out_file"
+                },
+                "reference_source|ref_file": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "toolshed.g2.bx.psu.edu/repos/devteam/depth_of_coverage/gatk_depth_of_coverage/0.0.2",
+            "outputs": [],
+            "position": {
+                "left": 2335,
+                "top": 1130
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_cumulative_coverage_counts_library": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_cumulative_coverage_counts_library"
+                },
+                "HideDatasetActionoutput_cumulative_coverage_counts_readgroup": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_cumulative_coverage_counts_readgroup"
+                },
+                "HideDatasetActionoutput_cumulative_coverage_counts_sample": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_cumulative_coverage_counts_sample"
+                },
+                "HideDatasetActionoutput_cumulative_coverage_proportions_library": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_cumulative_coverage_proportions_library"
+                },
+                "HideDatasetActionoutput_cumulative_coverage_proportions_readgroup": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_cumulative_coverage_proportions_readgroup"
+                },
+                "HideDatasetActionoutput_cumulative_coverage_proportions_sample": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_cumulative_coverage_proportions_sample"
+                },
+                "HideDatasetActionoutput_gene_statistics_library": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_gene_statistics_library"
+                },
+                "HideDatasetActionoutput_gene_statistics_readgroup": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_gene_statistics_readgroup"
+                },
+                "HideDatasetActionoutput_gene_statistics_sample": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_gene_statistics_sample"
+                },
+                "HideDatasetActionoutput_gene_summary_library": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_gene_summary_library"
+                },
+                "HideDatasetActionoutput_gene_summary_readgroup": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_gene_summary_readgroup"
+                },
+                "HideDatasetActionoutput_gene_summary_sample": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_gene_summary_sample"
+                },
+                "HideDatasetActionoutput_interval_statistics_library": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_interval_statistics_library"
+                },
+                "HideDatasetActionoutput_interval_statistics_readgroup": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_interval_statistics_readgroup"
+                },
+                "HideDatasetActionoutput_interval_statistics_sample": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_interval_statistics_sample"
+                },
+                "HideDatasetActionoutput_interval_summary_library": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_interval_summary_library"
+                },
+                "HideDatasetActionoutput_interval_summary_readgroup": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_interval_summary_readgroup"
+                },
+                "HideDatasetActionoutput_interval_summary_sample": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_interval_summary_sample"
+                },
+                "HideDatasetActionoutput_log": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_log"
+                },
+                "HideDatasetActionoutput_per_locus_coverage": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_per_locus_coverage"
+                },
+                "HideDatasetActionoutput_statistics_library": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_statistics_library"
+                },
+                "HideDatasetActionoutput_statistics_readgroup": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_statistics_readgroup"
+                },
+                "HideDatasetActionoutput_statistics_sample": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_statistics_sample"
+                },
+                "HideDatasetActionoutput_summary_library": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_summary_library"
+                },
+                "HideDatasetActionoutput_summary_readgroup": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_summary_readgroup"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/depth_of_coverage/gatk_depth_of_coverage/0.0.2",
+            "tool_state": "{\"analysis_param_type\": \"{\\\"analysis_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"chromInfo\": \"\\\"/galaxy/home/g2test/galaxy_test/tool-data/shared/ucsc/chrom/ce10.len\\\"\", \"gatk_param_type\": \"{\\\"gatk_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"input_calculate_coverage_over_genes\": \"null\", \"output_format\": \"\\\"table\\\"\", \"partition_type\": \"\\\"sample\\\"\", \"reference_source\": \"{\\\"ref_file\\\": null, \\\"reference_source_selector\\\": \\\"history\\\", \\\"input_bams\\\": [{\\\"__index__\\\": 0, \\\"input_bam\\\": null}], \\\"__current_case__\\\": 1}\", \"summary_coverage_threshold_group\": \"[]\"}",
+            "tool_version": "0.0.2",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_summary_sample",
+                    "uuid": null
+                }
+            ]
+        },
+        "21": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/variant_select/gatk_variant_select/0.0.2",
+            "errors": "Tool is not installed",
+            "id": 21,
+            "input_connections": {
+                "reference_source|input_variant": {
+                    "id": 16,
+                    "output_name": "output_vcf"
+                },
+                "reference_source|ref_file": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "toolshed.g2.bx.psu.edu/repos/devteam/variant_select/gatk_variant_select/0.0.2",
+            "outputs": [],
+            "position": {
+                "left": 2395,
+                "top": 302
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_log": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_log"
+                },
+                "HideDatasetActionoutput_vcf": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_vcf"
+                },
+                "RenameDatasetActionoutput_vcf": {
+                    "action_arguments": {
+                        "newname": "Variants at mapping strain variant positions (e.g. Hawaiian) with read depth > 0 (for plotting)"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_vcf"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/variant_select/gatk_variant_select/0.0.2",
+            "tool_state": "{\"analysis_param_type\": \"{\\\"analysis_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"exclude_filtered\": \"\\\"False\\\"\", \"exclude_sample_name_repeat\": \"[]\", \"gatk_param_type\": \"{\\\"gatk_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"input_concordance\": \"null\", \"input_discordance\": \"null\", \"reference_source\": \"{\\\"ref_file\\\": null, \\\"reference_source_selector\\\": \\\"history\\\", \\\"input_variant\\\": null, \\\"__current_case__\\\": 1}\", \"sample_name_repeat\": \"[]\", \"select_expressions_repeat\": \"[{\\\"__index__\\\": 0, \\\"select_expressions\\\": \\\"DP > 0\\\"}]\"}",
+            "tool_version": "0.0.2",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "22": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/pcingola/snpeff/snpSift_filter/1.0",
+            "errors": null,
+            "id": 22,
+            "input_connections": {
+                "input": {
+                    "id": 17,
+                    "output_name": "output_vcf"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "SnpSift Filter",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 2414,
+                "top": 876
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput": {
+                    "action_arguments": {
+                        "newtype": "vcf"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output"
+                },
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                },
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Homozygous variants VCF (mutant under consideration, lower quality variants for cloning, Hawaiian unfiltered SNPs subtracted)"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/pcingola/snpeff/snpSift_filter/1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "c052639fa666",
+                "name": "snpeff",
+                "owner": "pcingola",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/galaxy/home/g2test/galaxy_test/tool-data/shared/ucsc/chrom/ce10.len\", \"expr\": \"isHom( GEN[0] ) & isVariant( GEN[0] )\", \"input\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "23": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/pcingola/snpeff/snpSift_filter/1.0",
+            "errors": null,
+            "id": 23,
+            "input_connections": {
+                "input": {
+                    "id": 18,
+                    "output_name": "output_vcf"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "SnpSift Filter",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 2695,
+                "top": 518
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput": {
+                    "action_arguments": {
+                        "newtype": "vcf"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output"
+                },
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                },
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Homozygous and heterozygous variants VCF (higher stringency, for downstream subtraction steps) (snpEff)"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/pcingola/snpeff/snpSift_filter/1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "c052639fa666",
+                "name": "snpeff",
+                "owner": "pcingola",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/galaxy/home/g2test/galaxy_test/tool-data/shared/ucsc/chrom/ce10.len\", \"expr\": \"(DP >= 3)\", \"input\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "24": {
+            "annotation": "",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 24,
+            "input_connections": {
+                "input": {
+                    "id": 19,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 2664,
+                "top": 1086
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "Uncovered regions (BED file for downstream subtractions and snpEff annotation)"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Filter1",
+            "tool_state": "{\"chromInfo\": \"/galaxy/home/g2test/galaxy_test/tool-data/shared/ucsc/chrom/ce10.len\", \"cond\": \"c4==0\", \"header_lines\": \"0\", \"input\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": null
+                }
+            ]
+        },
+        "25": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/gregory-minevich/snp_mapping_using_wgs/snp_mapping_using_wgs/1.0.0",
+            "errors": null,
+            "id": 25,
+            "input_connections": {
+                "sample_vcf": {
+                    "id": 21,
+                    "output_name": "output_vcf"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "CloudMap: Hawaiian Variant Mapping with WGS data",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                },
+                {
+                    "name": "location_plot_output",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "left": 3057,
+                "top": 227
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/gregory-minevich/snp_mapping_using_wgs/snp_mapping_using_wgs/1.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "7fb9d1e732a0",
+                "name": "snp_mapping_using_wgs",
+                "owner": "gregory-minevich",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"d_yaxis\": \"0.7\", \"h_yaxis\": \"4000\", \"loess_color\": \"red\", \"loess_span\": \"0.2\", \"normalize_bins\": true, \"points_color\": \"gray27\", \"sample_vcf\": null, \"source\": {\"source_select\": \"elegans\", \"__current_case__\": 0, \"Celegans\": \"C.elegans\"}, \"standardize\": true, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "location_plot_output",
+                    "uuid": null
+                },
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": null
+                }
+            ]
+        },
+        "26": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/variant_select/gatk_variant_select/0.0.2",
+            "errors": "Tool is not installed",
+            "id": 26,
+            "input_connections": {
+                "input_discordance": {
+                    "id": 4,
+                    "output_name": "output"
+                },
+                "reference_source|input_variant": {
+                    "id": 22,
+                    "output_name": "output"
+                },
+                "reference_source|ref_file": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "toolshed.g2.bx.psu.edu/repos/devteam/variant_select/gatk_variant_select/0.0.2",
+            "outputs": [],
+            "position": {
+                "left": 2630,
+                "top": 782
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_log": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_log"
+                },
+                "RenameDatasetActionoutput_vcf": {
+                    "action_arguments": {
+                        "newname": "Homozygous variants VCF (for cloning mutant under consideration, Hawaiian unfiltered variants subtracted, lower quality variants included)"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_vcf"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/variant_select/gatk_variant_select/0.0.2",
+            "tool_state": "{\"analysis_param_type\": \"{\\\"analysis_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"exclude_filtered\": \"\\\"False\\\"\", \"exclude_sample_name_repeat\": \"[]\", \"gatk_param_type\": \"{\\\"gatk_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"input_concordance\": \"null\", \"input_discordance\": \"null\", \"reference_source\": \"{\\\"ref_file\\\": null, \\\"reference_source_selector\\\": \\\"history\\\", \\\"input_variant\\\": null, \\\"__current_case__\\\": 1}\", \"sample_name_repeat\": \"[]\", \"select_expressions_repeat\": \"[]\"}",
+            "tool_version": "0.0.2",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_vcf",
+                    "uuid": null
+                }
+            ]
+        },
+        "27": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/variant_select/gatk_variant_select/0.0.2",
+            "errors": "Tool is not installed",
+            "id": 27,
+            "input_connections": {
+                "input_discordance": {
+                    "id": 4,
+                    "output_name": "output"
+                },
+                "reference_source|input_variant": {
+                    "id": 23,
+                    "output_name": "output"
+                },
+                "reference_source|ref_file": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "toolshed.g2.bx.psu.edu/repos/devteam/variant_select/gatk_variant_select/0.0.2",
+            "outputs": [],
+            "position": {
+                "left": 3101,
+                "top": 463
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_log": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_log"
+                },
+                "RenameDatasetActionoutput_vcf": {
+                    "action_arguments": {
+                        "newname": "Heterozygous and Homozygous variants (higher quality, coverage >= 3, Hawaiian unfiltered variants subtracted for submission to databases or for variant subtraction)"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_vcf"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/variant_select/gatk_variant_select/0.0.2",
+            "tool_state": "{\"analysis_param_type\": \"{\\\"analysis_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"exclude_filtered\": \"\\\"True\\\"\", \"exclude_sample_name_repeat\": \"[]\", \"gatk_param_type\": \"{\\\"gatk_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"input_concordance\": \"null\", \"input_discordance\": \"null\", \"reference_source\": \"{\\\"ref_file\\\": null, \\\"reference_source_selector\\\": \\\"history\\\", \\\"input_variant\\\": null, \\\"__current_case__\\\": 1}\", \"sample_name_repeat\": \"[]\", \"select_expressions_repeat\": \"[]\"}",
+            "tool_version": "0.0.2",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_vcf",
+                    "uuid": null
+                }
+            ]
+        },
+        "28": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/pcingola/snpeff/snpEff/1.0",
+            "errors": null,
+            "id": 28,
+            "input_connections": {
+                "input": {
+                    "id": 24,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "SnpEff",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                },
+                {
+                    "name": "statsFile",
+                    "type": "html"
+                }
+            ],
+            "position": {
+                "left": 2999,
+                "top": 1034
+            },
+            "post_job_actions": {
+                "HideDatasetActionstatsFile": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "statsFile"
+                },
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Uncovered regions annotated (snpEff)"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/pcingola/snpeff/snpEff/1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "c052639fa666",
+                "name": "snpeff",
+                "owner": "pcingola",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"addChr\": \"False\", \"chromInfo\": \"/galaxy/home/g2test/galaxy_test/tool-data/shared/ucsc/chrom/ce10.len\", \"filterHomHet\": \"\", \"filterIn\": \"\", \"filterOut\": \"None\", \"genomeVersion\": \"WS220.64\", \"input\": null, \"inputFormat\": \"bed\", \"offset\": \"\", \"outputFormat\": \"txt\", \"udLength\": \"10000\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": null
+                }
+            ]
+        },
+        "29": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/pcingola/snpeff/snpEff/1.0",
+            "errors": null,
+            "id": 29,
+            "input_connections": {
+                "input": {
+                    "id": 26,
+                    "output_name": "output_vcf"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "SnpEff",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                },
+                {
+                    "name": "statsFile",
+                    "type": "html"
+                }
+            ],
+            "position": {
+                "left": 2959,
+                "top": 808
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput": {
+                    "action_arguments": {
+                        "newtype": "tabular"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output"
+                },
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Homozygous variants annotated (snpEff) (for cloning mutant under consideration, Hawaiian unfiltered variants subtracted, lower quality variants included, candidate genes NOT annotated)"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/pcingola/snpeff/snpEff/1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "c052639fa666",
+                "name": "snpeff",
+                "owner": "pcingola",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"filterHomHet\": \"\", \"filterIn\": \"\", \"filterOut\": \"None\", \"genomeVersion\": \"WS220.64\", \"input\": null, \"inputFormat\": \"vcf\", \"offset\": \"\", \"outputFormat\": \"txt\", \"udLength\": \"10000\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "statsFile",
+                    "uuid": null
+                },
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": null
+                }
+            ]
+        }
+    },
+    "tags": [],
+    "version": 2
+}

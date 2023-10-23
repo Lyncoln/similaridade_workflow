@@ -1,0 +1,731 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "GigaScience Example 1B -- aye-aye FST (imported from uploaded file)",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "aye-aye SNPs"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 210,
+                "top": 164
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "3f69115a-8a5b-42b1-aa25-62e8548b611a",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "human SNPs, like aye-aye"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 202,
+                "top": 411
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "018782b8-4455-4639-8977-d01bab5b2bb9",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/miller-lab/genome_diversity/gd_specify/1.1.0",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Specify Individuals",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "gd_indivs"
+                }
+            ],
+            "position": {
+                "left": 421,
+                "top": 253
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "all but North 5"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/miller-lab/genome_diversity/gd_specify/1.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "e56023008e36",
+                "name": "genome_diversity",
+                "owner": "miller-lab",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/galaxy/data/chrom/?.len\", \"individuals\": [\"North1\", \"North2\", \"North3\", \"North4\", \"East1\", \"East2\", \"East3\", \"East4\", \"East5\", \"West1\", \"West2\", \"West3\"], \"input\": null, \"outname\": \"all aye-aye but North5\", \"string\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "901bd0cb-8358-4433-97a6-dc336856e29b",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/miller-lab/genome_diversity/gd_specify/1.1.0",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Specify Individuals",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "gd_indivs"
+                }
+            ],
+            "position": {
+                "left": 434,
+                "top": 499
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "all humans"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/miller-lab/genome_diversity/gd_specify/1.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "e56023008e36",
+                "name": "genome_diversity",
+                "owner": "miller-lab",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/galaxy/data/chrom/hg19.len\", \"individuals\": [\"E1\", \"E2\", \"E3\", \"E4\", \"E5\", \"F1\", \"F2\", \"F3\", \"F4\", \"S1\", \"S2\", \"S3\"], \"input\": null, \"outname\": \"all human individuals\", \"string\": \"None\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "14c734aa-21fe-4cb2-9c30-4f4742dbf51f",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/miller-lab/genome_diversity/gd_filter_gd_snp/1.2.0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input_type|input": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "input_type|p1_input": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter SNPs",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 665,
+                "top": 164
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "coverage limits on aye-aye SNPs"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/miller-lab/genome_diversity/gd_filter_gd_snp/1.2.0",
+            "tool_shed_repository": {
+                "changeset_revision": "e56023008e36",
+                "name": "genome_diversity",
+                "owner": "miller-lab",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/galaxy/data/chrom/?.len\", \"hi_coverage\": \"120\", \"input\": null, \"input_type\": {\"choice\": \"0\", \"__current_case__\": 0, \"input\": null, \"p1_input\": null, \"lo_coverage\": \"0\", \"hi_coverage\": \"120\", \"low_ind_cov\": \"4\", \"lo_quality\": \"0\"}, \"lo_coverage\": \"0\", \"lo_genotypes\": \"0\", \"lo_quality\": \"0\", \"low_ind_cov\": \"4\", \"min_spacing\": \"0\", \"p1_input\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.2.0",
+            "type": "tool",
+            "uuid": "6fd0b0ed-6c36-40c1-9d0f-0ac40fd52b0b",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/miller-lab/genome_diversity/gd_filter_gd_snp/1.2.0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input_type|input": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "input_type|p1_input": {
+                    "id": 3,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter SNPs",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 676,
+                "top": 411
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "coverage limits on human SNPs"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/miller-lab/genome_diversity/gd_filter_gd_snp/1.2.0",
+            "tool_shed_repository": {
+                "changeset_revision": "e56023008e36",
+                "name": "genome_diversity",
+                "owner": "miller-lab",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/galaxy/data/chrom/hg19.len\", \"hi_coverage\": \"120\", \"input\": null, \"input_type\": {\"choice\": \"0\", \"__current_case__\": 0, \"input\": null, \"p1_input\": null, \"lo_coverage\": \"0\", \"hi_coverage\": \"120\", \"low_ind_cov\": \"4\", \"lo_quality\": \"0\"}, \"lo_coverage\": \"0\", \"lo_genotypes\": \"0\", \"lo_quality\": \"0\", \"low_ind_cov\": \"4\", \"min_spacing\": \"0\", \"p1_input\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.2.0",
+            "type": "tool",
+            "uuid": "e1d07f6d-5d3e-415d-b4fc-60a40b2cb6a7",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/miller-lab/genome_diversity/gd_specify/1.1.0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input": {
+                    "id": 4,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Specify Individuals",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "gd_indivs"
+                }
+            ],
+            "position": {
+                "left": 928,
+                "top": 169
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/miller-lab/genome_diversity/gd_specify/1.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "e56023008e36",
+                "name": "genome_diversity",
+                "owner": "miller-lab",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/galaxy/data/chrom/?.len\", \"individuals\": [\"North1\", \"North2\", \"North3\", \"North4\"], \"input\": null, \"outname\": \"aye-aye North\", \"string\": \"None\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "a85c1b3b-3631-4b11-858a-11548220194e",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/miller-lab/genome_diversity/gd_specify/1.1.0",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input": {
+                    "id": 4,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Specify Individuals",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "gd_indivs"
+                }
+            ],
+            "position": {
+                "left": 931,
+                "top": 319
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/miller-lab/genome_diversity/gd_specify/1.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "e56023008e36",
+                "name": "genome_diversity",
+                "owner": "miller-lab",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/galaxy/data/chrom/?.len\", \"individuals\": [\"East1\", \"East2\", \"East3\", \"East4\", \"East5\"], \"input\": null, \"outname\": \"aye-aye East\", \"string\": \"None\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "fc70e6d5-3556-43d4-b6e8-991ec11c2e70",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/miller-lab/genome_diversity/gd_specify/1.1.0",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input": {
+                    "id": 5,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Specify Individuals",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "gd_indivs"
+                }
+            ],
+            "position": {
+                "left": 931,
+                "top": 439
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/miller-lab/genome_diversity/gd_specify/1.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "e56023008e36",
+                "name": "genome_diversity",
+                "owner": "miller-lab",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/galaxy/data/chrom/hg19.len\", \"individuals\": [\"E1\", \"E2\", \"E3\", \"E4\", \"E5\"], \"input\": null, \"outname\": \"Europeans\", \"string\": \"None\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "e03c2cc9-dff6-470b-9ee9-e2c048a43c4a",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/miller-lab/genome_diversity/gd_specify/1.1.0",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "input": {
+                    "id": 5,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Specify Individuals",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "gd_indivs"
+                }
+            ],
+            "position": {
+                "left": 931,
+                "top": 559
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/miller-lab/genome_diversity/gd_specify/1.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "e56023008e36",
+                "name": "genome_diversity",
+                "owner": "miller-lab",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/galaxy/data/chrom/hg19.len\", \"individuals\": [\"F1\", \"F2\", \"F3\", \"F4\"], \"input\": null, \"outname\": \"Africans\", \"string\": \"None\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "b71c6c60-3aff-4793-aa71-8140223c6dc4",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/miller-lab/genome_diversity/gd_add_fst_column/1.2.0",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "input_type|input": {
+                    "id": 4,
+                    "output_name": "output"
+                },
+                "p1_input": {
+                    "id": 6,
+                    "output_name": "output"
+                },
+                "p2_input": {
+                    "id": 7,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Per-SNP FSTs",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1196,
+                "top": 114
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "per-SNP FST, north vs. east"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/miller-lab/genome_diversity/gd_add_fst_column/1.2.0",
+            "tool_shed_repository": {
+                "changeset_revision": "e56023008e36",
+                "name": "genome_diversity",
+                "owner": "miller-lab",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"biased\": \"2\", \"chromInfo\": \"/galaxy/data/chrom/?.len\", \"discard_fixed\": \"1\", \"input_type\": {\"choice\": \"0\", \"__current_case__\": 0, \"input\": null, \"data_source\": {\"choice\": \"1\", \"__current_case__\": 1}}, \"p1_input\": null, \"p2_input\": null, \"retain\": \"0\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.2.0",
+            "type": "tool",
+            "uuid": "94573a51-b8a1-4b37-8f35-f83bdc98421c",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/miller-lab/genome_diversity/gd_average_fst/1.3.0",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "input_type|input": {
+                    "id": 4,
+                    "output_name": "output"
+                },
+                "p1_input": {
+                    "id": 6,
+                    "output_name": "output"
+                },
+                "p2_input": {
+                    "id": 7,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Overall FST",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 1190,
+                "top": 297
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "overall FST, aye-aye north vs. east"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/miller-lab/genome_diversity/gd_average_fst/1.3.0",
+            "tool_shed_repository": {
+                "changeset_revision": "e56023008e36",
+                "name": "genome_diversity",
+                "owner": "miller-lab",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/galaxy/data/chrom/?.len\", \"data_source\": {\"min_value\": \"1\", \"ds_choice\": \"1\", \"__current_case__\": 1}, \"discard_fixed\": \"1\", \"input\": null, \"input_type\": {\"choice\": \"0\", \"__current_case__\": 0, \"input\": null, \"data_source\": {\"choice\": \"1\", \"__current_case__\": 1}}, \"p1_input\": null, \"p2_input\": null, \"use_randomization\": {\"choice\": \"0\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.3.0",
+            "type": "tool",
+            "uuid": "09ca3878-4b32-4656-a241-fc242adf1197",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/miller-lab/genome_diversity/gd_add_fst_column/1.2.0",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "input_type|input": {
+                    "id": 5,
+                    "output_name": "output"
+                },
+                "p1_input": {
+                    "id": 8,
+                    "output_name": "output"
+                },
+                "p2_input": {
+                    "id": 9,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Per-SNP FSTs",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1191,
+                "top": 499
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "per-SNP FSTs of Europeans vs. Africans"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/miller-lab/genome_diversity/gd_add_fst_column/1.2.0",
+            "tool_shed_repository": {
+                "changeset_revision": "e56023008e36",
+                "name": "genome_diversity",
+                "owner": "miller-lab",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"biased\": \"2\", \"chromInfo\": \"/galaxy/data/chrom/hg19.len\", \"discard_fixed\": \"1\", \"input_type\": {\"choice\": \"0\", \"__current_case__\": 0, \"input\": null, \"data_source\": {\"choice\": \"1\", \"__current_case__\": 1}}, \"p1_input\": null, \"p2_input\": null, \"retain\": \"0\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.2.0",
+            "type": "tool",
+            "uuid": "401650b8-e27d-4bc6-ae48-903b2deffb08",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "13": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/miller-lab/genome_diversity/gd_average_fst/1.3.0",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "input_type|input": {
+                    "id": 5,
+                    "output_name": "output"
+                },
+                "p1_input": {
+                    "id": 8,
+                    "output_name": "output"
+                },
+                "p2_input": {
+                    "id": 9,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Overall FST",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 1200,
+                "top": 694
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "overall FST of Europeans vs. Africans"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/miller-lab/genome_diversity/gd_average_fst/1.3.0",
+            "tool_shed_repository": {
+                "changeset_revision": "e56023008e36",
+                "name": "genome_diversity",
+                "owner": "miller-lab",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/galaxy/data/chrom/hg19.len\", \"data_source\": {\"min_value\": \"1\", \"ds_choice\": \"1\", \"__current_case__\": 1}, \"discard_fixed\": \"1\", \"input\": null, \"input_type\": {\"choice\": \"0\", \"__current_case__\": 0, \"input\": null, \"data_source\": {\"choice\": \"1\", \"__current_case__\": 1}}, \"p1_input\": null, \"p2_input\": null, \"use_randomization\": {\"choice\": \"0\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.3.0",
+            "type": "tool",
+            "uuid": "52be42cf-e028-427c-af2e-82f4631235c5",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "14": {
+            "annotation": "",
+            "content_id": "histogram_rpy",
+            "errors": null,
+            "id": 14,
+            "input_connections": {
+                "input": {
+                    "id": 10,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Histogram",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "left": 1421,
+                "top": 227
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "histogram of aye-aye FST"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "histogram_rpy",
+            "tool_shed_repository": {
+                "changeset_revision": "6f134426c2b0",
+                "name": "histogram",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"breaks\": \"0\", \"chromInfo\": \"/galaxy/data/chrom/?.len\", \"density\": true, \"frequency\": false, \"input\": null, \"numerical_column\": \"60\", \"title\": \"Histogram\", \"xlab\": \"V1\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.3",
+            "type": "tool",
+            "uuid": "70b7fee2-0e80-4d85-8e75-7dd380f9ba27",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "15": {
+            "annotation": "",
+            "content_id": "histogram_rpy",
+            "errors": null,
+            "id": 15,
+            "input_connections": {
+                "input": {
+                    "id": 12,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Histogram",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "left": 1423,
+                "top": 620
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "histogram of human FST"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "histogram_rpy",
+            "tool_shed_repository": {
+                "changeset_revision": "6f134426c2b0",
+                "name": "histogram",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"breaks\": \"0\", \"chromInfo\": \"/galaxy/data/chrom/hg19.len\", \"density\": true, \"frequency\": false, \"input\": null, \"numerical_column\": \"54\", \"title\": \"Histogram\", \"xlab\": \"V1\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.3",
+            "type": "tool",
+            "uuid": "a21c598b-8d18-4f0e-a5e7-cab279405772",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [],
+    "uuid": "575a6df2-563e-4aa2-9c3d-1f1862f7d2cf",
+    "version": 0
+}

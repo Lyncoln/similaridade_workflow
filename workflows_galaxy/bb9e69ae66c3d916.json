@@ -1,0 +1,321 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "RNA-Seq (2hr mice)",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Mice data as fastq.qz"
+                }
+            ],
+            "label": "Mice data as fastq.qz",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 204.3923683166504,
+                "top": 194.94792938232422
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "f65b031b-bfbd-43f8-9aa3-47fe2679b201",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "genes.gtf"
+                }
+            ],
+            "label": "genes.gtf",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 1368.4028625488281,
+                "top": 884.96533203125
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "6dede9a4-c99b-462a-ae99-3e9e5276b81a",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.4.3.1",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "singlePaired|input_singles": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Trim Galore!",
+                    "name": "singlePaired"
+                }
+            ],
+            "label": null,
+            "name": "Trim Galore!",
+            "outputs": [
+                {
+                    "name": "trimmed_reads_single",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 548.420166015625,
+                "top": 178.9757080078125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.4.3.1",
+            "tool_shed_repository": {
+                "changeset_revision": "949f01671246",
+                "name": "trim_galore",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"params\": {\"settingsType\": \"default\", \"__current_case__\": 0}, \"rrbs\": {\"settingsType\": \"default\", \"__current_case__\": 0}, \"singlePaired\": {\"sPaired\": \"single\", \"__current_case__\": 0, \"input_singles\": {\"__class__\": \"RuntimeValue\"}, \"trimming\": {\"trimming_select\": \"\", \"__current_case__\": 0}, \"three_prime_clip_R1\": null}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.4.3.1",
+            "type": "tool",
+            "uuid": "e0670519-9c38-4312-af44-62a5d27334df",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input_file": {
+                    "id": 2,
+                    "output_name": "trimmed_reads_single"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool FastQC",
+                    "name": "contaminants"
+                },
+                {
+                    "description": "runtime parameter for tool FastQC",
+                    "name": "input_file"
+                },
+                {
+                    "description": "runtime parameter for tool FastQC",
+                    "name": "limits"
+                }
+            ],
+            "label": null,
+            "name": "FastQC",
+            "outputs": [
+                {
+                    "name": "html_file",
+                    "type": "html"
+                },
+                {
+                    "name": "text_file",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 926.4584045410156,
+                "top": 197.96876525878906
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72",
+            "tool_shed_repository": {
+                "changeset_revision": "c15237684a01",
+                "name": "fastqc",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"contaminants\": {\"__class__\": \"RuntimeValue\"}, \"input_file\": {\"__class__\": \"RuntimeValue\"}, \"limits\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.72",
+            "type": "tool",
+            "uuid": "dcbd3abc-b328-4a72-8111-702f27dd55c9",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.3.4.2",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "library|input_1": {
+                    "id": 2,
+                    "output_name": "trimmed_reads_single"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Bowtie2",
+                    "name": "library"
+                }
+            ],
+            "label": null,
+            "name": "Bowtie2",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 928.4549255371094,
+                "top": 433.9757080078125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.3.4.2",
+            "tool_shed_repository": {
+                "changeset_revision": "17062a0decb7",
+                "name": "bowtie2",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__job_resource\": {\"__job_resource__select\": \"no\", \"__current_case__\": 0}, \"analysis_type\": {\"analysis_type_selector\": \"simple\", \"__current_case__\": 0, \"presets\": \"no_presets\"}, \"library\": {\"type\": \"single\", \"__current_case__\": 0, \"input_1\": {\"__class__\": \"RuntimeValue\"}, \"unaligned_file\": false, \"aligned_file\": false}, \"reference_genome\": {\"source\": \"indexed\", \"__current_case__\": 0, \"index\": \"mm10\"}, \"rg\": {\"rg_selector\": \"do_not_set\", \"__current_case__\": 3}, \"sam_options\": {\"sam_options_selector\": \"no\", \"__current_case__\": 1}, \"save_mapping_stats\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.3.4.2",
+            "type": "tool",
+            "uuid": "87a53fcb-af38-4588-b2df-5b16826e608f",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_SortSam/2.7.1.1",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "inputFile": {
+                    "id": 4,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool SortSam",
+                    "name": "inputFile"
+                }
+            ],
+            "label": null,
+            "name": "SortSam",
+            "outputs": [
+                {
+                    "name": "outFile",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 1299.4444885253906,
+                "top": 659.982666015625
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_SortSam/2.7.1.1",
+            "tool_shed_repository": {
+                "changeset_revision": "fc288950c3b7",
+                "name": "picard",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"inputFile\": {\"__class__\": \"RuntimeValue\"}, \"sort_order\": \"coordinate\", \"validation_stringency\": \"LENIENT\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.7.1.1",
+            "type": "tool",
+            "uuid": "0dc159ee-bc8d-4047-a947-5de88ff4924b",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/cufflinks/cufflinks/2.2.1.2",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input": {
+                    "id": 5,
+                    "output_name": "outFile"
+                },
+                "reference_annotation|reference_annotation_file": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Cufflinks",
+                    "name": "input"
+                },
+                {
+                    "description": "runtime parameter for tool Cufflinks",
+                    "name": "reference_annotation"
+                }
+            ],
+            "label": null,
+            "name": "Cufflinks",
+            "outputs": [
+                {
+                    "name": "genes_expression",
+                    "type": "tabular"
+                },
+                {
+                    "name": "transcripts_expression",
+                    "type": "tabular"
+                },
+                {
+                    "name": "assembled_isoforms",
+                    "type": "gtf"
+                },
+                {
+                    "name": "total_map_mass",
+                    "type": "txt"
+                },
+                {
+                    "name": "skipped",
+                    "type": "gtf"
+                }
+            ],
+            "position": {
+                "left": 1677.4480285644531,
+                "top": 741.9791870117188
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/cufflinks/cufflinks/2.2.1.2",
+            "tool_shed_repository": {
+                "changeset_revision": "e04dbae2abe0",
+                "name": "cufflinks",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__job_resource\": {\"__job_resource__select\": \"no\", \"__current_case__\": 0}, \"advanced_settings\": {\"use_advanced_settings\": \"No\", \"__current_case__\": 0}, \"bias_correction\": {\"do_bias_correction\": \"No\", \"__current_case__\": 1}, \"input\": {\"__class__\": \"RuntimeValue\"}, \"length_correction\": \"\", \"max_intron_len\": \"300000\", \"min_isoform_fraction\": \"0.1\", \"multiread_correct\": \"No\", \"pre_mrna_fraction\": \"0.15\", \"reference_annotation\": {\"use_ref\": \"Use reference annotation\", \"__current_case__\": 1, \"reference_annotation_file\": {\"__class__\": \"RuntimeValue\"}, \"compatible_hits_norm\": \"\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.2.1.2",
+            "type": "tool",
+            "uuid": "9d2f70cd-ca8e-4a61-a375-da23229630dc",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [],
+    "uuid": "06a2990b-7e4d-4ecd-9b39-39748603b26a",
+    "version": 2
+}

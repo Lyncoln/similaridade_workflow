@@ -1,0 +1,116 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "FastQ Filter, Sort BAM",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": "sam_bw_filter",
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [],
+            "label": null,
+            "name": "Filter SAM",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "sam"
+                }
+            ],
+            "position": {
+                "left": 200,
+                "top": 200
+            },
+            "post_job_actions": {},
+            "tool_id": "sam_bw_filter",
+            "tool_shed_repository": {
+                "changeset_revision": "0b2424a404d9",
+                "name": "sam_bitwise_flag_filter",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"bits\": [{\"__index__\": 0, \"flags\": \"--0x0004\", \"states\": \"1\"}, {\"__index__\": 1, \"flags\": \"--0x0200\", \"states\": \"0\"}, {\"__index__\": 2, \"flags\": \"--0x0400\", \"states\": \"0\"}], \"input1\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "sort1",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Sort",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 440,
+                "top": 200
+            },
+            "post_job_actions": {},
+            "tool_id": "sort1",
+            "tool_state": "{\"column\": \"4\", \"column_set\": [], \"input\": null, \"order\": \"ASC\", \"style\": \"num\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.3",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "sam_to_bam",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "source|input1": {
+                    "id": 1,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "SAM-to-BAM",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 679,
+                "top": 200
+            },
+            "post_job_actions": {},
+            "tool_id": "sam_to_bam",
+            "tool_shed_repository": {
+                "changeset_revision": "9bd1568619cd",
+                "name": "sam_to_bam",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"source\": {\"index_source\": \"cached\", \"input1\": null, \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.2",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [],
+    "version": 0
+}

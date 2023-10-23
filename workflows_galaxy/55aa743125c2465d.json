@@ -1,0 +1,665 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "otu relabelled analysis",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "reads"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 200.5555419921875,
+                "top": 203.888916015625
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "qualities"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 196.11114501953125,
+                "top": 360.55558586120605
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "trim_reads",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input1": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "input2": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Select high quality segments",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "fasta"
+                }
+            ],
+            "position": {
+                "left": 523.888916015625,
+                "top": 330.5555839538574
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output1"
+                }
+            },
+            "tool_id": "trim_reads",
+            "tool_shed_repository": {
+                "changeset_revision": "25e6fe525306",
+                "name": "short_reads_trim_seq",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/var/opt/galaxy/main/tool-data/shared/ucsc/chrom/?.len\", \"input1\": null, \"input2\": null, \"length\": \"50\", \"sequencing_method_choice\": {\"sequencer\": \"454\", \"__current_case__\": 0, \"input3\": \"yes\"}, \"trim\": \"20\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "fasta2tab",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input": {
+                    "id": 2,
+                    "output_name": "output1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "FASTA-to-Tabular",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 388.3333435058594,
+                "top": 518.3333740234375
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "fasta2tab",
+            "tool_shed_repository": {
+                "changeset_revision": "7e801ab2b70e",
+                "name": "fasta_to_tabular",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/var/opt/galaxy/main/tool-data/shared/ucsc/chrom/?.len\", \"descr_columns\": \"1\", \"input\": null, \"keep_first\": \"0\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "addValue",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 3,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Add column",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 420.5555725097656,
+                "top": 633.8889465332031
+            },
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "addValue",
+            "tool_state": "{\"chromInfo\": \"/var/opt/galaxy/main/tool-data/shared/ucsc/chrom/?.len\", \"exp\": \"read\", \"input\": null, \"iterate\": \"yes\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "tab2fasta",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input": {
+                    "id": 4,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Tabular-to-FASTA",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "fasta"
+                }
+            ],
+            "position": {
+                "left": 440.5555725097656,
+                "top": 733.8889465332031
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "tab2fasta",
+            "tool_shed_repository": {
+                "changeset_revision": "0b4e36026794",
+                "name": "tabular_to_fasta",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/var/opt/galaxy/main/tool-data/shared/ucsc/chrom/?.len\", \"input\": null, \"seq_col\": \"2\", \"title_col\": [\"3\"], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "megablast_wrapper",
+            "errors": "Tool is not installed",
+            "id": 6,
+            "input_connections": {
+                "input_query": {
+                    "id": 5,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "megablast_wrapper",
+            "outputs": [],
+            "position": {
+                "left": 766.1111507415771,
+                "top": 451.6667022705078
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output1"
+                }
+            },
+            "tool_id": "megablast_wrapper",
+            "tool_state": "{\"evalue_cutoff\": \"\\\"0.0001\\\"\", \"filter_query\": \"\\\"yes\\\"\", \"iden_cutoff\": \"\\\"80.0\\\"\", \"input_query\": \"null\", \"source_select\": \"\\\"25apr2012-nt\\\"\", \"word_size\": \"\\\"28\\\"\"}",
+            "tool_version": "1.2.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "megablast_wrapper",
+            "errors": "Tool is not installed",
+            "id": 7,
+            "input_connections": {
+                "input_query": {
+                    "id": 5,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "megablast_wrapper",
+            "outputs": [],
+            "position": {
+                "left": 749.1111488342285,
+                "top": 643.5556030273438
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output1"
+                }
+            },
+            "tool_id": "megablast_wrapper",
+            "tool_state": "{\"evalue_cutoff\": \"\\\"0.0001\\\"\", \"filter_query\": \"\\\"yes\\\"\", \"iden_cutoff\": \"\\\"80.0\\\"\", \"input_query\": \"null\", \"source_select\": \"\\\"25apr2012-wgs\\\"\", \"word_size\": \"\\\"28\\\"\"}",
+            "tool_version": "1.2.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "fasta_compute_length",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input": {
+                    "id": 5,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Compute sequence length",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 735.0000381469727,
+                "top": 919.4444885253906
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "fasta_compute_length",
+            "tool_shed_repository": {
+                "changeset_revision": "ece409f6573c",
+                "name": "fasta_compute_length",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/var/opt/galaxy/main/tool-data/shared/ucsc/chrom/?.len\", \"input\": null, \"keep_first\": \"0\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "cat1",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "input1": {
+                    "id": 6,
+                    "output_name": "output1"
+                },
+                "queries_0|input2": {
+                    "id": 7,
+                    "output_name": "output1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Concatenate datasets",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 998.3333892822266,
+                "top": 408.33336639404297
+            },
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "cat1",
+            "tool_state": "{\"chromInfo\": \"/var/opt/galaxy/main/tool-data/shared/ucsc/chrom/?.len\", \"input1\": null, \"queries\": [{\"__index__\": 0, \"input2\": null}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "join1",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "input1": {
+                    "id": 9,
+                    "output_name": "out_file1"
+                },
+                "input2": {
+                    "id": 8,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Join two Datasets",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1046.1111755371094,
+                "top": 576.1111450195312
+            },
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "join1",
+            "tool_state": "{\"chromInfo\": \"/var/opt/galaxy/main/tool-data/shared/ucsc/chrom/?.len\", \"field1\": \"1\", \"field2\": \"1\", \"fill_empty_columns\": {\"fill_empty_columns_switch\": \"no_fill\", \"__current_case__\": 0}, \"input1\": null, \"input2\": null, \"partial\": \"\", \"unmatched\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.0.2",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "input": {
+                    "id": 10,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1085.0000610351562,
+                "top": 723.8889465332031
+            },
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Filter1",
+            "tool_state": "{\"chromInfo\": \"/var/opt/galaxy/main/tool-data/shared/ucsc/chrom/?.len\", \"cond\": \"c5/c15 __gt__ 0.5\", \"input\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "Fetch Taxonomic Ranks",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "input": {
+                    "id": 11,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Fetch taxonomic representation",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "taxonomy"
+                }
+            ],
+            "position": {
+                "left": 1120.5556030273438,
+                "top": 841.6667175292969
+            },
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Fetch Taxonomic Ranks",
+            "tool_shed_repository": {
+                "changeset_revision": "7b1b03c4465d",
+                "name": "gi2taxonomy",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/var/opt/galaxy/main/tool-data/shared/ucsc/chrom/?.len\", \"giField\": \"2\", \"idField\": \"1\", \"input\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "13": {
+            "annotation": "",
+            "content_id": "lca1",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "input1": {
+                    "id": 12,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Find lowest diagnostic rank",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "taxonomy"
+                }
+            ],
+            "position": {
+                "left": 1359.4445190429688,
+                "top": 487.2222595214844
+            },
+            "post_job_actions": {},
+            "tool_id": "lca1",
+            "tool_shed_repository": {
+                "changeset_revision": "33e8ed5a4601",
+                "name": "lca_wrapper",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/var/opt/galaxy/main/tool-data/shared/ucsc/chrom/?.len\", \"input1\": null, \"rank_bound\": \"5\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.1",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": null
+                }
+            ]
+        },
+        "14": {
+            "annotation": "",
+            "content_id": "t2t_report",
+            "errors": null,
+            "id": 14,
+            "input_connections": {
+                "input": {
+                    "id": 12,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Summarize taxonomy",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1697.2222900390625,
+                "top": 546.1111450195312
+            },
+            "post_job_actions": {},
+            "tool_id": "t2t_report",
+            "tool_shed_repository": {
+                "changeset_revision": "592acb9505fc",
+                "name": "t2t_report",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/var/opt/galaxy/main/tool-data/shared/ucsc/chrom/?.len\", \"input\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": null
+                }
+            ]
+        },
+        "15": {
+            "annotation": "",
+            "content_id": "Draw_phylogram",
+            "errors": null,
+            "id": 15,
+            "input_connections": {
+                "input": {
+                    "id": 13,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Draw phylogeny",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "left": 1695.0000610351562,
+                "top": 425.0000343322754
+            },
+            "post_job_actions": {},
+            "tool_id": "Draw_phylogram",
+            "tool_shed_repository": {
+                "changeset_revision": "9e2b9ca7f33a",
+                "name": "t2ps",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/var/opt/galaxy/main/tool-data/shared/ucsc/chrom/?.len\", \"font_size\": \"8\", \"input\": null, \"max_leaves\": \"0\", \"max_tree_level\": \"8\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": null
+                }
+            ]
+        }
+    },
+    "tags": [
+        "metagenomics",
+        "galaxy",
+        "NGS",
+        "Metagenomics"
+    ],
+    "version": 14
+}

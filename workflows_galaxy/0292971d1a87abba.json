@@ -1,0 +1,256 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "fastq2count",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "P1 fastq"
+                }
+            ],
+            "label": "P1 fastq",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 252.88351440429688,
+                "top": 142.6988639831543
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "361e597c-654a-4723-b74e-ef3d55d5b231",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "cbbb4b1d-8a1e-4286-88ad-7d139b65875b"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "P2 fastq"
+                }
+            ],
+            "label": "P2 fastq",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 215.90908813476562,
+                "top": 391.7187309265137
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "8fa2a40f-e9b9-49a2-8776-1806a848a7c5",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "f48edd1e-2476-4057-9c5b-46999a8780d9"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "mm10_gff"
+                }
+            ],
+            "label": "mm10 annotation",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 430.92327880859375,
+                "top": 438.6789665222168
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "c499b3e1-11c5-43f4-80ca-c006f3e679b1",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "aaa09379-296a-4ece-b96f-338abe26099c"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.0.3",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input_format|paired|reads_f": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "input_format|paired|reads_r": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "HISAT",
+            "outputs": [
+                {
+                    "name": "output_alignments",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 377.95452880859375,
+                "top": 259.71589279174805
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput_alignments": {
+                    "action_arguments": {
+                        "newname": "HISAT ${sample_name}.bam"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_alignments"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.0.3",
+            "tool_shed_repository": {
+                "changeset_revision": "1eb21dccc2fa",
+                "name": "hisat2",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__job_resource\": {\"__job_resource__select\": \"no\", \"__current_case__\": 0}, \"alignment_options\": {\"alignment_options_selector\": \"defaults\", \"__current_case__\": 0}, \"input_format\": {\"input_format_selector\": \"fastq\", \"__current_case__\": 1, \"paired\": {\"paired_selector\": \"paired\", \"__current_case__\": 1, \"reads_f\": {\"__class__\": \"RuntimeValue\"}, \"reads_r\": {\"__class__\": \"RuntimeValue\"}, \"paired_end_options\": {\"paired_end_options_selector\": \"defaults\", \"__current_case__\": 0}}}, \"input_options\": {\"input_options_selector\": \"defaults\", \"__current_case__\": 0}, \"max_primary\": \"5\", \"paired_options\": {\"paired_options_selector\": \"defaults\", \"__current_case__\": 0}, \"reference_genome\": {\"reference_genome_source\": \"indexed\", \"__current_case__\": 0, \"index\": \"mm10\"}, \"scoring_options\": {\"scoring_options_selector\": \"defaults\", \"__current_case__\": 0}, \"spliced_options\": {\"spliced_options_selector\": \"defaults\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.0.3",
+            "type": "tool",
+            "uuid": "c845ee8d-f65b-4eb0-82c0-f2096e36f895",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_alignments",
+                    "uuid": "d0de916a-b579-49c0-9760-2689ff6f2db5"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/lparsons/htseq_count/htseq_count/0.6.1galaxy1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "gfffile": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "samfile": {
+                    "id": 3,
+                    "output_name": "output_alignments"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool htseq-count",
+                    "name": "gfffile"
+                },
+                {
+                    "description": "runtime parameter for tool htseq-count",
+                    "name": "samfile"
+                }
+            ],
+            "label": null,
+            "name": "htseq-count",
+            "outputs": [
+                {
+                    "name": "counts",
+                    "type": "tabular"
+                },
+                {
+                    "name": "othercounts",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 630.9090576171875,
+                "top": 298.6789665222168
+            },
+            "post_job_actions": {
+                "HideDatasetActionothercounts": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "othercounts"
+                },
+                "HideDatasetActionsamoutfile": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "samoutfile"
+                },
+                "RenameDatasetActioncounts": {
+                    "action_arguments": {
+                        "newname": "HTSEQ ${sample_name}.counts"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "counts"
+                },
+                "RenameDatasetActionothercounts": {
+                    "action_arguments": {
+                        "newname": "${sample_name}_other.counts"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "othercounts"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/lparsons/htseq_count/htseq_count/0.6.1galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "a6dcb86af112",
+                "name": "htseq_count",
+                "owner": "lparsons",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"featuretype\": \"exon\", \"force_sort\": false, \"gfffile\": {\"__class__\": \"RuntimeValue\"}, \"idattr\": \"gene_name\", \"minaqual\": \"10\", \"mode\": \"intersection-strict\", \"samfile\": {\"__class__\": \"RuntimeValue\"}, \"samout_conditional\": {\"samout\": false, \"__current_case__\": 1}, \"stranded\": \"yes\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.6.1galaxy1",
+            "type": "tool",
+            "uuid": "bedb6323-9bf8-484e-8328-dabb7614cfbb",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "counts",
+                    "uuid": "334aff20-f811-47f5-917d-b80176253535"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "asbmr2016"
+    ],
+    "uuid": "80eb2373-a1b4-48dc-9812-c1076e11ca0a",
+    "version": 6
+}

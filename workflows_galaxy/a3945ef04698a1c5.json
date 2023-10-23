@@ -1,0 +1,760 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "Parent Workflow ChIPSeq",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Control Fastq List"
+                }
+            ],
+            "label": "Control Fastq List",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "left": 225,
+                "top": 290
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null, \"collection_type\": \"list\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "f778f8bc-4d89-4bc9-ae07-5fa5156f17dd",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Treatment Fastq List"
+                }
+            ],
+            "label": "Treatment Fastq List",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "left": 200,
+                "top": 593
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null, \"collection_type\": \"list\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "60e7137c-a939-474d-90f9-70e50b25e6b0",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "id": 2,
+            "input_connections": {
+                "Fastq input Collection": {
+                    "id": 0,
+                    "input_subworkflow_step_id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "ChipSeq_tutorial_child1",
+            "outputs": [],
+            "position": {
+                "left": 529.5,
+                "top": 240
+            },
+            "subworkflow": {
+                "a_galaxy_workflow": "true",
+                "annotation": "",
+                "format-version": "0.1",
+                "name": "ChipSeq_tutorial_child1",
+                "steps": {
+                    "0": {
+                        "annotation": "",
+                        "content_id": null,
+                        "errors": null,
+                        "id": 0,
+                        "input_connections": {},
+                        "inputs": [
+                            {
+                                "description": "",
+                                "name": "Fastq input Collection"
+                            }
+                        ],
+                        "label": "Fastq input Collection",
+                        "name": "Input dataset collection",
+                        "outputs": [],
+                        "position": {
+                            "left": 147,
+                            "top": 203.5
+                        },
+                        "tool_id": null,
+                        "tool_state": "{\"optional\": false, \"tag\": null, \"collection_type\": \"list\"}",
+                        "tool_version": null,
+                        "type": "data_collection_input",
+                        "uuid": "9e072568-cd7c-47d6-8019-a423969699ae",
+                        "when": null,
+                        "workflow_outputs": []
+                    },
+                    "1": {
+                        "annotation": "",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa/0.7.15.1",
+                        "errors": null,
+                        "id": 1,
+                        "input_connections": {
+                            "input_type|fastq_input1": {
+                                "id": 0,
+                                "output_name": "output"
+                            }
+                        },
+                        "inputs": [
+                            {
+                                "description": "runtime parameter for tool Map with BWA",
+                                "name": "input_type"
+                            }
+                        ],
+                        "label": null,
+                        "name": "Map with BWA",
+                        "outputs": [
+                            {
+                                "name": "bam_output",
+                                "type": "bam"
+                            }
+                        ],
+                        "position": {
+                            "left": 471.5,
+                            "top": 206.5
+                        },
+                        "post_job_actions": {
+                            "HideDatasetActionbam_output": {
+                                "action_arguments": {},
+                                "action_type": "HideDatasetAction",
+                                "output_name": "bam_output"
+                            }
+                        },
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa/0.7.15.1",
+                        "tool_shed_repository": {
+                            "changeset_revision": "53646aaaafef",
+                            "name": "bwa",
+                            "owner": "devteam",
+                            "tool_shed": "toolshed.g2.bx.psu.edu"
+                        },
+                        "tool_state": "{\"__job_resource\": {\"__job_resource__select\": \"no\", \"__current_case__\": 0}, \"analysis_type\": {\"analysis_type_selector\": \"illumina\", \"__current_case__\": 0}, \"input_type\": {\"input_type_selector\": \"single\", \"__current_case__\": 2, \"fastq_input1\": {\"__class__\": \"RuntimeValue\"}, \"adv_se_options\": {\"adv_se_options_selector\": \"do_not_set\", \"__current_case__\": 1}}, \"reference_source\": {\"reference_source_selector\": \"cached\", \"__current_case__\": 0, \"ref_file\": \"sacCer3\"}, \"rg\": {\"rg_selector\": \"do_not_set\", \"__current_case__\": 3}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": "0.7.15.1",
+                        "type": "tool",
+                        "uuid": "90a69ebf-1fa9-40f0-84e9-738ae81e5073",
+                        "when": null,
+                        "workflow_outputs": []
+                    },
+                    "2": {
+                        "annotation": "",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtool_filter2/samtool_filter2/1.1.2",
+                        "errors": null,
+                        "id": 2,
+                        "input_connections": {
+                            "input1": {
+                                "id": 1,
+                                "output_name": "bam_output"
+                            }
+                        },
+                        "inputs": [
+                            {
+                                "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM",
+                                "name": "bed_file"
+                            },
+                            {
+                                "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM",
+                                "name": "input1"
+                            }
+                        ],
+                        "label": null,
+                        "name": "Filter SAM or BAM, output SAM or BAM",
+                        "outputs": [
+                            {
+                                "name": "output1",
+                                "type": "sam"
+                            }
+                        ],
+                        "position": {
+                            "left": 771,
+                            "top": 204.5
+                        },
+                        "post_job_actions": {},
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtool_filter2/samtool_filter2/1.1.2",
+                        "tool_shed_repository": {
+                            "changeset_revision": "dc6ff68ea5e8",
+                            "name": "samtool_filter2",
+                            "owner": "devteam",
+                            "tool_shed": "toolshed.g2.bx.psu.edu"
+                        },
+                        "tool_state": "{\"bed_file\": {\"__class__\": \"RuntimeValue\"}, \"flag\": {\"filter\": \"no\", \"__current_case__\": 0}, \"header\": \"-h\", \"input1\": {\"__class__\": \"RuntimeValue\"}, \"library\": \"\", \"mapq\": \"20\", \"outputtype\": \"bam\", \"possibly_select_inverse\": false, \"read_group\": \"\", \"regions\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": "1.1.2",
+                        "type": "tool",
+                        "uuid": "0bd80275-36aa-4349-9f13-93e4d5a242af",
+                        "when": null,
+                        "workflow_outputs": [
+                            {
+                                "label": "Filtered BAM",
+                                "output_name": "output1",
+                                "uuid": "43d6bb0f-2417-4065-ba0c-bac88c9bbfc7"
+                            }
+                        ]
+                    },
+                    "3": {
+                        "annotation": "",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_coverage/deeptools_bam_coverage/2.5.0.0",
+                        "errors": null,
+                        "id": 3,
+                        "input_connections": {
+                            "bamInput": {
+                                "id": 2,
+                                "output_name": "output1"
+                            }
+                        },
+                        "inputs": [
+                            {
+                                "description": "runtime parameter for tool bamCoverage",
+                                "name": "advancedOpt"
+                            },
+                            {
+                                "description": "runtime parameter for tool bamCoverage",
+                                "name": "bamInput"
+                            }
+                        ],
+                        "label": null,
+                        "name": "bamCoverage",
+                        "outputs": [
+                            {
+                                "name": "outFileName",
+                                "type": "bigwig"
+                            }
+                        ],
+                        "position": {
+                            "left": 819.5,
+                            "top": 570.5
+                        },
+                        "post_job_actions": {},
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_coverage/deeptools_bam_coverage/2.5.0.0",
+                        "tool_shed_repository": {
+                            "changeset_revision": "22bfbb186bf1",
+                            "name": "deeptools_bam_coverage",
+                            "owner": "bgruening",
+                            "tool_shed": "toolshed.g2.bx.psu.edu"
+                        },
+                        "tool_state": "{\"__job_resource\": {\"__job_resource__select\": \"no\", \"__current_case__\": 0}, \"advancedOpt\": {\"showAdvancedOpt\": \"yes\", \"__current_case__\": 1, \"scaleFactor\": \"1.0\", \"smoothLength\": null, \"ignoreForNormalization\": \"\", \"skipNAs\": false, \"doExtendCustom\": {\"doExtend\": \"custom\", \"__current_case__\": 2, \"extendReadsValue\": \"150\"}, \"ignoreDuplicates\": false, \"centerReads\": false, \"minMappingQuality\": \"1\", \"samFlagInclude\": null, \"samFlagExclude\": null, \"minFragmentLength\": \"0\", \"maxFragmentLength\": \"0\", \"MNase\": false, \"Offset\": \"\", \"filterRNAstrand\": \"no\", \"blackListFileName\": {\"__class__\": \"RuntimeValue\"}}, \"bamInput\": {\"__class__\": \"RuntimeValue\"}, \"binSize\": \"50\", \"outFileFormat\": \"bigwig\", \"region\": \"\", \"scaling\": {\"type\": \"1x\", \"__current_case__\": 2, \"effectiveGenomeSize\": {\"effectiveGenomeSize_opt\": \"specific\", \"__current_case__\": 0, \"effectiveGenomeSize\": \"12000000\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": "2.5.0.0",
+                        "type": "tool",
+                        "uuid": "84b15a77-045f-4bbb-ab42-5b6cee0b632c",
+                        "when": null,
+                        "workflow_outputs": [
+                            {
+                                "label": "bigWig out",
+                                "output_name": "outFileName",
+                                "uuid": "925feecc-5d81-45d1-9893-aaac4613aaf4"
+                            }
+                        ]
+                    }
+                },
+                "tags": "",
+                "uuid": "2652a6d4-551c-4f6d-a90c-6017a9844e99"
+            },
+            "tool_id": null,
+            "type": "subworkflow",
+            "uuid": "4b1da5ae-8b21-4a4b-96d1-fc67a57fc6a1",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "id": 3,
+            "input_connections": {
+                "Fastq input Collection": {
+                    "id": 1,
+                    "input_subworkflow_step_id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "ChipSeq_tutorial_child1",
+            "outputs": [],
+            "position": {
+                "left": 532.5,
+                "top": 626
+            },
+            "subworkflow": {
+                "a_galaxy_workflow": "true",
+                "annotation": "",
+                "format-version": "0.1",
+                "name": "ChipSeq_tutorial_child1",
+                "steps": {
+                    "0": {
+                        "annotation": "",
+                        "content_id": null,
+                        "errors": null,
+                        "id": 0,
+                        "input_connections": {},
+                        "inputs": [
+                            {
+                                "description": "",
+                                "name": "Fastq input Collection"
+                            }
+                        ],
+                        "label": "Fastq input Collection",
+                        "name": "Input dataset collection",
+                        "outputs": [],
+                        "position": {
+                            "left": 147,
+                            "top": 203.5
+                        },
+                        "tool_id": null,
+                        "tool_state": "{\"optional\": false, \"tag\": null, \"collection_type\": \"list\"}",
+                        "tool_version": null,
+                        "type": "data_collection_input",
+                        "uuid": "9e072568-cd7c-47d6-8019-a423969699ae",
+                        "when": null,
+                        "workflow_outputs": []
+                    },
+                    "1": {
+                        "annotation": "",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa/0.7.15.1",
+                        "errors": null,
+                        "id": 1,
+                        "input_connections": {
+                            "input_type|fastq_input1": {
+                                "id": 0,
+                                "output_name": "output"
+                            }
+                        },
+                        "inputs": [
+                            {
+                                "description": "runtime parameter for tool Map with BWA",
+                                "name": "input_type"
+                            }
+                        ],
+                        "label": null,
+                        "name": "Map with BWA",
+                        "outputs": [
+                            {
+                                "name": "bam_output",
+                                "type": "bam"
+                            }
+                        ],
+                        "position": {
+                            "left": 471.5,
+                            "top": 206.5
+                        },
+                        "post_job_actions": {
+                            "HideDatasetActionbam_output": {
+                                "action_arguments": {},
+                                "action_type": "HideDatasetAction",
+                                "output_name": "bam_output"
+                            }
+                        },
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa/0.7.15.1",
+                        "tool_shed_repository": {
+                            "changeset_revision": "53646aaaafef",
+                            "name": "bwa",
+                            "owner": "devteam",
+                            "tool_shed": "toolshed.g2.bx.psu.edu"
+                        },
+                        "tool_state": "{\"__job_resource\": {\"__job_resource__select\": \"no\", \"__current_case__\": 0}, \"analysis_type\": {\"analysis_type_selector\": \"illumina\", \"__current_case__\": 0}, \"input_type\": {\"input_type_selector\": \"single\", \"__current_case__\": 2, \"fastq_input1\": {\"__class__\": \"RuntimeValue\"}, \"adv_se_options\": {\"adv_se_options_selector\": \"do_not_set\", \"__current_case__\": 1}}, \"reference_source\": {\"reference_source_selector\": \"cached\", \"__current_case__\": 0, \"ref_file\": \"sacCer3\"}, \"rg\": {\"rg_selector\": \"do_not_set\", \"__current_case__\": 3}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": "0.7.15.1",
+                        "type": "tool",
+                        "uuid": "90a69ebf-1fa9-40f0-84e9-738ae81e5073",
+                        "when": null,
+                        "workflow_outputs": []
+                    },
+                    "2": {
+                        "annotation": "",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtool_filter2/samtool_filter2/1.1.2",
+                        "errors": null,
+                        "id": 2,
+                        "input_connections": {
+                            "input1": {
+                                "id": 1,
+                                "output_name": "bam_output"
+                            }
+                        },
+                        "inputs": [
+                            {
+                                "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM",
+                                "name": "bed_file"
+                            },
+                            {
+                                "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM",
+                                "name": "input1"
+                            }
+                        ],
+                        "label": null,
+                        "name": "Filter SAM or BAM, output SAM or BAM",
+                        "outputs": [
+                            {
+                                "name": "output1",
+                                "type": "sam"
+                            }
+                        ],
+                        "position": {
+                            "left": 771,
+                            "top": 204.5
+                        },
+                        "post_job_actions": {},
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtool_filter2/samtool_filter2/1.1.2",
+                        "tool_shed_repository": {
+                            "changeset_revision": "dc6ff68ea5e8",
+                            "name": "samtool_filter2",
+                            "owner": "devteam",
+                            "tool_shed": "toolshed.g2.bx.psu.edu"
+                        },
+                        "tool_state": "{\"bed_file\": {\"__class__\": \"RuntimeValue\"}, \"flag\": {\"filter\": \"no\", \"__current_case__\": 0}, \"header\": \"-h\", \"input1\": {\"__class__\": \"RuntimeValue\"}, \"library\": \"\", \"mapq\": \"20\", \"outputtype\": \"bam\", \"possibly_select_inverse\": false, \"read_group\": \"\", \"regions\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": "1.1.2",
+                        "type": "tool",
+                        "uuid": "0bd80275-36aa-4349-9f13-93e4d5a242af",
+                        "when": null,
+                        "workflow_outputs": [
+                            {
+                                "label": "Filtered BAM",
+                                "output_name": "output1",
+                                "uuid": "43d6bb0f-2417-4065-ba0c-bac88c9bbfc7"
+                            }
+                        ]
+                    },
+                    "3": {
+                        "annotation": "",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_coverage/deeptools_bam_coverage/2.5.0.0",
+                        "errors": null,
+                        "id": 3,
+                        "input_connections": {
+                            "bamInput": {
+                                "id": 2,
+                                "output_name": "output1"
+                            }
+                        },
+                        "inputs": [
+                            {
+                                "description": "runtime parameter for tool bamCoverage",
+                                "name": "advancedOpt"
+                            },
+                            {
+                                "description": "runtime parameter for tool bamCoverage",
+                                "name": "bamInput"
+                            }
+                        ],
+                        "label": null,
+                        "name": "bamCoverage",
+                        "outputs": [
+                            {
+                                "name": "outFileName",
+                                "type": "bigwig"
+                            }
+                        ],
+                        "position": {
+                            "left": 819.5,
+                            "top": 570.5
+                        },
+                        "post_job_actions": {},
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_coverage/deeptools_bam_coverage/2.5.0.0",
+                        "tool_shed_repository": {
+                            "changeset_revision": "22bfbb186bf1",
+                            "name": "deeptools_bam_coverage",
+                            "owner": "bgruening",
+                            "tool_shed": "toolshed.g2.bx.psu.edu"
+                        },
+                        "tool_state": "{\"__job_resource\": {\"__job_resource__select\": \"no\", \"__current_case__\": 0}, \"advancedOpt\": {\"showAdvancedOpt\": \"yes\", \"__current_case__\": 1, \"scaleFactor\": \"1.0\", \"smoothLength\": null, \"ignoreForNormalization\": \"\", \"skipNAs\": false, \"doExtendCustom\": {\"doExtend\": \"custom\", \"__current_case__\": 2, \"extendReadsValue\": \"150\"}, \"ignoreDuplicates\": false, \"centerReads\": false, \"minMappingQuality\": \"1\", \"samFlagInclude\": null, \"samFlagExclude\": null, \"minFragmentLength\": \"0\", \"maxFragmentLength\": \"0\", \"MNase\": false, \"Offset\": \"\", \"filterRNAstrand\": \"no\", \"blackListFileName\": {\"__class__\": \"RuntimeValue\"}}, \"bamInput\": {\"__class__\": \"RuntimeValue\"}, \"binSize\": \"50\", \"outFileFormat\": \"bigwig\", \"region\": \"\", \"scaling\": {\"type\": \"1x\", \"__current_case__\": 2, \"effectiveGenomeSize\": {\"effectiveGenomeSize_opt\": \"specific\", \"__current_case__\": 0, \"effectiveGenomeSize\": \"12000000\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": "2.5.0.0",
+                        "type": "tool",
+                        "uuid": "84b15a77-045f-4bbb-ab42-5b6cee0b632c",
+                        "when": null,
+                        "workflow_outputs": [
+                            {
+                                "label": "bigWig out",
+                                "output_name": "outFileName",
+                                "uuid": "925feecc-5d81-45d1-9893-aaac4613aaf4"
+                            }
+                        ]
+                    }
+                },
+                "tags": "",
+                "uuid": "2652a6d4-551c-4f6d-a90c-6017a9844e99"
+            },
+            "tool_id": null,
+            "type": "subworkflow",
+            "uuid": "9fbc3e9a-afae-4c2b-b085-33fff082f233",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_multi_bam_summary/deeptools_multi_bam_summary/2.5.0.0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "multibam_conditional|bamfiles": [
+                    {
+                        "id": 2,
+                        "output_name": "Filtered BAM"
+                    },
+                    {
+                        "id": 3,
+                        "output_name": "Filtered BAM"
+                    }
+                ]
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool multiBamSummary",
+                    "name": "multibam_conditional"
+                }
+            ],
+            "label": null,
+            "name": "multiBamSummary",
+            "outputs": [
+                {
+                    "name": "outFile",
+                    "type": "deeptools_coverage_matrix"
+                }
+            ],
+            "position": {
+                "left": 871,
+                "top": 205
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_multi_bam_summary/deeptools_multi_bam_summary/2.5.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "b3dbbeb2cc57",
+                "name": "deeptools_multi_bam_summary",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__job_resource\": {\"__job_resource__select\": \"no\", \"__current_case__\": 0}, \"advancedOpt\": {\"showAdvancedOpt\": \"no\", \"__current_case__\": 0}, \"mode\": {\"modeOpt\": \"bins\", \"__current_case__\": 0, \"binSize\": \"10000\", \"distanceBetweenBins\": \"0\"}, \"multibam_conditional\": {\"orderMatters\": \"No\", \"__current_case__\": 0, \"bamfiles\": {\"__class__\": \"RuntimeValue\"}}, \"outRawCounts\": false, \"region\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.5.0.0",
+            "type": "tool",
+            "uuid": "f1321bc0-c80d-4768-b7b2-e0b466a79934",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_fingerprint/deeptools_plot_fingerprint/2.5.0.0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "multibam_conditional|bamfiles": [
+                    {
+                        "id": 3,
+                        "output_name": "Filtered BAM"
+                    },
+                    {
+                        "id": 2,
+                        "output_name": "Filtered BAM"
+                    }
+                ]
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool plotFingerprint",
+                    "name": "multibam_conditional"
+                }
+            ],
+            "label": null,
+            "name": "plotFingerprint",
+            "outputs": [
+                {
+                    "name": "outFileName",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 914.5,
+                "top": 668
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_fingerprint/deeptools_plot_fingerprint/2.5.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "1fa2b3df52b0",
+                "name": "deeptools_plot_fingerprint",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__job_resource\": {\"__job_resource__select\": \"no\", \"__current_case__\": 0}, \"advancedOpt\": {\"showAdvancedOpt\": \"no\", \"__current_case__\": 0}, \"multibam_conditional\": {\"orderMatters\": \"No\", \"__current_case__\": 0, \"bamfiles\": {\"__class__\": \"RuntimeValue\"}}, \"output\": {\"showOutputSettings\": \"no\", \"__current_case__\": 0}, \"region\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.5.0.0",
+            "type": "tool",
+            "uuid": "60800de4-c9d3-4bc3-bda5-4e2c69c67711",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_predictd/2.1.0.20151222.0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "infiles": [
+                    {
+                        "id": 3,
+                        "output_name": "Filtered BAM"
+                    },
+                    {
+                        "id": 2,
+                        "output_name": "Filtered BAM"
+                    }
+                ]
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool MACS2 predictd",
+                    "name": "infiles"
+                }
+            ],
+            "label": null,
+            "name": "MACS2 predictd",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "txt"
+                },
+                {
+                    "name": "outfile_image",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "left": 1155.5,
+                "top": 200
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_predictd/2.1.0.20151222.0",
+            "tool_shed_repository": {
+                "changeset_revision": "640d3af5d833",
+                "name": "macs2",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"band_width\": \"300\", \"effective_genome_size_options\": {\"effective_genome_size_options_selector\": \"user_defined\", \"__current_case__\": 4, \"gsize\": \"12000000\"}, \"infiles\": {\"__class__\": \"RuntimeValue\"}, \"mfoldhi\": \"100\", \"mfoldlo\": \"5\", \"tsize\": \"-1.0\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.0.20151222.0",
+            "type": "tool",
+            "uuid": "eb7fae42-129e-4bd6-87f0-f49af50a14f2",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.1.1.20160309.0",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input_control_file": {
+                    "id": 2,
+                    "output_name": "Filtered BAM"
+                },
+                "input_treatment_file": {
+                    "id": 3,
+                    "output_name": "Filtered BAM"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool MACS2 callpeak",
+                    "name": "input_control_file"
+                },
+                {
+                    "description": "runtime parameter for tool MACS2 callpeak",
+                    "name": "input_treatment_file"
+                }
+            ],
+            "label": null,
+            "name": "MACS2 callpeak",
+            "outputs": [
+                {
+                    "name": "output_narrowpeaks",
+                    "type": "bed"
+                },
+                {
+                    "name": "output_summits",
+                    "type": "bed"
+                }
+            ],
+            "position": {
+                "left": 1395,
+                "top": 193
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.1.1.20160309.0",
+            "tool_shed_repository": {
+                "changeset_revision": "f5d67c722d67",
+                "name": "macs2",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"advanced_options\": {\"advanced_options_selector\": \"off\", \"__current_case__\": 1}, \"bampe\": false, \"band_width\": \"300\", \"cutoff_options\": {\"cutoff_options_selector\": \"qvalue\", \"__current_case__\": 1, \"qvalue\": \"0.05\"}, \"effective_genome_size_options\": {\"effective_genome_size_options_selector\": \"12400000\", \"__current_case__\": 4}, \"input_control_file\": {\"__class__\": \"RuntimeValue\"}, \"input_treatment_file\": {\"__class__\": \"RuntimeValue\"}, \"mfold\": {\"lower\": \"5\", \"upper\": \"50\"}, \"nomodel_type\": {\"nomodel_type_selector\": \"nomodel\", \"__current_case__\": 1, \"extsize\": \"30\", \"shift\": \"0\"}, \"outputs\": [\"summits\"], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.1.20160309.0",
+            "type": "tool",
+            "uuid": "44307d2c-6063-4c90-b48f-c210f3f49f9a",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_correlation/deeptools_plot_correlation/2.5.0.0",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "corData": {
+                    "id": 4,
+                    "output_name": "outFile"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool plotCorrelation",
+                    "name": "corData"
+                }
+            ],
+            "label": null,
+            "name": "plotCorrelation",
+            "outputs": [
+                {
+                    "name": "outFileName",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 1168.5,
+                "top": 547
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_correlation/deeptools_plot_correlation/2.5.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "ed2767cdf4e8",
+                "name": "deeptools_plot_correlation",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"corData\": {\"__class__\": \"RuntimeValue\"}, \"corMethod\": \"spearman\", \"outFileCorMatrix\": false, \"outFileFormat\": \"png\", \"plotting_type\": {\"whatToPlot\": \"heatmap\", \"__current_case__\": 0, \"zMin\": \"\", \"zMax\": \"\", \"colorMap\": \"RdYlBu\", \"plotTitle\": \"\", \"plotNumbers\": false}, \"removeOutliers\": false, \"skipZeros\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.5.0.0",
+            "type": "tool",
+            "uuid": "559c6497-4b69-4d8e-9013-b1d33bb1ad34",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [
+        "ChIPseq",
+        "tutorial"
+    ],
+    "uuid": "5083adb2-5891-4a95-9261-c5b016a981ae",
+    "version": 3
+}

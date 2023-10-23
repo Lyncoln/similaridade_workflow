@@ -1,0 +1,214 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "Test workflow 1",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 10,
+                "top": 10
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "fastq_stats",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "input_file": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "FASTQ Summary Statistics",
+            "outputs": [
+                {
+                    "name": "output_file",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 230,
+                "top": 10
+            },
+            "post_job_actions": {},
+            "tool_id": "fastq_stats",
+            "tool_shed_repository": {
+                "changeset_revision": "f0e7deab6518",
+                "name": "fastq_stats",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/hg19.len\", \"input_file\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": null,
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "bowtie_wrapper",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "singlePaired|sInput1": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Map with Bowtie for Illumina",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "sam"
+                },
+                {
+                    "name": "mapping_stats",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 230,
+                "top": 130
+            },
+            "post_job_actions": {},
+            "tool_id": "bowtie_wrapper",
+            "tool_shed_repository": {
+                "changeset_revision": "b46e7d48076a",
+                "name": "bowtie_wrappers",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/hg19.len\", \"refGenomeSource\": {\"genomeSource\": \"indexed\", \"__current_case__\": 0, \"index\": \"/galaxy/data/hg19/bowtie_index/hg19\"}, \"singlePaired\": {\"sPaired\": \"single\", \"__current_case__\": 0, \"sInput1\": null, \"sParams\": {\"sSettingsType\": \"preSet\", \"__current_case__\": 0}}, \"suppressHeader\": true, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": null,
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "solid_qual_boxplot",
+            "errors": "Tool is not installed",
+            "id": 3,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "output_file"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "solid_qual_boxplot",
+            "outputs": [],
+            "position": {
+                "left": 450,
+                "top": 10
+            },
+            "post_job_actions": {},
+            "tool_id": "solid_qual_boxplot",
+            "tool_state": "{\"chromInfo\": \"\\\"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/hg19.len\\\"\", \"input\": \"null\"}",
+            "tool_version": null,
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "qual_stats_boxplot",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input_file": {
+                    "id": 1,
+                    "output_name": "output_file"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Boxplot",
+            "outputs": [
+                {
+                    "name": "output_file",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 450,
+                "top": 130
+            },
+            "post_job_actions": {},
+            "tool_id": "qual_stats_boxplot",
+            "tool_state": "{\"chromInfo\": \"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/hg19.len\", \"graph_size\": \"2048,768\", \"input_file\": null, \"lwcol\": \"11\", \"medcol\": \"8\", \"q1col\": \"7\", \"q3col\": \"9\", \"rwcol\": \"12\", \"title\": \"Box plot in Galaxy\", \"use_outliers\": {\"use_outliers_type\": \"use_outliers\", \"__current_case__\": 0, \"outliercol\": \"13\"}, \"xcol\": \"1\", \"xlabel\": \"X Axis Label\", \"ylabel\": \"Score Value\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": null,
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "sam_to_bam",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "source|input1": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "SAM-to-BAM",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 450,
+                "top": 250
+            },
+            "post_job_actions": {},
+            "tool_id": "sam_to_bam",
+            "tool_shed_repository": {
+                "changeset_revision": "9bd1568619cd",
+                "name": "sam_to_bam",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/hg19.len\", \"source\": {\"index_source\": \"cached\", \"input1\": null, \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": null,
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [],
+    "version": 0
+}

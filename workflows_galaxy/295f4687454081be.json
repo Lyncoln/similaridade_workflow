@@ -1,0 +1,198 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "Panda_Gene_Mapping_Analysis",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 10,
+                "top": 10
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 10,
+                "top": 130
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "CONVERTER_sam_to_bam",
+            "errors": "Tool is not installed",
+            "id": 2,
+            "input_connections": {},
+            "inputs": [],
+            "label": null,
+            "name": "CONVERTER_sam_to_bam",
+            "outputs": [],
+            "position": {
+                "left": 10,
+                "top": 250
+            },
+            "post_job_actions": {},
+            "tool_id": "CONVERTER_sam_to_bam",
+            "tool_state": "{\"chromInfo\": \"\\\"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/?.len\\\"\", \"input1\": \"null\"}",
+            "tool_version": null,
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "fastq_groomer",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input_file": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "FASTQ Groomer",
+            "outputs": [
+                {
+                    "name": "output_file",
+                    "type": "fastqsanger"
+                }
+            ],
+            "position": {
+                "left": 230,
+                "top": 10
+            },
+            "post_job_actions": {},
+            "tool_id": "fastq_groomer",
+            "tool_shed_repository": {
+                "changeset_revision": "47e5dbc3e790",
+                "name": "fastq_groomer",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/?.len\", \"input_file\": null, \"input_type\": \"illumina\", \"options_type\": {\"options_type_selector\": \"advanced\", \"__current_case__\": 1, \"output_type\": \"sanger\", \"force_quality_encoding\": \"ascii\", \"summarize_input\": \"summarize_input\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": null,
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa_wrappers/bwa_wrapper/1.2.3",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "genomeSource|ownFile": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "paired|input1": {
+                    "id": 3,
+                    "output_name": "output_file"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Map with BWA for Illumina",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "sam"
+                }
+            ],
+            "position": {
+                "left": 450,
+                "top": 10
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa_wrappers/bwa_wrapper/1.2.3",
+            "tool_shed_repository": {
+                "changeset_revision": "b4427dbb6ced",
+                "name": "bwa_wrappers",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/?.len\", \"genomeSource\": {\"refGenomeSource\": \"history\", \"__current_case__\": 1, \"ownFile\": null}, \"paired\": {\"sPaired\": \"single\", \"__current_case__\": 0, \"input1\": null}, \"params\": {\"source_select\": \"full\", \"__current_case__\": 1, \"maxEditDist\": \"0\", \"fracMissingAligns\": \"0.04\", \"maxGapOpens\": \"1\", \"maxGapExtens\": \"-1\", \"disallowLongDel\": \"16\", \"disallowIndel\": \"5\", \"seed\": \"-1\", \"maxEditDistSeed\": \"2\", \"mismatchPenalty\": \"3\", \"gapOpenPenalty\": \"11\", \"gapExtensPenalty\": \"4\", \"suboptAlign\": null, \"noIterSearch\": false, \"outputTopN\": \"3\", \"outputTopNDisc\": \"10\", \"maxInsertSize\": \"500\", \"maxOccurPairing\": \"100000\", \"readGroup\": {\"specReadGroup\": \"no\", \"__current_case__\": 1}}, \"suppressHeader\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": null,
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "samtools_flagstat",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input1": {
+                    "id": 4,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Samtools flagstat",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 670,
+                "top": 10
+            },
+            "post_job_actions": {},
+            "tool_id": "samtools_flagstat",
+            "tool_shed_repository": {
+                "changeset_revision": "fe34990e5ce7",
+                "name": "samtools_flagstat",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/?.len\", \"input1\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": null,
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [],
+    "version": -1
+}

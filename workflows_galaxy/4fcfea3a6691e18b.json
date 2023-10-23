@@ -1,0 +1,376 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "01-ngs-bwa-mem-markdupe-filter",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "WES01_chr22m_R1.fastq"
+                }
+            ],
+            "label": "WES01_chr22m_R1.fastq",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 199.94317626953125,
+                "top": 229.63068771362305
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "d161d6e3-95e0-4b01-9888-d2d5bb514d7d",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "WES01_chr22m_R2.fastq"
+                }
+            ],
+            "label": "WES01_chr22m_R2.fastq",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 199.94317626953125,
+                "top": 345.65339279174805
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "eecdc107-dfa2-464f-b852-a72b5093514a",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.12.1",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "fastq_input|fastq_input1": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "fastq_input|fastq_input2": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Map with BWA-MEM",
+                    "name": "fastq_input"
+                },
+                {
+                    "description": "runtime parameter for tool Map with BWA-MEM",
+                    "name": "fastq_input"
+                }
+            ],
+            "label": null,
+            "name": "Map with BWA-MEM",
+            "outputs": [
+                {
+                    "name": "bam_output",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 445.95169830322266,
+                "top": 229.63068771362305
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.12.1",
+            "tool_shed_repository": {
+                "changeset_revision": "546ada4a9f43",
+                "name": "bwa",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__job_resource\": {\"__job_resource__select\": \"no\", \"__current_case__\": 0}, \"__workflow_invocation_uuid__\": \"4236dc56f6ac11e687fb005056a52a46\", \"analysis_type\": {\"analysis_type_selector\": \"illumina\", \"__current_case__\": 0}, \"chromInfo\": \"/galaxy-repl/localdata/chrom/hg19.len\", \"fastq_input\": {\"fastq_input_selector\": \"paired\", \"__current_case__\": 0, \"fastq_input1\": {\"__class__\": \"RuntimeValue\"}, \"fastq_input2\": {\"__class__\": \"RuntimeValue\"}, \"iset_stats\": \"250,50\"}, \"reference_source\": {\"reference_source_selector\": \"cached\", \"__current_case__\": 0, \"ref_file\": \"hg19\"}, \"rg\": {\"rg_selector\": \"set\", \"__current_case__\": 1, \"read_group_id_conditional\": {\"do_auto_name\": false, \"__current_case__\": 1, \"ID\": \"HWI-D0011.50.H7AP8ADXX.1.WES01\"}, \"read_group_sm_conditional\": {\"do_auto_name\": false, \"__current_case__\": 1, \"SM\": \"WES01\"}, \"PL\": \"ILLUMINA\", \"read_group_lb_conditional\": {\"do_auto_name\": false, \"__current_case__\": 1, \"LB\": \"nextera-wes01-blood\"}, \"CN\": \"\", \"DS\": \"\", \"DT\": \"2017-02-23\", \"FO\": \"\", \"KS\": \"\", \"PG\": \"\", \"PI\": null, \"PU\": \"HWI-D00119\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.7.12.1",
+            "type": "tool",
+            "uuid": "120a09ba-5054-46b8-9f62-ec641041dfdb",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_FixMateInformation/2.7.1.0",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "inputFile": {
+                    "id": 2,
+                    "output_name": "bam_output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "FixMateInformation",
+            "outputs": [
+                {
+                    "name": "outFile",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 718.9772644042969,
+                "top": 229.63068771362305
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_FixMateInformation/2.7.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "fc288950c3b7",
+                "name": "picard",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"add_mate_cigar\": true, \"assume_sorted\": false, \"inputFile\": {\"values\": [{\"id\": 29351870, \"src\": \"hda\"}]}, \"validation_stringency\": \"LENIENT\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.7.1.0",
+            "type": "tool",
+            "uuid": "47a9543e-dd2f-4f20-905b-5543ad2b6a69",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_CleanSam/2.7.1.0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "inputFile": {
+                    "id": 3,
+                    "output_name": "outFile"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "CleanSam",
+            "outputs": [
+                {
+                    "name": "outFile",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 1045.01416015625,
+                "top": 229.63068771362305
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_CleanSam/2.7.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "fc288950c3b7",
+                "name": "picard",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"inputFile\": {\"values\": [{\"id\": 29351870, \"src\": \"hda\"}]}, \"validation_stringency\": \"LENIENT\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.7.1.0",
+            "type": "tool",
+            "uuid": "285460a9-43a6-4b01-a1cc-cdd3b726a6a7",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/1.136.0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "inputFile": {
+                    "id": 4,
+                    "output_name": "outFile"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool MarkDuplicates",
+                    "name": "inputFile"
+                }
+            ],
+            "label": null,
+            "name": "MarkDuplicates",
+            "outputs": [
+                {
+                    "name": "metrics_file",
+                    "type": "txt"
+                },
+                {
+                    "name": "outFile",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 1373.0255737304688,
+                "top": 229.63068771362305
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/1.136.0",
+            "tool_shed_repository": {
+                "changeset_revision": "efc56ee1ade4",
+                "name": "picard",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__workflow_invocation_uuid__\": \"4236dc56f6ac11e687fb005056a52a46\", \"assume_sorted\": true, \"chromInfo\": \"/galaxy-repl/localdata/chrom/hg19.len\", \"comments\": [], \"duplicate_scoring_strategy\": \"SUM_OF_BASE_QUALITIES\", \"inputFile\": {\"__class__\": \"RuntimeValue\"}, \"optical_duplicate_pixel_distance\": \"100\", \"read_name_regex\": \"[a-zA-Z0-9]+:[0-9]:([0-9]+):([0-9]+):([0-9]+).*.\", \"remove_duplicates\": false, \"validation_stringency\": \"LENIENT\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.136.0",
+            "type": "tool",
+            "uuid": "35360427-1fe4-40d4-b142-0bf1f267cb46",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtool_filter2/samtool_filter2/1.1.2",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input1": {
+                    "id": 5,
+                    "output_name": "outFile"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM",
+                    "name": "bed_file"
+                },
+                {
+                    "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM",
+                    "name": "input1"
+                }
+            ],
+            "label": null,
+            "name": "Filter SAM or BAM, output SAM or BAM",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "sam"
+                }
+            ],
+            "position": {
+                "left": 1703.0255737304688,
+                "top": 229.63068771362305
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtool_filter2/samtool_filter2/1.1.2",
+            "tool_shed_repository": {
+                "changeset_revision": "dc6ff68ea5e8",
+                "name": "samtool_filter2",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__workflow_invocation_uuid__\": \"4236dc56f6ac11e687fb005056a52a46\", \"bed_file\": {\"__class__\": \"RuntimeValue\"}, \"chromInfo\": \"/galaxy-repl/localdata/chrom/hg19.len\", \"flag\": {\"filter\": \"yes\", \"__current_case__\": 1, \"reqBits\": null, \"skipBits\": [\"0x0004\", \"0x0100\", \"0x0200\", \"0x0400\"]}, \"header\": \"-h\", \"input1\": {\"__class__\": \"RuntimeValue\"}, \"library\": \"\", \"mapq\": \"20\", \"outputtype\": \"bam\", \"possibly_select_inverse\": false, \"read_group\": \"\", \"regions\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.2",
+            "type": "tool",
+            "uuid": "4282978c-3d71-478f-a5ea-367f3a6b82f3",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_ValidateSamFile/2.7.1.0",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "inputFile": {
+                    "id": 5,
+                    "output_name": "outFile"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "ValidateSamFile",
+            "outputs": [
+                {
+                    "name": "outFile",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 1671.4913940429688,
+                "top": 507.9829521179199
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_ValidateSamFile/2.7.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "fc288950c3b7",
+                "name": "picard",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"ignore\": null, \"ignore_warnings\": false, \"inputFile\": {\"values\": [{\"id\": 29351870, \"src\": \"hda\"}]}, \"is_bisulfite_sequenced\": false, \"max_output\": \"100\", \"mode\": \"VERBOSE\", \"reference_source\": {\"reference_source_selector\": \"cached\", \"__current_case__\": 0, \"ref_file\": \"vicPac1\"}, \"validate_index\": true, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.7.1.0",
+            "type": "tool",
+            "uuid": "4bee261b-f6b8-48ae-8536-2d4fc1890b97",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_ValidateSamFile/2.7.1.0",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "inputFile": {
+                    "id": 6,
+                    "output_name": "output1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "ValidateSamFile",
+            "outputs": [
+                {
+                    "name": "outFile",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 2004.1476440429688,
+                "top": 329.6164665222168
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_ValidateSamFile/2.7.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "fc288950c3b7",
+                "name": "picard",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"ignore\": null, \"ignore_warnings\": false, \"inputFile\": {\"values\": [{\"id\": 29351870, \"src\": \"hda\"}]}, \"is_bisulfite_sequenced\": false, \"max_output\": \"100\", \"mode\": \"VERBOSE\", \"reference_source\": {\"reference_source_selector\": \"cached\", \"__current_case__\": 0, \"ref_file\": \"vicPac1\"}, \"validate_index\": true, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.7.1.0",
+            "type": "tool",
+            "uuid": "70ce41e2-4c0e-4fb3-98fe-f549aaeae68d",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [
+        "bwa-mem",
+        "cleansam",
+        "fixmate",
+        "hg19",
+        "markduplicate",
+        "filtersam"
+    ],
+    "uuid": "f0d096bb-6d86-43e7-8f1d-8679224d52f3",
+    "version": 4
+}

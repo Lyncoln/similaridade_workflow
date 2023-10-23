@@ -1,0 +1,594 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "v2",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Reference Genome FASTA"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 248.5416717529297,
+                "top": 412.35418701171875
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Pooled Mutant Strain Variants VCF"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 244.1041717529297,
+                "top": 599.4375
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Crossing Strain Variants VCF (preferably from sequenced crossing strain)"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 241.2291717529297,
+                "top": 976.7083740234375
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "gatk_variant_select",
+            "errors": "Tool is not installed",
+            "id": 3,
+            "input_connections": {
+                "reference_source|input_variant": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "reference_source|ref_file": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "gatk_variant_select",
+            "outputs": [],
+            "position": {
+                "left": 605.5417022705078,
+                "top": 265.35418701171875
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_log": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_log"
+                },
+                "RenameDatasetActionoutput_vcf": {
+                    "action_arguments": {
+                        "newname": "Mutant Strain SNPs QUAL100 VCF"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_vcf"
+                }
+            },
+            "tool_id": "gatk_variant_select",
+            "tool_state": "{\"analysis_param_type\": \"{\\\"analysis_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"chromInfo\": \"\\\"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/ce10.len\\\"\", \"exclude_filtered\": \"\\\"False\\\"\", \"exclude_sample_name_repeat\": \"[]\", \"gatk_param_type\": \"{\\\"gatk_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"input_concordance\": \"null\", \"input_discordance\": \"null\", \"reference_source\": \"{\\\"ref_file\\\": null, \\\"reference_source_selector\\\": \\\"history\\\", \\\"input_variant\\\": null, \\\"__current_case__\\\": 1}\", \"sample_name_repeat\": \"[]\", \"select_expressions_repeat\": \"[{\\\"__index__\\\": 0, \\\"select_expressions\\\": \\\"QUAL >= 100\\\"}]\"}",
+            "tool_version": "0.0.2",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_vcf",
+                    "uuid": null
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "gatk_variant_select",
+            "errors": "Tool is not installed",
+            "id": 4,
+            "input_connections": {
+                "reference_source|input_variant": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "reference_source|ref_file": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "gatk_variant_select",
+            "outputs": [],
+            "position": {
+                "left": 621.3958282470703,
+                "top": 546.1666870117188
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_log": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_log"
+                },
+                "RenameDatasetActionoutput_vcf": {
+                    "action_arguments": {
+                        "newname": "Mutant Strain SNPs QUAL200 VCF"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_vcf"
+                }
+            },
+            "tool_id": "gatk_variant_select",
+            "tool_state": "{\"analysis_param_type\": \"{\\\"analysis_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"chromInfo\": \"\\\"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/ce10.len\\\"\", \"exclude_filtered\": \"\\\"False\\\"\", \"exclude_sample_name_repeat\": \"[]\", \"gatk_param_type\": \"{\\\"gatk_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"input_concordance\": \"null\", \"input_discordance\": \"null\", \"reference_source\": \"{\\\"ref_file\\\": null, \\\"reference_source_selector\\\": \\\"history\\\", \\\"input_variant\\\": null, \\\"__current_case__\\\": 1}\", \"sample_name_repeat\": \"[]\", \"select_expressions_repeat\": \"[{\\\"__index__\\\": 0, \\\"select_expressions\\\": \\\"QUAL >= 200\\\"}]\"}",
+            "tool_version": "0.0.2",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_vcf",
+                    "uuid": null
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "gatk_variant_select",
+            "errors": "Tool is not installed",
+            "id": 5,
+            "input_connections": {
+                "reference_source|input_variant": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "reference_source|ref_file": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "gatk_variant_select",
+            "outputs": [],
+            "position": {
+                "left": 637.2292022705078,
+                "top": 857.1875
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_log": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_log"
+                },
+                "RenameDatasetActionoutput_vcf": {
+                    "action_arguments": {
+                        "newname": "Mutant Strain SNPs QUAL300 VCF"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_vcf"
+                }
+            },
+            "tool_id": "gatk_variant_select",
+            "tool_state": "{\"analysis_param_type\": \"{\\\"analysis_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"chromInfo\": \"\\\"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/ce10.len\\\"\", \"exclude_filtered\": \"\\\"False\\\"\", \"exclude_sample_name_repeat\": \"[]\", \"gatk_param_type\": \"{\\\"gatk_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"input_concordance\": \"null\", \"input_discordance\": \"null\", \"reference_source\": \"{\\\"ref_file\\\": null, \\\"reference_source_selector\\\": \\\"history\\\", \\\"input_variant\\\": null, \\\"__current_case__\\\": 1}\", \"sample_name_repeat\": \"[]\", \"select_expressions_repeat\": \"[{\\\"__index__\\\": 0, \\\"select_expressions\\\": \\\"QUAL >= 300\\\"}]\"}",
+            "tool_version": "0.0.2",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_vcf",
+                    "uuid": null
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "gatk_variant_select",
+            "errors": "Tool is not installed",
+            "id": 6,
+            "input_connections": {
+                "input_discordance": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "reference_source|input_variant": {
+                    "id": 3,
+                    "output_name": "output_vcf"
+                },
+                "reference_source|ref_file": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "gatk_variant_select",
+            "outputs": [],
+            "position": {
+                "left": 1010.1875762939453,
+                "top": 275.4375
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_log": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_log"
+                },
+                "RenameDatasetActionoutput_vcf": {
+                    "action_arguments": {
+                        "newname": "Mutant Strain SNPs QUAL100 minus crossing strain SNPs VCF"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_vcf"
+                }
+            },
+            "tool_id": "gatk_variant_select",
+            "tool_state": "{\"analysis_param_type\": \"{\\\"analysis_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"chromInfo\": \"\\\"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/ce10.len\\\"\", \"exclude_filtered\": \"\\\"True\\\"\", \"exclude_sample_name_repeat\": \"[]\", \"gatk_param_type\": \"{\\\"gatk_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"input_concordance\": \"null\", \"input_discordance\": \"null\", \"reference_source\": \"{\\\"ref_file\\\": null, \\\"reference_source_selector\\\": \\\"history\\\", \\\"input_variant\\\": null, \\\"__current_case__\\\": 1}\", \"sample_name_repeat\": \"[]\", \"select_expressions_repeat\": \"[]\"}",
+            "tool_version": "0.0.2",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_vcf",
+                    "uuid": null
+                }
+            ]
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "gatk_variant_select",
+            "errors": "Tool is not installed",
+            "id": 7,
+            "input_connections": {
+                "input_discordance": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "reference_source|input_variant": {
+                    "id": 4,
+                    "output_name": "output_vcf"
+                },
+                "reference_source|ref_file": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "gatk_variant_select",
+            "outputs": [],
+            "position": {
+                "left": 994.3542022705078,
+                "top": 543.2708740234375
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_log": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_log"
+                },
+                "RenameDatasetActionoutput_vcf": {
+                    "action_arguments": {
+                        "newname": "Mutant Strain SNPs QUAL200 minus crossing strain SNPs VCF"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_vcf"
+                }
+            },
+            "tool_id": "gatk_variant_select",
+            "tool_state": "{\"analysis_param_type\": \"{\\\"analysis_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"chromInfo\": \"\\\"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/ce10.len\\\"\", \"exclude_filtered\": \"\\\"True\\\"\", \"exclude_sample_name_repeat\": \"[]\", \"gatk_param_type\": \"{\\\"gatk_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"input_concordance\": \"null\", \"input_discordance\": \"null\", \"reference_source\": \"{\\\"ref_file\\\": null, \\\"reference_source_selector\\\": \\\"history\\\", \\\"input_variant\\\": null, \\\"__current_case__\\\": 1}\", \"sample_name_repeat\": \"[]\", \"select_expressions_repeat\": \"[]\"}",
+            "tool_version": "0.0.2",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_vcf",
+                    "uuid": null
+                }
+            ]
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "gatk_variant_select",
+            "errors": "Tool is not installed",
+            "id": 8,
+            "input_connections": {
+                "input_discordance": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "reference_source|input_variant": {
+                    "id": 5,
+                    "output_name": "output_vcf"
+                },
+                "reference_source|ref_file": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "gatk_variant_select",
+            "outputs": [],
+            "position": {
+                "left": 998.6667022705078,
+                "top": 884.5625
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_log": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_log"
+                },
+                "RenameDatasetActionoutput_vcf": {
+                    "action_arguments": {
+                        "newname": "Mutant Strain SNPs QUAL300 minus crossing strain SNPs VCF"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_vcf"
+                }
+            },
+            "tool_id": "gatk_variant_select",
+            "tool_state": "{\"analysis_param_type\": \"{\\\"analysis_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"chromInfo\": \"\\\"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/ce10.len\\\"\", \"exclude_filtered\": \"\\\"True\\\"\", \"exclude_sample_name_repeat\": \"[]\", \"gatk_param_type\": \"{\\\"gatk_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"input_concordance\": \"null\", \"input_discordance\": \"null\", \"reference_source\": \"{\\\"ref_file\\\": null, \\\"reference_source_selector\\\": \\\"history\\\", \\\"input_variant\\\": null, \\\"__current_case__\\\": 1}\", \"sample_name_repeat\": \"[]\", \"select_expressions_repeat\": \"[]\"}",
+            "tool_version": "0.0.2",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_vcf",
+                    "uuid": null
+                }
+            ]
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/gregory-minevich/cloudmap_variant_discovery_mapping/cloudmap_variant_discovery_mapping/1.0.0",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "sample_vcf": {
+                    "id": 6,
+                    "output_name": "output_vcf"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "CloudMap: Variant Discovery Mapping with WGS data",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                },
+                {
+                    "name": "location_plot_output",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "left": 1341.3958282470703,
+                "top": 275.4375
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Mutant Strain SNPs QUAL100 minus crossing+background strain VDM plot"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/gregory-minevich/cloudmap_variant_discovery_mapping/cloudmap_variant_discovery_mapping/1.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "c80c0aabc869",
+                "name": "cloudmap_variant_discovery_mapping",
+                "owner": "gregory-minevich",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"d_yaxis\": \"1.0\", \"h_yaxis\": \"20\", \"loess_color\": \"green2\", \"loess_span\": \"0.4\", \"normalize_bins\": true, \"points_color\": \"gray27\", \"sample_vcf\": null, \"source\": {\"source_select\": \"elegans\", \"__current_case__\": 0, \"Celegans\": \"C.elegans\"}, \"standardize\": true, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "location_plot_output",
+                    "uuid": null
+                },
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": null
+                }
+            ]
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/gregory-minevich/cloudmap_variant_discovery_mapping/cloudmap_variant_discovery_mapping/1.0.0",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "sample_vcf": {
+                    "id": 7,
+                    "output_name": "output_vcf"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "CloudMap: Variant Discovery Mapping with WGS data",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                },
+                {
+                    "name": "location_plot_output",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "left": 1334.1875762939453,
+                "top": 538.9583740234375
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Mutant Strain SNPs QUAL200 minus crossing+background strain VDM plot"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/gregory-minevich/cloudmap_variant_discovery_mapping/cloudmap_variant_discovery_mapping/1.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "c80c0aabc869",
+                "name": "cloudmap_variant_discovery_mapping",
+                "owner": "gregory-minevich",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"d_yaxis\": \"1.0\", \"h_yaxis\": \"20\", \"loess_color\": \"green2\", \"loess_span\": \"0.4\", \"normalize_bins\": true, \"points_color\": \"gray27\", \"sample_vcf\": null, \"source\": {\"source_select\": \"elegans\", \"__current_case__\": 0, \"Celegans\": \"C.elegans\"}, \"standardize\": true, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "location_plot_output",
+                    "uuid": null
+                },
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": null
+                }
+            ]
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/gregory-minevich/cloudmap_variant_discovery_mapping/cloudmap_variant_discovery_mapping/1.0.0",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "sample_vcf": {
+                    "id": 8,
+                    "output_name": "output_vcf"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "CloudMap: Variant Discovery Mapping with WGS data",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                },
+                {
+                    "name": "location_plot_output",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "left": 1328.4375762939453,
+                "top": 870.1666870117188
+            },
+            "post_job_actions": {
+                "HideDatasetActionlocation_plot_output": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "location_plot_output"
+                },
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                },
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Mutant Strain SNPs QUAL300 minus crossing+background strain VDM plot"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/gregory-minevich/cloudmap_variant_discovery_mapping/cloudmap_variant_discovery_mapping/1.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "c80c0aabc869",
+                "name": "cloudmap_variant_discovery_mapping",
+                "owner": "gregory-minevich",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"d_yaxis\": \"1.0\", \"h_yaxis\": \"20\", \"loess_color\": \"green2\", \"loess_span\": \"0.4\", \"normalize_bins\": true, \"points_color\": \"gray27\", \"sample_vcf\": null, \"source\": {\"source_select\": \"elegans\", \"__current_case__\": 0, \"Celegans\": \"C.elegans\"}, \"standardize\": true, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [],
+    "version": 1
+}

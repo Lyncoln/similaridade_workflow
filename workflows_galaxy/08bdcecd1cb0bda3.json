@@ -1,0 +1,378 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "Benchmarking RNA Single-Read Cloud Costs",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Reference Transcript (FASTA)"
+                }
+            ],
+            "label": "Reference Transcript (FASTA)",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 490.6000061035156,
+                "height": 40.600006103515625,
+                "left": 657.1666259765625,
+                "right": 757.1666259765625,
+                "top": 450,
+                "width": 100,
+                "x": 657.1666259765625,
+                "y": 450
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "683510e4-da70-4cad-9f63-6424414d3f5d",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "82de379f-7628-428a-a267-a59193e09932"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "FASTQ RNA Dataset"
+                }
+            ],
+            "label": "FASTQ RNA Dataset",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 332.9666748046875,
+                "height": 40.600006103515625,
+                "left": 856.066650390625,
+                "right": 956.066650390625,
+                "top": 292.3666687011719,
+                "width": 100,
+                "x": 856.066650390625,
+                "y": 292.3666687011719
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "ed8adbeb-0191-4ad2-b33c-b5b6d6480297",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/kallisto_quant/kallisto_quant/0.46.2+galaxy0",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "reference_transcriptome|reference": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "single_paired|reads": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Kallisto quant",
+                    "name": "reference_transcriptome"
+                },
+                {
+                    "description": "runtime parameter for tool Kallisto quant",
+                    "name": "single_paired"
+                }
+            ],
+            "label": null,
+            "name": "Kallisto quant",
+            "outputs": [
+                {
+                    "name": "abundance_h5",
+                    "type": "h5"
+                },
+                {
+                    "name": "abundance_tab",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 699.0666656494141,
+                "height": 127.33332824707031,
+                "left": 938.066650390625,
+                "right": 1038.066650390625,
+                "top": 571.7333374023438,
+                "width": 100,
+                "x": 938.066650390625,
+                "y": 571.7333374023438
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/kallisto_quant/kallisto_quant/0.46.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "c971db6f0fe5",
+                "name": "kallisto_quant",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"bias\": false, \"bootstrap_samples\": \"0\", \"fusion\": false, \"lib_type\": \"\", \"pseudobam\": false, \"reference_transcriptome\": {\"reference_transcriptome_source\": \"history\", \"__current_case__\": 1, \"reference\": {\"__class__\": \"RuntimeValue\"}}, \"seed\": \"42\", \"single_paired\": {\"single_paired_selector\": \"single\", \"__current_case__\": 0, \"reads\": {\"__class__\": \"RuntimeValue\"}, \"fragment_length\": \"200\", \"sd\": \"20\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": null,
+            "type": "tool",
+            "uuid": "7ce54ad3-a8ba-4ae3-a1a0-e9c0375e48ac",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Kallisto quant on input dataset(s): Abundances (tabular)",
+                    "output_name": "abundance_tab",
+                    "uuid": "63868f54-f70e-4499-8b5e-6a7f4c93fc20"
+                },
+                {
+                    "label": "Kallisto quant on input dataset(s): Abundances (HDF5)",
+                    "output_name": "abundance_h5",
+                    "uuid": "a72fdd46-5d98-4248-bd16-1fe716119e45"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "fastq_input|fastq_input1": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Map with BWA-MEM",
+            "outputs": [
+                {
+                    "name": "bam_output",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "bottom": 311.03334045410156,
+                "height": 76.53334045410156,
+                "left": 1241.63330078125,
+                "right": 1341.63330078125,
+                "top": 234.5,
+                "width": 100,
+                "x": 1241.63330078125,
+                "y": 234.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1",
+            "tool_shed_repository": {
+                "changeset_revision": "3fe632431b68",
+                "name": "bwa",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"analysis_type\": {\"analysis_type_selector\": \"illumina\", \"__current_case__\": 0}, \"fastq_input\": {\"fastq_input_selector\": \"single\", \"__current_case__\": 1, \"fastq_input1\": {\"__class__\": \"ConnectedValue\"}}, \"reference_source\": {\"reference_source_selector\": \"cached\", \"__current_case__\": 0, \"ref_file\": \"hg38\"}, \"rg\": {\"rg_selector\": \"do_not_set\", \"__current_case__\": 3}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": null,
+            "type": "tool",
+            "uuid": "d5fe8f3f-3c40-4ef3-be0d-c6afb27886d4",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Map with BWA-MEM on input dataset(s) (mapped reads in BAM format)",
+                    "output_name": "bam_output",
+                    "uuid": "0b1a66f7-3e08-434c-8ff2-d36378e194ca"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.2+galaxy0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "library|input_1": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Bowtie2",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "bottom": 467.23333740234375,
+                "height": 76.5333251953125,
+                "left": 1239.9666748046875,
+                "right": 1339.9666748046875,
+                "top": 390.70001220703125,
+                "width": 100,
+                "x": 1239.9666748046875,
+                "y": 390.70001220703125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "09b2cdb7ace5",
+                "name": "bowtie2",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"analysis_type\": {\"analysis_type_selector\": \"simple\", \"__current_case__\": 0, \"presets\": \"no_presets\"}, \"library\": {\"type\": \"single\", \"__current_case__\": 0, \"input_1\": {\"__class__\": \"ConnectedValue\"}, \"unaligned_file\": false, \"aligned_file\": false}, \"reference_genome\": {\"source\": \"indexed\", \"__current_case__\": 0, \"index\": \"hg38\"}, \"rg\": {\"rg_selector\": \"do_not_set\", \"__current_case__\": 3}, \"sam_options\": {\"sam_options_selector\": \"no\", \"__current_case__\": 1}, \"save_mapping_stats\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": null,
+            "type": "tool",
+            "uuid": "9a5d133d-73fe-4e48-a6c8-4bfa675fecb7",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Bowtie2 on input dataset(s): alignments",
+                    "output_name": "output",
+                    "uuid": "49e614ab-6c42-4545-8d40-ff5e6a65ef4e"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/salmon/salmon/1.5.1+galaxy0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "quant_type|input|single_or_paired|input_singles": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "quant_type|refTranscriptSource|s_index|fasta": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Salmon quant",
+                    "name": "geneMap"
+                }
+            ],
+            "label": null,
+            "name": "Salmon quant",
+            "outputs": [
+                {
+                    "name": "output_quant",
+                    "type": "tabular"
+                },
+                {
+                    "name": "output_gene_quant",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 698.4000244140625,
+                "height": 142.5333251953125,
+                "left": 1241.7666015625,
+                "right": 1341.7666015625,
+                "top": 555.86669921875,
+                "width": 100,
+                "x": 1241.7666015625,
+                "y": 555.86669921875
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/salmon/salmon/1.5.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "49121db48873",
+                "name": "salmon",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"skipQuant\": false, \"dumpEq\": false, \"dumpEqWeights\": false, \"minAssignedFrags\": null, \"biasSpeedSamp\": \"5\", \"fldMax\": \"1000\", \"fldMean\": \"250\", \"fldSD\": \"25\", \"forgettingFactor\": \"0.65\", \"initUniform\": false, \"maxReadOcc\": \"100\", \"noLengthCorrection\": false, \"noEffectiveLengthCorrection\": false, \"noFragLengthDist\": false, \"noBiasLengthThreshold\": false, \"numBiasSamples\": \"2000000\", \"numAuxModelSamples\": \"5000000\", \"numPreAuxModelSamples\": \"5000\", \"useEM\": false, \"rangeFactorizationBins\": \"0\", \"numGibbsSamples\": \"0\", \"noGammaDraw\": false, \"numBootstraps\": \"0\", \"bootstrapReproject\": false, \"thinningFactor\": \"16\", \"perTranscriptPrior\": false, \"sigDigits\": \"3\", \"vbPrior\": \"1e-05\", \"writeOrphanLinks\": false, \"writeUnmappedNames\": false}, \"gcBias\": false, \"geneMap\": {\"__class__\": \"RuntimeValue\"}, \"incompatPrior\": \"0.0\", \"meta\": false, \"quant_type\": {\"qtype\": \"reads\", \"__current_case__\": 0, \"refTranscriptSource\": {\"TranscriptSource\": \"history\", \"__current_case__\": 1, \"s_index\": {\"fasta\": {\"__class__\": \"RuntimeValue\"}, \"kmer\": \"31\", \"phash\": false}}, \"input\": {\"single_or_paired\": {\"single_or_paired_opts\": \"single\", \"__current_case__\": 0, \"input_singles\": {\"__class__\": \"RuntimeValue\"}, \"libtype\": {\"strandedness\": \"A\", \"__current_case__\": 0}}}, \"type\": \"quasi\", \"discardOrphansQuasi\": false, \"validmap\": {\"validateMappings\": false, \"__current_case__\": 1}, \"consensusSlack\": \"0\", \"dovetail\": false, \"recoverOrphans\": false, \"writeMappings\": false, \"consistentHits\": false, \"quasiCoverage\": null}, \"seqBias\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": null,
+            "type": "tool",
+            "uuid": "66525f78-5ae8-4d9b-934d-2a8ab993a2b5",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Salmon quant on input dataset(s) (Gene Quantification)",
+                    "output_name": "output_gene_quant",
+                    "uuid": "8737b726-72eb-46db-8911-e32374f951c7"
+                },
+                {
+                    "label": "Salmon quant on input dataset(s) (Quantification)",
+                    "output_name": "output_quant",
+                    "uuid": "80e8ec96-326c-4c7f-9d78-fc515b31f6e1"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.1.1",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input_bam": {
+                    "id": 4,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "StringTie",
+            "outputs": [
+                {
+                    "name": "output_gtf",
+                    "type": "gtf"
+                }
+            ],
+            "position": {
+                "bottom": 452.6999969482422,
+                "height": 66.33332824707031,
+                "left": 1522.800048828125,
+                "right": 1622.800048828125,
+                "top": 386.3666687011719,
+                "width": 100,
+                "x": 1522.800048828125,
+                "y": 386.3666687011719
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.1.1",
+            "tool_shed_repository": {
+                "changeset_revision": "1ebd14235b92",
+                "name": "stringtie",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"abundance_estimation\": false, \"omit_sequences\": \"\", \"name_prefix\": \"\", \"fraction\": \"0.15\", \"min_tlen\": \"200\", \"min_anchor_len\": \"10\", \"min_anchor_cov\": \"1\", \"min_bundle_cov\": \"2\", \"bdist\": \"50\", \"bundle_fraction\": \"0.95\", \"disable_trimming\": false, \"multi_mapping\": false}, \"guide\": {\"use_guide\": \"no\", \"__current_case__\": 0}, \"input_bam\": {\"__class__\": \"ConnectedValue\"}, \"long_reads\": false, \"rna_strandness\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": null,
+            "type": "tool",
+            "uuid": "fe85c426-bff3-43d0-9294-06eee22eacdb",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_gtf",
+                    "uuid": "3a08b2a2-955b-412c-876e-b564888a99f2"
+                }
+            ]
+        }
+    },
+    "tags": [],
+    "uuid": "a35e3aeb-19e5-44d8-bdb7-fec8c4955a25",
+    "version": 1
+}

@@ -1,0 +1,243 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "Somatics Variant Calling - HDS (imported from uploaded file)",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Tumor BAM"
+                }
+            ],
+            "label": "Tumor BAM",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0.0,
+                "top": 0.0
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"bam\"], \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "547558d0-821e-4d6d-8655-fa11b5ab66ee",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "ce9b30d6-cf2c-4cd7-879d-b664d38577cd"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Normal BAM"
+                }
+            ],
+            "label": "Normal BAM",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 2.0,
+                "top": 118.9375
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"bam\"], \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "163b142a-ba14-4a5c-86a4-809164fe9dd9",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "507b4cbe-2e47-434a-b774-3628eb5555a3"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Reference fasta"
+                }
+            ],
+            "label": "Reference fasta",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 3.328125,
+                "top": 262.53125000000006
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"fasta\"], \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "4b243c75-4026-43d5-b173-774659d2149a",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "4d23b477-d3e5-40fc-b331-8382fd0fe5a7"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/varscan_somatic/varscan_somatic/2.4.3.6",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "normal_bam": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "reference|genome": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "tumor_bam": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool VarScan somatic",
+                    "name": "normal_bam"
+                },
+                {
+                    "description": "runtime parameter for tool VarScan somatic",
+                    "name": "reference"
+                },
+                {
+                    "description": "runtime parameter for tool VarScan somatic",
+                    "name": "tumor_bam"
+                }
+            ],
+            "label": null,
+            "name": "VarScan somatic",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "vcf"
+                }
+            ],
+            "position": {
+                "left": 295.70312500000006,
+                "top": 1.84375
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/varscan_somatic/varscan_somatic/2.4.3.6",
+            "tool_shed_repository": {
+                "changeset_revision": "cf8ffc79db67",
+                "name": "varscan_somatic",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"call_params\": {\"settings\": \"varscan_defaults\", \"__current_case__\": 1}, \"filter_params\": {\"settings\": \"varscan_defaults\", \"__current_case__\": 1, \"experts_only\": {\"compat_opts\": [\"--ignore-md\"]}}, \"normal_bam\": {\"__class__\": \"RuntimeValue\"}, \"normal_purity\": \"1.0\", \"reference\": {\"source\": \"history\", \"__current_case__\": 1, \"genome\": {\"__class__\": \"RuntimeValue\"}}, \"split_output\": false, \"tumor_bam\": {\"__class__\": \"RuntimeValue\"}, \"tumor_purity\": \"0.5\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.4.3.6",
+            "type": "tool",
+            "uuid": "babff343-477d-4f8d-aecf-9be769ed5ed7",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "fb1d3ff3-5a5a-4e67-a26b-568954267888"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 3,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool SnpEff eff:",
+                    "name": "input"
+                },
+                {
+                    "description": "runtime parameter for tool SnpEff eff:",
+                    "name": "intervals"
+                },
+                {
+                    "description": "runtime parameter for tool SnpEff eff:",
+                    "name": "transcripts"
+                }
+            ],
+            "label": null,
+            "name": "SnpEff eff:",
+            "outputs": [
+                {
+                    "name": "snpeff_output",
+                    "type": "vcf"
+                },
+                {
+                    "name": "statsFile",
+                    "type": "html"
+                }
+            ],
+            "position": {
+                "left": 572.5625000000002,
+                "top": 19.71875
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "cfcf33df7fc0",
+                "name": "snpeff",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"annotations\": [\"-classic\"], \"chr\": \"\", \"csvStats\": false, \"filter\": {\"specificEffects\": \"no\", \"__current_case__\": 0}, \"filterOut\": null, \"generate_stats\": true, \"input\": {\"__class__\": \"RuntimeValue\"}, \"inputFormat\": \"vcf\", \"intervals\": {\"__class__\": \"RuntimeValue\"}, \"noLog\": true, \"offset\": \"default\", \"outputConditional\": {\"outputFormat\": \"vcf\", \"__current_case__\": 0}, \"snpDb\": {\"genomeSrc\": \"named\", \"__current_case__\": 2, \"genome_version\": \"GRCh37.75\"}, \"spliceRegion\": {\"setSpliceRegions\": \"no\", \"__current_case__\": 0}, \"spliceSiteSize\": \"2\", \"transcripts\": {\"__class__\": \"RuntimeValue\"}, \"udLength\": \"5000\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "4.3+T.galaxy1",
+            "type": "tool",
+            "uuid": "2159efb3-85cf-4dc7-aa14-17bf0616fea8",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "snpeff_output",
+                    "uuid": "5f5ec1c2-f750-4aa6-81cc-8c9a45952343"
+                },
+                {
+                    "label": "SnpEff eff: on input dataset(s) - HTML stats",
+                    "output_name": "statsFile",
+                    "uuid": "4a6461c6-bf7f-4406-b372-5662fa74de68"
+                }
+            ]
+        }
+    },
+    "tags": [],
+    "uuid": "1c9a82f3-66ca-4579-a019-24075900f661",
+    "version": 0
+}

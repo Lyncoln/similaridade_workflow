@@ -1,0 +1,160 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "Unnamed workflow",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa_wrappers/bwa_wrapper/1.2.3",
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [],
+            "label": null,
+            "name": "Map with BWA for Illumina",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "sam"
+                }
+            ],
+            "position": {
+                "left": 221.00001525878906,
+                "top": 444.99998474121094
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa_wrappers/bwa_wrapper/1.2.3",
+            "tool_shed_repository": {
+                "changeset_revision": "b4427dbb6ced",
+                "name": "bwa_wrappers",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"genomeSource\": {\"refGenomeSource\": \"indexed\", \"__current_case__\": 0, \"indices\": \"Araly1\"}, \"paired\": {\"sPaired\": \"single\", \"__current_case__\": 0, \"input1\": null}, \"params\": {\"source_select\": \"pre_set\", \"__current_case__\": 0}, \"suppressHeader\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.2.3",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/rgPicardMarkDups/1.56.0",
+            "errors": "Tool is not installed",
+            "id": 1,
+            "input_connections": {
+                "input_file": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "toolshed.g2.bx.psu.edu/repos/devteam/picard/rgPicardMarkDups/1.56.0",
+            "outputs": [],
+            "position": {
+                "left": 225.00001525878906,
+                "top": 127
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/rgPicardMarkDups/1.56.0",
+            "tool_state": "{\"assumeSorted\": \"\\\"True\\\"\", \"input_file\": \"null\", \"optDupeDist\": \"\\\"100\\\"\", \"out_prefix\": \"\\\"Dupes Marked\\\"\", \"readRegex\": \"\\\"[a-zA-Z0-9]+:[0-9]:([0-9]+):([0-9]+):([0-9]+).*\\\"\", \"remDups\": \"\\\"True\\\"\"}",
+            "tool_version": "1.56.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/realigner_target_creator/gatk_realigner_target_creator/0.0.4",
+            "errors": "Tool is not installed",
+            "id": 2,
+            "input_connections": {
+                "reference_source|input_bam": {
+                    "id": 1,
+                    "output_name": "out_file"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "toolshed.g2.bx.psu.edu/repos/devteam/realigner_target_creator/gatk_realigner_target_creator/0.0.4",
+            "outputs": [],
+            "position": {
+                "left": 536.0000152587891,
+                "top": 122
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/realigner_target_creator/gatk_realigner_target_creator/0.0.4",
+            "tool_state": "{\"analysis_param_type\": \"{\\\"analysis_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"gatk_param_type\": \"{\\\"gatk_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"reference_source\": \"{\\\"ref_file\\\": {\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": null}, \\\"reference_source_selector\\\": \\\"cached\\\", \\\"input_bam\\\": null, \\\"__current_case__\\\": 0}\", \"rod_bind\": \"[]\"}",
+            "tool_version": "0.0.4",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/indel_realigner/gatk_indel_realigner/0.0.6",
+            "errors": "Tool is not installed",
+            "id": 3,
+            "input_connections": {
+                "reference_source|input_bam": {
+                    "id": 1,
+                    "output_name": "out_file"
+                },
+                "target_intervals": {
+                    "id": 2,
+                    "output_name": "output_interval"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "toolshed.g2.bx.psu.edu/repos/devteam/indel_realigner/gatk_indel_realigner/0.0.6",
+            "outputs": [],
+            "position": {
+                "left": 557.0000152587891,
+                "top": 278
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/indel_realigner/gatk_indel_realigner/0.0.6",
+            "tool_state": "{\"analysis_param_type\": \"{\\\"analysis_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"gatk_param_type\": \"{\\\"gatk_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"knowns_only\": \"\\\"False\\\"\", \"lod_threshold\": \"\\\"5.0\\\"\", \"reference_source\": \"{\\\"ref_file\\\": {\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": null}, \\\"reference_source_selector\\\": \\\"cached\\\", \\\"input_bam\\\": null, \\\"__current_case__\\\": 0}\", \"rod_bind\": \"[]\", \"target_intervals\": \"null\"}",
+            "tool_version": "0.0.6",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/unified_genotyper/gatk_unified_genotyper/0.0.6",
+            "errors": "Tool is not installed",
+            "id": 4,
+            "input_connections": {
+                "reference_source|input_bams_0|input_bam": {
+                    "id": 3,
+                    "output_name": "output_bam"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "toolshed.g2.bx.psu.edu/repos/devteam/unified_genotyper/gatk_unified_genotyper/0.0.6",
+            "outputs": [],
+            "position": {
+                "left": 615.0000152587891,
+                "top": 475.99998474121094
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/unified_genotyper/gatk_unified_genotyper/0.0.6",
+            "tool_state": "{\"analysis_param_type\": \"{\\\"analysis_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"gatk_param_type\": \"{\\\"gatk_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"genotype_likelihoods_model\": \"\\\"BOTH\\\"\", \"reference_source\": \"{\\\"ref_file\\\": \\\"hg_g1k_v37\\\", \\\"reference_source_selector\\\": \\\"cached\\\", \\\"input_bams\\\": [{\\\"__index__\\\": 0, \\\"input_bam\\\": null}], \\\"__current_case__\\\": 0}\", \"rod_bind\": \"[]\", \"standard_min_confidence_threshold_for_calling\": \"\\\"30.0\\\"\", \"standard_min_confidence_threshold_for_emitting\": \"\\\"30.0\\\"\"}",
+            "tool_version": "0.0.6",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [],
+    "version": 1
+}

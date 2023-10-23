@@ -1,0 +1,248 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "differential_gene_expression",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "control"
+                }
+            ],
+            "label": "control",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 231,
+                "top": 469.5
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "53e4e2dc-55a6-4371-86cb-eef1086e11a7",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "923de07f-9693-495e-bc63-482c91d212db"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "test"
+                }
+            ],
+            "label": "test",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 241,
+                "top": 727.5
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "18890264-5663-41a8-873c-722704718af6",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "a7d5cbbf-62a3-41ac-9357-4e0b8bdf1751"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "Remove beginning1",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Remove beginning",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "Remove beginning",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 497,
+                "top": 419.5
+            },
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Remove beginning1",
+            "tool_state": "{\"input\": {\"__class__\": \"RuntimeValue\"}, \"num_lines\": \"1\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "c1af75af-844f-429b-af37-7f6414b887bf",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "Remove beginning1",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Remove beginning",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "Remove beginning",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 510,
+                "top": 694.5
+            },
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Remove beginning1",
+            "tool_state": "{\"input\": {\"__class__\": \"RuntimeValue\"}, \"num_lines\": \"1\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "7cbed4ce-b016-4e93-86cc-b9150098e6ba",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.1.8.3",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "rep_factorName_0|rep_factorLevel_0|countsFile": {
+                    "id": 2,
+                    "output_name": "out_file1"
+                },
+                "rep_factorName_0|rep_factorLevel_1|countsFile": {
+                    "id": 3,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "DESeq2",
+            "outputs": [
+                {
+                    "name": "deseq_out",
+                    "type": "tabular"
+                },
+                {
+                    "name": "plots",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "left": 837,
+                "top": 516.5
+            },
+            "post_job_actions": {
+                "HideDatasetActioncounts_out": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "counts_out"
+                },
+                "HideDatasetActionsplit_output": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "split_output"
+                },
+                "RenameDatasetActiondeseq_out": {
+                    "action_arguments": {
+                        "newname": "dseq.tab"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "deseq_out"
+                },
+                "RenameDatasetActionplots": {
+                    "action_arguments": {
+                        "newname": "plots.pdf"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "plots"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.1.8.3",
+            "tool_shed_repository": {
+                "changeset_revision": "8702e49e68b6",
+                "name": "deseq2",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"auto_mean_filter_off\": false, \"fit_type\": \"1\", \"many_contrasts\": false, \"normCounts\": \"false\", \"outlier_filter_off\": false, \"outlier_replace_off\": false, \"pdf\": true, \"rep_factorName\": [{\"__index__\": 0, \"factorName\": \"treatment\", \"rep_factorLevel\": [{\"__index__\": 0, \"factorLevel\": \"control\", \"countsFile\": {\"__class__\": \"RuntimeValue\"}}, {\"__index__\": 1, \"factorLevel\": \"E2\", \"countsFile\": {\"__class__\": \"RuntimeValue\"}}]}], \"tximport\": {\"__current_case__\": 1, \"tximport_selector\": \"count\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.8.3",
+            "type": "tool",
+            "uuid": "90c8d19c-b661-46ce-9271-4eff50f5684e",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "plots",
+                    "uuid": "b0d73d22-2fc8-4106-a0c8-e85a149d3e9b"
+                },
+                {
+                    "label": null,
+                    "output_name": "deseq_out",
+                    "uuid": "17a46e19-bf89-4606-a2fc-a78330babb5f"
+                }
+            ]
+        }
+    },
+    "tags": [],
+    "uuid": "bcd23a0c-51ff-45c4-8a82-4ee4439663e2",
+    "version": 0
+}

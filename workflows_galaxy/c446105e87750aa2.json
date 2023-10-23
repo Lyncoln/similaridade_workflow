@@ -1,0 +1,220 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "Etapa 1 - An\u00e1lise de Qualidade - (Update 21.07.19) (imported from uploaded file)",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "FASTQ"
+                }
+            ],
+            "label": "FASTQ",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "left": 199.96875,
+                "top": 296
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null, \"collection_type\": \"list:paired\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "c741ce65-a5b8-4da9-a297-87140d561aaa",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "393fb77b-a37a-4a73-9fab-87562f0c3aa1"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastq_groomer/fastq_groomer/1.1.5",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "input_file": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool FASTQ Groomer",
+                    "name": "input_file"
+                }
+            ],
+            "label": null,
+            "name": "FASTQ Groomer",
+            "outputs": [
+                {
+                    "name": "output_file",
+                    "type": "fastqsanger"
+                }
+            ],
+            "position": {
+                "left": 477.75,
+                "top": 296
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastq_groomer/fastq_groomer/1.1.5",
+            "tool_shed_repository": {
+                "changeset_revision": "47e5dbc3e790",
+                "name": "fastq_groomer",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_file\": {\"__class__\": \"RuntimeValue\"}, \"input_type\": \"sanger\", \"options_type\": {\"options_type_selector\": \"basic\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.5",
+            "type": "tool",
+            "uuid": "99507e37-1664-4717-a6af-55d10d0f076e",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_file",
+                    "uuid": "bcca6208-5293-40d7-850a-a4a2a144812d"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastq_paired_end_interlacer/fastq_paired_end_interlacer/1.2.0.1+galaxy0",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "reads|reads_coll": {
+                    "id": 1,
+                    "output_name": "output_file"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool FASTQ interlacer",
+                    "name": "reads"
+                }
+            ],
+            "label": null,
+            "name": "FASTQ interlacer",
+            "outputs": [
+                {
+                    "name": "outfile_pairs_from_coll",
+                    "type": "input"
+                },
+                {
+                    "name": "outfile_singles_from_coll",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 805.546875,
+                "top": 296
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastq_paired_end_interlacer/fastq_paired_end_interlacer/1.2.0.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2ccb8dcabddc",
+                "name": "fastq_paired_end_interlacer",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"reads\": {\"reads_selector\": \"paired_collection\", \"__current_case__\": 1, \"reads_coll\": {\"__class__\": \"RuntimeValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.2.0.1+galaxy0",
+            "type": "tool",
+            "uuid": "7f547cab-3c46-41a4-bcf8-b012904a7b0f",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outfile_singles_from_coll",
+                    "uuid": "6e49fea2-2d21-4f12-8d15-3f7cba2bf932"
+                },
+                {
+                    "label": null,
+                    "output_name": "outfile_pairs_from_coll",
+                    "uuid": "100b8fad-f28b-419f-a3c1-6233dba98975"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input_file": {
+                    "id": 2,
+                    "output_name": "outfile_pairs_from_coll"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool FastQC",
+                    "name": "adapters"
+                },
+                {
+                    "description": "runtime parameter for tool FastQC",
+                    "name": "contaminants"
+                },
+                {
+                    "description": "runtime parameter for tool FastQC",
+                    "name": "limits"
+                }
+            ],
+            "label": null,
+            "name": "FastQC",
+            "outputs": [
+                {
+                    "name": "html_file",
+                    "type": "html"
+                },
+                {
+                    "name": "text_file",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 1133.328125,
+                "top": 296
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "e7b2202befea",
+                "name": "fastqc",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adapters\": {\"__class__\": \"RuntimeValue\"}, \"contaminants\": {\"__class__\": \"RuntimeValue\"}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"kmers\": \"7\", \"limits\": {\"__class__\": \"RuntimeValue\"}, \"min_length\": null, \"nogroup\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.72+galaxy1",
+            "type": "tool",
+            "uuid": "9c954bd1-8b2e-4b44-a7e3-590e7e608917",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "text_file",
+                    "uuid": "5c755778-43f3-40ed-a1d8-59cde12ed663"
+                },
+                {
+                    "label": null,
+                    "output_name": "html_file",
+                    "uuid": "626e0aec-0095-4476-b6f9-00af1f38ecfc"
+                }
+            ]
+        }
+    },
+    "tags": [],
+    "uuid": "0d5a9f43-cb65-4087-99a1-289cf4eb66bc",
+    "version": 0
+}

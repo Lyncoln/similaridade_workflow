@@ -1,0 +1,200 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "SSM Variant Subtraction",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Comparator Variant (VCF) file"
+                }
+            ],
+            "label": "Comparator Variant (VCF) file",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 160.5,
+                "top": 137.5
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "c706e8ec-3d01-4dd3-bc0c-512a0d63e89c",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Mutant Variant (VCF) file"
+                }
+            ],
+            "label": "Mutant Variant (VCF) file",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 155.5,
+                "top": 233.5
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "a1bac1af-13d2-4d25-8a0c-25c95d646e9f",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Reference Genome"
+                }
+            ],
+            "label": "Reference Genome",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 162,
+                "top": 385
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "d6e07446-f746-4d68-811b-92516a32871f",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/vcfvcfintersect/vcfvcfintersect/1.0.0_rc1+galaxy0",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "reference_source|ref_file": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "vcf_input1": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "vcf_input2": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool VCF-VCFintersect:",
+                    "name": "reference_source"
+                },
+                {
+                    "description": "runtime parameter for tool VCF-VCFintersect:",
+                    "name": "vcf_input1"
+                },
+                {
+                    "description": "runtime parameter for tool VCF-VCFintersect:",
+                    "name": "vcf_input2"
+                }
+            ],
+            "label": null,
+            "name": "VCF-VCFintersect:",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "vcf"
+                }
+            ],
+            "position": {
+                "left": 420,
+                "top": 202
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/vcfvcfintersect/vcfvcfintersect/1.0.0_rc1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "6f6bf10618d7",
+                "name": "vcfvcfintersect",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv_options\": {\"adv_options_selector\": \"no\", \"__current_case__\": 0}, \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/ce10.len\", \"invert\": true, \"isect_union\": \"-i\", \"loci\": false, \"reference_source\": {\"reference_source_selector\": \"history\", \"__current_case__\": 1, \"ref_file\": {\"__class__\": \"RuntimeValue\"}}, \"vcf_input1\": {\"__class__\": \"RuntimeValue\"}, \"vcf_input2\": {\"__class__\": \"RuntimeValue\"}, \"window_size\": \"30\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0_rc1+galaxy0",
+            "type": "tool",
+            "uuid": "527ffcf8-0415-4895-9ab1-eeead8a917f8",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/pcingola/snpeff/snpEff/1.0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 3,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool SnpEff",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "SnpEff",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                },
+                {
+                    "name": "statsFile",
+                    "type": "html"
+                }
+            ],
+            "position": {
+                "left": 640,
+                "top": 202
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/pcingola/snpeff/snpEff/1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "c052639fa666",
+                "name": "snpeff",
+                "owner": "pcingola",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__workflow_invocation_uuid__\": \"4c1c4ab2aba511e8a781005056ba2773\", \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/ce10.len\", \"filterHomHet\": \"\", \"filterIn\": \"\", \"filterOut\": [\"None\"], \"genomeVersion\": \"WS220.64\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"inputFormat\": \"vcf\", \"offset\": \"\", \"outputFormat\": \"txt\", \"udLength\": \"10000\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0",
+            "type": "tool",
+            "uuid": "77530efd-ae04-4d90-9312-03814d0845fc",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [],
+    "uuid": "92d26a3d-c997-4ffa-855a-1d248953d2e3",
+    "version": 2
+}

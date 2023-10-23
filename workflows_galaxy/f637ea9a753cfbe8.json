@@ -1,0 +1,340 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "Overlapping features on opposite strands",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Features on both starnds"
+                }
+            ],
+            "label": "Features on both starnds",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 312.91015625,
+                "height": 82.890625,
+                "left": 389.98046875,
+                "right": 589.98046875,
+                "top": 230.01953125,
+                "width": 200,
+                "x": 389.98046875,
+                "y": 230.01953125
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "a918e7f1-d73f-476e-8257-1921c1749f64",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "6b138cb1-f05e-49e0-9bdc-18fd8ecde756"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Filter",
+                    "name": "input"
+                }
+            ],
+            "label": "forward feature strand",
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 292.5390625,
+                "height": 114.53125,
+                "left": 625.99609375,
+                "right": 825.99609375,
+                "top": 178.0078125,
+                "width": 200,
+                "x": 625.99609375,
+                "y": 178.0078125
+            },
+            "post_job_actions": {},
+            "tool_id": "Filter1",
+            "tool_state": "{\"cond\": \"c6 == '+'\", \"header_lines\": \"0\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "061e9e4e-ff83-4253-aebe-3f7d8c73bec3",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "95f3264d-6dfd-4e9b-9f9f-d42259cd664e"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Filter",
+                    "name": "input"
+                }
+            ],
+            "label": "Reverse feature strand",
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 420.546875,
+                "height": 114.53125,
+                "left": 617.98828125,
+                "right": 817.98828125,
+                "top": 306.015625,
+                "width": 200,
+                "x": 617.98828125,
+                "y": 306.015625
+            },
+            "post_job_actions": {},
+            "tool_id": "Filter1",
+            "tool_state": "{\"cond\": \"c6 == '-'\", \"header_lines\": \"0\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "85768702-44e6-417f-8e69-cfcd60a1c759",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "c68c54b6-942e-421a-815b-705face3ac1a"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/intersect/gops_intersect_1/1.0.0",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input1": {
+                    "id": 1,
+                    "output_name": "out_file1"
+                },
+                "input2": {
+                    "id": 2,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Intersect",
+                    "name": "input1"
+                },
+                {
+                    "description": "runtime parameter for tool Intersect",
+                    "name": "input2"
+                }
+            ],
+            "label": null,
+            "name": "Intersect",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 245.546875,
+                "height": 124.53125,
+                "left": 888.984375,
+                "right": 1088.984375,
+                "top": 121.015625,
+                "width": 200,
+                "x": 888.984375,
+                "y": 121.015625
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/intersect/gops_intersect_1/1.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "69c10b56f46d",
+                "name": "intersect",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input1\": {\"__class__\": \"RuntimeValue\"}, \"input2\": {\"__class__\": \"RuntimeValue\"}, \"min\": \"9\", \"returntype\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "754b5014-88b4-42c0-b15a-c68029b5b763",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "2f2b83ad-e59a-4a35-aeb6-be855566525b"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/intersect/gops_intersect_1/1.0.0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input1": {
+                    "id": 2,
+                    "output_name": "out_file1"
+                },
+                "input2": {
+                    "id": 1,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Intersect",
+                    "name": "input1"
+                },
+                {
+                    "description": "runtime parameter for tool Intersect",
+                    "name": "input2"
+                }
+            ],
+            "label": null,
+            "name": "Intersect",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 512.5390625,
+                "height": 124.53125,
+                "left": 877.98828125,
+                "right": 1077.98828125,
+                "top": 388.0078125,
+                "width": 200,
+                "x": 877.98828125,
+                "y": 388.0078125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/intersect/gops_intersect_1/1.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "69c10b56f46d",
+                "name": "intersect",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input1\": {\"__class__\": \"RuntimeValue\"}, \"input2\": {\"__class__\": \"RuntimeValue\"}, \"min\": \"9\", \"returntype\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "f6f61368-866f-49ea-a46f-5a44eb311c9d",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "eae0b1dd-4f3f-4fe7-b27b-37790dab7f9c"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/mvdbeek/concatenate_multiple_datasets/cat_multiple/0.2",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input": [
+                    {
+                        "id": 3,
+                        "output_name": "output"
+                    },
+                    {
+                        "id": 4,
+                        "output_name": "output"
+                    }
+                ]
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Concatenate multiple datasets",
+                    "name": "input"
+                }
+            ],
+            "label": "Overlapping Feature, forward and reverse",
+            "name": "Concatenate multiple datasets",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 383.53515625,
+                "height": 114.53125,
+                "left": 1114.98046875,
+                "right": 1314.98046875,
+                "top": 269.00390625,
+                "width": 200,
+                "x": 1114.98046875,
+                "y": 269.00390625
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/mvdbeek/concatenate_multiple_datasets/cat_multiple/0.2",
+            "tool_shed_repository": {
+                "changeset_revision": "201c568972c3",
+                "name": "concatenate_multiple_datasets",
+                "owner": "mvdbeek",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2",
+            "type": "tool",
+            "uuid": "43e0f9a7-fd3a-4529-bd18-557eb1938f96",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "6a6d3a69-51bd-44ef-b9dd-5826fe699863"
+                }
+            ]
+        }
+    },
+    "tags": [],
+    "uuid": "90304850-74be-4839-a3fc-08c8a2bad92c",
+    "version": 1
+}

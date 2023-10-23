@@ -1,0 +1,503 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "miRNA Mapping and DE",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Input Dataset"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 272,
+                "top": 200
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Input Dataset"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 272,
+                "top": 320
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "fastq_groomer",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input_file": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "FASTQ Groomer",
+            "outputs": [
+                {
+                    "name": "output_file",
+                    "type": "fastqsanger"
+                }
+            ],
+            "position": {
+                "left": 492,
+                "top": 200
+            },
+            "post_job_actions": {},
+            "tool_id": "fastq_groomer",
+            "tool_shed_repository": {
+                "changeset_revision": "1298445c852b",
+                "name": "fastq_groomer",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/hg19.len\", \"input_file\": null, \"input_type\": \"illumina\", \"options_type\": {\"options_type_selector\": \"basic\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.4",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "fastq_groomer",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input_file": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "FASTQ Groomer",
+            "outputs": [
+                {
+                    "name": "output_file",
+                    "type": "fastqsanger"
+                }
+            ],
+            "position": {
+                "left": 492,
+                "top": 320
+            },
+            "post_job_actions": {},
+            "tool_id": "fastq_groomer",
+            "tool_shed_repository": {
+                "changeset_revision": "1298445c852b",
+                "name": "fastq_groomer",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/hg19.len\", \"input_file\": null, \"input_type\": \"illumina\", \"options_type\": {\"options_type_selector\": \"basic\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.4",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "cshl_fastx_clipper",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 2,
+                    "output_name": "output_file"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Clip",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 795,
+                "top": 202
+            },
+            "post_job_actions": {},
+            "tool_id": "cshl_fastx_clipper",
+            "tool_shed_repository": {
+                "changeset_revision": "bdf1ce174e39",
+                "name": "fastx_clipper",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"DISCARD_OPTIONS\": \"-c\", \"KEEP_N\": \"\", \"chromInfo\": \"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/hg19.len\", \"clip_source\": {\"clip_source_list\": \"user\", \"__current_case__\": 0, \"clip_sequence\": \"TCGTAT\"}, \"input\": null, \"keepdelta\": \"0\", \"minlength\": \"15\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.1",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "cshl_fastx_clipper",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input": {
+                    "id": 3,
+                    "output_name": "output_file"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Clip",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 788,
+                "top": 325
+            },
+            "post_job_actions": {},
+            "tool_id": "cshl_fastx_clipper",
+            "tool_shed_repository": {
+                "changeset_revision": "bdf1ce174e39",
+                "name": "fastx_clipper",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"DISCARD_OPTIONS\": \"-c\", \"KEEP_N\": \"\", \"chromInfo\": \"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/hg19.len\", \"clip_source\": {\"clip_source_list\": \"user\", \"__current_case__\": 0, \"clip_sequence\": \"TCGTAT\"}, \"input\": null, \"keepdelta\": \"0\", \"minlength\": \"15\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.1",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bowtie_wrappers/bowtie_wrapper/1.1.2",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "singlePaired|sInput1": {
+                    "id": 4,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Map with Bowtie for Illumina",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "sam"
+                }
+            ],
+            "position": {
+                "left": 995,
+                "top": 199
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bowtie_wrappers/bowtie_wrapper/1.1.2",
+            "tool_shed_repository": {
+                "changeset_revision": "42c4463baaad",
+                "name": "bowtie_wrappers",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/hg19.len\", \"refGenomeSource\": {\"genomeSource\": \"indexed\", \"__current_case__\": 0, \"index\": \"/galaxy/data/hg19/bowtie_index/hg19\"}, \"singlePaired\": {\"sPaired\": \"single\", \"__current_case__\": 0, \"sInput1\": null, \"sParams\": {\"sSettingsType\": \"preSet\", \"__current_case__\": 0}}, \"suppressHeader\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.2",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bowtie_wrappers/bowtie_wrapper/1.1.2",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "singlePaired|sInput1": {
+                    "id": 5,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Map with Bowtie for Illumina",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "sam"
+                }
+            ],
+            "position": {
+                "left": 998,
+                "top": 405
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bowtie_wrappers/bowtie_wrapper/1.1.2",
+            "tool_shed_repository": {
+                "changeset_revision": "42c4463baaad",
+                "name": "bowtie_wrappers",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"refGenomeSource\": {\"genomeSource\": \"indexed\", \"__current_case__\": 0, \"index\": \"/galaxy/data/hg19/bowtie_index/hg19\"}, \"singlePaired\": {\"sPaired\": \"single\", \"__current_case__\": 0, \"sInput1\": null, \"sParams\": {\"sSettingsType\": \"preSet\", \"__current_case__\": 0}}, \"suppressHeader\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.2",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "sam_to_bam",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "source|input1": {
+                    "id": 6,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "SAM-to-BAM",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 1273,
+                "top": 209
+            },
+            "post_job_actions": {},
+            "tool_id": "sam_to_bam",
+            "tool_shed_repository": {
+                "changeset_revision": "9bd1568619cd",
+                "name": "sam_to_bam",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/hg19.len\", \"source\": {\"index_source\": \"cached\", \"input1\": null, \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.2",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "sam_to_bam",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "source|input1": {
+                    "id": 7,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "SAM-to-BAM",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 1279,
+                "top": 426
+            },
+            "post_job_actions": {},
+            "tool_id": "sam_to_bam",
+            "tool_shed_repository": {
+                "changeset_revision": "9bd1568619cd",
+                "name": "sam_to_bam",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/hg18.len\", \"source\": {\"index_source\": \"cached\", \"input1\": null, \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.2",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "cuffdiff",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "group_analysis|aligned_reads1": {
+                    "id": 8,
+                    "output_name": "output1"
+                },
+                "group_analysis|aligned_reads2": {
+                    "id": 9,
+                    "output_name": "output1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Cuffdiff",
+            "outputs": [
+                {
+                    "name": "isoforms_read_group",
+                    "type": "tabular"
+                },
+                {
+                    "name": "genes_read_group",
+                    "type": "tabular"
+                },
+                {
+                    "name": "cds_read_group",
+                    "type": "tabular"
+                },
+                {
+                    "name": "tss_groups_read_group",
+                    "type": "tabular"
+                },
+                {
+                    "name": "read_group_info",
+                    "type": "txt"
+                },
+                {
+                    "name": "run_info",
+                    "type": "txt"
+                },
+                {
+                    "name": "splicing_diff",
+                    "type": "tabular"
+                },
+                {
+                    "name": "promoters_diff",
+                    "type": "tabular"
+                },
+                {
+                    "name": "cds_diff",
+                    "type": "tabular"
+                },
+                {
+                    "name": "cds_exp_fpkm_tracking",
+                    "type": "tabular"
+                },
+                {
+                    "name": "cds_fpkm_tracking",
+                    "type": "tabular"
+                },
+                {
+                    "name": "cds_count_tracking",
+                    "type": "tabular"
+                },
+                {
+                    "name": "tss_groups_exp",
+                    "type": "tabular"
+                },
+                {
+                    "name": "tss_groups_fpkm_tracking",
+                    "type": "tabular"
+                },
+                {
+                    "name": "tss_groups_count_tracking",
+                    "type": "tabular"
+                },
+                {
+                    "name": "genes_exp",
+                    "type": "tabular"
+                },
+                {
+                    "name": "genes_fpkm_tracking",
+                    "type": "tabular"
+                },
+                {
+                    "name": "genes_count_tracking",
+                    "type": "tabular"
+                },
+                {
+                    "name": "isoforms_exp",
+                    "type": "tabular"
+                },
+                {
+                    "name": "isoforms_fpkm_tracking",
+                    "type": "tabular"
+                },
+                {
+                    "name": "isoforms_count_tracking",
+                    "type": "tabular"
+                },
+                {
+                    "name": "output_cummerbund",
+                    "type": "sqlite"
+                }
+            ],
+            "position": {
+                "left": 1541,
+                "top": 209
+            },
+            "post_job_actions": {},
+            "tool_id": "cuffdiff",
+            "tool_shed_repository": {
+                "changeset_revision": "43221aef70e2",
+                "name": "cuffdiff",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"additional\": {\"sAdditional\": \"No\", \"__current_case__\": 0}, \"bias_correction\": {\"do_bias_correction\": \"No\", \"__current_case__\": 1}, \"do_normalization\": \"No\", \"fdr\": \"0.05\", \"group_analysis\": {\"aligned_reads1\": null, \"aligned_reads2\": null, \"__current_case__\": 1, \"do_groups\": \"No\"}, \"gtf_input\": null, \"min_alignment_count\": \"10\", \"multiread_correct\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.0.5",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [],
+    "version": 1
+}

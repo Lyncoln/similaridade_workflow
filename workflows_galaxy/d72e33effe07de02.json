@@ -1,0 +1,361 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "RNA-seq differential expression analysis",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 139.5
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "a040cf3d-2b3e-4107-9339-b7cc8f2638f5",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/tophat2/tophat2/2.1.0",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "singlePaired|input1": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "singlePaired|input2": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool TopHat",
+                    "name": "singlePaired"
+                },
+                {
+                    "description": "runtime parameter for tool TopHat",
+                    "name": "singlePaired"
+                }
+            ],
+            "label": null,
+            "name": "TopHat",
+            "outputs": [
+                {
+                    "name": "align_summary",
+                    "type": "txt"
+                },
+                {
+                    "name": "insertions",
+                    "type": "bed"
+                },
+                {
+                    "name": "deletions",
+                    "type": "bed"
+                },
+                {
+                    "name": "junctions",
+                    "type": "bed"
+                },
+                {
+                    "name": "accepted_hits",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 266,
+                "top": 108.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/tophat2/tophat2/2.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "0849fa93eadb",
+                "name": "tophat2",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__job_resource\": {\"__job_resource__select\": \"no\", \"__current_case__\": 0}, \"params\": {\"settingsType\": \"preSet\", \"__current_case__\": 0}, \"readGroup\": {\"specReadGroup\": \"no\", \"__current_case__\": 1}, \"refGenomeSource\": {\"genomeSource\": \"indexed\", \"__current_case__\": 0, \"index\": \"hg19\"}, \"singlePaired\": {\"sPaired\": \"paired\", \"__current_case__\": 1, \"input1\": {\"__class__\": \"RuntimeValue\"}, \"input2\": {\"__class__\": \"RuntimeValue\"}, \"mate_inner_distance\": \"300\", \"mate_std_dev\": \"20\", \"report_discordant_pairs\": \"Yes\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.0",
+            "type": "tool",
+            "uuid": "229553dd-e640-4523-95c4-6be3a2a1ecbb",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.2.6.2",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "library|input_1": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Bowtie2",
+                    "name": "library"
+                }
+            ],
+            "label": null,
+            "name": "Bowtie2",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 264,
+                "top": 503
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.2.6.2",
+            "tool_shed_repository": {
+                "changeset_revision": "a9d4f71dbfb0",
+                "name": "bowtie2",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__job_resource\": {\"__job_resource__select\": \"no\", \"__current_case__\": 0}, \"analysis_type\": {\"analysis_type_selector\": \"simple\", \"__current_case__\": 0, \"presets\": \"no_presets\"}, \"library\": {\"type\": \"single\", \"__current_case__\": 0, \"input_1\": {\"__class__\": \"ConnectedValue\"}, \"unaligned_file\": {\"__class__\": \"RuntimeValue\"}, \"aligned_file\": false}, \"reference_genome\": {\"source\": \"indexed\", \"__current_case__\": 0, \"index\": \"papHam1\"}, \"rg\": {\"rg_selector\": \"do_not_set\", \"__current_case__\": 3}, \"save_mapping_stats\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.2.6.2",
+            "type": "tool",
+            "uuid": "ad1a4c4a-bb49-43b8-9ea3-00ad560d901d",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/cufflinks/cufflinks/2.2.1.3",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "accepted_hits"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Cufflinks",
+            "outputs": [
+                {
+                    "name": "genes_expression",
+                    "type": "tabular"
+                },
+                {
+                    "name": "transcripts_expression",
+                    "type": "tabular"
+                },
+                {
+                    "name": "assembled_isoforms",
+                    "type": "gtf"
+                },
+                {
+                    "name": "total_map_mass",
+                    "type": "txt"
+                },
+                {
+                    "name": "skipped",
+                    "type": "gtf"
+                }
+            ],
+            "position": {
+                "left": 559,
+                "top": 170.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/cufflinks/cufflinks/2.2.1.3",
+            "tool_shed_repository": {
+                "changeset_revision": "d080005cffe1",
+                "name": "cufflinks",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__job_resource\": {\"__job_resource__select\": \"no\", \"__current_case__\": 0}, \"advanced_settings\": {\"use_advanced_settings\": \"No\", \"__current_case__\": 0}, \"bias_correction\": {\"do_bias_correction\": \"No\", \"__current_case__\": 1}, \"global_model\": null, \"input\": {\"__class__\": \"ConnectedValue\"}, \"length_correction\": \"\", \"max_intron_len\": \"300000\", \"min_isoform_fraction\": \"0.1\", \"multiread_correct\": false, \"pre_mrna_fraction\": \"0.15\", \"reference_annotation\": {\"use_ref\": \"No\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.2.1.3",
+            "type": "tool",
+            "uuid": "4d7416b9-5148-4b73-baa3-a21fa4346bbf",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/cuffmerge/cuffmerge/2.2.1.3",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "inputs": {
+                    "id": 3,
+                    "output_name": "assembled_isoforms"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Cuffmerge",
+            "outputs": [
+                {
+                    "name": "merged_transcripts",
+                    "type": "gtf"
+                }
+            ],
+            "position": {
+                "left": 862,
+                "top": 289.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/cuffmerge/cuffmerge/2.2.1.3",
+            "tool_shed_repository": {
+                "changeset_revision": "86285ddd4512",
+                "name": "cuffmerge",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__job_resource\": {\"__job_resource__select\": \"no\", \"__current_case__\": 0}, \"additional_inputs\": [], \"annotation\": {\"use_ref_annotation\": \"No\", \"__current_case__\": 1}, \"inputs\": {\"__class__\": \"ConnectedValue\"}, \"min_isoform_fraction\": \"0.05\", \"seq_data\": {\"use_seq_data\": \"No\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.2.1.3",
+            "type": "tool",
+            "uuid": "71e4723a-cbe9-4582-9638-4a53b6fa9b94",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.39",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "rep_factorName_0|rep_factorLevel_0|countsFile": {
+                    "id": 4,
+                    "output_name": "merged_transcripts"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "DESeq2",
+            "outputs": [
+                {
+                    "name": "deseq_out",
+                    "type": "tabular"
+                },
+                {
+                    "name": "plots",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "left": 1101,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.39",
+            "tool_shed_repository": {
+                "changeset_revision": "24a09ca67621",
+                "name": "deseq2",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__job_resource\": {\"__job_resource__select\": \"no\", \"__current_case__\": 0}, \"auto_mean_filter_off\": false, \"fit_type\": \"1\", \"many_contrasts\": false, \"normCounts\": false, \"outlier_filter_off\": false, \"outlier_replace_off\": false, \"pdf\": true, \"rep_factorName\": [{\"__index__\": 0, \"factorName\": \"FactorName\", \"rep_factorLevel\": [{\"__index__\": 0, \"factorLevel\": \"FactorLevel\", \"countsFile\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 1, \"factorLevel\": \"FactorLevel\", \"countsFile\": {\"__class__\": \"RuntimeValue\"}}]}], \"tximport\": {\"tximport_selector\": \"count\", \"__current_case__\": 1}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.11.39",
+            "type": "tool",
+            "uuid": "eaa948ea-7521-4902-bbf9-9ab82c06c1c5",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/cuffdiff/cuffdiff/2.2.1.3",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "gtf_input": {
+                    "id": 4,
+                    "output_name": "merged_transcripts"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Cuffdiff",
+            "outputs": [
+                {
+                    "name": "splicing_diff",
+                    "type": "tabular"
+                },
+                {
+                    "name": "promoters_diff",
+                    "type": "tabular"
+                },
+                {
+                    "name": "cds_diff",
+                    "type": "tabular"
+                },
+                {
+                    "name": "cds_exp_fpkm_tracking",
+                    "type": "tabular"
+                },
+                {
+                    "name": "cds_fpkm_tracking",
+                    "type": "tabular"
+                },
+                {
+                    "name": "tss_groups_exp",
+                    "type": "tabular"
+                },
+                {
+                    "name": "tss_groups_fpkm_tracking",
+                    "type": "tabular"
+                },
+                {
+                    "name": "genes_exp",
+                    "type": "tabular"
+                },
+                {
+                    "name": "genes_fpkm_tracking",
+                    "type": "tabular"
+                },
+                {
+                    "name": "isoforms_exp",
+                    "type": "tabular"
+                },
+                {
+                    "name": "isoforms_fpkm_tracking",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1085,
+                "top": 443.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/cuffdiff/cuffdiff/2.2.1.3",
+            "tool_shed_repository": {
+                "changeset_revision": "0f32ad418df8",
+                "name": "cuffdiff",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__job_resource\": {\"__job_resource__select\": \"no\", \"__current_case__\": 0}, \"additional\": {\"sAdditional\": \"No\", \"__current_case__\": 0}, \"advanced_settings\": {\"sAdvanced\": \"No\", \"__current_case__\": 0}, \"bias_correction\": {\"do_bias_correction\": \"No\", \"__current_case__\": 1}, \"dispersion_method\": \"pooled\", \"fdr\": \"0.05\", \"generate_sqlite\": false, \"gtf_input\": {\"__class__\": \"ConnectedValue\"}, \"in_type\": {\"set_in_type\": \"BAM\", \"__current_case__\": 0, \"conditions\": [{\"__index__\": 0, \"name\": \"\", \"samples\": {\"__class__\": \"RuntimeValue\"}}, {\"__index__\": 1, \"name\": \"\", \"samples\": {\"__class__\": \"RuntimeValue\"}}]}, \"include_count_files\": \"No\", \"include_read_group_files\": \"No\", \"length_correction\": \"\", \"library_norm_method\": \"geometric\", \"min_alignment_count\": \"10\", \"multiread_correct\": false, \"omit_tabular_output\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.2.1.3",
+            "type": "tool",
+            "uuid": "2873e5e8-aae2-441d-8265-7d8193e5f7e7",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [],
+    "uuid": "b4dd8aef-61ae-4b9d-b764-e17d3730e470",
+    "version": 2
+}

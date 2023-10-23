@@ -1,0 +1,189 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "Homework 5",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastq_groomer/fastq_groomer/1.0.4",
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [],
+            "label": null,
+            "name": "FASTQ Groomer",
+            "outputs": [
+                {
+                    "name": "output_file",
+                    "type": "fastqsanger"
+                }
+            ],
+            "position": {
+                "left": 199.94000244140625,
+                "top": 264.25
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastq_groomer/fastq_groomer/1.0.4",
+            "tool_shed_repository": {
+                "changeset_revision": "1298445c852b",
+                "name": "fastq_groomer",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_file\": null, \"input_type\": \"sanger\", \"options_type\": {\"options_type_selector\": \"basic\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.4",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.52",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "input_file": {
+                    "id": 0,
+                    "output_name": "output_file"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "FastQC:Read QC",
+            "outputs": [
+                {
+                    "name": "html_file",
+                    "type": "html"
+                }
+            ],
+            "position": {
+                "left": 545.9599609375,
+                "top": 257.2599792480469
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.52",
+            "tool_shed_repository": {
+                "changeset_revision": "e28c965eeed4",
+                "name": "fastqc",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"contaminants\": null, \"input_file\": null, \"out_prefix\": \"FastQC\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.52",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa_wrappers/bwa_wrapper/1.2.3",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "paired|input1": {
+                    "id": 0,
+                    "output_name": "output_file"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Map with BWA for Illumina",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "sam"
+                }
+            ],
+            "position": {
+                "left": 539.0899658203125,
+                "top": 406.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa_wrappers/bwa_wrapper/1.2.3",
+            "tool_shed_repository": {
+                "changeset_revision": "b4427dbb6ced",
+                "name": "bwa_wrappers",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"genomeSource\": {\"refGenomeSource\": \"indexed\", \"__current_case__\": 0, \"indices\": \"/galaxy/data/hg19/bwa_index/hg19.fa\"}, \"paired\": {\"sPaired\": \"single\", \"__current_case__\": 0, \"input1\": null}, \"params\": {\"source_select\": \"full\", \"__current_case__\": 1, \"maxEditDist\": \"0\", \"fracMissingAligns\": \"0.04\", \"maxGapOpens\": \"1\", \"maxGapExtens\": \"-1\", \"disallowLongDel\": \"16\", \"disallowIndel\": \"5\", \"seed\": \"-1\", \"maxEditDistSeed\": \"2\", \"mismatchPenalty\": \"3\", \"gapOpenPenalty\": \"11\", \"gapExtensPenalty\": \"4\", \"suboptAlign\": null, \"noIterSearch\": false, \"outputTopN\": \"3\", \"outputTopNDisc\": \"10\", \"maxInsertSize\": \"500\", \"maxOccurPairing\": \"100000\", \"readGroup\": {\"specReadGroup\": \"no\", \"__current_case__\": 1}}, \"suppressHeader\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.2.3",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/sam_to_bam/sam_to_bam/1.1.3",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "source|input1": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "SAM-to-BAM",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 793.8900146484375,
+                "top": 406.9100036621094
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/sam_to_bam/sam_to_bam/1.1.3",
+            "tool_shed_repository": {
+                "changeset_revision": "ab4c4e07eb3c",
+                "name": "sam_to_bam",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"source\": {\"index_source\": \"cached\", \"__current_case__\": 0, \"input1\": null, \"index\": \"hg19\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.3",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/PicardASMetrics/1.56.0",
+            "errors": "Tool is not installed",
+            "id": 4,
+            "input_connections": {
+                "input_file": {
+                    "id": 3,
+                    "output_name": "output1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "toolshed.g2.bx.psu.edu/repos/devteam/picard/PicardASMetrics/1.56.0",
+            "outputs": [],
+            "position": {
+                "left": 835.699951171875,
+                "top": 149.8300018310547
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/PicardASMetrics/1.56.0",
+            "tool_state": "{\"adaptors\": \"\\\"\\\"\", \"bisulphite\": \"\\\"False\\\"\", \"genomeSource\": \"{\\\"index\\\": {\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": \\\"hg19\\\"}, \\\"refGenomeSource\\\": \\\"default\\\", \\\"__current_case__\\\": 0}\", \"input_file\": \"null\", \"maxinsert\": \"\\\"100000\\\"\", \"out_prefix\": \"\\\"Picard Alignment Summary Metrics\\\"\", \"sorted\": \"\\\"True\\\"\"}",
+            "tool_version": "1.56.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [],
+    "version": 8
+}

@@ -1,0 +1,151 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "Sep 25 2015 Indel analysis workflow (final)",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Bam file"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 200,
+                "top": 200
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "324356a3-0d5d-4b9f-9cbd-9dea61963b2d",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Bed file"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 200,
+                "top": 285
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "7cf09635-4779-4995-88f4-f1fa3d66105b",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtools_mpileup/samtools_mpileup/2.0",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "advanced_options|limit_by_region|bed_regions": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "reference_source|input_bams_0|input_bam": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "MPileup",
+            "outputs": [
+                {
+                    "name": "output_mpileup",
+                    "type": "pileup"
+                },
+                {
+                    "name": "output_log",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 432,
+                "top": 200
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtools_mpileup/samtools_mpileup/2.0",
+            "tool_shed_repository": {
+                "changeset_revision": "aa0ef6f0ee89",
+                "name": "samtools_mpileup",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"advanced_options\": {\"advanced_options_selector\": \"advanced\", \"__current_case__\": 0, \"filter_by_flags\": {\"filter_flags\": \"nofilter\", \"__current_case__\": 1}, \"limit_by_region\": {\"limit_by_regions\": \"history\", \"__current_case__\": 0, \"bed_regions\": null}, \"exclude_read_group\": {\"exclude_read_groups\": \"no_limit\", \"__current_case__\": 2}, \"ignore_overlaps\": false, \"skip_anomalous_read_pairs\": false, \"disable_probabilistic_realignment\": false, \"coefficient_for_downgrading\": \"0\", \"max_reads_per_bam\": \"250\", \"extended_BAQ_computation\": false, \"minimum_mapping_quality\": \"0\", \"minimum_base_quality\": \"13\", \"region_string\": \"\"}, \"genotype_likelihood_computation_type\": {\"genotype_likelihood_computation_type_selector\": \"perform_genotype_likelihood_computation\", \"__current_case__\": 0, \"output_format\": \"--VCF\", \"compressed\": false, \"output_tags\": null, \"perform_indel_calling\": {\"perform_indel_calling_selector\": \"perform_indel_calling\", \"__current_case__\": 1, \"gap_open_sequencing_error_probability\": \"40\", \"gap_extension_sequencing_error_probability\": \"20\", \"coefficient_for_modeling_homopolymer_errors\": \"100\", \"skip_indel_calling_above_sample_depth\": \"1000000\", \"minimum_gapped_reads_for_indel_candidates\": \"1\", \"open_seq_error_probability\": \"40\", \"minimum_gapped_read_fraction\": \"0.002\", \"gapped_read_per_sample\": false, \"platform_list_repeat\": []}}, \"reference_source\": {\"reference_source_selector\": \"cached\", \"__current_case__\": 0, \"input_bams\": [{\"__index__\": 0, \"input_bam\": null}], \"ref_file\": \"mm10\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.0",
+            "type": "tool",
+            "uuid": "8ebb557a-329d-494d-bc43-1795772bf57c",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/vcffilter/vcffilter2/0.0.3",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input1": {
+                    "id": 2,
+                    "output_name": "output_mpileup"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "VCFfilter:",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "vcf"
+                }
+            ],
+            "position": {
+                "left": 746,
+                "top": 200
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/vcffilter/vcffilter2/0.0.3",
+            "tool_shed_repository": {
+                "changeset_revision": "fa24bf0598f4",
+                "name": "vcffilter",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/galaxy-repl/localdata/chrom/mm10.len\", \"filterList\": \"-f \\\"INDEL\\\"\", \"input1\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.0.3",
+            "type": "tool",
+            "uuid": "45dc01af-ea7e-4b14-b4a1-5981cb3c3136",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [],
+    "uuid": "47b6b20d-acea-4ba8-af93-a2ff7c4eed50",
+    "version": 4
+}

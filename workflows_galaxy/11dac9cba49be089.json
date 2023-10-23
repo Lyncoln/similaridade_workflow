@@ -1,0 +1,277 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "Workflow Chrom5",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Input Dataset"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 200,
+                "top": 320
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Input Dataset"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 200,
+                "top": 440
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "bowtie_wrapper",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "refGenomeSource|ownFile": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "singlePaired|sInput1": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Map with Bowtie for Illumina",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "sam"
+                },
+                {
+                    "name": "mapping_stats",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 673,
+                "top": 324
+            },
+            "post_job_actions": {},
+            "tool_id": "bowtie_wrapper",
+            "tool_shed_repository": {
+                "changeset_revision": "b46e7d48076a",
+                "name": "bowtie_wrappers",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/?.len\", \"refGenomeSource\": {\"genomeSource\": \"history\", \"__current_case__\": 1, \"ownFile\": null, \"indexParams\": {\"indexSettings\": \"indexPreSet\", \"__current_case__\": 0}}, \"singlePaired\": {\"sPaired\": \"single\", \"__current_case__\": 0, \"sInput1\": null, \"sParams\": {\"sSettingsType\": \"full\", \"__current_case__\": 1, \"sSkip\": \"0\", \"sAlignLimit\": \"-1\", \"sTrimH\": \"1\", \"sTrimL\": \"12\", \"sBestOption\": {\"sBest\": \"noBest\", \"__current_case__\": 0}, \"sSuppressAlign\": \"1\", \"sMaxFile\": false, \"sUnmappedFile\": false, \"sOffrate\": \"-1\", \"sSeed\": \"-1\"}}, \"suppressHeader\": true, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "sam_to_bam",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "source|input1": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "source|ref_file": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "SAM-to-BAM",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 963,
+                "top": 198
+            },
+            "post_job_actions": {},
+            "tool_id": "sam_to_bam",
+            "tool_shed_repository": {
+                "changeset_revision": "9bd1568619cd",
+                "name": "sam_to_bam",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/?.len\", \"source\": {\"index_source\": \"history\", \"ref_file\": null, \"input1\": null, \"__current_case__\": 1}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "sam_pileup",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "refOrHistory|input1": {
+                    "id": 3,
+                    "output_name": "output1"
+                },
+                "refOrHistory|ownFile": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Generate pileup",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 972,
+                "top": 528
+            },
+            "post_job_actions": {},
+            "tool_id": "sam_pileup",
+            "tool_shed_repository": {
+                "changeset_revision": "a3b4ad6858ff",
+                "name": "sam_pileup",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"c\": {\"consensus\": \"no\", \"__current_case__\": 0}, \"chromInfo\": \"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/?.len\", \"indels\": \"no\", \"lastCol\": \"no\", \"mapCap\": \"60\", \"refOrHistory\": {\"reference\": \"history\", \"__current_case__\": 1, \"input1\": null, \"ownFile\": null}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "pileup_parser",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input": {
+                    "id": 4,
+                    "output_name": "output1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter pileup",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1300,
+                "top": 320
+            },
+            "post_job_actions": {},
+            "tool_id": "pileup_parser",
+            "tool_shed_repository": {
+                "changeset_revision": "85bedbea8a12",
+                "name": "pileup_parser",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/?.len\", \"cvrg_cutoff\": \"3\", \"diff\": \"Yes\", \"input\": null, \"interval\": \"No\", \"pileup_type\": {\"type_select\": \"six\", \"__current_case__\": 1}, \"qc_base\": \"Yes\", \"qv_cutoff\": \"20\", \"snps_only\": \"Yes\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "Cut1",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input": {
+                    "id": 5,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Cut",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1740,
+                "top": 320
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "Chr 5 SNPs"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Cut1",
+            "tool_state": "{\"chromInfo\": \"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/?.len\", \"columnList\": \"c1,c2,c3,c4,c12\", \"delimiter\": \"T\", \"input\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.1",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [],
+    "version": 3
+}

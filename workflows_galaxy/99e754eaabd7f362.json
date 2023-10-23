@@ -1,0 +1,788 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "Normal Cryo Mpileup with GATK and without GATK.",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Normal Cryo F"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 271,
+                "top": 557
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Normal Cryo R"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 276,
+                "top": 643
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Hg19 reference"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 285,
+                "top": 804
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 3,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "dbSNP b37"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 284,
+                "top": 909
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "fastq_groomer",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input_file": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "FASTQ Groomer",
+            "outputs": [
+                {
+                    "name": "output_file",
+                    "type": "fastqsanger"
+                }
+            ],
+            "position": {
+                "left": 530.5,
+                "top": 506.5
+            },
+            "post_job_actions": {},
+            "tool_id": "fastq_groomer",
+            "tool_shed_repository": {
+                "changeset_revision": "1298445c852b",
+                "name": "fastq_groomer",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_file\": null, \"input_type\": \"sanger\", \"options_type\": {\"options_type_selector\": \"basic\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.4",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "fastq_groomer",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input_file": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "FASTQ Groomer",
+            "outputs": [
+                {
+                    "name": "output_file",
+                    "type": "fastqsanger"
+                }
+            ],
+            "position": {
+                "left": 530.5,
+                "top": 664.5
+            },
+            "post_job_actions": {},
+            "tool_id": "fastq_groomer",
+            "tool_shed_repository": {
+                "changeset_revision": "1298445c852b",
+                "name": "fastq_groomer",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_file\": null, \"input_type\": \"sanger\", \"options_type\": {\"options_type_selector\": \"basic\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.4",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa_wrappers/bwa_wrapper/1.2.3",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "genomeSource|ownFile": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "paired|input1": {
+                    "id": 4,
+                    "output_name": "output_file"
+                },
+                "paired|input2": {
+                    "id": 5,
+                    "output_name": "output_file"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Map with BWA for Illumina",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "sam"
+                }
+            ],
+            "position": {
+                "left": 872,
+                "top": 578
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa_wrappers/bwa_wrapper/1.2.3",
+            "tool_shed_repository": {
+                "changeset_revision": "b4427dbb6ced",
+                "name": "bwa_wrappers",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"genomeSource\": {\"refGenomeSource\": \"history\", \"__current_case__\": 1, \"ownFile\": null}, \"paired\": {\"sPaired\": \"paired\", \"__current_case__\": 1, \"input1\": null, \"input2\": null}, \"params\": {\"source_select\": \"pre_set\", \"__current_case__\": 0}, \"suppressHeader\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.2.3",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "sam_bw_filter",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input1": {
+                    "id": 6,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter SAM",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "sam"
+                }
+            ],
+            "position": {
+                "left": 1141,
+                "top": 590
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "NC Filtered SAM"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "sam_bw_filter",
+            "tool_shed_repository": {
+                "changeset_revision": "0b2424a404d9",
+                "name": "sam_bitwise_flag_filter",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"bits\": [{\"__index__\": 0, \"flags\": \"--0x0001\", \"states\": \"1\"}, {\"__index__\": 1, \"flags\": \"--0x0002\", \"states\": \"1\"}, {\"__index__\": 2, \"flags\": \"--0x0004\", \"states\": \"0\"}], \"input1\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "sam_to_bam",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "source|input1": {
+                    "id": 7,
+                    "output_name": "out_file1"
+                },
+                "source|ref_file": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "SAM-to-BAM",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 1349,
+                "top": 571
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput1": {
+                    "action_arguments": {
+                        "newname": "NC BAM"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output1"
+                }
+            },
+            "tool_id": "sam_to_bam",
+            "tool_shed_repository": {
+                "changeset_revision": "9bd1568619cd",
+                "name": "sam_to_bam",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"source\": {\"index_source\": \"history\", \"ref_file\": null, \"input1\": null, \"__current_case__\": 1}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.2",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/rgPicardMarkDups/1.56.0",
+            "errors": "Tool is not installed",
+            "id": 9,
+            "input_connections": {
+                "input_file": {
+                    "id": 8,
+                    "output_name": "output1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "toolshed.g2.bx.psu.edu/repos/devteam/picard/rgPicardMarkDups/1.56.0",
+            "outputs": [],
+            "position": {
+                "left": 1552,
+                "top": 563
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file": {
+                    "action_arguments": {
+                        "newname": "NC Picard duplicate removed"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/rgPicardMarkDups/1.56.0",
+            "tool_state": "{\"assumeSorted\": \"\\\"True\\\"\", \"input_file\": \"null\", \"optDupeDist\": \"\\\"100\\\"\", \"out_prefix\": \"\\\"Dupes Marked\\\"\", \"readRegex\": \"\\\"[a-zA-Z0-9]+:[0-9]:([0-9]+):([0-9]+):([0-9]+).*\\\"\", \"remDups\": \"\\\"True\\\"\"}",
+            "tool_version": "1.56.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_ARRG/1.56.0",
+            "errors": "Tool is not installed",
+            "id": 10,
+            "input_connections": {
+                "inputFile": {
+                    "id": 9,
+                    "output_name": "out_file"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_ARRG/1.56.0",
+            "outputs": [],
+            "position": {
+                "left": 1866.5,
+                "top": 580
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_ARRG/1.56.0",
+            "tool_state": "{\"inputFile\": \"null\", \"outputFormat\": \"\\\"True\\\"\", \"readGroupOpts\": \"{\\\"rgOpts\\\": \\\"preSet\\\", \\\"__current_case__\\\": 0}\", \"rgid\": \"\\\"1\\\"\", \"rglb\": \"\\\"sample\\\"\", \"rgpl\": \"\\\"illumina\\\"\", \"rgpu\": \"\\\"5A\\\"\", \"rgsm\": \"\\\"Patient5A\\\"\"}",
+            "tool_version": "1.56.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "gatk_count_covariates",
+            "errors": "Tool is not installed",
+            "id": 11,
+            "input_connections": {
+                "reference_source|input_bam": {
+                    "id": 10,
+                    "output_name": "outFile"
+                },
+                "reference_source|ref_file": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "rod_bind_0|rod_bind_type|input_rod": {
+                    "id": 3,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "gatk_count_covariates",
+            "outputs": [],
+            "position": {
+                "left": 2094,
+                "top": 288
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput_recal": {
+                    "action_arguments": {
+                        "newname": "NC Count Covariates"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_recal"
+                }
+            },
+            "tool_id": "gatk_count_covariates",
+            "tool_state": "{\"analysis_param_type\": \"{\\\"analysis_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"covariates\": \"null\", \"gatk_param_type\": \"{\\\"gatk_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"reference_source\": \"{\\\"ref_file\\\": null, \\\"reference_source_selector\\\": \\\"history\\\", \\\"input_bam\\\": null, \\\"__current_case__\\\": 1}\", \"rod_bind\": \"[{\\\"__index__\\\": 0, \\\"rod_bind_type\\\": {\\\"rod_bind_type_selector\\\": \\\"dbsnp\\\", \\\"__current_case__\\\": 0, \\\"input_rod\\\": null}}]\", \"standard_covs\": \"\\\"True\\\"\"}",
+            "tool_version": "0.0.5",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "gatk_analyze_covariates",
+            "errors": "Tool is not installed",
+            "id": 12,
+            "input_connections": {
+                "input_recal": {
+                    "id": 11,
+                    "output_name": "output_recal"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "gatk_analyze_covariates",
+            "outputs": [],
+            "position": {
+                "left": 2424,
+                "top": 200
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput_html": {
+                    "action_arguments": {
+                        "newname": "NC Analyze Covariate "
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_html"
+                }
+            },
+            "tool_id": "gatk_analyze_covariates",
+            "tool_state": "{\"analysis_param_type\": \"{\\\"analysis_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"input_recal\": \"null\"}",
+            "tool_version": "0.0.5",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "13": {
+            "annotation": "",
+            "content_id": "gatk_table_recalibration",
+            "errors": "Tool is not installed",
+            "id": 13,
+            "input_connections": {
+                "input_recal": {
+                    "id": 11,
+                    "output_name": "output_recal"
+                },
+                "reference_source|input_bam": {
+                    "id": 10,
+                    "output_name": "outFile"
+                },
+                "reference_source|ref_file": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "gatk_table_recalibration",
+            "outputs": [],
+            "position": {
+                "left": 2428,
+                "top": 508
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput_bam": {
+                    "action_arguments": {
+                        "newname": "NC Table Recalibration"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_bam"
+                }
+            },
+            "tool_id": "gatk_table_recalibration",
+            "tool_state": "{\"analysis_param_type\": \"{\\\"analysis_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"gatk_param_type\": \"{\\\"gatk_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"input_recal\": \"null\", \"reference_source\": \"{\\\"ref_file\\\": null, \\\"reference_source_selector\\\": \\\"history\\\", \\\"input_bam\\\": null, \\\"__current_case__\\\": 1}\"}",
+            "tool_version": "0.0.5",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "14": {
+            "annotation": "",
+            "content_id": "gatk_count_covariates",
+            "errors": "Tool is not installed",
+            "id": 14,
+            "input_connections": {
+                "reference_source|input_bam": {
+                    "id": 13,
+                    "output_name": "output_bam"
+                },
+                "reference_source|ref_file": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "rod_bind_0|rod_bind_type|input_rod": {
+                    "id": 3,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "gatk_count_covariates",
+            "outputs": [],
+            "position": {
+                "left": 2701,
+                "top": 263
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput_recal": {
+                    "action_arguments": {
+                        "newname": "NC Table Recalibrated Count Covariate"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_recal"
+                }
+            },
+            "tool_id": "gatk_count_covariates",
+            "tool_state": "{\"analysis_param_type\": \"{\\\"analysis_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"covariates\": \"null\", \"gatk_param_type\": \"{\\\"gatk_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"reference_source\": \"{\\\"ref_file\\\": null, \\\"reference_source_selector\\\": \\\"history\\\", \\\"input_bam\\\": null, \\\"__current_case__\\\": 1}\", \"rod_bind\": \"[{\\\"__index__\\\": 0, \\\"rod_bind_type\\\": {\\\"rod_bind_type_selector\\\": \\\"dbsnp\\\", \\\"__current_case__\\\": 0, \\\"input_rod\\\": null}}]\", \"standard_covs\": \"\\\"True\\\"\"}",
+            "tool_version": "0.0.5",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "15": {
+            "annotation": "",
+            "content_id": "gatk_realigner_target_creator",
+            "errors": "Tool is not installed",
+            "id": 15,
+            "input_connections": {
+                "reference_source|input_bam": {
+                    "id": 13,
+                    "output_name": "output_bam"
+                },
+                "reference_source|ref_file": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "rod_bind_0|rod_bind_type|input_rod": {
+                    "id": 3,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "gatk_realigner_target_creator",
+            "outputs": [],
+            "position": {
+                "left": 2989,
+                "top": 496
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput_interval": {
+                    "action_arguments": {
+                        "newname": "NC Realigner Tartget Creator"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_interval"
+                }
+            },
+            "tool_id": "gatk_realigner_target_creator",
+            "tool_state": "{\"analysis_param_type\": \"{\\\"analysis_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"gatk_param_type\": \"{\\\"gatk_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"reference_source\": \"{\\\"ref_file\\\": null, \\\"reference_source_selector\\\": \\\"history\\\", \\\"input_bam\\\": null, \\\"__current_case__\\\": 1}\", \"rod_bind\": \"[{\\\"__index__\\\": 0, \\\"rod_bind_type\\\": {\\\"rod_bind_type_selector\\\": \\\"dbsnp\\\", \\\"__current_case__\\\": 0, \\\"input_rod\\\": null}}]\"}",
+            "tool_version": "0.0.4",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "16": {
+            "annotation": "",
+            "content_id": "gatk_analyze_covariates",
+            "errors": "Tool is not installed",
+            "id": 16,
+            "input_connections": {
+                "input_recal": {
+                    "id": 14,
+                    "output_name": "output_recal"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "gatk_analyze_covariates",
+            "outputs": [],
+            "position": {
+                "left": 2997,
+                "top": 255
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput_html": {
+                    "action_arguments": {
+                        "newname": "NC Table Recaliberated Analyze Covariate"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_html"
+                }
+            },
+            "tool_id": "gatk_analyze_covariates",
+            "tool_state": "{\"analysis_param_type\": \"{\\\"analysis_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"input_recal\": \"null\"}",
+            "tool_version": "0.0.5",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "17": {
+            "annotation": "",
+            "content_id": "gatk_indel_realigner",
+            "errors": "Tool is not installed",
+            "id": 17,
+            "input_connections": {
+                "reference_source|input_bam": {
+                    "id": 13,
+                    "output_name": "output_bam"
+                },
+                "reference_source|ref_file": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "rod_bind_0|rod_bind_type|input_rod": {
+                    "id": 3,
+                    "output_name": "output"
+                },
+                "target_intervals": {
+                    "id": 15,
+                    "output_name": "output_interval"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "gatk_indel_realigner",
+            "outputs": [],
+            "position": {
+                "left": 3354,
+                "top": 506
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput_bam": {
+                    "action_arguments": {
+                        "newname": "NC Indel Realigner"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_bam"
+                }
+            },
+            "tool_id": "gatk_indel_realigner",
+            "tool_state": "{\"analysis_param_type\": \"{\\\"analysis_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"gatk_param_type\": \"{\\\"gatk_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"knowns_only\": \"\\\"False\\\"\", \"lod_threshold\": \"\\\"5.0\\\"\", \"reference_source\": \"{\\\"ref_file\\\": null, \\\"reference_source_selector\\\": \\\"history\\\", \\\"input_bam\\\": null, \\\"__current_case__\\\": 1}\", \"rod_bind\": \"[{\\\"__index__\\\": 0, \\\"rod_bind_type\\\": {\\\"rod_bind_type_selector\\\": \\\"dbsnp\\\", \\\"__current_case__\\\": 0, \\\"input_rod\\\": null}}]\", \"target_intervals\": \"null\"}",
+            "tool_version": "0.0.6",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "18": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/rgPicFixMate/1.56.0",
+            "errors": "Tool is not installed",
+            "id": 18,
+            "input_connections": {
+                "input_file": {
+                    "id": 17,
+                    "output_name": "output_bam"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "toolshed.g2.bx.psu.edu/repos/devteam/picard/rgPicFixMate/1.56.0",
+            "outputs": [],
+            "position": {
+                "left": 3703,
+                "top": 543
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file": {
+                    "action_arguments": {
+                        "newname": "NC Paired Mate Fixer"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/rgPicFixMate/1.56.0",
+            "tool_state": "{\"input_file\": \"null\", \"out_prefix\": \"\\\"Fix Mate\\\"\", \"outputFormat\": \"\\\"True\\\"\", \"sortOrder\": \"\\\"coordinate\\\"\"}",
+            "tool_version": "1.56.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "19": {
+            "annotation": "",
+            "content_id": "samtools_mpileup",
+            "errors": null,
+            "id": 19,
+            "input_connections": {
+                "reference_source|input_bams_0|input_bam": {
+                    "id": 18,
+                    "output_name": "out_file"
+                },
+                "reference_source|ref_file": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Samtools mpileup",
+            "outputs": [
+                {
+                    "name": "output_file_pu",
+                    "type": "pileup"
+                }
+            ],
+            "position": {
+                "left": 3968,
+                "top": 480
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput_mpileup": {
+                    "action_arguments": {
+                        "newname": "NC mpileup"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_mpileup"
+                }
+            },
+            "tool_id": "samtools_mpileup",
+            "tool_shed_repository": {
+                "changeset_revision": "9da0311ab1dd",
+                "name": "samtools_mpileup",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"advanced_options\": {\"advanced_options_selector\": \"advanced\", \"__current_case__\": 1, \"skip_anomalous_read_pairs\": false, \"disable_probabilistic_realignment\": false, \"coefficient_for_downgrading\": \"0\", \"max_reads_per_bam\": \"250\", \"extended_BAQ_computation\": false, \"minimum_mapping_quality\": \"10\", \"minimum_base_quality\": \"20\"}, \"genotype_likelihood_computation_type\": {\"genotype_likelihood_computation_type_selector\": \"do_not_perform_genotype_likelihood_computation\", \"__current_case__\": 1}, \"reference_source\": {\"ref_file\": null, \"reference_source_selector\": \"history\", \"input_bams\": [{\"__index__\": 0, \"input_bam\": null}], \"__current_case__\": 1}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.0.1",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [],
+    "version": 12
+}

@@ -1,0 +1,189 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "From peaks to genes (imported from uploaded file)",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Reference regions"
+                }
+            ],
+            "label": "Reference regions",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 380.390625,
+                "height": 81,
+                "left": 738.328125,
+                "right": 938.328125,
+                "top": 299.390625,
+                "width": 200,
+                "x": 738.328125,
+                "y": 299.390625
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "150d8ebd-1593-4ef6-b4b4-b0d943bbd962",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "CONVERTER_interval_to_bed_0",
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [],
+            "label": "Peak Regions",
+            "name": "Convert Genomic Intervals To BED",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "bed"
+                }
+            ],
+            "position": {
+                "bottom": 599.390625,
+                "height": 92,
+                "left": 758.328125,
+                "right": 958.328125,
+                "top": 507.390625,
+                "width": 200,
+                "x": 758.328125,
+                "y": 507.390625
+            },
+            "post_job_actions": {},
+            "tool_id": "CONVERTER_interval_to_bed_0",
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/mm9.len\", \"input1\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "ea4d54d6-cb62-4525-9444-6907f339826f",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output1",
+                    "uuid": "c6c536af-18c5-433d-8f3b-ee669ea8e76f"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/intersect/gops_intersect_1/1.0.0",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input1": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "input2": {
+                    "id": 1,
+                    "output_name": "output1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Intersect",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 493.390625,
+                "height": 122,
+                "left": 970.3125,
+                "right": 1170.3125,
+                "top": 371.390625,
+                "width": 200,
+                "x": 970.3125,
+                "y": 371.390625
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/intersect/gops_intersect_1/1.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "69c10b56f46d",
+                "name": "intersect",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"bed\", \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/mm9.len\", \"input1\": {\"__class__\": \"ConnectedValue\"}, \"input2\": {\"__class__\": \"ConnectedValue\"}, \"min\": \"1\", \"returntype\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "28dca038-359e-4c53-8020-f3bed1e58c39",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "a96eed12-1727-4f13-9527-d458351b731f"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "Grouping1",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input1": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Group",
+                    "name": "input1"
+                }
+            ],
+            "label": null,
+            "name": "Group",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 463.390625,
+                "height": 92,
+                "left": 1190.3125,
+                "right": 1390.3125,
+                "top": 371.390625,
+                "width": 200,
+                "x": 1190.3125,
+                "y": 371.390625
+            },
+            "post_job_actions": {},
+            "tool_id": "Grouping1",
+            "tool_state": "{\"groupcol\": \"1\", \"ignorecase\": false, \"ignorelines\": null, \"input1\": {\"__class__\": \"RuntimeValue\"}, \"operations\": [{\"__index__\": 0, \"optype\": \"length\", \"opcol\": \"1\", \"opround\": \"no\", \"opdefault\": null}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.4",
+            "type": "tool",
+            "uuid": "2c47bcfc-e035-4560-a8d3-c288fa73dc8e",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "bf9bbf7f-d265-4ba2-a50d-41bc7ea12ef4"
+                }
+            ]
+        }
+    },
+    "tags": [],
+    "uuid": "21094977-8169-4a48-b079-21a5e35e6a64",
+    "version": 0
+}

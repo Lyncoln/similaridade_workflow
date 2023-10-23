@@ -1,0 +1,132 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "Download list of isolates &amp; type",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ncbi_acc_download/ncbi_acc_download/0.2.7+galaxy0",
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool NCBI Accession Download",
+                    "name": "query_source"
+                }
+            ],
+            "label": null,
+            "name": "NCBI Accession Download",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                },
+                {
+                    "name": "error_log",
+                    "type": "txt"
+                },
+                {
+                    "name": "failed_accessions",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "bottom": 579.5,
+                "height": 332,
+                "left": 436,
+                "right": 636,
+                "top": 247.5,
+                "width": 200,
+                "x": 436,
+                "y": 247.5
+            },
+            "post_job_actions": {
+                "HideDatasetActionerror_log": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "error_log"
+                },
+                "HideDatasetActionfailed_accessions": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "failed_accessions"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ncbi_acc_download/ncbi_acc_download/0.2.7+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "28587613264f",
+                "name": "ncbi_acc_download",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"ignore_failed\": \"1\", \"molecule\": {\"select\": \"nucleotide\", \"__current_case__\": 0, \"format\": \"fasta\"}, \"query_source\": {\"select\": \"accession_file\", \"__current_case__\": 0, \"accession_file\": {\"__class__\": \"RuntimeValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2.7+galaxy0",
+            "type": "tool",
+            "uuid": "10c86261-287a-4b39-a339-54cd34aaaf4d",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "NCBI Accession Download on input dataset(s): Downloaded Files",
+                    "output_name": "output",
+                    "uuid": "a08d29f0-8bc9-4abc-882a-f15fb9a6520f"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/mlst/mlst/2.19.0",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "input_files": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "MLST",
+            "outputs": [
+                {
+                    "name": "report",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 381.5,
+                "height": 112,
+                "left": 808,
+                "right": 1008,
+                "top": 269.5,
+                "width": 200,
+                "x": 808,
+                "y": 269.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/mlst/mlst/2.19.0",
+            "tool_shed_repository": {
+                "changeset_revision": "ded48b36f3b7",
+                "name": "mlst",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__job_resource\": {\"__job_resource__select\": \"no\", \"__current_case__\": 0}, \"input_files\": {\"__class__\": \"ConnectedValue\"}, \"settings\": {\"advanced\": \"simple\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.19.0",
+            "type": "tool",
+            "uuid": "14faa39a-a773-439e-8236-ff8fcb8da3a6",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "MLST on input dataset(s): report.tsv",
+                    "output_name": "report",
+                    "uuid": "b3abcff6-7572-4f63-970f-b44bb694aed2"
+                }
+            ]
+        }
+    },
+    "tags": [],
+    "uuid": "c890c97a-33b4-47b0-896a-08777c606692",
+    "version": 3
+}

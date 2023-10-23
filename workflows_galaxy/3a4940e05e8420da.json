@@ -1,0 +1,520 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "old snpEff",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Candidate gene list (e.g. transcription factors)"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 200,
+                "top": 798.703125
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "6bf6113c-c69b-4881-9139-9f083d836526",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "c4576c14-3fb1-41c0-b931-b0afe26be5c7"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Unfiltered mapping strain VCF (e.g. 112,061 Hawaiian SNPs)"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 1362.078125,
+                "top": 921.109375
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "3dcbc3f4-65b1-457f-bf21-b36d136dd430",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "16c370b6-3256-46dc-9063-880f5be2ada8"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "vcf readfilter=30"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 1790.59375,
+                "top": 722
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "3204a245-9e6d-4b1b-9631-d865e648a3d5",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "4e64f7b8-e018-4d12-bce4-2e72a7599077"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 3,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "vcf (read filter=10)"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 1877.59375,
+                "top": 1115
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "dedc9b9d-d6b8-41e6-a606-0689a81d1995",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "77874f1e-9671-4545-9c94-a0f419368f75"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/pcingola/snpeff/snpSift_filter/1.0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool SnpSift Filter",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "SnpSift Filter",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 2334.109375,
+                "top": 395.5
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput": {
+                    "action_arguments": {
+                        "newtype": "vcf"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output"
+                },
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                },
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Homozygous and heterozygous variants VCF (higher stringency, for downstream subtraction steps) (snpEff)"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/pcingola/snpeff/snpSift_filter/1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "c052639fa666",
+                "name": "snpeff",
+                "owner": "pcingola",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/galaxy/home/g2test/galaxy_test/tool-data/shared/ucsc/chrom/ce10.len\", \"expr\": \"(DP >= 3)\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0",
+            "type": "tool",
+            "uuid": "db7c5620-b34d-4ef8-8f86-6fa5654ece73",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/pcingola/snpeff/snpSift_filter/1.0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input": {
+                    "id": 3,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool SnpSift Filter",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "SnpSift Filter",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 2063.375,
+                "top": 736.796875
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput": {
+                    "action_arguments": {
+                        "newtype": "vcf"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output"
+                },
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                },
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Homozygous variants VCF (mutant under consideration, lower quality variants for cloning, Hawaiian unfiltered SNPs subtracted)"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/pcingola/snpeff/snpSift_filter/1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "c052639fa666",
+                "name": "snpeff",
+                "owner": "pcingola",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/galaxy/home/g2test/galaxy_test/tool-data/shared/ucsc/chrom/ce10.len\", \"expr\": \"isHom( GEN[0] ) & isVariant( GEN[0] )\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0",
+            "type": "tool",
+            "uuid": "f16605b1-de00-4bb2-841b-13bb5de546a8",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/variant_select/gatk_variant_select/0.0.2",
+            "errors": "Tool is not installed",
+            "id": 6,
+            "input_connections": {
+                "input_discordance": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "reference_source|input_variant": {
+                    "id": 4,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "toolshed.g2.bx.psu.edu/repos/devteam/variant_select/gatk_variant_select/0.0.2",
+            "outputs": [],
+            "position": {
+                "left": 2737.40625,
+                "top": 293.390625
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_log": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_log"
+                },
+                "RenameDatasetActionoutput_vcf": {
+                    "action_arguments": {
+                        "newname": "Heterozygous and Homozygous variants (higher quality, coverage >= 3, Hawaiian unfiltered variants subtracted for submission to databases or for variant subtraction)"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_vcf"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/variant_select/gatk_variant_select/0.0.2",
+            "tool_state": "{\"analysis_param_type\": \"{\\\"analysis_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"exclude_filtered\": \"\\\"true\\\"\", \"exclude_sample_name_repeat\": \"[]\", \"gatk_param_type\": \"{\\\"gatk_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"input_concordance\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"input_discordance\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"reference_source\": \"{\\\"ref_file\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"reference_source_selector\\\": \\\"history\\\", \\\"input_variant\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 1}\", \"sample_name_repeat\": \"[]\", \"select_expressions_repeat\": \"[]\"}",
+            "tool_version": "0.0.2",
+            "type": "tool",
+            "uuid": "87b5c13d-cc01-442f-9f60-dcb159a2313c",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_vcf",
+                    "uuid": "17d3e403-624b-4fd0-bb71-51b6977d69dd"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/variant_select/gatk_variant_select/0.0.2",
+            "errors": "Tool is not installed",
+            "id": 7,
+            "input_connections": {
+                "input_discordance": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "reference_source|input_variant": {
+                    "id": 5,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "toolshed.g2.bx.psu.edu/repos/devteam/variant_select/gatk_variant_select/0.0.2",
+            "outputs": [],
+            "position": {
+                "left": 2269.265625,
+                "top": 659.015625
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_log": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_log"
+                },
+                "RenameDatasetActionoutput_vcf": {
+                    "action_arguments": {
+                        "newname": "Homozygous variants VCF (for cloning mutant under consideration, Hawaiian unfiltered variants subtracted, lower quality variants included)"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_vcf"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/variant_select/gatk_variant_select/0.0.2",
+            "tool_state": "{\"analysis_param_type\": \"{\\\"analysis_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"exclude_filtered\": \"\\\"false\\\"\", \"exclude_sample_name_repeat\": \"[]\", \"gatk_param_type\": \"{\\\"gatk_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"input_concordance\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"input_discordance\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"reference_source\": \"{\\\"ref_file\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"reference_source_selector\\\": \\\"history\\\", \\\"input_variant\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 1}\", \"sample_name_repeat\": \"[]\", \"select_expressions_repeat\": \"[]\"}",
+            "tool_version": "0.0.2",
+            "type": "tool",
+            "uuid": "a147523c-a85d-48cf-9ed3-ce4d6a793713",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_vcf",
+                    "uuid": "53b6d0c4-c610-4d3e-bb3c-659c73337a42"
+                }
+            ]
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/pcingola/snpeff/snpEff/1.0",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input": {
+                    "id": 7,
+                    "output_name": "output_vcf"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool SnpEff",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "SnpEff",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                },
+                {
+                    "name": "statsFile",
+                    "type": "html"
+                }
+            ],
+            "position": {
+                "left": 2597.640625,
+                "top": 686.421875
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput": {
+                    "action_arguments": {
+                        "newtype": "tabular"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output"
+                },
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                },
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Homozygous variants annotated (snpEff) (for cloning mutant under consideration, Hawaiian unfiltered variants subtracted, lower quality variants included, candidate genes NOT annotated)"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/pcingola/snpeff/snpEff/1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "c052639fa666",
+                "name": "snpeff",
+                "owner": "pcingola",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"filterHomHet\": \"\", \"filterIn\": \"\", \"filterOut\": \"None\", \"genomeVersion\": \"WS220.64\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"inputFormat\": \"vcf\", \"offset\": \"\", \"outputFormat\": \"txt\", \"udLength\": \"10000\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0",
+            "type": "tool",
+            "uuid": "daaaf4f5-8237-4219-88e7-2b49c02f6d95",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "statsFile",
+                    "uuid": "efc1817d-e322-44b7-82c1-868b56d7cd2a"
+                }
+            ]
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/gregory-minevich/check_snpeff_candidates/check_snpeff_candidates/1.0.0",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "candidate_list": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "snpeff_file": {
+                    "id": 8,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool CloudMap: Check snpEff Candidates",
+                    "name": "candidate_list"
+                },
+                {
+                    "description": "runtime parameter for tool CloudMap: Check snpEff Candidates",
+                    "name": "snpeff_file"
+                }
+            ],
+            "label": null,
+            "name": "CloudMap: Check snpEff Candidates",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 2844.8125,
+                "top": 519.484375
+            },
+            "post_job_actions": {
+                "EmailActionoutput": {
+                    "action_arguments": {
+                        "host": "main.g2.bx.psu.edu"
+                    },
+                    "action_type": "EmailAction",
+                    "output_name": "output"
+                },
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Homozygous variants annotated (snpEff) (for cloning mutant under consideration, Hawaiian unfiltered variants subtracted, lower quality variants included, candidate genes annotated with CloudMap) "
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/gregory-minevich/check_snpeff_candidates/check_snpeff_candidates/1.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "f20585ccbf05",
+                "name": "check_snpeff_candidates",
+                "owner": "gregory-minevich",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"candidate_list\": {\"__class__\": \"RuntimeValue\"}, \"chromInfo\": \"/galaxy/home/g2test/galaxy_test/tool-data/shared/ucsc/chrom/ce10.len\", \"snpeff_file\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "712c3b6a-4d2b-4a92-9741-c8412b2f6bfc",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "eeca63c0-9986-45d9-af3b-37fff4bfb7d4"
+                }
+            ]
+        }
+    },
+    "tags": [],
+    "uuid": "3b4cfbe8-314b-41d1-ba91-9b932073cdc7",
+    "version": 2
+}

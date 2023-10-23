@@ -1,0 +1,212 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "Index Separation-FASTQ-Tophat",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Filter",
+                    "name": "cond"
+                }
+            ],
+            "label": null,
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 203,
+                "top": 162
+            },
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Filter1",
+            "tool_state": "{\"cond\": {\"__class__\": \"RuntimeValue\"}, \"input\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "tabular_to_fastq",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "input_file": {
+                    "id": 0,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Tabular to FASTQ",
+            "outputs": [
+                {
+                    "name": "output_file",
+                    "type": "fastq"
+                }
+            ],
+            "position": {
+                "left": 420,
+                "top": 262
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_file": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_file"
+                }
+            },
+            "tool_id": "tabular_to_fastq",
+            "tool_shed_repository": {
+                "changeset_revision": "b334cd1095ea",
+                "name": "tabular_to_fastq",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"identifier\": \"23\", \"input_file\": null, \"quality\": \"10\", \"sequence\": \"9\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "fastq_manipulation",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input_file": {
+                    "id": 1,
+                    "output_name": "output_file"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Manipulate FASTQ",
+            "outputs": [
+                {
+                    "name": "output_file",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 574.9999694824219,
+                "top": 394.99998474121094
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_file": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_file"
+                }
+            },
+            "tool_id": "fastq_manipulation",
+            "tool_shed_repository": {
+                "changeset_revision": "5b87038565bb",
+                "name": "fastq_manipulation",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_file\": null, \"manipulate_blocks\": [{\"__index__\": 0, \"manipulation_type\": {\"manipulation_type_selector\": \"sequence\", \"__current_case__\": 1, \"manipulation\": {\"manipulation_selector\": \"translate\", \"__current_case__\": 6, \"from\": \".\", \"to\": \"N\"}}}], \"match_blocks\": [], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.1",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "tophat",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input1": {
+                    "id": 2,
+                    "output_name": "output_file"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "TopHat for Illumina",
+            "outputs": [
+                {
+                    "name": "insertions",
+                    "type": "bed"
+                },
+                {
+                    "name": "deletions",
+                    "type": "bed"
+                },
+                {
+                    "name": "junctions",
+                    "type": "bed"
+                },
+                {
+                    "name": "accepted_hits",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 836.9999694824219,
+                "top": 497.99998474121094
+            },
+            "post_job_actions": {
+                "HideDatasetActiondeletions": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "deletions"
+                },
+                "HideDatasetActioninsertions": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "insertions"
+                }
+            },
+            "tool_id": "tophat",
+            "tool_shed_repository": {
+                "changeset_revision": "2ad64c5bb5f4",
+                "name": "tophat",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input1\": null, \"refGenomeSource\": {\"genomeSource\": \"indexed\", \"__current_case__\": 0, \"index\": \"mm9canon\"}, \"singlePaired\": {\"sPaired\": \"single\", \"__current_case__\": 0, \"sParams\": {\"sSettingsType\": \"full\", \"__current_case__\": 1, \"library_type\": \"fr-firststrand\", \"anchor_length\": \"8\", \"splice_mismatches\": \"0\", \"min_intron_length\": \"70\", \"max_intron_length\": \"500000\", \"indel_search\": {\"allow_indel_search\": \"No\", \"__current_case__\": 0}, \"max_multihits\": \"1\", \"min_segment_intron\": \"50\", \"max_segment_intron\": \"500000\", \"initial_read_mismatches\": \"2\", \"seg_mismatches\": \"2\", \"seg_length\": \"25\", \"own_junctions\": {\"use_junctions\": \"No\", \"__current_case__\": 1}, \"closure_search\": {\"use_search\": \"No\", \"__current_case__\": 1}, \"coverage_search\": {\"use_search\": \"Yes\", \"__current_case__\": 0, \"min_coverage_intron\": \"50\", \"max_coverage_intron\": \"20000\"}, \"microexon_search\": \"No\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.5",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "accepted_hits",
+                    "uuid": null
+                },
+                {
+                    "label": null,
+                    "output_name": "junctions",
+                    "uuid": null
+                }
+            ]
+        }
+    },
+    "tags": [],
+    "version": -1
+}

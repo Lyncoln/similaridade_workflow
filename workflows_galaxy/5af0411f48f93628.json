@@ -1,0 +1,159 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": " Generation of input-normalized coverage files and their visualization (CHIP)",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Bed file of interest (gene, chromosome or genome) imported from ucsc"
+                }
+            ],
+            "label": "Bed file of interest (gene, chromosome or genome) imported from ucsc",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 0
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "d99af3a7-caee-49db-a3f6-b6488d0681e1",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Bamcompare (bigbed)"
+                }
+            ],
+            "label": "Bamcompare (bigbed)",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 175
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "48d452d4-ed70-46db-8693-7f60bc479c58",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.5.1.0.0",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "multibigwig_conditional|bigwigfiles": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "regionsFiles_0|regionsFile": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "computeMatrix",
+            "outputs": [
+                {
+                    "name": "outFileName",
+                    "type": "deeptools_compute_matrix_archive"
+                }
+            ],
+            "position": {
+                "left": 291,
+                "top": 64
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.5.1.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "19bb3e6d9e31",
+                "name": "deeptools_compute_matrix",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__job_resource\": {\"__job_resource__select\": \"no\", \"__current_case__\": 0}, \"advancedOpt\": {\"showAdvancedOpt\": \"no\", \"__current_case__\": 0}, \"custom_sample_labels_conditional\": {\"custom_labels_select\": \"No\", \"__current_case__\": 0}, \"mode\": {\"mode_select\": \"reference-point\", \"__current_case__\": 1, \"referencePoint\": \"TSS\", \"nanAfterEnd\": false, \"beforeRegionStartLength\": \"1000\", \"afterRegionStartLength\": \"1000\"}, \"multibigwig_conditional\": {\"orderMatters\": \"No\", \"__current_case__\": 0, \"bigwigfiles\": {\"__class__\": \"ConnectedValue\"}}, \"output\": {\"showOutputSettings\": \"no\", \"__current_case__\": 0}, \"regionsFiles\": [{\"__index__\": 0, \"regionsFile\": {\"__class__\": \"ConnectedValue\"}}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.5.1.0.0",
+            "type": "tool",
+            "uuid": "346ce30b-18c6-4e51-a58c-f790832d935f",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "computeMatrix on input dataset(s): Matrix",
+                    "output_name": "outFileName",
+                    "uuid": "29a19062-63ab-45db-9562-010588837f11"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.5.1.0.1",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "matrixFile": {
+                    "id": 2,
+                    "output_name": "outFileName"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "plotHeatmap",
+            "outputs": [
+                {
+                    "name": "outFileName",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 551,
+                "top": 81
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.5.1.0.1",
+            "tool_shed_repository": {
+                "changeset_revision": "42cb23d80271",
+                "name": "deeptools_plot_heatmap",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"advancedOpt\": {\"showAdvancedOpt\": \"no\", \"__current_case__\": 0}, \"matrixFile\": {\"__class__\": \"ConnectedValue\"}, \"output\": {\"showOutputSettings\": \"no\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.5.1.0.1",
+            "type": "tool",
+            "uuid": "13eef50d-38a8-43c8-aa6f-1348c4c71b17",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "plotHeatmap on input dataset(s): Image",
+                    "output_name": "outFileName",
+                    "uuid": "826df0f4-0e1e-4d9d-ae25-daa6c25c80d2"
+                }
+            ]
+        }
+    },
+    "tags": [],
+    "uuid": "4a50d166-3e19-4173-a366-eb6fc1287451",
+    "version": 4
+}

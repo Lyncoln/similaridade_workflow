@@ -1,0 +1,300 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "op",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Input Dataset"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 267.59375,
+                "top": 205
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "3acccb80-0924-4450-a223-0f4d9553718e",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fasta_compute_length/fasta_compute_length/1.0.0",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Compute sequence length",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "Compute sequence length",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 461.09375,
+                "top": 232
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fasta_compute_length/fasta_compute_length/1.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "ece409f6573c",
+                "name": "fasta_compute_length",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"__class__\": \"RuntimeValue\"}, \"keep_first\": \"0\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "1f68cedc-a3fe-4144-8c5b-882b03669436",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/clustalw/clustalw/0.1",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool ClustalW",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "ClustalW",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "clustal"
+                },
+                {
+                    "name": "outlog",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 469.8125,
+                "top": 493.546875
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/clustalw/clustalw/0.1",
+            "tool_shed_repository": {
+                "changeset_revision": "7cc64024fe92",
+                "name": "clustalw",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"dnarna\": \"DNA\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"out_order\": \"ALIGNED\", \"outcontrol\": {\"outform\": \"fasta\", \"__current_case__\": 0}, \"outname\": \"Clustal_run\", \"range\": {\"mode\": \"complete\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1",
+            "type": "tool",
+            "uuid": "9c2f90f7-114d-4b80-9de3-32ec9fcc852f",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Filter",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 486.09375,
+                "top": 353
+            },
+            "post_job_actions": {},
+            "tool_id": "Filter1",
+            "tool_state": "{\"cond\": \"c2< 50 and c2 >10\", \"header_lines\": \"0\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "ea02f93d-696b-4b8d-be07-2eef28f40295",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/histogram/histogram_rpy/1.0.3",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Histogram",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "Histogram",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "left": 745.59375,
+                "top": 245
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/histogram/histogram_rpy/1.0.3",
+            "tool_shed_repository": {
+                "changeset_revision": "6f134426c2b0",
+                "name": "histogram",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"breaks\": \"0\", \"density\": true, \"frequency\": false, \"input\": {\"__class__\": \"RuntimeValue\"}, \"numerical_column\": \"2\", \"title\": \"Histogram\", \"xlab\": \"V1\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.3",
+            "type": "tool",
+            "uuid": "a69a72d6-a80d-42db-89a0-082056aa5194",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/weblogo3/rgweblogo3/0.4",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Sequence Logo",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "Sequence Logo",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "left": 703.8125,
+                "top": 470.546875
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/weblogo3/rgweblogo3/0.4",
+            "tool_shed_repository": {
+                "changeset_revision": "c1a9e644d580",
+                "name": "weblogo3",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"colours\": \"auto\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"logoname\": \"Galaxy-Rgenetics Sequence Logo\", \"outformat\": \"png\", \"range\": {\"mode\": \"complete\", \"__current_case__\": 0}, \"size\": \"large\", \"units\": \"bits\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.4",
+            "type": "tool",
+            "uuid": "46441799-159b-4e5e-b4a0-8496e2bfa7bc",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/histogram/histogram_rpy/1.0.3",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input": {
+                    "id": 3,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Histogram",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "Histogram",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "left": 750.09375,
+                "top": 360
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/histogram/histogram_rpy/1.0.3",
+            "tool_shed_repository": {
+                "changeset_revision": "6f134426c2b0",
+                "name": "histogram",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"breaks\": \"0\", \"density\": true, \"frequency\": false, \"input\": {\"__class__\": \"RuntimeValue\"}, \"numerical_column\": \"2\", \"title\": \"Histogram\", \"xlab\": \"V1\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.3",
+            "type": "tool",
+            "uuid": "3dc89496-0478-4f73-b164-9ab98ed34113",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [],
+    "uuid": "663b8f96-9ac9-4cac-8099-3e4359bf73bc",
+    "version": 13
+}

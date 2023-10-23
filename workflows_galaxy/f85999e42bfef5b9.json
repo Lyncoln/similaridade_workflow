@@ -1,0 +1,239 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "SPRING Map Cross-Reference",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "SPRING Unmapped Cross-reference"
+                }
+            ],
+            "label": "SPRING Unmapped Cross-reference",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 472.5,
+                "height": 84,
+                "left": -52.5,
+                "right": 147.5,
+                "top": 388.5,
+                "width": 200,
+                "x": -52.5,
+                "y": 388.5
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "d082bce2-bd9f-4ddf-bf49-c152d66a8619",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "PDB70 Identifiers"
+                }
+            ],
+            "label": "PDB70 Identifiers",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 610.5,
+                "height": 84,
+                "left": 225.5,
+                "right": 425.5,
+                "top": 526.5,
+                "width": 200,
+                "x": 225.5,
+                "y": 526.5
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "1e353232-6722-49dc-a12a-8f3198ee8214",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/split_file_to_collection/split_file_to_collection/0.5.0",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "split_parms|input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Split file",
+            "outputs": [
+                {
+                    "name": "list_output_txt",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 488.5,
+                "height": 116,
+                "left": 225.5,
+                "right": 425.5,
+                "top": 372.5,
+                "width": 200,
+                "x": 225.5,
+                "y": 372.5
+            },
+            "post_job_actions": {
+                "HideDatasetActionlist_output_txt": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "list_output_txt"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/split_file_to_collection/split_file_to_collection/0.5.0",
+            "tool_shed_repository": {
+                "changeset_revision": "6cbe2f30c2d7",
+                "name": "split_file_to_collection",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"split_parms\": {\"select_ftype\": \"txt\", \"__current_case__\": 5, \"input\": {\"__class__\": \"ConnectedValue\"}, \"select_mode\": {\"mode\": \"numnew\", \"__current_case__\": 1, \"numnew\": \"50\"}, \"newfilenames\": \"split_file\", \"select_allocate\": {\"allocate\": \"batch\", \"__current_case__\": 1}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.5.0",
+            "type": "tool",
+            "uuid": "f52a71b1-71d5-42ba-87b7-9f6d0976f8b4",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/guerler/spring_map/spring_map/0.2+galaxy0",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "cross": {
+                    "id": 2,
+                    "output_name": "list_output_txt"
+                },
+                "list": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "SPRING Map",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 538.5,
+                "height": 168,
+                "left": 503.5,
+                "right": 703.5,
+                "top": 370.5,
+                "width": 200,
+                "x": 503.5,
+                "y": 370.5
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/guerler/spring_map/spring_map/0.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "5f5cdcfaa1a9",
+                "name": "spring_map",
+                "owner": "guerler",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"cross\": {\"__class__\": \"ConnectedValue\"}, \"evalue\": \"0.001\", \"list\": {\"__class__\": \"ConnectedValue\"}, \"logfile\": false, \"pdb_source\": {\"pdb_source_selector\": \"indexed\", \"__current_case__\": 0, \"pdb\": \"pdb_2021-03\", \"zipped\": \"gz\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2+galaxy0",
+            "type": "tool",
+            "uuid": "cdd951c2-33ac-4f2a-9521-7bf1347137a6",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input_list": {
+                    "id": 3,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Collapse Collection",
+                    "name": "input_list"
+                }
+            ],
+            "label": null,
+            "name": "Collapse Collection",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 536.5,
+                "height": 137,
+                "left": 781.5,
+                "right": 981.5,
+                "top": 399.5,
+                "width": 200,
+                "x": 781.5,
+                "y": 399.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2",
+            "tool_shed_repository": {
+                "changeset_revision": "830961c48e42",
+                "name": "collapse_collections",
+                "owner": "nml",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"filename\": {\"add_name\": false, \"__current_case__\": 1}, \"input_list\": {\"__class__\": \"RuntimeValue\"}, \"one_header\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "4.2",
+            "type": "tool",
+            "uuid": "529e3d83-1e81-48a2-bbf7-67e7897bd42d",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "16d49261-4951-48a1-8d2a-7a4bb0d495b9"
+                }
+            ]
+        }
+    },
+    "tags": [],
+    "uuid": "7edf447b-d3b0-4186-aa8f-931daa02ccc0",
+    "version": 2
+}

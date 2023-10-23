@@ -1,0 +1,224 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "RNA-Seq_B_Analysis - Alignment",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Reads wild type in FASTQ format"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 196,
+                "top": 109
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Reads from mutant in FASTQ format"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 198,
+                "top": 306
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "tophat",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input1": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "TopHat for Illumina",
+            "outputs": [
+                {
+                    "name": "insertions",
+                    "type": "bed"
+                },
+                {
+                    "name": "deletions",
+                    "type": "bed"
+                },
+                {
+                    "name": "junctions",
+                    "type": "bed"
+                },
+                {
+                    "name": "accepted_hits",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 447,
+                "top": 133
+            },
+            "post_job_actions": {
+                "HideDatasetActiondeletions": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "deletions"
+                },
+                "HideDatasetActioninsertions": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "insertions"
+                },
+                "HideDatasetActionjunctions": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "junctions"
+                },
+                "RenameDatasetActionaccepted_hits": {
+                    "action_arguments": {
+                        "newname": "Reads_WT_aligned.bam"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "accepted_hits"
+                }
+            },
+            "tool_id": "tophat",
+            "tool_shed_repository": {
+                "changeset_revision": "2ad64c5bb5f4",
+                "name": "tophat",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input1\": null, \"refGenomeSource\": {\"genomeSource\": \"indexed\", \"__current_case__\": 0, \"index\": \"Zea_mays_B73_RefGen_v2\"}, \"singlePaired\": {\"sPaired\": \"single\", \"__current_case__\": 0, \"sParams\": {\"sSettingsType\": \"preSet\", \"__current_case__\": 0}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.5.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "accepted_hits",
+                    "uuid": null
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "tophat",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input1": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "TopHat for Illumina",
+            "outputs": [
+                {
+                    "name": "insertions",
+                    "type": "bed"
+                },
+                {
+                    "name": "deletions",
+                    "type": "bed"
+                },
+                {
+                    "name": "junctions",
+                    "type": "bed"
+                },
+                {
+                    "name": "accepted_hits",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 445,
+                "top": 374
+            },
+            "post_job_actions": {
+                "HideDatasetActiondeletions": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "deletions"
+                },
+                "HideDatasetActioninsertions": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "insertions"
+                },
+                "HideDatasetActionjunctions": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "junctions"
+                },
+                "RenameDatasetActionaccepted_hits": {
+                    "action_arguments": {
+                        "newname": "Reads_MUT_aligned.bam"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "accepted_hits"
+                }
+            },
+            "tool_id": "tophat",
+            "tool_shed_repository": {
+                "changeset_revision": "2ad64c5bb5f4",
+                "name": "tophat",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input1\": null, \"refGenomeSource\": {\"genomeSource\": \"indexed\", \"__current_case__\": 0, \"index\": \"Zea_mays_B73_RefGen_v2\"}, \"singlePaired\": {\"sPaired\": \"single\", \"__current_case__\": 0, \"sParams\": {\"sSettingsType\": \"preSet\", \"__current_case__\": 0}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.5.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "accepted_hits",
+                    "uuid": null
+                }
+            ]
+        }
+    },
+    "tags": [],
+    "version": 2
+}

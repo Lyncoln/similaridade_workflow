@@ -1,0 +1,569 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "CloudMap Subtract Variants workflow (1 set candidates, 1 sets of variants to subtract)",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Fasta reference"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 248.4000244140625,
+                "top": 339.6000118255615
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Candidate gene list"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 256.8000183105469,
+                "top": 492.0000057220459
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Variants for mutant under analysis (VCF file) (e.g. ot266 in CloudMap paper)"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 248.4000244140625,
+                "top": 625.2000484466553
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 3,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Variants to subtract 1 (VCF file) (e.g. ot260 or ot263 in CloudMap paper)"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 258.0000305175781,
+                "top": 742.8000240325928
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 4,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Variants to subtract 2 (VCF file) (e.g. ot260 or ot263 in CloudMap paper)"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 261.6000061035156,
+                "top": 843.6000118255615
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "gatk_variant_combine",
+            "errors": "Tool is not installed",
+            "id": 5,
+            "input_connections": {
+                "reference_source|input_variants_0|input_variant": {
+                    "id": 3,
+                    "output_name": "output"
+                },
+                "reference_source|input_variants_1|input_variant": {
+                    "id": 4,
+                    "output_name": "output"
+                },
+                "reference_source|ref_file": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "gatk_variant_combine",
+            "outputs": [],
+            "position": {
+                "left": 613.6000061035156,
+                "top": 205.60001182556152
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_log": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_log"
+                },
+                "HideDatasetActionoutput_variants": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_variants"
+                },
+                "RenameDatasetActionoutput_variants": {
+                    "action_arguments": {
+                        "newname": "Merge of variants that will be used for subtraction"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_variants"
+                }
+            },
+            "tool_id": "gatk_variant_combine",
+            "tool_state": "{\"analysis_param_type\": \"{\\\"set_key\\\": \\\"\\\", \\\"minimum_n\\\": \\\"1\\\", \\\"filtered_records_merge_type\\\": \\\"KEEP_IF_ANY_UNFILTERED\\\", \\\"analysis_param_type_selector\\\": \\\"advanced\\\", \\\"assume_identical_samples\\\": \\\"False\\\", \\\"__current_case__\\\": 1, \\\"filtered_are_uncalled\\\": \\\"False\\\", \\\"print_complex_merges\\\": \\\"False\\\", \\\"minimal_vcf\\\": \\\"False\\\"}\", \"chromInfo\": \"\\\"/galaxy/home/g2test/galaxy_test/tool-data/shared/ucsc/chrom/ce10.len\\\"\", \"gatk_param_type\": \"{\\\"gatk_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"genotype_merge_option\": \"\\\"UNIQUIFY\\\"\", \"reference_source\": \"{\\\"ref_file\\\": null, \\\"reference_source_selector\\\": \\\"history\\\", \\\"__current_case__\\\": 1, \\\"input_variants\\\": [{\\\"__index__\\\": 0, \\\"input_variant\\\": null, \\\"input_variant_name\\\": \\\"A\\\"}, {\\\"__index__\\\": 1, \\\"input_variant\\\": null, \\\"input_variant_name\\\": \\\"B\\\"}]}\"}",
+            "tool_version": "0.0.4",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "gatk_variant_select",
+            "errors": "Tool is not installed",
+            "id": 6,
+            "input_connections": {
+                "input_discordance": {
+                    "id": 5,
+                    "output_name": "output_variants"
+                },
+                "reference_source|input_variant": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "reference_source|ref_file": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "gatk_variant_select",
+            "outputs": [],
+            "position": {
+                "left": 614.4000549316406,
+                "top": 632.3999996185303
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_log": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_log"
+                },
+                "RenameDatasetActionoutput_vcf": {
+                    "action_arguments": {
+                        "newname": "Subtracted variants (liberal, variants present in either subtraction strain removed)"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_vcf"
+                }
+            },
+            "tool_id": "gatk_variant_select",
+            "tool_state": "{\"analysis_param_type\": \"{\\\"analysis_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"chromInfo\": \"\\\"/galaxy/home/g2test/galaxy_test/tool-data/shared/ucsc/chrom/ce10.len\\\"\", \"exclude_filtered\": \"\\\"False\\\"\", \"exclude_sample_name_repeat\": \"[]\", \"gatk_param_type\": \"{\\\"gatk_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"input_concordance\": \"null\", \"input_discordance\": \"null\", \"reference_source\": \"{\\\"ref_file\\\": null, \\\"reference_source_selector\\\": \\\"history\\\", \\\"input_variant\\\": null, \\\"__current_case__\\\": 1}\", \"sample_name_repeat\": \"[]\", \"select_expressions_repeat\": \"[]\"}",
+            "tool_version": "0.0.2",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "gatk_variant_select",
+            "errors": "Tool is not installed",
+            "id": 7,
+            "input_connections": {
+                "reference_source|input_variant": {
+                    "id": 5,
+                    "output_name": "output_variants"
+                },
+                "reference_source|ref_file": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "gatk_variant_select",
+            "outputs": [],
+            "position": {
+                "left": 938.3999938964844,
+                "top": 162.0000057220459
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_log": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_log"
+                },
+                "HideDatasetActionoutput_vcf": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_vcf"
+                }
+            },
+            "tool_id": "gatk_variant_select",
+            "tool_state": "{\"analysis_param_type\": \"{\\\"analysis_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"chromInfo\": \"\\\"/galaxy/home/g2test/galaxy_test/tool-data/shared/ucsc/chrom/ce10.len\\\"\", \"exclude_filtered\": \"\\\"False\\\"\", \"exclude_sample_name_repeat\": \"[]\", \"gatk_param_type\": \"{\\\"gatk_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"input_concordance\": \"null\", \"input_discordance\": \"null\", \"reference_source\": \"{\\\"ref_file\\\": null, \\\"reference_source_selector\\\": \\\"history\\\", \\\"input_variant\\\": null, \\\"__current_case__\\\": 1}\", \"sample_name_repeat\": \"[]\", \"select_expressions_repeat\": \"[{\\\"__index__\\\": 0, \\\"select_expressions\\\": \\\"set == \\\\\\\"Intersection\\\\\\\"\\\"}]\"}",
+            "tool_version": "0.0.2",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/pcingola/snpeff/snpEff/1.0",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input": {
+                    "id": 6,
+                    "output_name": "output_vcf"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "SnpEff",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                },
+                {
+                    "name": "statsFile",
+                    "type": "html"
+                }
+            ],
+            "position": {
+                "left": 968.3999938964844,
+                "top": 750.000036239624
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                },
+                "HideDatasetActionstatsFile": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "statsFile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/pcingola/snpeff/snpEff/1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "c052639fa666",
+                "name": "snpeff",
+                "owner": "pcingola",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/galaxy/home/g2test/galaxy_test/tool-data/shared/ucsc/chrom/ce10.len\", \"filterHomHet\": \"\", \"filterIn\": \"\", \"filterOut\": \"None\", \"genomeVersion\": \"WS220.64\", \"input\": null, \"inputFormat\": \"vcf\", \"offset\": \"\", \"outputFormat\": \"txt\", \"udLength\": \"10000\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "gatk_variant_select",
+            "errors": "Tool is not installed",
+            "id": 9,
+            "input_connections": {
+                "input_discordance": {
+                    "id": 7,
+                    "output_name": "output_vcf"
+                },
+                "reference_source|input_variant": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "reference_source|ref_file": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "gatk_variant_select",
+            "outputs": [],
+            "position": {
+                "left": 954.0000915527344,
+                "top": 464.4000301361084
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_log": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_log"
+                },
+                "HideDatasetActionoutput_vcf": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_vcf"
+                },
+                "RenameDatasetActionoutput_vcf": {
+                    "action_arguments": {
+                        "newname": "Subtracted variants (conservative, only variants present in both subtraction strains removed)"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_vcf"
+                }
+            },
+            "tool_id": "gatk_variant_select",
+            "tool_state": "{\"analysis_param_type\": \"{\\\"analysis_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"chromInfo\": \"\\\"/galaxy/home/g2test/galaxy_test/tool-data/shared/ucsc/chrom/ce10.len\\\"\", \"exclude_filtered\": \"\\\"False\\\"\", \"exclude_sample_name_repeat\": \"[]\", \"gatk_param_type\": \"{\\\"gatk_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"input_concordance\": \"null\", \"input_discordance\": \"null\", \"reference_source\": \"{\\\"ref_file\\\": null, \\\"reference_source_selector\\\": \\\"history\\\", \\\"input_variant\\\": null, \\\"__current_case__\\\": 1}\", \"sample_name_repeat\": \"[]\", \"select_expressions_repeat\": \"[]\"}",
+            "tool_version": "0.0.2",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/gregory-minevich/check_snpeff_candidates/check_snpeff_candidates/1.0.0",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "candidate_list": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "snpeff_file": {
+                    "id": 8,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "CloudMap: Check snpEff Candidates",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1342.8000183105469,
+                "top": 648.000036239624
+            },
+            "post_job_actions": {
+                "EmailActionoutput": {
+                    "action_arguments": {
+                        "host": "test.g2.bx.psu.edu"
+                    },
+                    "action_type": "EmailAction",
+                    "output_name": "output"
+                },
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Annotated subtracted variants (liberal, variants present in either subtraction strain removed)"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/gregory-minevich/check_snpeff_candidates/check_snpeff_candidates/1.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "f20585ccbf05",
+                "name": "check_snpeff_candidates",
+                "owner": "gregory-minevich",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"candidate_list\": null, \"chromInfo\": \"/galaxy/home/g2test/galaxy_test/tool-data/shared/ucsc/chrom/ce10.len\", \"snpeff_file\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/pcingola/snpeff/snpEff/1.0",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "input": {
+                    "id": 9,
+                    "output_name": "output_vcf"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "SnpEff",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                },
+                {
+                    "name": "statsFile",
+                    "type": "html"
+                }
+            ],
+            "position": {
+                "left": 1334.4001159667969,
+                "top": 417.6000118255615
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                },
+                "HideDatasetActionstatsFile": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "statsFile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/pcingola/snpeff/snpEff/1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "c052639fa666",
+                "name": "snpeff",
+                "owner": "pcingola",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/galaxy/home/g2test/galaxy_test/tool-data/shared/ucsc/chrom/ce10.len\", \"filterHomHet\": \"\", \"filterIn\": \"\", \"filterOut\": \"None\", \"genomeVersion\": \"WS220.64\", \"input\": null, \"inputFormat\": \"vcf\", \"offset\": \"\", \"outputFormat\": \"txt\", \"udLength\": \"10000\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/gregory-minevich/check_snpeff_candidates/check_snpeff_candidates/1.0.0",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "candidate_list": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "snpeff_file": {
+                    "id": 11,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "CloudMap: Check snpEff Candidates",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1326.0000915527344,
+                "top": 211.2000026702881
+            },
+            "post_job_actions": {
+                "EmailActionoutput": {
+                    "action_arguments": {
+                        "host": "test.g2.bx.psu.edu"
+                    },
+                    "action_type": "EmailAction",
+                    "output_name": "output"
+                },
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Annotated subtracted variants (conservative, only variants present in both subtraction strains removed)"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/gregory-minevich/check_snpeff_candidates/check_snpeff_candidates/1.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "f20585ccbf05",
+                "name": "check_snpeff_candidates",
+                "owner": "gregory-minevich",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"candidate_list\": null, \"chromInfo\": \"/galaxy/home/g2test/galaxy_test/tool-data/shared/ucsc/chrom/ce10.len\", \"snpeff_file\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "None",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [],
+    "version": 0
+}

@@ -1,0 +1,277 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "BINF6000 workshop 1- performing the differential gene analysis using the CuffDiff tool",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Alignment of data 2 using Bowtie2"
+                }
+            ],
+            "label": "Alignment of data 2 using Bowtie2",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 273.71875,
+                "height": 40.5,
+                "left": 899.9375,
+                "right": 999.9375,
+                "top": 233.21875,
+                "width": 100,
+                "x": 899.9375,
+                "y": 233.21875
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "ec125762-cbcc-4b3e-8dfe-aac0d160f8d8",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "9761d8ae-9e99-4caf-85ec-abf50076d986"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Alignment of data 3 using Bowtie2"
+                }
+            ],
+            "label": "Alignment of data 3 using Bowtie2",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 393.71875,
+                "height": 40.5,
+                "left": 899.9375,
+                "right": 999.9375,
+                "top": 353.21875,
+                "width": 100,
+                "x": 899.9375,
+                "y": 353.21875
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "c100fa49-a2ea-499a-a510-3cdfc4c80b15",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "21daf665-aab7-49c5-a840-6a5cc996629f"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Merge data using StringTie tool"
+                }
+            ],
+            "label": "Merge data using StringTie tool",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 513.71875,
+                "height": 40.5,
+                "left": 899.9375,
+                "right": 999.9375,
+                "top": 473.21875,
+                "width": 100,
+                "x": 899.9375,
+                "y": 473.21875
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "bb092a3e-da3d-4da3-87b9-dbbb61758018",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "7405b479-1782-4ded-a5ce-2cfb6ade9901"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/cuffdiff/cuffdiff/2.2.1.6",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "gtf_input": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "in_type|conditions_0|samples": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "in_type|conditions_1|samples": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Diiferential gene analysis using the CuffDiff tool",
+            "name": "Cuffdiff",
+            "outputs": [
+                {
+                    "name": "splicing_diff",
+                    "type": "tabular"
+                },
+                {
+                    "name": "promoters_diff",
+                    "type": "tabular"
+                },
+                {
+                    "name": "cds_diff",
+                    "type": "tabular"
+                },
+                {
+                    "name": "cds_exp_fpkm_tracking",
+                    "type": "tabular"
+                },
+                {
+                    "name": "cds_fpkm_tracking",
+                    "type": "tabular"
+                },
+                {
+                    "name": "tss_groups_exp",
+                    "type": "tabular"
+                },
+                {
+                    "name": "tss_groups_fpkm_tracking",
+                    "type": "tabular"
+                },
+                {
+                    "name": "genes_exp",
+                    "type": "tabular"
+                },
+                {
+                    "name": "genes_fpkm_tracking",
+                    "type": "tabular"
+                },
+                {
+                    "name": "isoforms_exp",
+                    "type": "tabular"
+                },
+                {
+                    "name": "isoforms_fpkm_tracking",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 759.21875,
+                "height": 526,
+                "left": 1119.9271240234375,
+                "right": 1219.9271240234375,
+                "top": 233.21875,
+                "width": 100,
+                "x": 1119.9271240234375,
+                "y": 233.21875
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/cuffdiff/cuffdiff/2.2.1.6",
+            "tool_shed_repository": {
+                "changeset_revision": "43221aef70e2",
+                "name": "cuffdiff",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"gtf\", \"__job_resource\": {\"__job_resource__select\": \"no\", \"__current_case__\": 0}, \"additional\": {\"sAdditional\": \"No\", \"__current_case__\": 0}, \"advanced_settings\": {\"sAdvanced\": \"No\", \"__current_case__\": 0}, \"bias_correction\": {\"do_bias_correction\": \"No\", \"__current_case__\": 1}, \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"dispersion_method\": \"pooled\", \"fdr\": \"0.05\", \"generate_sqlite\": false, \"gtf_input\": {\"__class__\": \"ConnectedValue\"}, \"in_type\": {\"set_in_type\": \"BAM\", \"__current_case__\": 0, \"conditions\": [{\"__index__\": 0, \"name\": \"Embryo\", \"samples\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 1, \"name\": \"Adult\", \"samples\": {\"__class__\": \"ConnectedValue\"}}]}, \"include_count_files\": \"No\", \"include_read_group_files\": \"No\", \"length_correction\": \"\", \"library_norm_method\": \"geometric\", \"min_alignment_count\": \"10\", \"multiread_correct\": false, \"omit_tabular_output\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.2.1.6",
+            "type": "tool",
+            "uuid": "c7e2274f-a99a-4399-a2a3-2b1e2d684640",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "splicing_diff",
+                    "uuid": "8c94df7a-9df0-4623-a33d-4d3de39b3253"
+                },
+                {
+                    "label": null,
+                    "output_name": "promoters_diff",
+                    "uuid": "43c1096f-5338-4143-be05-9f788db6124e"
+                },
+                {
+                    "label": null,
+                    "output_name": "cds_diff",
+                    "uuid": "6ee290a8-80d8-4437-a3c8-e65159290792"
+                },
+                {
+                    "label": null,
+                    "output_name": "cds_exp_fpkm_tracking",
+                    "uuid": "9cd3b075-2599-4f1f-992a-0d2e463fc686"
+                },
+                {
+                    "label": null,
+                    "output_name": "cds_fpkm_tracking",
+                    "uuid": "a2216877-8d2c-4798-b462-081081b435d9"
+                },
+                {
+                    "label": null,
+                    "output_name": "tss_groups_exp",
+                    "uuid": "b889bb29-220b-4572-a04c-75b34117625e"
+                },
+                {
+                    "label": null,
+                    "output_name": "tss_groups_fpkm_tracking",
+                    "uuid": "e3322286-2a39-4473-8568-04eae41c3001"
+                },
+                {
+                    "label": null,
+                    "output_name": "genes_exp",
+                    "uuid": "8cd4d0c6-9f59-4abf-bf9f-7a851faac7a0"
+                },
+                {
+                    "label": null,
+                    "output_name": "genes_fpkm_tracking",
+                    "uuid": "be3c729d-9c10-4ea5-9362-a79a8b00de09"
+                },
+                {
+                    "label": null,
+                    "output_name": "isoforms_exp",
+                    "uuid": "5bf1a142-bb34-4274-9b75-47da984e3217"
+                },
+                {
+                    "label": null,
+                    "output_name": "isoforms_fpkm_tracking",
+                    "uuid": "d57ed8e7-b05c-44cc-a427-dd799fe92d1b"
+                }
+            ]
+        }
+    },
+    "tags": [],
+    "uuid": "0303673f-26d9-421d-b21e-1528a4322596",
+    "version": 2
+}

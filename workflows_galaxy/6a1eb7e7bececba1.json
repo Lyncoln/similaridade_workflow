@@ -1,0 +1,515 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "Phylogenetic analysis Workflow",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Khairul-Tetsing"
+                }
+            ],
+            "label": "Khairul-Tetsing",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 347.234375,
+                "height": 61.78125,
+                "left": 678.359375,
+                "right": 878.359375,
+                "top": 285.453125,
+                "width": 200,
+                "x": 678.359375,
+                "y": 285.453125
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "de7cca9b-c0f5-4651-9bfd-afcde6df8bfb",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.221.3",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "inputSequences": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "MAFFT",
+            "outputs": [
+                {
+                    "name": "outputAlignment",
+                    "type": "fasta"
+                }
+            ],
+            "position": {
+                "bottom": 291.40625,
+                "height": 133.953125,
+                "left": 1060.859375,
+                "right": 1260.859375,
+                "top": 157.453125,
+                "width": 200,
+                "x": 1060.859375,
+                "y": 157.453125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.221.3",
+            "tool_shed_repository": {
+                "changeset_revision": "15974dd17515",
+                "name": "mafft",
+                "owner": "rnateam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__job_resource\": {\"__job_resource__select\": \"no\", \"__current_case__\": 0}, \"adjustdirection\": \" \", \"cond_flavour\": {\"flavourType\": \"mafft-fftns\", \"__current_case__\": 0}, \"datatype\": \"\", \"ep\": \"0.123\", \"getTree\": false, \"inputSequences\": {\"__class__\": \"ConnectedValue\"}, \"matrix_condition\": {\"matrix\": \"\", \"__current_case__\": 0}, \"op\": \"1.53\", \"outputFormat\": \"\", \"reorder\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "7.221.3",
+            "type": "tool",
+            "uuid": "c216f588-44a5-43b8-80e9-0453ff2c9b92",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "MAFFT on input dataset(s)",
+                    "output_name": "outputAlignment",
+                    "uuid": "d1e64df3-283b-4503-92da-1586a71e0a44"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/clustalw/clustalw/2.1",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "ClustalW",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "clustal"
+                },
+                {
+                    "name": "dnd",
+                    "type": "nhx"
+                }
+            ],
+            "position": {
+                "bottom": 538.1875,
+                "height": 184.734375,
+                "left": 1064.859375,
+                "right": 1264.859375,
+                "top": 353.453125,
+                "width": 200,
+                "x": 1064.859375,
+                "y": 353.453125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/clustalw/clustalw/2.1",
+            "tool_shed_repository": {
+                "changeset_revision": "d6694932c5e0",
+                "name": "clustalw",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"dnarna\": \"DNA\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"out_order\": \"ALIGNED\", \"outcontrol\": {\"outform\": \"clustal\", \"__current_case__\": 2, \"out_seqnos\": false}, \"range\": {\"mode\": \"complete\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1",
+            "type": "tool",
+            "uuid": "64105da5-71f6-4bbb-8abe-39e2ebb2d0e5",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "ClustalW on input dataset(s): clustal",
+                    "output_name": "output",
+                    "uuid": "52a4af80-2a86-4afe-9961-d29bddc4d569"
+                },
+                {
+                    "label": "ClustalW on input dataset(s): dnd",
+                    "output_name": "dnd",
+                    "uuid": "04b68b91-6cd5-4023-b2a4-de764febf749"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_fastq_info/mothur_fastq_info/1.39.5.0",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "fastq": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Fastq.info",
+            "outputs": [
+                {
+                    "name": "fasta_out",
+                    "type": "fasta"
+                },
+                {
+                    "name": "qfile_out",
+                    "type": "qual454"
+                },
+                {
+                    "name": "fastq_scrap_out",
+                    "type": "fastq"
+                },
+                {
+                    "name": "fasta_scrap_out",
+                    "type": "fasta"
+                },
+                {
+                    "name": "qfile_scrap_out",
+                    "type": "qual454"
+                }
+            ],
+            "position": {
+                "bottom": 1508.3125,
+                "height": 377.859375,
+                "left": 731.296875,
+                "right": 931.296875,
+                "top": 1130.453125,
+                "width": 200,
+                "x": 731.296875,
+                "y": 1130.453125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_fastq_info/mothur_fastq_info/1.39.5.0",
+            "tool_shed_repository": {
+                "changeset_revision": "a630c5167f5d",
+                "name": "mothur_fastq_info",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"fastq\": {\"__class__\": \"ConnectedValue\"}, \"format\": \"sanger\", \"oligo\": {\"add\": \"no\", \"__current_case__\": 1}, \"pacbio\": false, \"savelog\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.39.5.0",
+            "type": "tool",
+            "uuid": "aad0e03c-cce8-4c6c-8c14-912628554308",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Fastq.info on input dataset(s): qual",
+                    "output_name": "qfile_out",
+                    "uuid": "2b6a4df3-1a3b-4963-938b-255bbefdf321"
+                },
+                {
+                    "label": "Fastq.info on input dataset(s): qual scrap",
+                    "output_name": "qfile_scrap_out",
+                    "uuid": "ad627aef-c05f-447b-b630-2ae12a4fe77f"
+                },
+                {
+                    "label": "Fastq.info on input dataset(s): fasta scrap",
+                    "output_name": "fasta_scrap_out",
+                    "uuid": "f105d76a-b7c5-429c-9e02-11ca18c5353c"
+                },
+                {
+                    "label": "Fastq.info on input dataset(s): fasta",
+                    "output_name": "fasta_out",
+                    "uuid": "3cd56c57-6a10-4e46-b9d2-2104cbaa693c"
+                },
+                {
+                    "label": "Fastq.info on input dataset(s): fastq scrap",
+                    "output_name": "fastq_scrap_out",
+                    "uuid": "04b31c48-f361-44e0-a124-32f7494ca41c"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/iqtree/iqtree/1.5.5.3",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "general_options|s": {
+                    "id": 1,
+                    "output_name": "outputAlignment"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool IQ-TREE",
+                    "name": "general_options"
+                },
+                {
+                    "description": "runtime parameter for tool IQ-TREE",
+                    "name": "general_options"
+                },
+                {
+                    "description": "runtime parameter for tool IQ-TREE",
+                    "name": "likelihood_mapping"
+                }
+            ],
+            "label": null,
+            "name": "IQ-TREE",
+            "outputs": [
+                {
+                    "name": "bionj",
+                    "type": "nhx"
+                },
+                {
+                    "name": "treefile",
+                    "type": "nhx"
+                },
+                {
+                    "name": "contree",
+                    "type": "nhx"
+                },
+                {
+                    "name": "mldist",
+                    "type": "mldist"
+                },
+                {
+                    "name": "splits.nex",
+                    "type": "nex"
+                },
+                {
+                    "name": "iqtree",
+                    "type": "iqtree"
+                }
+            ],
+            "position": {
+                "bottom": 1236.1875,
+                "height": 1170.75,
+                "left": 1897.875,
+                "right": 2097.875,
+                "top": 65.4375,
+                "width": 200,
+                "x": 1897.875,
+                "y": 65.4375
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/iqtree/iqtree/1.5.5.3",
+            "tool_shed_repository": {
+                "changeset_revision": "f97743d52b87",
+                "name": "iqtree",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__job_resource\": {\"__job_resource__select\": \"no\", \"__current_case__\": 0}, \"bootstrap_parameters\": {\"ultrafast_bootstrap\": {\"bb\": null, \"wbt\": false, \"wbtl\": false, \"nm\": \"1000\", \"bcor\": \"0.99\", \"nstep\": \"100\", \"beps\": \"0.5\", \"bspec\": \"\", \"bnni\": false}, \"nonparametric_bootstrap\": {\"b\": null, \"bc\": false, \"bo\": false}}, \"general_options\": {\"s\": {\"__class__\": \"ConnectedValue\"}, \"short_alignments\": false, \"st\": \"DNA\", \"t\": {\"__class__\": \"RuntimeValue\"}, \"te\": {\"__class__\": \"RuntimeValue\"}, \"seed\": null, \"keep_ident\": false, \"safe\": false}, \"likelihood_mapping\": {\"lmap\": null, \"lmclust\": {\"__class__\": \"RuntimeValue\"}, \"wql\": false}, \"miscellaneous_options\": {\"fconst\": \"\"}, \"modelling_parameters\": {\"automatic_model\": {\"cond_model\": {\"opt_custommodel\": false, \"__current_case__\": 1, \"m\": \"\"}, \"rcluster\": null, \"mset\": \"\", \"msub\": \"nuclear\", \"mfreq\": \"\", \"mrate\": \"\", \"cmin\": \"2\", \"cmax\": \"10\", \"merit\": \"AIC\", \"mtree\": false, \"madd\": \"\", \"mdef\": {\"__class__\": \"RuntimeValue\"}}, \"specifying_substitution\": {\"mwopt\": false}, \"rate_heterogeneity\": {\"a\": \"\", \"gmedian\": false, \"i\": \"\", \"opt_gamma_inv\": false, \"wsr\": false}, \"partition_model\": {\"q\": {\"__class__\": \"RuntimeValue\"}, \"spp\": false, \"sp\": {\"__class__\": \"RuntimeValue\"}}, \"site_specific_frequency\": {\"ft\": {\"__class__\": \"RuntimeValue\"}, \"fs\": null, \"fmax\": false}}, \"tree_parameters\": {\"tree_search\": {\"n\": null, \"ninit\": \"100\", \"ntop\": \"20\", \"nbest\": \"5\", \"nstop\": \"100\", \"sprrad\": \"6\", \"pers\": \"0.5\", \"allnni\": false, \"djc\": false, \"g\": {\"__class__\": \"RuntimeValue\"}}, \"single_branch\": {\"alrt\": null, \"abayes\": false, \"lbp\": null}, \"tree_topology\": {\"z\": {\"__class__\": \"RuntimeValue\"}, \"zb\": null, \"zw\": false, \"au\": false}, \"constructing_consensus\": {\"con\": false, \"net\": false, \"minsup\": \"0.0\", \"bi\": null, \"sup\": {\"__class__\": \"RuntimeValue\"}, \"suptag\": \"\"}, \"computing_robinson_foulds\": {\"rf\": {\"__class__\": \"RuntimeValue\"}, \"rf_all\": false, \"rf_adj\": false}, \"generating_random\": {\"r\": null, \"ru\": false, \"rcat\": false, \"rbal\": false, \"rcsg\": false, \"rlen\": \"\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.5.5.3",
+            "type": "tool",
+            "uuid": "e1e2b586-c437-4028-8871-2c9f300b67dc",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "IQ-TREE on input dataset(s): BIONJ Tree",
+                    "output_name": "bionj",
+                    "uuid": "8649f466-1d0f-496f-b4af-1af3ab158126"
+                },
+                {
+                    "label": "IQ-TREE on input dataset(s): Consensus Tree",
+                    "output_name": "contree",
+                    "uuid": "bca64da6-acbd-4dbb-896b-ad004ecf27e4"
+                },
+                {
+                    "label": "IQ-TREE on input dataset(s): MaxLikelihood Distance Matrix",
+                    "output_name": "mldist",
+                    "uuid": "8038b0de-f1aa-4cac-87de-349573c8c186"
+                },
+                {
+                    "label": "IQ-TREE on input dataset(s): Occurence Frequencies in Bootstrap Trees",
+                    "output_name": "splits.nex",
+                    "uuid": "ca677ec1-7389-4b28-85b1-2afbbdd13c5b"
+                },
+                {
+                    "label": "IQ-TREE on input dataset(s): Report and Final Tree",
+                    "output_name": "iqtree",
+                    "uuid": "26b3b148-8285-48e7-8cf8-5cd1213b5eb1"
+                },
+                {
+                    "label": "IQ-TREE on input dataset(s): MaxLikelihood Tree",
+                    "output_name": "treefile",
+                    "uuid": "6b37787f-977e-4202-bbf1-fcd00fe4f52c"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/iqtree/iqtree/1.5.5.3",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "general_options|s": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool IQ-TREE",
+                    "name": "general_options"
+                },
+                {
+                    "description": "runtime parameter for tool IQ-TREE",
+                    "name": "general_options"
+                },
+                {
+                    "description": "runtime parameter for tool IQ-TREE",
+                    "name": "likelihood_mapping"
+                }
+            ],
+            "label": null,
+            "name": "IQ-TREE",
+            "outputs": [
+                {
+                    "name": "bionj",
+                    "type": "nhx"
+                },
+                {
+                    "name": "treefile",
+                    "type": "nhx"
+                },
+                {
+                    "name": "contree",
+                    "type": "nhx"
+                },
+                {
+                    "name": "mldist",
+                    "type": "mldist"
+                },
+                {
+                    "name": "splits.nex",
+                    "type": "nex"
+                },
+                {
+                    "name": "iqtree",
+                    "type": "iqtree"
+                }
+            ],
+            "position": {
+                "bottom": 1435.203125,
+                "height": 1170.75,
+                "left": 1562.796875,
+                "right": 1762.796875,
+                "top": 264.453125,
+                "width": 200,
+                "x": 1562.796875,
+                "y": 264.453125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/iqtree/iqtree/1.5.5.3",
+            "tool_shed_repository": {
+                "changeset_revision": "f97743d52b87",
+                "name": "iqtree",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__job_resource\": {\"__job_resource__select\": \"no\", \"__current_case__\": 0}, \"bootstrap_parameters\": {\"ultrafast_bootstrap\": {\"bb\": null, \"wbt\": false, \"wbtl\": false, \"nm\": \"1000\", \"bcor\": \"0.99\", \"nstep\": \"100\", \"beps\": \"0.5\", \"bspec\": \"\", \"bnni\": false}, \"nonparametric_bootstrap\": {\"b\": null, \"bc\": false, \"bo\": false}}, \"general_options\": {\"s\": {\"__class__\": \"ConnectedValue\"}, \"short_alignments\": false, \"st\": \"DNA\", \"t\": {\"__class__\": \"RuntimeValue\"}, \"te\": {\"__class__\": \"RuntimeValue\"}, \"seed\": null, \"keep_ident\": false, \"safe\": false}, \"likelihood_mapping\": {\"lmap\": null, \"lmclust\": {\"__class__\": \"RuntimeValue\"}, \"wql\": false}, \"miscellaneous_options\": {\"fconst\": \"\"}, \"modelling_parameters\": {\"automatic_model\": {\"cond_model\": {\"opt_custommodel\": false, \"__current_case__\": 1, \"m\": \"\"}, \"rcluster\": null, \"mset\": \"\", \"msub\": \"nuclear\", \"mfreq\": \"\", \"mrate\": \"\", \"cmin\": \"2\", \"cmax\": \"10\", \"merit\": \"AIC\", \"mtree\": false, \"madd\": \"\", \"mdef\": {\"__class__\": \"RuntimeValue\"}}, \"specifying_substitution\": {\"mwopt\": false}, \"rate_heterogeneity\": {\"a\": \"\", \"gmedian\": false, \"i\": \"\", \"opt_gamma_inv\": false, \"wsr\": false}, \"partition_model\": {\"q\": {\"__class__\": \"RuntimeValue\"}, \"spp\": false, \"sp\": {\"__class__\": \"RuntimeValue\"}}, \"site_specific_frequency\": {\"ft\": {\"__class__\": \"RuntimeValue\"}, \"fs\": null, \"fmax\": false}}, \"tree_parameters\": {\"tree_search\": {\"n\": null, \"ninit\": \"100\", \"ntop\": \"20\", \"nbest\": \"5\", \"nstop\": \"100\", \"sprrad\": \"6\", \"pers\": \"0.5\", \"allnni\": false, \"djc\": false, \"g\": {\"__class__\": \"RuntimeValue\"}}, \"single_branch\": {\"alrt\": null, \"abayes\": false, \"lbp\": null}, \"tree_topology\": {\"z\": {\"__class__\": \"RuntimeValue\"}, \"zb\": null, \"zw\": false, \"au\": false}, \"constructing_consensus\": {\"con\": false, \"net\": false, \"minsup\": \"0.0\", \"bi\": null, \"sup\": {\"__class__\": \"RuntimeValue\"}, \"suptag\": \"\"}, \"computing_robinson_foulds\": {\"rf\": {\"__class__\": \"RuntimeValue\"}, \"rf_all\": false, \"rf_adj\": false}, \"generating_random\": {\"r\": null, \"ru\": false, \"rcat\": false, \"rbal\": false, \"rcsg\": false, \"rlen\": \"\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.5.5.3",
+            "type": "tool",
+            "uuid": "1014ce07-f8ff-4bc7-ad75-b73d220ebf97",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "splits.nex",
+                    "uuid": "333fe063-99cc-4c07-9f40-502a8fca0f29"
+                },
+                {
+                    "label": null,
+                    "output_name": "mldist",
+                    "uuid": "077afa40-7e69-4a03-83c4-e07dad20dcfd"
+                },
+                {
+                    "label": null,
+                    "output_name": "contree",
+                    "uuid": "d3ccf755-9a58-42ec-aaba-536e77f40d84"
+                },
+                {
+                    "label": null,
+                    "output_name": "treefile",
+                    "uuid": "3308b6a8-3aab-4427-821e-68233f011030"
+                },
+                {
+                    "label": null,
+                    "output_name": "bionj",
+                    "uuid": "79fd0b76-1d87-488a-a4b8-1082a869a0bd"
+                },
+                {
+                    "label": null,
+                    "output_name": "iqtree",
+                    "uuid": "79b4577e-82d8-4d36-b2aa-474c30edbdf9"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/newick_utils/newick_display/1.6+galaxy1",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "fileNewick": {
+                    "id": 5,
+                    "output_name": "contree"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Newick Display",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "svg"
+                }
+            ],
+            "position": {
+                "bottom": 1425.40625,
+                "height": 133.953125,
+                "left": 1644.859375,
+                "right": 1844.859375,
+                "top": 1291.453125,
+                "width": 200,
+                "x": 1644.859375,
+                "y": 1291.453125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/newick_utils/newick_display/1.6+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "b4163d2f64ab",
+                "name": "newick_utils",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"condbranchlength\": {\"branchlength\": \"false\", \"__current_case__\": 1}, \"condbranchsupport\": {\"branchsupport\": \"false\", \"__current_case__\": 1}, \"fileNewick\": {\"__class__\": \"ConnectedValue\"}, \"leafFont\": \"sans-serif\", \"leafSize\": \"10px\", \"legend\": \"\", \"outformat\": \"svg\", \"radial\": false, \"scalebar\": true, \"width\": \"800\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.6+galaxy1",
+            "type": "tool",
+            "uuid": "07a4249f-bebc-4245-9e48-8b3d459d76b3",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Newick Display on input dataset(s): Tree Graph",
+                    "output_name": "output",
+                    "uuid": "bcd3d085-4e22-479b-8546-5045754539bc"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "phylogeny",
+        "fasta",
+        "phylogenetic"
+    ],
+    "uuid": "13174d5d-3246-4b3a-9039-d96163273ed5",
+    "version": 3
+}

@@ -1,0 +1,253 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "Bam_to_consensus_fasta",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 107.390625,
+                "top": 226.65625
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "c97467c0-8daf-4e75-a407-ace70588e6d1",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "reference"
+                }
+            ],
+            "label": "reference",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 660.390625,
+                "top": 229.78125
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "19139ad7-5c8a-4a08-8464-4030858c8c41",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastq_masker_by_quality/fastq_masker_by_quality/1.1.1",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input_file": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "FASTQ Masker",
+            "outputs": [
+                {
+                    "name": "output_file",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 390.640625,
+                "top": 215.234375
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastq_masker_by_quality/fastq_masker_by_quality/1.1.1",
+            "tool_shed_repository": {
+                "changeset_revision": "9282652e7234",
+                "name": "fastq_masker_by_quality",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_file\": {\"__class__\": \"ConnectedValue\"}, \"mask_type\": \"N\", \"quality_score\": \"20\", \"score_comparison\": \"le\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "a54fa9b5-8515-4b40-9204-a73d7819a2f7",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "fastq_input|fastq_input1": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Map with BWA-MEM",
+            "outputs": [
+                {
+                    "name": "bam_output",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 200,
+                "top": 428.53125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1",
+            "tool_shed_repository": {
+                "changeset_revision": "3fe632431b68",
+                "name": "bwa",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__job_resource\": {\"__job_resource__select\": \"no\", \"__current_case__\": 0}, \"analysis_type\": {\"analysis_type_selector\": \"illumina\", \"__current_case__\": 0}, \"fastq_input\": {\"fastq_input_selector\": \"single\", \"__current_case__\": 1, \"fastq_input1\": {\"__class__\": \"ConnectedValue\"}}, \"reference_source\": {\"reference_source_selector\": \"cached\", \"__current_case__\": 0, \"ref_file\": \"hg19_rCRS_pUC18_phiX174\"}, \"rg\": {\"rg_selector\": \"set_id_auto\", \"__current_case__\": 2}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.7.17.1",
+            "type": "tool",
+            "uuid": "bb6021f5-47e0-47c3-8587-02d08163462c",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/unified_genotyper/gatk_unified_genotyper/0.0.6",
+            "errors": "Tool is not installed",
+            "id": 4,
+            "input_connections": {
+                "reference_source|input_bams_0|input_bam": {
+                    "id": 3,
+                    "output_name": "bam_output"
+                },
+                "reference_source|ref_file": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "toolshed.g2.bx.psu.edu/repos/devteam/unified_genotyper/gatk_unified_genotyper/0.0.6",
+            "outputs": [],
+            "position": {
+                "left": 452.71875,
+                "top": 427.53125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/unified_genotyper/gatk_unified_genotyper/0.0.6",
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"analysis_param_type\": {\"__current_case__\": 0, \"analysis_param_type_selector\": \"basic\"}, \"gatk_param_type\": {\"__current_case__\": 1, \"baq\": \"OFF\", \"baq_gap_open_penalty\": \"40.0\", \"default_base_qualities\": \"-1\", \"disable_experimental_low_memory_sharding\": \"false\", \"downsampling_type\": {\"__current_case__\": 0, \"downsampling_type_selector\": \"NONE\"}, \"gatk_param_type_selector\": \"advanced\", \"input_exclude_interval_repeat\": [], \"input_interval_repeat\": [], \"interval_merging\": \"ALL\", \"interval_set_rule\": \"UNION\", \"non_deterministic_random_seed\": \"false\", \"pedigree\": [], \"pedigree_string_repeat\": [], \"pedigree_validation_type\": \"STRICT\", \"read_filter\": [], \"read_group_black_list_repeat\": [], \"use_original_qualities\": \"false\", \"validation_strictness\": \"STRICT\"}, \"genotype_likelihoods_model\": \"BOTH\", \"reference_source\": {\"__current_case__\": 1, \"input_bams\": [{\"__index__\": 0, \"input_bam\": {\"__class__\": \"ConnectedValue\"}}], \"ref_file\": {\"__class__\": \"ConnectedValue\"}, \"reference_source_selector\": \"history\"}, \"rod_bind\": [], \"standard_min_confidence_threshold_for_calling\": \"30.0\", \"standard_min_confidence_threshold_for_emitting\": \"30.0\"}",
+            "tool_version": "0.0.6",
+            "type": "tool",
+            "uuid": "ccd18462-59fd-46d1-bda0-482ecedab27b",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/variant_filtration/gatk_variant_filtration/0.0.5",
+            "errors": "Tool is not installed",
+            "id": 5,
+            "input_connections": {
+                "mask_rod_bind_type|input_mask_rod": {
+                    "id": 2,
+                    "output_name": "output_file"
+                },
+                "reference_source|input_variant": {
+                    "id": 4,
+                    "output_name": "output_vcf"
+                },
+                "reference_source|ref_file": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "toolshed.g2.bx.psu.edu/repos/devteam/variant_filtration/gatk_variant_filtration/0.0.5",
+            "outputs": [],
+            "position": {
+                "left": 708.265625,
+                "top": 429.40625
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/variant_filtration/gatk_variant_filtration/0.0.5",
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"cluster_snp_type\": {\"__current_case__\": 0, \"cluster_snp_type_selector\": \"do_not_cluster_snp\"}, \"gatk_param_type\": {\"__current_case__\": 0, \"gatk_param_type_selector\": \"basic\"}, \"mask_rod_bind_type\": {\"__current_case__\": 1, \"input_mask_rod\": {\"__class__\": \"ConnectedValue\"}, \"mask_extension\": \"0\", \"mask_rod_bind_type_selector\": \"set_mask\", \"mask_rod_name\": \"Mask\"}, \"missing_values_in_expressions_should_evaluate_as_failing\": \"false\", \"reference_source\": {\"__current_case__\": 1, \"input_variant\": {\"__class__\": \"ConnectedValue\"}, \"ref_file\": {\"__class__\": \"ConnectedValue\"}, \"reference_source_selector\": \"history\"}, \"variant_filters\": []}",
+            "tool_version": "0.0.5",
+            "type": "tool",
+            "uuid": "67bd390d-1855-42ea-a0e7-3e07dbf165a4",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.4.0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input_file": {
+                    "id": 5,
+                    "output_name": "output_vcf"
+                },
+                "sec_default|fasta_ref": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "sec_default|mask": {
+                    "id": 2,
+                    "output_name": "output_file"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "bcftools consensus",
+            "outputs": [
+                {
+                    "name": "output_file",
+                    "type": "fasta"
+                }
+            ],
+            "position": {
+                "left": 959.4375,
+                "top": 427.40625
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.4.0",
+            "tool_shed_repository": {
+                "changeset_revision": "1829900b5dcd",
+                "name": "bcftools_consensus",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chain\": false, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"sec_default\": {\"fasta_ref\": {\"__class__\": \"ConnectedValue\"}, \"mask\": {\"__class__\": \"ConnectedValue\"}, \"iupac_codes\": false, \"sample\": \"\", \"select_haplotype\": null}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.4.0",
+            "type": "tool",
+            "uuid": "0ce89e6c-71a5-4826-a2de-affa4b3726a6",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [],
+    "uuid": "d79b1842-e596-482c-866f-88ba4fa6972b",
+    "version": 15
+}
