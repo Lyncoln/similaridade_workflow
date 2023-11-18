@@ -1,0 +1,165 @@
+{
+    "a_galaxy_workflow": "true", 
+    "annotation": "Converts FASTA blocks to a FASTA file.", 
+    "format-version": "0.1", 
+    "name": "Transform 'Stitch Gene blocks' FASTA blocks to standardized FASTA file", 
+    "steps": {
+        "0": {
+            "annotation": "", 
+            "id": 0, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "Output of tool \"Stitch Gene blocks\""
+                }
+            ], 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 160, 
+                "top": 197
+            }, 
+            "tool_errors": null, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"Output of tool \\\"Stitch Gene blocks\\\"\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "user_outputs": []
+        }, 
+        "1": {
+            "annotation": "", 
+            "id": 1, 
+            "input_connections": {
+                "input": {
+                    "id": 0, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "FASTA-to-Tabular", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 380.00003051757812, 
+                "top": 185
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "fasta2tab", 
+            "tool_state": "{\"input\": \"null\", \"keep_first\": \"\\\"0\\\"\", \"chromInfo\": \"\\\"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/hg19.len\\\"\", \"descr_columns\": \"\\\"1\\\"\", \"__page__\": 0}", 
+            "tool_version": "1.1.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "2": {
+            "annotation": "", 
+            "id": 2, 
+            "input_connections": {
+                "input": {
+                    "id": 1, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Filter", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 582.00003051757812, 
+                "top": 195
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "Filter1", 
+            "tool_state": "{\"__page__\": 0, \"cond\": \"\\\"len( c2.replace( '-', '' ) ) > 0\\\"\", \"chromInfo\": \"\\\"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/hg19.len\\\"\", \"input\": \"null\"}", 
+            "tool_version": "1.1.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "3": {
+            "annotation": "", 
+            "id": 3, 
+            "input_connections": {
+                "input": {
+                    "id": 2, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Tabular-to-FASTA", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "fasta"
+                }
+            ], 
+            "position": {
+                "left": 773.00003051757812, 
+                "top": 189
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "tab2fasta", 
+            "tool_state": "{\"title_col\": \"{\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": [\\\"1\\\"]}\", \"input\": \"null\", \"__page__\": 0, \"chromInfo\": \"\\\"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/hg19.len\\\"\", \"seq_col\": \"{\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": \\\"2\\\"}\"}", 
+            "tool_version": "1.1.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "4": {
+            "annotation": "", 
+            "id": 4, 
+            "input_connections": {
+                "input": {
+                    "id": 3, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "FASTA Width", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 974.00003051757812, 
+                "top": 190
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "cshl_fasta_formatter", 
+            "tool_state": "{\"__page__\": 0, \"input\": \"null\", \"chromInfo\": \"\\\"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/hg19.len\\\"\", \"width\": \"\\\"50\\\"\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }
+    }
+}

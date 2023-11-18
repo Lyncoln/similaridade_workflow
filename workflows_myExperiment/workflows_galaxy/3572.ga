@@ -1,0 +1,507 @@
+{
+    "a_galaxy_workflow": "true", 
+    "annotation": "", 
+    "format-version": "0.1", 
+    "name": "Variant discovery and reference correction from separate reads", 
+    "steps": {
+        "0": {
+            "annotation": "", 
+            "id": 0, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "Lib 1 Left"
+                }
+            ], 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 205.95458984375, 
+                "top": 204.93938827514648
+            }, 
+            "tool_errors": null, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"Lib 1 Left\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "user_outputs": []
+        }, 
+        "1": {
+            "annotation": "", 
+            "id": 1, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "Lib 1 Right"
+                }
+            ], 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 199.95458984375, 
+                "top": 282.16665267944336
+            }, 
+            "tool_errors": null, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"Lib 1 Right\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "user_outputs": []
+        }, 
+        "2": {
+            "annotation": "", 
+            "id": 2, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "Lib 2 Left"
+                }
+            ], 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 199.95458984375, 
+                "top": 365.3484764099121
+            }, 
+            "tool_errors": null, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"Lib 2 Left\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "user_outputs": []
+        }, 
+        "3": {
+            "annotation": "", 
+            "id": 3, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "Lib 2 Right"
+                }
+            ], 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 199.95458984375, 
+                "top": 447.51513290405273
+            }, 
+            "tool_errors": null, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"Lib 2 Right\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "user_outputs": []
+        }, 
+        "4": {
+            "annotation": "", 
+            "id": 4, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "Reference Genome"
+                }
+            ], 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 199.95458984375, 
+                "top": 530.6363182067871
+            }, 
+            "tool_errors": null, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"Reference Genome\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "user_outputs": []
+        }, 
+        "5": {
+            "annotation": "", 
+            "id": 5, 
+            "input_connections": {
+                "genomeSource|ownFile": {
+                    "id": 4, 
+                    "output_name": "output"
+                }, 
+                "paired|input1": {
+                    "id": 0, 
+                    "output_name": "output"
+                }, 
+                "paired|input2": {
+                    "id": 1, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Map with BWA for Illumina", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "sam"
+                }
+            ], 
+            "position": {
+                "left": 430.151611328125, 
+                "top": 199.93938827514648
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "bwa_wrapper", 
+            "tool_state": "{\"genomeSource\": \"{\\\"refGenomeSource\\\": \\\"history\\\", \\\"ownFile\\\": null, \\\"__current_case__\\\": 1}\", \"__page__\": 0, \"paired\": \"{\\\"input2\\\": null, \\\"sPaired\\\": \\\"paired\\\", \\\"input1\\\": null, \\\"__current_case__\\\": 1}\", \"params\": \"{\\\"outputTopN\\\": \\\"3\\\", \\\"suboptAlign\\\": \\\"False\\\", \\\"gapOpenPenalty\\\": \\\"11\\\", \\\"maxGapOpens\\\": \\\"1\\\", \\\"mismatchPenalty\\\": \\\"3\\\", \\\"fracMissingAligns\\\": \\\"0.04\\\", \\\"disallowIndel\\\": \\\"5\\\", \\\"outputTopNDisc\\\": \\\"10\\\", \\\"disallowLongDel\\\": \\\"5\\\", \\\"readGroup\\\": {\\\"rgpl\\\": \\\"ILLUMINA\\\", \\\"rgpi\\\": \\\"\\\", \\\"rgsm\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"rgpg\\\": \\\"\\\", \\\"rgid\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"specReadGroup\\\": \\\"yes\\\", \\\"rgds\\\": \\\"\\\", \\\"rgfo\\\": \\\"\\\", \\\"rgdt\\\": \\\"\\\", \\\"__current_case__\\\": 0, \\\"rgpu\\\": \\\"\\\", \\\"rgcn\\\": \\\"\\\", \\\"rglb\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"rgks\\\": \\\"\\\"}, \\\"maxInsertSize\\\": \\\"500\\\", \\\"__current_case__\\\": 1, \\\"maxEditDist\\\": \\\"0\\\", \\\"gapExtensPenalty\\\": \\\"4\\\", \\\"maxGapExtens\\\": \\\"-1\\\", \\\"maxEditDistSeed\\\": \\\"2\\\", \\\"noIterSearch\\\": \\\"False\\\", \\\"seed\\\": \\\"-1\\\", \\\"maxOccurPairing\\\": \\\"100000\\\", \\\"source_select\\\": \\\"full\\\"}\", \"suppressHeader\": \"\\\"False\\\"\", \"chromInfo\": \"\\\"/home/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "1.2.2", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "6": {
+            "annotation": "", 
+            "id": 6, 
+            "input_connections": {
+                "genomeSource|ownFile": {
+                    "id": 4, 
+                    "output_name": "output"
+                }, 
+                "paired|input1": {
+                    "id": 2, 
+                    "output_name": "output"
+                }, 
+                "paired|input2": {
+                    "id": 3, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Map with BWA for Illumina", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "sam"
+                }
+            ], 
+            "position": {
+                "left": 430.151611328125, 
+                "top": 359.13634872436523
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "bwa_wrapper", 
+            "tool_state": "{\"genomeSource\": \"{\\\"refGenomeSource\\\": \\\"history\\\", \\\"ownFile\\\": null, \\\"__current_case__\\\": 1}\", \"__page__\": 0, \"paired\": \"{\\\"input2\\\": null, \\\"sPaired\\\": \\\"paired\\\", \\\"input1\\\": null, \\\"__current_case__\\\": 1}\", \"params\": \"{\\\"outputTopN\\\": \\\"3\\\", \\\"suboptAlign\\\": \\\"False\\\", \\\"gapOpenPenalty\\\": \\\"11\\\", \\\"maxGapOpens\\\": \\\"1\\\", \\\"mismatchPenalty\\\": \\\"3\\\", \\\"fracMissingAligns\\\": \\\"0.04\\\", \\\"disallowIndel\\\": \\\"5\\\", \\\"outputTopNDisc\\\": \\\"10\\\", \\\"disallowLongDel\\\": \\\"5\\\", \\\"readGroup\\\": {\\\"rgpl\\\": \\\"ILLUMINA\\\", \\\"rgpi\\\": \\\"\\\", \\\"rgsm\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"rgpg\\\": \\\"\\\", \\\"rgid\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"specReadGroup\\\": \\\"yes\\\", \\\"rgds\\\": \\\"\\\", \\\"rgfo\\\": \\\"\\\", \\\"rgdt\\\": \\\"\\\", \\\"__current_case__\\\": 0, \\\"rgpu\\\": \\\"\\\", \\\"rgcn\\\": \\\"\\\", \\\"rglb\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"rgks\\\": \\\"\\\"}, \\\"maxInsertSize\\\": \\\"500\\\", \\\"__current_case__\\\": 1, \\\"maxEditDist\\\": \\\"0\\\", \\\"gapExtensPenalty\\\": \\\"4\\\", \\\"maxGapExtens\\\": \\\"-1\\\", \\\"maxEditDistSeed\\\": \\\"2\\\", \\\"noIterSearch\\\": \\\"False\\\", \\\"seed\\\": \\\"-1\\\", \\\"maxOccurPairing\\\": \\\"100000\\\", \\\"source_select\\\": \\\"full\\\"}\", \"suppressHeader\": \"\\\"False\\\"\", \"chromInfo\": \"\\\"/home/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "1.2.2", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "7": {
+            "annotation": "", 
+            "id": 7, 
+            "input_connections": {
+                "input1": {
+                    "id": 5, 
+                    "output_name": "output"
+                }, 
+                "input2": {
+                    "id": 6, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Merge BAM Files", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "bam"
+                }, 
+                {
+                    "name": "outlog", 
+                    "type": "txt"
+                }
+            ], 
+            "position": {
+                "left": 698.3333435058594, 
+                "top": 199.93938827514648
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutlog": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "outlog"
+                }, 
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "sam_merge2", 
+            "tool_state": "{\"input2\": \"null\", \"inputs\": \"[]\", \"input1\": \"null\", \"title\": \"\\\"Bioplatforms mapped\\\"\", \"__page__\": 0, \"mergeSD\": \"\\\"True\\\"\", \"chromInfo\": \"\\\"/home/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "1.1.2", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "8": {
+            "annotation": "", 
+            "id": 8, 
+            "input_connections": {
+                "reference_source|input_bam": {
+                    "id": 7, 
+                    "output_name": "output1"
+                }, 
+                "reference_source|ref_file": {
+                    "id": 4, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Realigner Target Creator", 
+            "outputs": [
+                {
+                    "name": "output_interval", 
+                    "type": "gatk_interval"
+                }, 
+                {
+                    "name": "output_log", 
+                    "type": "txt"
+                }
+            ], 
+            "position": {
+                "left": 928.5151519775391, 
+                "top": 199.93938827514648
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput_interval": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output_interval"
+                }, 
+                "HideDatasetActionoutput_log": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output_log"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "gatk_realigner_target_creator", 
+            "tool_state": "{\"__page__\": 0, \"gatk_param_type\": \"{\\\"gatk_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"analysis_param_type\": \"{\\\"analysis_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"reference_source\": \"{\\\"ref_file\\\": null, \\\"reference_source_selector\\\": \\\"history\\\", \\\"input_bam\\\": null, \\\"__current_case__\\\": 1}\", \"chromInfo\": \"\\\"/home/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"rod_bind\": \"[]\"}", 
+            "tool_version": "0.0.4", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "9": {
+            "annotation": "", 
+            "id": 9, 
+            "input_connections": {
+                "reference_source|input_bam": {
+                    "id": 7, 
+                    "output_name": "output1"
+                }, 
+                "reference_source|ref_file": {
+                    "id": 4, 
+                    "output_name": "output"
+                }, 
+                "target_intervals": {
+                    "id": 8, 
+                    "output_name": "output_interval"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Indel Realigner", 
+            "outputs": [
+                {
+                    "name": "output_bam", 
+                    "type": "bam"
+                }, 
+                {
+                    "name": "output_log", 
+                    "type": "txt"
+                }
+            ], 
+            "position": {
+                "left": 1201.6817588806152, 
+                "top": 199.93938827514648
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput_bam": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output_bam"
+                }, 
+                "HideDatasetActionoutput_log": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output_log"
+                }, 
+                "RenameDatasetActionoutput_bam": {
+                    "action_arguments": {
+                        "newname": "Aligned Reads"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "output_bam"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "gatk_indel_realigner", 
+            "tool_state": "{\"__page__\": 0, \"knowns_only\": \"\\\"False\\\"\", \"gatk_param_type\": \"{\\\"gatk_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"lod_threshold\": \"\\\"5.0\\\"\", \"analysis_param_type\": \"{\\\"analysis_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"target_intervals\": \"null\", \"reference_source\": \"{\\\"ref_file\\\": null, \\\"reference_source_selector\\\": \\\"history\\\", \\\"input_bam\\\": null, \\\"__current_case__\\\": 1}\", \"chromInfo\": \"\\\"/home/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"rod_bind\": \"[]\"}", 
+            "tool_version": "0.0.6", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "10": {
+            "annotation": "", 
+            "id": 10, 
+            "input_connections": {
+                "reference_source|input_bams_0|input_bam": {
+                    "id": 9, 
+                    "output_name": "output_bam"
+                }, 
+                "reference_source|ref_file": {
+                    "id": 4, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Unified Genotyper", 
+            "outputs": [
+                {
+                    "name": "output_vcf", 
+                    "type": "vcf"
+                }, 
+                {
+                    "name": "output_metrics", 
+                    "type": "txt"
+                }, 
+                {
+                    "name": "output_log", 
+                    "type": "txt"
+                }
+            ], 
+            "position": {
+                "left": 1518.8787841796875, 
+                "top": 199.93938827514648
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput_log": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output_log"
+                }, 
+                "HideDatasetActionoutput_metrics": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output_metrics"
+                }, 
+                "HideDatasetActionoutput_vcf": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output_vcf"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "gatk_unified_genotyper", 
+            "tool_state": "{\"__page__\": 0, \"genotype_likelihoods_model\": \"\\\"POOLBOTH\\\"\", \"gatk_param_type\": \"{\\\"gatk_param_type_selector\\\": \\\"advanced\\\", \\\"pedigree_string_repeat\\\": [], \\\"disable_experimental_low_memory_sharding\\\": \\\"False\\\", \\\"pedigree_validation_type\\\": \\\"STRICT\\\", \\\"pedigree\\\": [], \\\"input_interval_repeat\\\": [], \\\"baq\\\": \\\"OFF\\\", \\\"input_exclude_interval_repeat\\\": [], \\\"default_base_qualities\\\": \\\"-1\\\", \\\"downsampling_type\\\": {\\\"downsampling_type_selector\\\": \\\"NONE\\\", \\\"__current_case__\\\": 0}, \\\"interval_merging\\\": \\\"ALL\\\", \\\"interval_set_rule\\\": \\\"UNION\\\", \\\"non_deterministic_random_seed\\\": \\\"False\\\", \\\"__current_case__\\\": 1, \\\"read_filter\\\": [], \\\"validation_strictness\\\": \\\"LENIENT\\\", \\\"baq_gap_open_penalty\\\": \\\"40.0\\\", \\\"read_group_black_list_repeat\\\": [], \\\"use_original_qualities\\\": \\\"False\\\"}\", \"standard_min_confidence_threshold_for_emitting\": \"\\\"30.0\\\"\", \"analysis_param_type\": \"{\\\"max_alternate_alleles\\\": \\\"5\\\", \\\"doContextDependentGapPenalties\\\": \\\"False\\\", \\\"indelGapOpenPenalty\\\": \\\"45\\\", \\\"indelGapContinuationPenalty\\\": \\\"10\\\", \\\"min_base_quality_score\\\": \\\"17\\\", \\\"max_deletion_fraction\\\": \\\"0.05\\\", \\\"group\\\": null, \\\"p_nonref_model\\\": \\\"POOL\\\", \\\"output_mode\\\": \\\"EMIT_VARIANTS_ONLY\\\", \\\"analysis_param_type_selector\\\": \\\"advanced\\\", \\\"multiallelic\\\": \\\"False\\\", \\\"pcr_error_rate\\\": \\\"0.0001\\\", \\\"genotyping_mode_type\\\": {\\\"genotyping_mode\\\": \\\"DISCOVERY\\\", \\\"__current_case__\\\": 0}, \\\"min_indel_count_for_genotyping\\\": \\\"5\\\", \\\"annotation\\\": {\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": null}, \\\"additional_annotations\\\": [], \\\"exclude_annotations\\\": {\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": null}, \\\"indel_heterozygosity\\\": \\\"0.000125\\\", \\\"heterozygosity\\\": \\\"0.001\\\", \\\"__current_case__\\\": 1, \\\"indelHaplotypeSize\\\": \\\"80\\\", \\\"compute_SLOD\\\": \\\"False\\\"}\", \"standard_min_confidence_threshold_for_calling\": \"\\\"30.0\\\"\", \"reference_source\": \"{\\\"ref_file\\\": null, \\\"reference_source_selector\\\": \\\"history\\\", \\\"input_bams\\\": [{\\\"__index__\\\": 0, \\\"input_bam\\\": null}], \\\"__current_case__\\\": 1}\", \"ploidy\": \"\\\"1\\\"\", \"chromInfo\": \"\\\"/home/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/sn15.len\\\"\", \"rod_bind\": \"[]\"}", 
+            "tool_version": "0.0.6", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "11": {
+            "annotation": "", 
+            "id": 11, 
+            "input_connections": {
+                "reference_source|input_variant": {
+                    "id": 10, 
+                    "output_name": "output_vcf"
+                }, 
+                "reference_source|ref_file": {
+                    "id": 4, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Variant Filtration", 
+            "outputs": [
+                {
+                    "name": "output_vcf", 
+                    "type": "vcf"
+                }, 
+                {
+                    "name": "output_log", 
+                    "type": "txt"
+                }
+            ], 
+            "position": {
+                "left": 1749.0454711914062, 
+                "top": 199.93938827514648
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput_log": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output_log"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "gatk_variant_filtration", 
+            "tool_state": "{\"__page__\": 0, \"gatk_param_type\": \"{\\\"gatk_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"mask_rod_bind_type\": \"{\\\"mask_rod_bind_type_selector\\\": \\\"exclude_mask\\\", \\\"__current_case__\\\": 0}\", \"cluster_snp_type\": \"{\\\"cluster_snp_type_selector\\\": \\\"do_not_cluster_snp\\\", \\\"__current_case__\\\": 0}\", \"missing_values_in_expressions_should_evaluate_as_failing\": \"\\\"False\\\"\", \"variant_filters\": \"[{\\\"__index__\\\": 0, \\\"filter_expression\\\": \\\"DP > 500\\\", \\\"is_genotype_filter\\\": \\\"False\\\", \\\"filter_name\\\": \\\"too_deep\\\"}]\", \"reference_source\": \"{\\\"ref_file\\\": null, \\\"reference_source_selector\\\": \\\"history\\\", \\\"input_variant\\\": null, \\\"__current_case__\\\": 1}\", \"chromInfo\": \"\\\"/home/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/sn15.len\\\"\"}", 
+            "tool_version": "0.0.5", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "12": {
+            "annotation": "", 
+            "id": 12, 
+            "input_connections": {
+                "input_variants": {
+                    "id": 11, 
+                    "output_name": "output_vcf"
+                }, 
+                "ref_file": {
+                    "id": 4, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Generates an alternative reference sequence over the specified interval.", 
+            "outputs": [
+                {
+                    "name": "output_sequence", 
+                    "type": "fasta"
+                }, 
+                {
+                    "name": "output_log", 
+                    "type": "txt"
+                }
+            ], 
+            "position": {
+                "left": 1979.272705078125, 
+                "top": 199.93938827514648
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput_log": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output_log"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "gatk_fasta_alternate_reference_walker", 
+            "tool_state": "{\"ref_file\": \"null\", \"__page__\": 0, \"chromInfo\": \"\\\"/home/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/sn15.len\\\"\", \"input_variants\": \"null\"}", 
+            "tool_version": "0.0.1", 
+            "type": "tool", 
+            "user_outputs": []
+        }
+    }
+}

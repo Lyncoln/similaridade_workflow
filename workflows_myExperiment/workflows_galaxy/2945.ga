@@ -1,0 +1,203 @@
+{
+    "a_galaxy_workflow": "true", 
+    "annotation": "", 
+    "format-version": "0.1", 
+    "name": "Gene enhancer region analysis", 
+    "steps": {
+        "0": {
+            "annotation": "", 
+            "id": 0, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "Input Dataset"
+                }
+            ], 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 10, 
+                "top": 10
+            }, 
+            "tool_errors": null, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"Input Dataset\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "user_outputs": []
+        }, 
+        "1": {
+            "annotation": "", 
+            "id": 1, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "Input Dataset"
+                }
+            ], 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 10, 
+                "top": 130
+            }, 
+            "tool_errors": null, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"Input Dataset\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "user_outputs": []
+        }, 
+        "2": {
+            "annotation": "", 
+            "id": 2, 
+            "input_connections": {
+                "input1": {
+                    "id": 0, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Merge", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 230, 
+                "top": 10
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "gops_merge_1", 
+            "tool_state": "{\"returntype\": \"\\\"False\\\"\", \"__page__\": 0, \"input1\": \"null\", \"chromInfo\": \"\\\"/galaxy/home/g2test/galaxy_test/tool-data/shared/ucsc/chrom/hg18.len\\\"\"}", 
+            "tool_version": null, 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "3": {
+            "annotation": "", 
+            "id": 3, 
+            "input_connections": {
+                "input": {
+                    "id": 1, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Get flanks", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "interval"
+                }
+            ], 
+            "position": {
+                "left": 230, 
+                "top": 130
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "get_flanks1", 
+            "tool_state": "{\"__page__\": 0, \"direction\": \"\\\"Upstream\\\"\", \"region\": \"\\\"whole\\\"\", \"offset\": \"\\\"0\\\"\", \"input\": \"null\", \"chromInfo\": \"\\\"/galaxy/home/g2test/galaxy_test/tool-data/shared/ucsc/chrom/hg18.len\\\"\", \"size\": \"\\\"2000\\\"\"}", 
+            "tool_version": null, 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "4": {
+            "annotation": "", 
+            "id": 4, 
+            "input_connections": {
+                "input1": {
+                    "id": 2, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "MAF Coverage Stats", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "interval"
+                }
+            ], 
+            "position": {
+                "left": 450, 
+                "top": 10
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "maf_stats1", 
+            "tool_state": "{\"__page__\": 0, \"maf_source_type\": \"{\\\"mafType\\\": {\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": \\\"28_WAY_MULTIZ_hg18\\\"}, \\\"maf_source\\\": \\\"cached\\\", \\\"__current_case__\\\": 1}\", \"input1\": \"null\", \"chromInfo\": \"\\\"/galaxy/home/g2test/galaxy_test/tool-data/shared/ucsc/chrom/hg18.len\\\"\", \"summary\": \"\\\"false\\\"\"}", 
+            "tool_version": null, 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "5": {
+            "annotation": "", 
+            "id": 5, 
+            "input_connections": {
+                "input": {
+                    "id": 4, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Filter", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 670, 
+                "top": 10
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "Filter1", 
+            "tool_state": "{\"__page__\": 0, \"cond\": \"\\\"c4 == \\\\\\\"fr2\\\\\\\" and c6/c5 <= 0.1\\\"\", \"chromInfo\": \"\\\"/galaxy/home/g2test/galaxy_test/tool-data/shared/ucsc/chrom/hg18.len\\\"\", \"input\": \"null\"}", 
+            "tool_version": null, 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "6": {
+            "annotation": "", 
+            "id": 6, 
+            "input_connections": {
+                "input1": {
+                    "id": 3, 
+                    "output_name": "out_file1"
+                }, 
+                "input2": {
+                    "id": 5, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Join", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "interval"
+                }
+            ], 
+            "position": {
+                "left": 890, 
+                "top": 10
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "gops_join_1", 
+            "tool_state": "{\"input2\": \"null\", \"__page__\": 0, \"input1\": \"null\", \"min\": \"\\\"1\\\"\", \"chromInfo\": \"\\\"/galaxy/home/g2test/galaxy_test/tool-data/shared/ucsc/chrom/hg18.len\\\"\", \"fill\": \"\\\"none\\\"\"}", 
+            "tool_version": null, 
+            "type": "tool", 
+            "user_outputs": []
+        }
+    }
+}

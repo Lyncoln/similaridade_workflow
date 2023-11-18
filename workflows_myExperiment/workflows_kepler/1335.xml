@@ -1,0 +1,94 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE entity PUBLIC "-//UC Berkeley//DTD MoML 1//EN"
+    "http://ptolemy.eecs.berkeley.edu/xml/dtd/MoML_1.dtd">
+<entity name="SimpleMobyWF" class="ptolemy.actor.TypedCompositeActor">
+    <property name="_createdBy" class="ptolemy.kernel.attributes.VersionAttribute" value="8.1.devel">
+    </property>
+    <property name="derivedFrom" class="org.kepler.moml.NamedObjIdReferralList" value="urn:lsid:gamma.msi.ucsb.edu/OpenAuth/:278:632:550:urn:lsid:gamma.msi.ucsb.edu/OpenAuth/:3493:9:121:urn:lsid:gamma.msi.ucsb.edu/OpenAuth/:7802:32:439:urn:lsid:gamma.msi.ucsb.edu/OpenAuth/:7802:511:39:urn:lsid:gamma.msi.ucsb.edu/OpenAuth/:7802:544:24">
+    </property>
+    <property name="entityId" class="org.kepler.moml.NamedObjId" value="urn:lsid:gamma.msi.ucsb.edu/OpenAuth/:7802:557:5">
+    </property>
+    <property name="_windowProperties" class="ptolemy.actor.gui.WindowPropertiesAttribute" value="{bounds={1, 1, 1278, 767}, maximized=false}">
+    </property>
+    <property name="_vergilSize" class="ptolemy.actor.gui.SizeAttribute" value="[957, 608]">
+    </property>
+    <property name="_vergilZoomFactor" class="ptolemy.data.expr.ExpertParameter" value="1.0">
+    </property>
+    <property name="_vergilCenter" class="ptolemy.data.expr.ExpertParameter" value="{115.5, 123.0}">
+    </property>
+    <property name="ComadDirector" class="org.kepler.domains.ComadDirector">
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[-240.0, -60.0]">
+        </property>
+    </property>
+    <entity name="CollectionComposer" class="org.kepler.coactors.CollectionComposer">
+        <property name="collectionXml" class="ptolemy.data.expr.StringParameter" value="&lt;Collection&gt;&#10;	&lt;Annotation key=&quot;namespace&quot;&gt;&quot;NCBI_gi&quot;&lt;/Annotation&gt;&#10;	&lt;Collection label=&quot;idList&quot;&gt;&#10;		&lt;Data label=&quot;gi&quot;&gt;&quot;656461&quot;&lt;/Data&gt;&#10;	&lt;/Collection&gt;&#10;&lt;/Collection&gt;&#10;	">
+            <display name="Collection XML"/>
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="{-260.0, 45.0}">
+        </property>
+    </entity>
+    <entity name="MOBYGetGenBankFasta" class="org.kepler.demo.moby.SimpleMobyServiceAccessor">
+        <property name="ReadScope" class="ptolemy.data.expr.StringParameter" value="//idList">
+        </property>
+        <property name="MobyServiceName" class="ptolemy.data.expr.ChoiceParameter" value="getGenBankFasta">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[-110.0, 45.0]">
+        </property>
+        <property name="Input_identifier_id" class="org.kepler.types.SignatureElementParameter" value="StringToken">
+        </property>
+        <property name="DB_Input_identifier_id" class="org.kepler.types.DataBindingParameter" value="/StringToken[@label==&quot;gi&quot;]">
+            <display name="Input_identifier_id"/>
+        </property>
+        <property name="Input_identifier_namespace" class="org.kepler.types.SignatureElementParameter" value="StringToken">
+        </property>
+        <property name="DB_Input_identifier_namespace" class="org.kepler.types.DataBindingParameter" value="/StringToken[@label==&quot;gi&quot;]/@namespace">
+            <display name="Input_identifier_namespace"/>
+        </property>
+        <property name="Output_fasta_content" class="org.kepler.types.SignatureElementParameter" value="StringToken">
+        </property>
+        <property name="DB_Output_fasta_content" class="org.kepler.types.DataBindingParameter" value="/{-p}fasta/StringToken[@label==&quot;fasta&quot;]">
+            <display name="Output_fasta_content"/>
+        </property>
+    </entity>
+    <entity name="CollectionDisplay" class="org.kepler.coactors.CollectionDisplay">
+        <property name="ReadScope" class="ptolemy.data.expr.StringParameter" value="/">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[310.0, 45.0]">
+        </property>
+    </entity>
+    <entity name="MOBYGetBlast" class="org.kepler.demo.moby.SimpleMobyServiceAccessor">
+        <property name="ReadScope" class="ptolemy.data.expr.StringParameter" value="//fasta">
+        </property>
+        <property name="MobyServiceName" class="ptolemy.data.expr.ChoiceParameter" value="getDragonBlastText">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[95.0, 45.0]">
+        </property>
+        <property name="Input_sequence_content" class="org.kepler.types.SignatureElementParameter" value="StringToken">
+        </property>
+        <property name="DB_Input_sequence_content" class="org.kepler.types.DataBindingParameter" value="/StringToken[@label==&quot;fasta&quot;]">
+            <display name="Input_sequence_content"/>
+        </property>
+        <property name="Param_evalue" class="org.kepler.types.SignatureElementParameter" value="DoubleToken?">
+        </property>
+        <property name="DB_Param_evalue" class="org.kepler.types.DataBindingParameter" value="10">
+            <display name="Param_evalue"/>
+        </property>
+        <property name="Output_blast_content" class="org.kepler.types.SignatureElementParameter" value="StringToken">
+        </property>
+        <property name="DB_Output_blast_content" class="org.kepler.types.DataBindingParameter" value="/{-p}blast/StringToken[@label==&quot;blast&quot;]">
+            <display name="Output_blast_content"/>
+        </property>
+    </entity>
+    <relation name="relation" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation2" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation3" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <link port="CollectionComposer.output" relation="relation"/>
+    <link port="MOBYGetGenBankFasta.input" relation="relation"/>
+    <link port="MOBYGetGenBankFasta.output" relation="relation2"/>
+    <link port="CollectionDisplay.input" relation="relation3"/>
+    <link port="MOBYGetBlast.input" relation="relation2"/>
+    <link port="MOBYGetBlast.output" relation="relation3"/>
+</entity>

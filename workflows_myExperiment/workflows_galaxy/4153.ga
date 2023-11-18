@@ -1,0 +1,591 @@
+{
+    "a_galaxy_workflow": "true", 
+    "annotation": "Generate pileup, Unify Genotypers and create a VCF file from FastQ files of two individuals", 
+    "format-version": "0.1", 
+    "name": "NGS : Tuto SNP detection workflow single end", 
+    "steps": {
+        "0": {
+            "annotation": "", 
+            "id": 0, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "Fastq file from individual of first condition"
+                }
+            ], 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 200, 
+                "top": 439
+            }, 
+            "tool_errors": null, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"Fastq file from individual of first condition\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "user_outputs": []
+        }, 
+        "1": {
+            "annotation": "", 
+            "id": 1, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "Fastq file from individual of second condition"
+                }
+            ], 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 201, 
+                "top": 615
+            }, 
+            "tool_errors": null, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"Fastq file from individual of second condition\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "user_outputs": []
+        }, 
+        "2": {
+            "annotation": "", 
+            "id": 2, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "Input Dataset"
+                }
+            ], 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 836, 
+                "top": 524
+            }, 
+            "tool_errors": null, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"Input Dataset\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "user_outputs": []
+        }, 
+        "3": {
+            "annotation": "", 
+            "id": 3, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "Input Dataset"
+                }
+            ], 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 2102, 
+                "top": 842
+            }, 
+            "tool_errors": null, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"Input Dataset\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "user_outputs": []
+        }, 
+        "4": {
+            "annotation": "", 
+            "id": 4, 
+            "input_connections": {
+                "input_file": {
+                    "id": 0, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "FASTQ Groomer", 
+            "outputs": [
+                {
+                    "name": "output_file", 
+                    "type": "fastqsanger"
+                }
+            ], 
+            "position": {
+                "left": 466, 
+                "top": 341
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "fastq_groomer", 
+            "tool_state": "{\"__page__\": 0, \"input_file\": \"null\", \"input_type\": \"\\\"sanger\\\"\", \"__rerun_remap_job_id__\": null, \"options_type\": \"{\\\"options_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "1.0.4", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "5": {
+            "annotation": "", 
+            "id": 5, 
+            "input_connections": {
+                "input_file": {
+                    "id": 1, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "FASTQ Groomer", 
+            "outputs": [
+                {
+                    "name": "output_file", 
+                    "type": "fastqsanger"
+                }
+            ], 
+            "position": {
+                "left": 470, 
+                "top": 676
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "fastq_groomer", 
+            "tool_state": "{\"__page__\": 0, \"input_file\": \"null\", \"input_type\": \"\\\"sanger\\\"\", \"__rerun_remap_job_id__\": null, \"options_type\": \"{\\\"options_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "1.0.4", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "6": {
+            "annotation": "", 
+            "id": 6, 
+            "input_connections": {
+                "library|input_1": {
+                    "id": 4, 
+                    "output_name": "output_file"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Bowtie2", 
+            "outputs": [
+                {
+                    "name": "output_unaligned_reads_l", 
+                    "type": "fastqsanger"
+                }, 
+                {
+                    "name": "output_unaligned_reads_r", 
+                    "type": "fastqsanger"
+                }, 
+                {
+                    "name": "output", 
+                    "type": "bam"
+                }
+            ], 
+            "position": {
+                "left": 1022, 
+                "top": 292
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "bowtie2", 
+            "tool_state": "{\"__page__\": 0, \"read_group\": \"{\\\"selection\\\": \\\"no\\\", \\\"__current_case__\\\": 1}\", \"singlePaired\": \"{\\\"sPaired\\\": \\\"single\\\", \\\"input1\\\": null, \\\"__current_case__\\\": 0}\", \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null, \"unaligned_file\": \"\\\"False\\\"\", \"library\": \"{\\\"type\\\": \\\"single\\\", \\\"__current_case__\\\": 0, \\\"input_1\\\": null}\", \"reference_genome\": \"{\\\"source\\\": \\\"indexed\\\", \\\"__current_case__\\\": 0, \\\"index\\\": \\\"m_musculus\\\"}\", \"params\": \"{\\\"full\\\": \\\"no\\\", \\\"__current_case__\\\": 1}\", \"refGenomeSource\": \"{\\\"genomeSource\\\": \\\"history\\\", \\\"ownFile\\\": null, \\\"__current_case__\\\": 1}\"}", 
+            "tool_version": "0.2", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "7": {
+            "annotation": "", 
+            "id": 7, 
+            "input_connections": {
+                "library|input_1": {
+                    "id": 5, 
+                    "output_name": "output_file"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Bowtie2", 
+            "outputs": [
+                {
+                    "name": "output_unaligned_reads_l", 
+                    "type": "fastqsanger"
+                }, 
+                {
+                    "name": "output_unaligned_reads_r", 
+                    "type": "fastqsanger"
+                }, 
+                {
+                    "name": "output", 
+                    "type": "bam"
+                }
+            ], 
+            "position": {
+                "left": 983, 
+                "top": 797
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "bowtie2", 
+            "tool_state": "{\"__page__\": 0, \"read_group\": \"{\\\"selection\\\": \\\"no\\\", \\\"__current_case__\\\": 1}\", \"singlePaired\": \"{\\\"sPaired\\\": \\\"single\\\", \\\"input1\\\": null, \\\"__current_case__\\\": 0}\", \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null, \"unaligned_file\": \"\\\"False\\\"\", \"library\": \"{\\\"type\\\": \\\"single\\\", \\\"__current_case__\\\": 0, \\\"input_1\\\": null}\", \"reference_genome\": \"{\\\"source\\\": \\\"indexed\\\", \\\"__current_case__\\\": 0, \\\"index\\\": \\\"m_musculus\\\"}\", \"params\": \"{\\\"full\\\": \\\"no\\\", \\\"__current_case__\\\": 1}\", \"refGenomeSource\": \"{\\\"genomeSource\\\": \\\"history\\\", \\\"ownFile\\\": null, \\\"__current_case__\\\": 1}\"}", 
+            "tool_version": "0.2", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "8": {
+            "annotation": "", 
+            "id": 8, 
+            "input_connections": {
+                "inputFile": {
+                    "id": 6, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Add or Replace Groups", 
+            "outputs": [
+                {
+                    "name": "outFile", 
+                    "type": "bam"
+                }
+            ], 
+            "position": {
+                "left": 1383, 
+                "top": 256
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_ARRG/1.56.0", 
+            "tool_state": "{\"rgpl\": \"\\\"illumina\\\"\", \"outputFormat\": \"\\\"True\\\"\", \"__page__\": 0, \"rgsm\": \"\\\"JF191\\\"\", \"readGroupOpts\": \"{\\\"rgOpts\\\": \\\"preSet\\\", \\\"__current_case__\\\": 0}\", \"rgid\": \"\\\"JF191\\\"\", \"rgpu\": \"\\\"JF191\\\"\", \"rglb\": \"\\\"JF191\\\"\", \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null, \"inputFile\": \"null\"}", 
+            "tool_version": "1.56.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "9": {
+            "annotation": "", 
+            "id": 9, 
+            "input_connections": {
+                "inputFile": {
+                    "id": 7, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Add or Replace Groups", 
+            "outputs": [
+                {
+                    "name": "outFile", 
+                    "type": "bam"
+                }
+            ], 
+            "position": {
+                "left": 1309, 
+                "top": 904
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_ARRG/1.56.0", 
+            "tool_state": "{\"rgpl\": \"\\\"illumina\\\"\", \"outputFormat\": \"\\\"True\\\"\", \"__page__\": 0, \"rgsm\": \"\\\"JF191\\\"\", \"readGroupOpts\": \"{\\\"rgOpts\\\": \\\"preSet\\\", \\\"__current_case__\\\": 0}\", \"rgid\": \"\\\"JF191\\\"\", \"rgpu\": \"\\\"JF191\\\"\", \"rglb\": \"\\\"JF191\\\"\", \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null, \"inputFile\": \"null\"}", 
+            "tool_version": "1.56.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "10": {
+            "annotation": "", 
+            "id": 10, 
+            "input_connections": {
+                "reference_source|input_bams_0|input_bam": {
+                    "id": 8, 
+                    "output_name": "outFile"
+                }, 
+                "reference_source|ref_file": {
+                    "id": 2, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Unified Genotyper", 
+            "outputs": [
+                {
+                    "name": "output_vcf", 
+                    "type": "vcf"
+                }, 
+                {
+                    "name": "output_metrics", 
+                    "type": "txt"
+                }, 
+                {
+                    "name": "output_log", 
+                    "type": "txt"
+                }
+            ], 
+            "position": {
+                "left": 1675, 
+                "top": 312
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "gatk_unified_genotyper", 
+            "tool_state": "{\"__page__\": 0, \"genotype_likelihoods_model\": \"\\\"BOTH\\\"\", \"__rerun_remap_job_id__\": null, \"gatk_param_type\": \"{\\\"gatk_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"standard_min_confidence_threshold_for_emitting\": \"\\\"30.0\\\"\", \"analysis_param_type\": \"{\\\"analysis_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"standard_min_confidence_threshold_for_calling\": \"\\\"30.0\\\"\", \"reference_source\": \"{\\\"ref_file\\\": null, \\\"reference_source_selector\\\": \\\"history\\\", \\\"input_bams\\\": [{\\\"__index__\\\": 0, \\\"input_bam\\\": null}], \\\"__current_case__\\\": 1}\", \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"rod_bind\": \"[]\"}", 
+            "tool_version": "0.0.6", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "11": {
+            "annotation": "", 
+            "id": 11, 
+            "input_connections": {
+                "refOrHistory|input1": {
+                    "id": 9, 
+                    "output_name": "outFile"
+                }, 
+                "refOrHistory|ownFile": {
+                    "id": 2, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Generate pileup", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 1683, 
+                "top": 593
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/sam_pileup/sam_pileup/1.1.1", 
+            "tool_state": "{\"__page__\": 0, \"c\": \"{\\\"consensus\\\": \\\"no\\\", \\\"__current_case__\\\": 0}\", \"indels\": \"\\\"no\\\"\", \"refOrHistory\": \"{\\\"input1\\\": null, \\\"reference\\\": \\\"history\\\", \\\"__current_case__\\\": 1, \\\"ownFile\\\": null}\", \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null, \"lastCol\": \"\\\"no\\\"\", \"mapCap\": \"\\\"60\\\"\"}", 
+            "tool_version": "1.1.1", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "12": {
+            "annotation": "", 
+            "id": 12, 
+            "input_connections": {
+                "reference_source|input_bams_0|input_bam": {
+                    "id": 9, 
+                    "output_name": "outFile"
+                }, 
+                "reference_source|ref_file": {
+                    "id": 2, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Unified Genotyper", 
+            "outputs": [
+                {
+                    "name": "output_vcf", 
+                    "type": "vcf"
+                }, 
+                {
+                    "name": "output_metrics", 
+                    "type": "txt"
+                }, 
+                {
+                    "name": "output_log", 
+                    "type": "txt"
+                }
+            ], 
+            "position": {
+                "left": 1725, 
+                "top": 882
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "gatk_unified_genotyper", 
+            "tool_state": "{\"__page__\": 0, \"genotype_likelihoods_model\": \"\\\"BOTH\\\"\", \"__rerun_remap_job_id__\": null, \"gatk_param_type\": \"{\\\"gatk_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"standard_min_confidence_threshold_for_emitting\": \"\\\"30.0\\\"\", \"analysis_param_type\": \"{\\\"analysis_param_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"standard_min_confidence_threshold_for_calling\": \"\\\"30.0\\\"\", \"reference_source\": \"{\\\"ref_file\\\": null, \\\"reference_source_selector\\\": \\\"history\\\", \\\"input_bams\\\": [{\\\"__index__\\\": 0, \\\"input_bam\\\": null}], \\\"__current_case__\\\": 1}\", \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"rod_bind\": \"[]\"}", 
+            "tool_version": "0.0.6", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "13": {
+            "annotation": "", 
+            "id": 13, 
+            "input_connections": {
+                "input": {
+                    "id": 11, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Pileup-to-Interval", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 2102, 
+                "top": 657
+            }, 
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput": {
+                    "action_arguments": {
+                        "newtype": "interval"
+                    }, 
+                    "action_type": "ChangeDatatypeAction", 
+                    "output_name": "output"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/pileup_interval/pileup_interval/1.0.0", 
+            "tool_state": "{\"__page__\": 0, \"__rerun_remap_job_id__\": null, \"coverage\": \"\\\"3\\\"\", \"input\": \"null\", \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"format_type\": \"{\\\"__current_case__\\\": 0, \\\"format\\\": \\\"six\\\"}\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "14": {
+            "annotation": "", 
+            "id": 14, 
+            "input_connections": {
+                "input": {
+                    "id": 12, 
+                    "output_name": "output_vcf"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Remove beginning", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 1987, 
+                "top": 954
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "Remove beginning1", 
+            "tool_state": "{\"input\": \"null\", \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"num_lines\": \"\\\"9\\\"\", \"__page__\": 0}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "15": {
+            "annotation": "", 
+            "id": 15, 
+            "input_connections": {
+                "input1": {
+                    "id": 13, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Convert Genomic Intervals To Strict BED6", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "bed6"
+                }
+            ], 
+            "position": {
+                "left": 2477, 
+                "top": 664
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "CONVERTER_interval_to_bed6_0", 
+            "tool_state": "{\"__page__\": 0, \"__rerun_remap_job_id__\": null, \"input1\": \"null\", \"chromInfo\": \"\\\"/opt/galaxy-dist/database/files/001/dataset_1483.dat\\\"\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "16": {
+            "annotation": "", 
+            "id": 16, 
+            "input_connections": {
+                "input1": {
+                    "id": 3, 
+                    "output_name": "output"
+                }, 
+                "queries_0|input2": {
+                    "id": 14, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Concatenate datasets", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 2271, 
+                "top": 986
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "cat1", 
+            "tool_state": "{\"__page__\": 0, \"__rerun_remap_job_id__\": null, \"input1\": \"null\", \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"queries\": \"[{\\\"input2\\\": null, \\\"__index__\\\": 0}]\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "17": {
+            "annotation": "", 
+            "id": 17, 
+            "input_connections": {
+                "input1": {
+                    "id": 16, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Filter", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "vcf"
+                }
+            ], 
+            "position": {
+                "left": 2547, 
+                "top": 872
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "vcf_filter", 
+            "tool_state": "{\"__page__\": 0, \"info_filter\": \"[{\\\"info\\\": \\\"DP 10 lt\\\", \\\"__index__\\\": 0}]\", \"input1\": \"null\", \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null, \"mark_as_pass\": \"\\\"False\\\"\", \"quality\": \"\\\"0\\\"\", \"remove_genotypes\": \"\\\"False\\\"\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "18": {
+            "annotation": "", 
+            "id": 18, 
+            "input_connections": {
+                "input1": {
+                    "id": 17, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Extract", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "vcf"
+                }
+            ], 
+            "position": {
+                "left": 2812, 
+                "top": 881
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "vcf_extract", 
+            "tool_state": "{\"keep_quality\": \"\\\"90 ge\\\"\", \"input1\": \"null\", \"__page__\": 0, \"region\": \"\\\"\\\"\", \"keep_info\": \"\\\"\\\"\", \"discard_info\": \"\\\"\\\"\", \"reference_sequence\": \"\\\"\\\"\", \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null, \"pass_filter\": \"\\\"True\\\"\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }
+    }
+}

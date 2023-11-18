@@ -1,0 +1,209 @@
+{
+    "a_galaxy_workflow": "true", 
+    "annotation": "", 
+    "format-version": "0.1", 
+    "name": "new workflow", 
+    "steps": {
+        "0": {
+            "annotation": "", 
+            "id": 0, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "Input Dataset"
+                }
+            ], 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 200, 
+                "top": 292.4166717529297
+            }, 
+            "tool_errors": null, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"Input Dataset\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "user_outputs": []
+        }, 
+        "1": {
+            "annotation": "", 
+            "id": 1, 
+            "input_connections": {
+                "input": {
+                    "id": 0, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Format", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "txt"
+                }
+            ], 
+            "position": {
+                "left": 420, 
+                "top": 292.4166717529297
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "format_input", 
+            "tool_state": "{\"input\": \"null\", \"chromInfo\": \"\\\"/home/prasundutta87/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__page__\": 0}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "2": {
+            "annotation": "", 
+            "id": 2, 
+            "input_connections": {
+                "input": {
+                    "id": 1, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Calculate length", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 640, 
+                "top": 292.4166717529297
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "check_length", 
+            "tool_state": "{\"input\": \"null\", \"chromInfo\": \"\\\"/home/prasundutta87/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__page__\": 0}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "3": {
+            "annotation": "", 
+            "id": 3, 
+            "input_connections": {
+                "input": {
+                    "id": 1, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Translate", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "txt"
+                }
+            ], 
+            "position": {
+                "left": 640, 
+                "top": 412.4166717529297
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "Translator", 
+            "tool_state": "{\"input\": \"null\", \"chromInfo\": \"\\\"/home/prasundutta87/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__page__\": 0}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "4": {
+            "annotation": "", 
+            "id": 4, 
+            "input_connections": {
+                "input": {
+                    "id": 1, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Calculate A,T,G and C content", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 640, 
+                "top": 532.4166717529297
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "atgc_content", 
+            "tool_state": "{\"input\": \"null\", \"chromInfo\": \"\\\"/home/prasundutta87/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__page__\": 0}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "5": {
+            "annotation": "", 
+            "id": 5, 
+            "input_connections": {
+                "input1": {
+                    "id": 2, 
+                    "output_name": "output"
+                }, 
+                "input2": {
+                    "id": 4, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Join two Datasets", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 860, 
+                "top": 292.4166717529297
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "join1", 
+            "tool_state": "{\"input2\": \"null\", \"__page__\": 0, \"field1\": \"{\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": \\\"1\\\"}\", \"partial\": \"\\\"\\\"\", \"field2\": \"{\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": \\\"1\\\"}\", \"fill_empty_columns\": \"{\\\"fill_empty_columns_switch\\\": \\\"no_fill\\\", \\\"__current_case__\\\": 0}\", \"unmatched\": \"\\\"\\\"\", \"input1\": \"null\", \"chromInfo\": \"\\\"/home/prasundutta87/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "2.0.2", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "6": {
+            "annotation": "", 
+            "id": 6, 
+            "input_connections": {
+                "input": {
+                    "id": 5, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Sort", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 1080, 
+                "top": 292.4166717529297
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "sort1", 
+            "tool_state": "{\"__page__\": 0, \"style\": \"\\\"num\\\"\", \"column\": \"{\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": \\\"2\\\"}\", \"order\": \"\\\"DESC\\\"\", \"input\": \"null\", \"chromInfo\": \"\\\"/home/prasundutta87/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"column_set\": \"[]\"}", 
+            "tool_version": "1.0.1", 
+            "type": "tool", 
+            "user_outputs": []
+        }
+    }
+}

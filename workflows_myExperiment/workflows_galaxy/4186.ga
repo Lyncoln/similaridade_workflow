@@ -1,0 +1,677 @@
+{
+    "a_galaxy_workflow": "true", 
+    "annotation": "", 
+    "format-version": "0.1", 
+    "name": "MergePeptides", 
+    "steps": {
+        "0": {
+            "annotation": "", 
+            "id": 0, 
+            "input_connections": {}, 
+            "inputs": [], 
+            "name": "Parse experiment metadata (flat-file)", 
+            "outputs": [
+                {
+                    "name": "output_file1", 
+                    "type": "xml"
+                }
+            ], 
+            "position": {
+                "left": 199.96376037597656, 
+                "top": 199.96376419067383
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput_file1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output_file1"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "PEXP", 
+            "tool_state": "{\"__page__\": 0, \"__rerun_remap_job_id__\": null, \"input_file1\": \"null\"}", 
+            "tool_version": "alpha", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "1": {
+            "annotation": "", 
+            "id": 1, 
+            "input_connections": {
+                "input": {
+                    "id": 0, 
+                    "output_name": "output_file1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Import observation data for an experiment", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "xml"
+                }, 
+                {
+                    "name": "mqoutput", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 527.9714508056641, 
+                "top": 199.96376419067383
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionmqoutput": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "mqoutput"
+                }, 
+                "HideDatasetActionoutput": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "ImportDataFromExp", 
+            "tool_state": "{\"__page__\": 0, \"__rerun_remap_job_id__\": null, \"progenesis\": \"null\", \"maxquantfiles\": \"[{\\\"__index__\\\": 0, \\\"maxquant\\\": null}, {\\\"__index__\\\": 1, \\\"maxquant\\\": null}]\", \"input\": \"null\", \"fasta\": \"null\"}", 
+            "tool_version": "alpha", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "2": {
+            "annotation": "", 
+            "id": 2, 
+            "input_connections": {
+                "input": {
+                    "id": 1, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Hide unmodified", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "xml"
+                }
+            ], 
+            "position": {
+                "left": 853.9614410400391, 
+                "top": 199.96376419067383
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "RemoveUnmodifiedPeptides", 
+            "tool_state": "{\"__page__\": 0, \"UseMaxQuantMod\": \"\\\"True\\\"\", \"Acetylation\": \"\\\"False\\\"\", \"__rerun_remap_job_id__\": null, \"Phosphorylation\": \"\\\"True\\\"\", \"Oxidation\": \"\\\"False\\\"\", \"UseProgenesisMod\": \"\\\"True\\\"\", \"input\": \"null\"}", 
+            "tool_version": "alpha", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "3": {
+            "annotation": "", 
+            "id": 3, 
+            "input_connections": {
+                "input": {
+                    "id": 2, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Merge identical # ids", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "xml"
+                }
+            ], 
+            "position": {
+                "left": 1083.9727935791016, 
+                "top": 199.96376419067383
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "InitialPeptide"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "output"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "MergeIdenticalPeptides", 
+            "tool_state": "{\"input\": \"null\", \"__rerun_remap_job_id__\": null, \"__page__\": 0}", 
+            "tool_version": "alpha", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "4": {
+            "annotation": "", 
+            "id": 4, 
+            "input_connections": {
+                "input": {
+                    "id": 3, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Filter redundant peaks", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "xml"
+                }
+            ], 
+            "position": {
+                "left": 1331.955093383789, 
+                "top": 199.96376419067383
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output"
+                }, 
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "PeaksFiltered"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "output"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "FilterRedundantPeaks", 
+            "tool_state": "{\"UseProgenesisMod\": \"\\\"True\\\"\", \"input\": \"null\", \"__rerun_remap_job_id__\": null, \"UseMaxQuantMod\": \"\\\"True\\\"\", \"__page__\": 0}", 
+            "tool_version": "alpha", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "5": {
+            "annotation": "", 
+            "id": 5, 
+            "input_connections": {
+                "input": {
+                    "id": 3, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Apply statistical tests", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "xml"
+                }
+            ], 
+            "position": {
+                "left": 1331.955093383789, 
+                "top": 312.9752082824707
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "ApplyStatistics", 
+            "tool_state": "{\"input\": \"null\", \"__rerun_remap_job_id__\": null, \"type\": \"\\\"-p\\\"\", \"__page__\": 0}", 
+            "tool_version": "alpha", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "6": {
+            "annotation": "", 
+            "id": 6, 
+            "input_connections": {
+                "input": {
+                    "id": 4, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Merge charge varients", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "xml"
+                }
+            ], 
+            "position": {
+                "left": 1588.9698638916016, 
+                "top": 199.96376419067383
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output"
+                }, 
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Charge"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "output"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "MergeChargeStates", 
+            "tool_state": "{\"UseProgenesisMod\": \"\\\"True\\\"\", \"input\": \"null\", \"__rerun_remap_job_id__\": null, \"UseMaxQuantMod\": \"\\\"True\\\"\", \"__page__\": 0}", 
+            "tool_version": "alpha", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "7": {
+            "annotation": "", 
+            "id": 7, 
+            "input_connections": {
+                "input": {
+                    "id": 4, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Apply statistical tests", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "xml"
+                }
+            ], 
+            "position": {
+                "left": 1588.9698638916016, 
+                "top": 312.9752082824707
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "ApplyStatistics", 
+            "tool_state": "{\"input\": \"null\", \"__rerun_remap_job_id__\": null, \"type\": \"\\\"-p\\\"\", \"__page__\": 0}", 
+            "tool_version": "alpha", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "8": {
+            "annotation": "", 
+            "id": 8, 
+            "input_connections": {
+                "input_file1": {
+                    "id": 5, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Export as tab delimited file", 
+            "outputs": [
+                {
+                    "name": "output_file1", 
+                    "type": "txt"
+                }
+            ], 
+            "position": {
+                "left": 1588.9698638916016, 
+                "top": 408.9539985656738
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutput_file1": {
+                    "action_arguments": {
+                        "newname": "Ident#"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "output_file1"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "TEXPORT", 
+            "tool_state": "{\"__page__\": 0, \"__rerun_remap_job_id__\": null, \"input_file1\": \"null\"}", 
+            "tool_version": "alpha", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "9": {
+            "annotation": "", 
+            "id": 9, 
+            "input_connections": {
+                "input": {
+                    "id": 6, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Merge all alternative modifications", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "xml"
+                }
+            ], 
+            "position": {
+                "left": 1872.964859008789, 
+                "top": 199.96376419067383
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output"
+                }, 
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "AltMod"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "output"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "MergeAlternativeModifications", 
+            "tool_state": "{\"__page__\": 0, \"UseMaxQuantMod\": \"\\\"True\\\"\", \"Acetylation\": \"\\\"False\\\"\", \"__rerun_remap_job_id__\": null, \"Phosphorylation\": \"\\\"True\\\"\", \"Oxidation\": \"\\\"False\\\"\", \"UseProgenesisMod\": \"\\\"True\\\"\", \"input\": \"null\"}", 
+            "tool_version": "alpha", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "10": {
+            "annotation": "", 
+            "id": 10, 
+            "input_connections": {
+                "input": {
+                    "id": 6, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Apply statistical tests", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "xml"
+                }
+            ], 
+            "position": {
+                "left": 1872.964859008789, 
+                "top": 312.9752082824707
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "ApplyStatistics", 
+            "tool_state": "{\"input\": \"null\", \"__rerun_remap_job_id__\": null, \"type\": \"\\\"-p\\\"\", \"__page__\": 0}", 
+            "tool_version": "alpha", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "11": {
+            "annotation": "", 
+            "id": 11, 
+            "input_connections": {
+                "input_file1": {
+                    "id": 7, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Export as tab delimited file", 
+            "outputs": [
+                {
+                    "name": "output_file1", 
+                    "type": "txt"
+                }
+            ], 
+            "position": {
+                "left": 1872.964859008789, 
+                "top": 408.9539985656738
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutput_file1": {
+                    "action_arguments": {
+                        "newname": "RP"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "output_file1"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "TEXPORT", 
+            "tool_state": "{\"__page__\": 0, \"__rerun_remap_job_id__\": null, \"input_file1\": \"null\"}", 
+            "tool_version": "alpha", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "12": {
+            "annotation": "", 
+            "id": 12, 
+            "input_connections": {
+                "input": {
+                    "id": 9, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Merge alternative tryptic-digestion", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "xml"
+                }
+            ], 
+            "position": {
+                "left": 2200.948989868164, 
+                "top": 199.96376419067383
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "FINALXML"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "output"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "MergeAlternativeTrypticDigests", 
+            "tool_state": "{\"__page__\": 0, \"UseMaxQuantMod\": \"\\\"True\\\"\", \"Acetylation\": \"\\\"False\\\"\", \"__rerun_remap_job_id__\": null, \"Phosphorylation\": \"\\\"True\\\"\", \"Oxidation\": \"\\\"False\\\"\", \"UseProgenesisMod\": \"\\\"True\\\"\", \"input\": \"null\"}", 
+            "tool_version": "alpha", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "13": {
+            "annotation": "", 
+            "id": 13, 
+            "input_connections": {
+                "input": {
+                    "id": 9, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Apply statistical tests", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "xml"
+                }
+            ], 
+            "position": {
+                "left": 2200.948989868164, 
+                "top": 312.9752082824707
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "ApplyStatistics", 
+            "tool_state": "{\"input\": \"null\", \"__rerun_remap_job_id__\": null, \"type\": \"\\\"-p\\\"\", \"__page__\": 0}", 
+            "tool_version": "alpha", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "14": {
+            "annotation": "", 
+            "id": 14, 
+            "input_connections": {
+                "input_file1": {
+                    "id": 10, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Export as tab delimited file", 
+            "outputs": [
+                {
+                    "name": "output_file1", 
+                    "type": "txt"
+                }
+            ], 
+            "position": {
+                "left": 2200.948989868164, 
+                "top": 408.9539985656738
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutput_file1": {
+                    "action_arguments": {
+                        "newname": "CV"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "output_file1"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "TEXPORT", 
+            "tool_state": "{\"__page__\": 0, \"__rerun_remap_job_id__\": null, \"input_file1\": \"null\"}", 
+            "tool_version": "alpha", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "15": {
+            "annotation": "", 
+            "id": 15, 
+            "input_connections": {
+                "input": {
+                    "id": 12, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Apply statistical tests", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "xml"
+                }
+            ], 
+            "position": {
+                "left": 2526.938980102539, 
+                "top": 199.96376419067383
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "ApplyStatistics", 
+            "tool_state": "{\"input\": \"null\", \"__rerun_remap_job_id__\": null, \"type\": \"\\\"paired\\\"\", \"__page__\": 0}", 
+            "tool_version": "alpha", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "16": {
+            "annotation": "", 
+            "id": 16, 
+            "input_connections": {
+                "input_file1": {
+                    "id": 13, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Export as tab delimited file", 
+            "outputs": [
+                {
+                    "name": "output_file1", 
+                    "type": "txt"
+                }
+            ], 
+            "position": {
+                "left": 2526.938980102539, 
+                "top": 295.9660224914551
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutput_file1": {
+                    "action_arguments": {
+                        "newname": "AM"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "output_file1"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "TEXPORT", 
+            "tool_state": "{\"__page__\": 0, \"__rerun_remap_job_id__\": null, \"input_file1\": \"null\"}", 
+            "tool_version": "alpha", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "17": {
+            "annotation": "", 
+            "id": 17, 
+            "input_connections": {
+                "input_file1": {
+                    "id": 15, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Export as tab delimited file", 
+            "outputs": [
+                {
+                    "name": "output_file1", 
+                    "type": "txt"
+                }
+            ], 
+            "position": {
+                "left": 2810.986831665039, 
+                "top": 199.99306106567383
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutput_file1": {
+                    "action_arguments": {
+                        "newname": "FINAL"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "output_file1"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "TEXPORT", 
+            "tool_state": "{\"__page__\": 0, \"__rerun_remap_job_id__\": null, \"input_file1\": \"null\"}", 
+            "tool_version": "alpha", 
+            "type": "tool", 
+            "user_outputs": []
+        }
+    }
+}

@@ -1,0 +1,218 @@
+{
+    "a_galaxy_workflow": "true", 
+    "annotation": "From the RNA-Seq analysis tutorial during the Functional Genomics Workshop 2012\nhttps://caps.osu.edu/pfg-workshop", 
+    "format-version": "0.1", 
+    "name": "Basic RNA-Seq Analysis - Differential Expression (Functional Genomics Workshop 2012)", 
+    "steps": {
+        "0": {
+            "annotation": "", 
+            "id": 0, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "Zea mays gtf Filtered Gene Set"
+                }
+            ], 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 203.99998474121094, 
+                "top": 149.45453643798828
+            }, 
+            "tool_errors": null, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"Zea mays gtf Filtered Gene Set\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "user_outputs": []
+        }, 
+        "1": {
+            "annotation": "", 
+            "id": 1, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "Reads_WT_aligned"
+                }
+            ], 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 207.63636779785156, 
+                "top": 272.18180084228516
+            }, 
+            "tool_errors": null, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"Reads_WT_aligned\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "user_outputs": []
+        }, 
+        "2": {
+            "annotation": "", 
+            "id": 2, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "Reads_MUT_aligned"
+                }
+            ], 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 208.81819152832031, 
+                "top": 362.45452117919922
+            }, 
+            "tool_errors": null, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"Reads_MUT_aligned\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "user_outputs": []
+        }, 
+        "3": {
+            "annotation": "", 
+            "id": 3, 
+            "input_connections": {
+                "group_analysis|aligned_reads1": {
+                    "id": 1, 
+                    "output_name": "output"
+                }, 
+                "group_analysis|aligned_reads2": {
+                    "id": 2, 
+                    "output_name": "output"
+                }, 
+                "gtf_input": {
+                    "id": 0, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Cuffdiff", 
+            "outputs": [
+                {
+                    "name": "splicing_diff", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "promoters_diff", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "cds_diff", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "cds_exp_fpkm_tracking", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "cds_fpkm_tracking", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "tss_groups_exp", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "tss_groups_fpkm_tracking", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "genes_exp", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "genes_fpkm_tracking", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "isoforms_exp", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "isoforms_fpkm_tracking", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 564.90907287597656, 
+                "top": 145.81817626953125
+            }, 
+            "post_job_actions": {
+                "HideDatasetActioncds_diff": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "cds_diff"
+                }, 
+                "HideDatasetActioncds_exp_fpkm_tracking": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "cds_exp_fpkm_tracking"
+                }, 
+                "HideDatasetActioncds_fpkm_tracking": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "cds_fpkm_tracking"
+                }, 
+                "HideDatasetActionpromoters_diff": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "promoters_diff"
+                }, 
+                "HideDatasetActionsplicing_diff": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "splicing_diff"
+                }, 
+                "HideDatasetActiontss_groups_exp": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "tss_groups_exp"
+                }, 
+                "HideDatasetActiontss_groups_fpkm_tracking": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "tss_groups_fpkm_tracking"
+                }, 
+                "RenameDatasetActiongenes_exp": {
+                    "action_arguments": {
+                        "newname": "WT_vs_MUT_genes_exp"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "genes_exp"
+                }, 
+                "RenameDatasetActiongenes_fpkm_tracking": {
+                    "action_arguments": {
+                        "newname": "WT_vs_MUT_genes_fpkm_tracking"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "genes_fpkm_tracking"
+                }, 
+                "RenameDatasetActionisoforms_exp": {
+                    "action_arguments": {
+                        "newname": "WT_vs_MUT_isoforms_exp"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "isoforms_exp"
+                }, 
+                "RenameDatasetActionisoforms_fpkm_tracking": {
+                    "action_arguments": {
+                        "newname": "WT_vs_MUT_isoforms_fpkm_tracking"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "isoforms_fpkm_tracking"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "cuffdiff", 
+            "tool_state": "{\"__page__\": 0, \"gtf_input\": \"null\", \"singlePaired\": \"{\\\"sPaired\\\": \\\"No\\\", \\\"__current_case__\\\": 0}\", \"group_analysis\": \"{\\\"aligned_reads1\\\": null, \\\"aligned_reads2\\\": null, \\\"__current_case__\\\": 1, \\\"do_groups\\\": \\\"No\\\"}\", \"bias_correction\": \"{\\\"do_bias_correction\\\": \\\"No\\\", \\\"__current_case__\\\": 1}\", \"fdr\": \"\\\"0.05\\\"\", \"min_alignment_count\": \"\\\"1000\\\"\", \"chromInfo\": \"\\\"/home/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"do_normalization\": \"\\\"No\\\"\"}", 
+            "tool_version": "0.0.5", 
+            "type": "tool", 
+            "user_outputs": []
+        }
+    }
+}

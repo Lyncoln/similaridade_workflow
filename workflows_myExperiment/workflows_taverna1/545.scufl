@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<s:scufl xmlns:s="http://org.embl.ebi.escience/xscufl/0.1alpha" version="0.2" log="0">
+  <s:workflowdescription lsid="" author="" title="" />
+  <s:processor name="hello" workers="10">
+    <s:arbitrarywsdl>
+      <s:wsdl>http://egee1.unice.fr/wsdl/gasw_service.wsdl</s:wsdl>
+      <s:operation>GASWexecution</s:operation>
+    </s:arbitrarywsdl>
+  </s:processor>
+  <s:processor name="empty" boring="true">
+    <s:stringconstant>""</s:stringconstant>
+  </s:processor>
+  <s:processor name="helloDescription" boring="true">
+    <s:stringconstant>https://ws1.grid.sara.nl/~glatard/descriptions/hellovfs.xml</s:stringconstant>
+  </s:processor>
+  <s:source name="yourName" />^M
+  <s:source name="file" />^M
+  <s:sink name="message" />^M
+  <s:link source="empty:value" sink="hello:command-line" />
+  <s:link source="file" sink="hello:input1" />
+  <s:link source="empty:value" sink="hello:input2" />
+  <s:link source="empty:value" sink="hello:input3" />
+  <s:link source="empty:value" sink="hello:input4" />
+  <s:link source="helloDescription:value" sink="hello:config-file" />
+  <s:link source="yourName" sink="hello:input0" />
+  <s:link source="hello:result0" sink="message" />
+</s:scufl>
+
+

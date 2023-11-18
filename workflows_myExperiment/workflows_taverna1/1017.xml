@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<s:scufl xmlns:s="http://org.embl.ebi.escience/xscufl/0.1alpha" version="0.2" log="0">
+  <s:workflowdescription lsid="urn:lsid:www.mygrid.org.uk:operation:RTE7A0GDUO0" author="" title="Search TP53 Somatic Mutation catalogue by intron and by effect according to the boolean operators (�and�, �or� and �butnot�) and retrieve full somatic mutation descriptions">This workflow takes the intron, the effect and the TP53 somatic mutation database as input and retrieves the full TP53 somatic mutation description(s) by first retrieving two different outputs and arranging them according to the boolean operators (and, or and butnot):
+- first output: a TP53 somatic mutation database unique IDs list associated with the input 'intron' (done via a call to the getP53MutationIdsByIntron web service)
+- second output: a TP53 somatic mutation database unique IDs list associated with the input 'effect' (done via a call to the getP53MutationIdsByEffect web service)and then using IDs for retrieving the full TP53 somatic mutations descriptions (done via a call to the getP53MutationsByIds web service).
+Special requirements on input data are:
+- the intron range of numbers is 2-11,
+- one or more of the following effects can be specified: 'fs' (frameshift), 'missense', 'na' (not available), 'nonsense', 'other', 'silent', 'splice'. Other values may lead to errors,
+- when specifying more than one intron or effect, they must be in a unique input string but on distinct text lines.</s:workflowdescription>
+  <s:processor name="Split_string_into_list_by_regular_expression_2">
+    <s:local>org.embl.ebi.escience.scuflworkers.java.SplitByRegex</s:local>
+  </s:processor>
+  <s:processor name="Filter_list_of_strings_extracting_match_to_a_regex_in_and">
+    <s:local>org.embl.ebi.escience.scuflworkers.java.RegularExpressionStringList</s:local>
+  </s:processor>
+  <s:processor name="Split_string_into_string_list_by_regular_expression">
+    <s:local>org.embl.ebi.escience.scuflworkers.java.SplitByRegex</s:local>
+  </s:processor>
+  <s:processor name="String_list_intersection">
+    <s:local>org.embl.ebi.escience.scuflworkers.java.StringSetIntersection</s:local>
+  </s:processor>
+  <s:processor name="regex_id_separator" boring="true">
+    <s:stringconstant>([A-Z0-9]*:)([0-9]*)</s:stringconstant>
+  </s:processor>
+  <s:processor name="Filter_list_of_strings_extracting_match_to_a_regex2_in_or">
+    <s:local>org.embl.ebi.escience.scuflworkers.java.RegularExpressionStringList</s:local>
+  </s:processor>
+  <s:processor name="String_list_difference">
+    <s:local>org.embl.ebi.escience.scuflworkers.java.StringSetDifference</s:local>
+  </s:processor>
+  <s:processor name="Filter_list_of_strings_extracting_match_to_a_regex3_in_butnot">
+    <s:local>org.embl.ebi.escience.scuflworkers.java.RegularExpressionStringList</s:local>
+  </s:processor>
+  <s:processor name="String_list_union">
+    <s:local>org.embl.ebi.escience.scuflworkers.java.StringSetUnion</s:local>
+  </s:processor>
+  <s:processor name="regex_entry_list_separator" boring="true">
+    <s:stringconstant>\n</s:stringconstant>
+  </s:processor>
+  <s:processor name="id_position" boring="true">
+    <s:stringconstant>2</s:stringconstant>
+  </s:processor>
+  <s:processor name="String_Constant" boring="true">
+    <s:stringconstant>tp53_somatic</s:stringconstant>
+  </s:processor>
+  <s:processor name="getP53MutationIdsByEffect">
+    <s:description>Get tp53 gene mutation ids by effect from IARC TP53 Database catalogue (see srs.o2i.it/srs71/)</s:description>
+    <s:soaplabwsdl>http://bioinformatics.istge.it:8080/axis/services/o2i.getP53MutationIdsByEffect</s:soaplabwsdl>
+  </s:processor>
+  <s:processor name="getP53MutationsByIdsInOr">
+    <s:description>Get tp53 gene mutations by ids from TP53 IARC database (see http://srs.o2i.it/srs71/)</s:description>
+    <s:soaplabwsdl>http://bioinformatics.istge.it:8080/axis/services/o2i.getP53MutationsByIds</s:soaplabwsdl>
+  </s:processor>
+  <s:processor name="getP53MutationsByIdsInButnot">
+    <s:description>Get tp53 gene mutations by ids from TP53 IARC database (see http://srs.o2i.it/srs71/)</s:description>
+    <s:soaplabwsdl>http://bioinformatics.istge.it:8080/axis/services/o2i.getP53MutationsByIds</s:soaplabwsdl>
+  </s:processor>
+  <s:processor name="getP53MutationsByIdsInAnd">
+    <s:description>Get tp53 gene mutations by ids from TP53 IARC database (see http://srs.o2i.it/srs71/)</s:description>
+    <s:soaplabwsdl>http://bioinformatics.istge.it:8080/axis/services/o2i.getP53MutationsByIds</s:soaplabwsdl>
+  </s:processor>
+  <s:processor name="getP53MutationIdsByIntron">
+    <s:description>Get tp53 gene mutation ids by intron from IARC TP53 Database catalogue (see srs.o2i.it/srs71/)</s:description>
+    <s:soaplabwsdl>http://bioinformatics.istge.it:8080/axis/services/o2i.getP53MutationIdsByIntron</s:soaplabwsdl>
+  </s:processor>
+  <s:link source="intron" sink="getP53MutationIdsByIntron:intron" />
+  <s:link source="Filter_list_of_strings_extracting_match_to_a_regex2_in_or:filteredlist" sink="getP53MutationsByIdsInOr:id" />
+  <s:link source="Filter_list_of_strings_extracting_match_to_a_regex3_in_butnot:filteredlist" sink="getP53MutationsByIdsInButnot:id" />
+  <s:link source="Filter_list_of_strings_extracting_match_to_a_regex_in_and:filteredlist" sink="getP53MutationsByIdsInAnd:id" />
+  <s:link source="effect" sink="getP53MutationIdsByEffect:effect" />
+  <s:link source="Split_string_into_list_by_regular_expression_2:split" sink="String_list_difference:list2" />
+  <s:link source="Split_string_into_list_by_regular_expression_2:split" sink="String_list_intersection:list2" />
+  <s:link source="Split_string_into_list_by_regular_expression_2:split" sink="String_list_union:list2" />
+  <s:link source="Split_string_into_string_list_by_regular_expression:split" sink="String_list_intersection:list1" />
+  <s:link source="Split_string_into_string_list_by_regular_expression:split" sink="String_list_union:list1" />
+  <s:link source="String_Constant:value" sink="getP53MutationIdsByEffect:libs" />
+  <s:link source="String_Constant:value" sink="getP53MutationIdsByIntron:libs" />
+  <s:link source="String_list_difference:difference" sink="Filter_list_of_strings_extracting_match_to_a_regex3_in_butnot:stringlist" />
+  <s:link source="String_list_intersection:intersection" sink="Filter_list_of_strings_extracting_match_to_a_regex_in_and:stringlist" />
+  <s:link source="String_list_union:union" sink="Filter_list_of_strings_extracting_match_to_a_regex2_in_or:stringlist" />
+  <s:link source="String_list_union:union" sink="String_list_difference:list1" />
+  <s:link source="getP53MutationIdsByEffect:result" sink="Split_string_into_list_by_regular_expression_2:string" />
+  <s:link source="getP53MutationIdsByIntron:result" sink="Split_string_into_string_list_by_regular_expression:string" />
+  <s:link source="getP53MutationsByIdsInAnd:result" sink="mutations_in_and" />
+  <s:link source="getP53MutationsByIdsInButnot:result" sink="mutations_in_but_not" />
+  <s:link source="getP53MutationsByIdsInOr:result" sink="mutations_in_or" />
+  <s:link source="id_position:value" sink="Filter_list_of_strings_extracting_match_to_a_regex2_in_or:group" />
+  <s:link source="id_position:value" sink="Filter_list_of_strings_extracting_match_to_a_regex3_in_butnot:group" />
+  <s:link source="id_position:value" sink="Filter_list_of_strings_extracting_match_to_a_regex_in_and:group" />
+  <s:link source="regex_entry_list_separator:value" sink="Split_string_into_list_by_regular_expression_2:regex" />
+  <s:link source="regex_entry_list_separator:value" sink="Split_string_into_string_list_by_regular_expression:regex" />
+  <s:link source="regex_id_separator:value" sink="Filter_list_of_strings_extracting_match_to_a_regex2_in_or:regex" />
+  <s:link source="regex_id_separator:value" sink="Filter_list_of_strings_extracting_match_to_a_regex3_in_butnot:regex" />
+  <s:link source="regex_id_separator:value" sink="Filter_list_of_strings_extracting_match_to_a_regex_in_and:regex" />
+  <s:source name="intron" />
+  <s:source name="effect" />
+  <s:sink name="mutations_in_and" />
+  <s:sink name="mutations_in_or" />
+  <s:sink name="mutations_in_but_not" />
+</s:scufl>
+

@@ -1,0 +1,1007 @@
+{
+    "a_galaxy_workflow": "true", 
+    "annotation": "Generates RTTS counts file from SAM file. Output consists of three columns: counts at given position;chromosome;position(0 based). Workflow removes untemplated nucleotides from 5' ends of the reads. Authors: Jeppe Vinther, Lukasz Kielpinski", 
+    "format-version": "0.1", 
+    "name": "RTTS Mapper", 
+    "steps": {
+        "0": {
+            "annotation": "Input SAM file from SRTT experiment", 
+            "id": 0, 
+            "input_connections": {}, 
+            "inputs": [], 
+            "name": "Convert SAM", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "interval"
+                }
+            ], 
+            "position": {
+                "left": 422.88330078125, 
+                "top": 503
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "out_file1"
+                }, 
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "Interval"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "sam2interval", 
+            "tool_state": "{\"print_all\": \"\\\"-p\\\"\", \"__page__\": 0, \"input1\": \"null\", \"chromInfo\": \"\\\"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/mm9.len\\\"\"}", 
+            "tool_version": "1.0.1", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "1": {
+            "annotation": "", 
+            "id": 1, 
+            "input_connections": {
+                "input": {
+                    "id": 0, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Filter", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 631.88330078125, 
+                "top": 356
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "Filter1", 
+            "tool_state": "{\"__page__\": 0, \"cond\": \"\\\"c4=='+'\\\"\", \"chromInfo\": \"\\\"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/mm9.len\\\"\", \"input\": \"null\"}", 
+            "tool_version": "1.1.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "2": {
+            "annotation": "", 
+            "id": 2, 
+            "input_connections": {
+                "input": {
+                    "id": 0, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Filter", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 635.88330078125, 
+                "top": 745
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "Filter1", 
+            "tool_state": "{\"__page__\": 0, \"cond\": \"\\\"c4=='-'\\\"\", \"chromInfo\": \"\\\"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/mm9.len\\\"\", \"input\": \"null\"}", 
+            "tool_version": "1.1.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "3": {
+            "annotation": "", 
+            "id": 3, 
+            "input_connections": {
+                "input": {
+                    "id": 1, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Select", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 841.88330078125, 
+                "top": 446
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "Grep1", 
+            "tool_state": "{\"__page__\": 0, \"input\": \"null\", \"invert\": \"\\\"false\\\"\", \"chromInfo\": \"\\\"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/mm9.len\\\"\", \"pattern\": \"\\\"MD:Z:2[AGCT]|(MD:Z:1[AGCT]0[AGCT])|(MD:Z:0[AGCT]1[AGCT])|(MD:Z:0[AGCT]0[AGCT]0[AGCT])\\\"\"}", 
+            "tool_version": "1.0.1", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "4": {
+            "annotation": "", 
+            "id": 4, 
+            "input_connections": {
+                "input": {
+                    "id": 2, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Select", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 852.88330078125, 
+                "top": 832
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "Grep1", 
+            "tool_state": "{\"__page__\": 0, \"input\": \"null\", \"invert\": \"\\\"false\\\"\", \"chromInfo\": \"\\\"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/mm9.len\\\"\", \"pattern\": \"\\\"(MD:Z:[0123456789ACGT]*[AGCT]2($|(\\\\\\\\s)|(\\\\\\\\t)))|(MD:Z:[0123456789ACGT]*[AGCT]0[AGCT]1($|(\\\\\\\\s)|(\\\\\\\\t)))|(MD:Z:[0123456789ACGT]*[AGCT]1[AGCT]0($|(\\\\\\\\s)|(\\\\\\\\t)))|(MD:Z:[0123456789ACGT]*[AGCT]0[AGCT]0[AGCT]0($|(\\\\\\\\s)|(\\\\\\\\t)))\\\"\"}", 
+            "tool_version": "1.0.1", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "5": {
+            "annotation": "", 
+            "id": 5, 
+            "input_connections": {
+                "input1": {
+                    "id": 1, 
+                    "output_name": "out_file1"
+                }, 
+                "input2": {
+                    "id": 3, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Subtract Whole Dataset", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 834.88330078125, 
+                "top": 247
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "subtract_query1", 
+            "tool_state": "{\"input2\": \"null\", \"__page__\": 0, \"end_col\": \"{\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": \\\"None\\\"}\", \"begin_col\": \"{\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": \\\"None\\\"}\", \"input1\": \"null\", \"chromInfo\": \"\\\"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/mm9.len\\\"\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "6": {
+            "annotation": "", 
+            "id": 6, 
+            "input_connections": {
+                "input": {
+                    "id": 3, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Compute", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 1720.88330078125, 
+                "top": 546
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "Add_a_column1", 
+            "tool_state": "{\"__page__\": 0, \"cond\": \"\\\"c2+3\\\"\", \"chromInfo\": \"\\\"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/mm9.len\\\"\", \"round\": \"\\\"yes\\\"\", \"input\": \"null\"}", 
+            "tool_version": "1.1.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "7": {
+            "annotation": "", 
+            "id": 7, 
+            "input_connections": {
+                "input1": {
+                    "id": 2, 
+                    "output_name": "out_file1"
+                }, 
+                "input2": {
+                    "id": 4, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Subtract Whole Dataset", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 846.88330078125, 
+                "top": 626
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "subtract_query1", 
+            "tool_state": "{\"input2\": \"null\", \"__page__\": 0, \"end_col\": \"{\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": \\\"None\\\"}\", \"begin_col\": \"{\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": \\\"None\\\"}\", \"input1\": \"null\", \"chromInfo\": \"\\\"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/mm9.len\\\"\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "8": {
+            "annotation": "", 
+            "id": 8, 
+            "input_connections": {
+                "input": {
+                    "id": 4, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Compute", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 1733.88330078125, 
+                "top": 817
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "Add_a_column1", 
+            "tool_state": "{\"__page__\": 0, \"cond\": \"\\\"c3-3\\\"\", \"chromInfo\": \"\\\"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/mm9.len\\\"\", \"round\": \"\\\"yes\\\"\", \"input\": \"null\"}", 
+            "tool_version": "1.1.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "9": {
+            "annotation": "", 
+            "id": 9, 
+            "input_connections": {
+                "input": {
+                    "id": 5, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Select", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 1150.88330078125, 
+                "top": 449
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "Grep1", 
+            "tool_state": "{\"__page__\": 0, \"input\": \"null\", \"invert\": \"\\\"false\\\"\", \"chromInfo\": \"\\\"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/mm9.len\\\"\", \"pattern\": \"\\\"(MD:Z:1[AGCT][^0])|(MD:Z:0[AGCT]0[AGCT][^0])\\\"\"}", 
+            "tool_version": "1.0.1", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "10": {
+            "annotation": "", 
+            "id": 10, 
+            "input_connections": {
+                "input": {
+                    "id": 7, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Select", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 1142.88330078125, 
+                "top": 838
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "Grep1", 
+            "tool_state": "{\"__page__\": 0, \"input\": \"null\", \"invert\": \"\\\"false\\\"\", \"chromInfo\": \"\\\"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/mm9.len\\\"\", \"pattern\": \"\\\"(MD:Z:[0123456789ACGT]*[^0][AGCT]1($|(\\\\\\\\s)|(\\\\\\\\t)))|(MD:Z:[0123456789ACGT]*[0-9]0[AGCT]1($|(\\\\\\\\s)|(\\\\\\\\t)))|(MD:Z:[0123456789ACGT]*[^0][AGCT]0[AGCT]0($|(\\\\\\\\s)|(\\\\\\\\t)))|(MD:Z:[0123456789ACGT]*[0-9]0[AGCT]0[AGCT]0($|(\\\\\\\\s)|(\\\\\\\\t)))\\\"\"}", 
+            "tool_version": "1.0.1", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "11": {
+            "annotation": "", 
+            "id": 11, 
+            "input_connections": {
+                "input1": {
+                    "id": 5, 
+                    "output_name": "output"
+                }, 
+                "input2": {
+                    "id": 9, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Subtract Whole Dataset", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 1150.88330078125, 
+                "top": 253
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "subtract_query1", 
+            "tool_state": "{\"input2\": \"null\", \"__page__\": 0, \"end_col\": \"{\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": \\\"None\\\"}\", \"begin_col\": \"{\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": \\\"None\\\"}\", \"input1\": \"null\", \"chromInfo\": \"\\\"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/mm9.len\\\"\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "12": {
+            "annotation": "", 
+            "id": 12, 
+            "input_connections": {
+                "input": {
+                    "id": 9, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Compute", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 1714.88330078125, 
+                "top": 419
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "Add_a_column1", 
+            "tool_state": "{\"__page__\": 0, \"cond\": \"\\\"c2+2\\\"\", \"chromInfo\": \"\\\"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/mm9.len\\\"\", \"round\": \"\\\"yes\\\"\", \"input\": \"null\"}", 
+            "tool_version": "1.1.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "13": {
+            "annotation": "", 
+            "id": 13, 
+            "input_connections": {
+                "input1": {
+                    "id": 7, 
+                    "output_name": "output"
+                }, 
+                "input2": {
+                    "id": 10, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Subtract Whole Dataset", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 1137.88330078125, 
+                "top": 631
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "subtract_query1", 
+            "tool_state": "{\"input2\": \"null\", \"__page__\": 0, \"end_col\": \"{\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": \\\"None\\\"}\", \"begin_col\": \"{\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": \\\"None\\\"}\", \"input1\": \"null\", \"chromInfo\": \"\\\"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/mm9.len\\\"\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "14": {
+            "annotation": "", 
+            "id": 14, 
+            "input_connections": {
+                "input": {
+                    "id": 10, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Compute", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 1737.88330078125, 
+                "top": 1075
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "Add_a_column1", 
+            "tool_state": "{\"__page__\": 0, \"cond\": \"\\\"c3-2\\\"\", \"chromInfo\": \"\\\"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/mm9.len\\\"\", \"round\": \"\\\"yes\\\"\", \"input\": \"null\"}", 
+            "tool_version": "1.1.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "15": {
+            "annotation": "", 
+            "id": 15, 
+            "input_connections": {
+                "input": {
+                    "id": 11, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Select", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 1457.88330078125, 
+                "top": 457
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "Grep1", 
+            "tool_state": "{\"__page__\": 0, \"input\": \"null\", \"invert\": \"\\\"false\\\"\", \"chromInfo\": \"\\\"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/mm9.len\\\"\", \"pattern\": \"\\\"MD:Z:0[AGCT][^01]|MD:Z:0[AGCT]1[1234567890]\\\"\"}", 
+            "tool_version": "1.0.1", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "16": {
+            "annotation": "", 
+            "id": 16, 
+            "input_connections": {
+                "input": {
+                    "id": 13, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Select", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 1481.88330078125, 
+                "top": 836
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "Grep1", 
+            "tool_state": "{\"__page__\": 0, \"input\": \"null\", \"invert\": \"\\\"false\\\"\", \"chromInfo\": \"\\\"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/mm9.len\\\"\", \"pattern\": \"\\\"(MD:Z:[0123456789ACGT]*[^01][AGCT]0($|(\\\\\\\\s)|(\\\\\\\\t)))|(MD:Z:[0123456789ACGT]*[0-9][01][AGCT]0($|(\\\\\\\\s)|(\\\\\\\\t)))\\\"\"}", 
+            "tool_version": "1.0.1", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "17": {
+            "annotation": "", 
+            "id": 17, 
+            "input_connections": {
+                "input1": {
+                    "id": 11, 
+                    "output_name": "output"
+                }, 
+                "input2": {
+                    "id": 15, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Subtract Whole Dataset", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 1457.88330078125, 
+                "top": 255
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "subtract_query1", 
+            "tool_state": "{\"input2\": \"null\", \"__page__\": 0, \"end_col\": \"{\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": \\\"None\\\"}\", \"begin_col\": \"{\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": \\\"None\\\"}\", \"input1\": \"null\", \"chromInfo\": \"\\\"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/mm9.len\\\"\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "18": {
+            "annotation": "", 
+            "id": 18, 
+            "input_connections": {
+                "input": {
+                    "id": 15, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Compute", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 1709.88330078125, 
+                "top": 284
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "Add_a_column1", 
+            "tool_state": "{\"__page__\": 0, \"cond\": \"\\\"c2+1\\\"\", \"chromInfo\": \"\\\"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/mm9.len\\\"\", \"round\": \"\\\"yes\\\"\", \"input\": \"null\"}", 
+            "tool_version": "1.1.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "19": {
+            "annotation": "", 
+            "id": 19, 
+            "input_connections": {
+                "input1": {
+                    "id": 13, 
+                    "output_name": "output"
+                }, 
+                "input2": {
+                    "id": 16, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Subtract Whole Dataset", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 1469.88330078125, 
+                "top": 634
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "subtract_query1", 
+            "tool_state": "{\"input2\": \"null\", \"__page__\": 0, \"end_col\": \"{\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": \\\"None\\\"}\", \"begin_col\": \"{\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": \\\"None\\\"}\", \"input1\": \"null\", \"chromInfo\": \"\\\"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/mm9.len\\\"\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "20": {
+            "annotation": "", 
+            "id": 20, 
+            "input_connections": {
+                "input": {
+                    "id": 16, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Compute", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 1733.88330078125, 
+                "top": 947
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "Add_a_column1", 
+            "tool_state": "{\"__page__\": 0, \"cond\": \"\\\"c3-1\\\"\", \"chromInfo\": \"\\\"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/mm9.len\\\"\", \"round\": \"\\\"yes\\\"\", \"input\": \"null\"}", 
+            "tool_version": "1.1.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "21": {
+            "annotation": "", 
+            "id": 21, 
+            "input_connections": {
+                "input": {
+                    "id": 17, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Compute", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 1706.88330078125, 
+                "top": 149
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "Add_a_column1", 
+            "tool_state": "{\"__page__\": 0, \"cond\": \"\\\"c2\\\"\", \"chromInfo\": \"\\\"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/mm9.len\\\"\", \"round\": \"\\\"yes\\\"\", \"input\": \"null\"}", 
+            "tool_version": "1.1.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "22": {
+            "annotation": "", 
+            "id": 22, 
+            "input_connections": {
+                "input": {
+                    "id": 19, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Compute", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 1727.88330078125, 
+                "top": 674
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "Add_a_column1", 
+            "tool_state": "{\"__page__\": 0, \"cond\": \"\\\"c3\\\"\", \"chromInfo\": \"\\\"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/mm9.len\\\"\", \"round\": \"\\\"yes\\\"\", \"input\": \"null\"}", 
+            "tool_version": "1.1.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "23": {
+            "annotation": "", 
+            "id": 23, 
+            "input_connections": {
+                "input1": {
+                    "id": 6, 
+                    "output_name": "out_file1"
+                }, 
+                "queries_0|input2": {
+                    "id": 12, 
+                    "output_name": "out_file1"
+                }, 
+                "queries_1|input2": {
+                    "id": 18, 
+                    "output_name": "out_file1"
+                }, 
+                "queries_2|input2": {
+                    "id": 21, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Concatenate datasets", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 1986.88330078125, 
+                "top": 411
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "cat1", 
+            "tool_state": "{\"__page__\": 0, \"input1\": \"null\", \"chromInfo\": \"\\\"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/mm9.len\\\"\", \"queries\": \"[{\\\"input2\\\": null, \\\"__index__\\\": 0}, {\\\"input2\\\": null, \\\"__index__\\\": 1}, {\\\"input2\\\": null, \\\"__index__\\\": 2}]\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "24": {
+            "annotation": "", 
+            "id": 24, 
+            "input_connections": {
+                "input1": {
+                    "id": 8, 
+                    "output_name": "out_file1"
+                }, 
+                "queries_0|input2": {
+                    "id": 14, 
+                    "output_name": "out_file1"
+                }, 
+                "queries_1|input2": {
+                    "id": 20, 
+                    "output_name": "out_file1"
+                }, 
+                "queries_2|input2": {
+                    "id": 22, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Concatenate datasets", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 1987.88330078125, 
+                "top": 848
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "cat1", 
+            "tool_state": "{\"__page__\": 0, \"input1\": \"null\", \"chromInfo\": \"\\\"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/mm9.len\\\"\", \"queries\": \"[{\\\"input2\\\": null, \\\"__index__\\\": 0}, {\\\"input2\\\": null, \\\"__index__\\\": 1}, {\\\"input2\\\": null, \\\"__index__\\\": 2}]\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "25": {
+            "annotation": "", 
+            "id": 25, 
+            "input_connections": {
+                "input": {
+                    "id": 23, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Count", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 2229.88330078125, 
+                "top": 608
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "Counts on positive strand"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "Count1", 
+            "tool_state": "{\"column\": \"{\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": [\\\"1\\\", \\\"19\\\"]}\", \"delim\": \"\\\"T\\\"\", \"__page__\": 0, \"chromInfo\": \"\\\"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/mm9.len\\\"\", \"input\": \"null\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "26": {
+            "annotation": "", 
+            "id": 26, 
+            "input_connections": {
+                "input": {
+                    "id": 24, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Count", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 2237.88330078125, 
+                "top": 775
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "Counts on negative strand"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "Count1", 
+            "tool_state": "{\"column\": \"{\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": [\\\"1\\\", \\\"19\\\"]}\", \"delim\": \"\\\"T\\\"\", \"__page__\": 0, \"chromInfo\": \"\\\"/galaxy/home/g2main/galaxy_main/tool-data/shared/ucsc/chrom/mm9.len\\\"\", \"input\": \"null\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }
+    }
+}

@@ -1,0 +1,76 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE entity PUBLIC "-//UC Berkeley//DTD MoML 1//EN"
+    "http://ptolemy.eecs.berkeley.edu/xml/dtd/MoML_1.dtd">
+<entity name="Statistic_XmlInputFormat" class="ptolemy.actor.TypedCompositeActor">
+    <property name="_createdBy" class="ptolemy.kernel.attributes.VersionAttribute" value="8.1.devel">
+    </property>
+    <property name="derivedFrom" class="org.kepler.moml.NamedObjIdReferralList" value="urn:lsid:gamma.msi.ucsb.edu/OpenAuth/:7802:763:20">
+    </property>
+    <property name="entityId" class="org.kepler.moml.NamedObjId" value="urn:lsid:gamma.msi.ucsb.edu/OpenAuth/:7802:774:25">
+    </property>
+    <property name="ComadDirector" class="org.kepler.domains.ComadDirector">
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[75.0, 65.0]">
+        </property>
+    </property>
+    <property name="_windowProperties" class="ptolemy.actor.gui.WindowPropertiesAttribute" value="{bounds={0, 0, 1292, 786}, maximized=false}">
+    </property>
+    <property name="_vergilSize" class="ptolemy.actor.gui.SizeAttribute" value="[971, 627]">
+    </property>
+    <property name="_vergilZoomFactor" class="ptolemy.data.expr.ExpertParameter" value="1.0">
+    </property>
+    <property name="_vergilCenter" class="ptolemy.data.expr.ExpertParameter" value="{485.5, 313.5}">
+    </property>
+    <entity name="CollectionComposer" class="org.kepler.coactors.CollectionComposer">
+        <property name="Schema" class="ptolemy.data.expr.ChoiceParameter" value="General XML">
+        </property>
+        <property name="collectionXml" class="ptolemy.data.expr.StringParameter" value="&lt;HumidityDataCollection start_time=&quot;01-01-2008&quot; end_time=&quot;01-01-2009&quot;&gt;&#10;	&lt;station station_number=&quot;s2&quot;&gt;&#10;		&lt;CollectionPoint&gt;&#10;			&lt;timestamps&gt;1.196499599E9&lt;/timestamps&gt;&#10;			&lt;humidity&gt;29.700001&lt;/humidity&gt;&#10;		&lt;/CollectionPoint&gt;&#10;		&lt;CollectionPoint&gt;&#10;			&lt;timestamps&gt;1.196503199E9&lt;/timestamps&gt;&#10;			&lt;humidity&gt;28.799999&lt;/humidity&gt;&#10;		&lt;/CollectionPoint&gt;&#10;		&lt;CollectionPoint&gt;&#10;			&lt;timestamps&gt;1.196510399E9&lt;/timestamps&gt;&#10;			&lt;humidity&gt;29.200001&lt;/humidity&gt;&#10;		&lt;/CollectionPoint&gt;					&#10;	&lt;/station&gt;	&#10;	&lt;station station_number=&quot;s5&quot;&gt;&#10;		&lt;CollectionPoint&gt;&#10;			&lt;timestamps&gt;1.196499599E9&lt;/timestamps&gt;&#10;			&lt;humidity&gt;36.799999&lt;/humidity&gt;&#10;		&lt;/CollectionPoint&gt;		&#10;	&lt;/station&gt;	&#10;&lt;/HumidityDataCollection&gt;">
+            <display name="Collection XML"/>
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[75.0, 175.0]">
+        </property>
+    </entity>
+    <entity name="StatisticCalculator" class="org.kepler.demo.simple.StatisticCalculator">
+        <property name="ReadScope" class="ptolemy.data.expr.StringParameter" value="/HumidityDataCollection/station">
+        </property>
+        <property name="DB_valueList" class="org.kepler.types.DataBindingParameter" value="//DoubleToken[@label==&quot;humidity&quot;]+">
+            <display name="valueList"/>
+        </property>
+        <property name="DB_avg" class="org.kepler.types.DataBindingParameter" value="/DoubleToken[@label==&quot;average&quot;]">
+            <display name="avg"/>
+        </property>
+        <property name="DB_max" class="org.kepler.types.DataBindingParameter" value="/DoubleToken[@label==&quot;max&quot;]">
+            <display name="max"/>
+        </property>
+        <property name="DB_min" class="org.kepler.types.DataBindingParameter" value="/DoubleToken[@label==&quot;min&quot;]">
+            <display name="min"/>
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[275.0, 175.0]">
+        </property>
+    </entity>
+    <entity name="XmlDisplay" class="org.kepler.coactors.XmlDisplay">
+        <property name="ReadScope" class="ptolemy.data.expr.StringParameter" value="/">
+        </property>
+        <property name="useDataTypesAsTags" class="ptolemy.data.expr.Parameter" value="false">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[615.0, 175.0]">
+        </property>
+    </entity>
+    <entity name="CollectionDisplay" class="org.kepler.coactors.CollectionDisplay">
+        <property name="ReadScope" class="ptolemy.data.expr.StringParameter" value="/HumidityDataCollection">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="{445.0, 175.0}">
+        </property>
+    </entity>
+    <relation name="relation" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation2" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation3" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <link port="CollectionComposer.output" relation="relation"/>
+    <link port="StatisticCalculator.input" relation="relation"/>
+    <link port="StatisticCalculator.output" relation="relation2"/>
+    <link port="XmlDisplay.input" relation="relation3"/>
+    <link port="CollectionDisplay.input" relation="relation2"/>
+    <link port="CollectionDisplay.output" relation="relation3"/>
+</entity>

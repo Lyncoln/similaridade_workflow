@@ -1,0 +1,345 @@
+{
+    "a_galaxy_workflow": "true", 
+    "annotation": "Assemble FastQ reads with minia", 
+    "format-version": "0.1", 
+    "name": "NGS : Mini assembly from FastQ files using Minia, summary statistics and visualization of output contigs", 
+    "steps": {
+        "0": {
+            "annotation": "", 
+            "id": 0, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "FastQ file"
+                }
+            ], 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 200, 
+                "top": 434.3833312988281
+            }, 
+            "tool_errors": null, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"FastQ file\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "user_outputs": []
+        }, 
+        "1": {
+            "annotation": "", 
+            "id": 1, 
+            "input_connections": {
+                "input": {
+                    "id": 0, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "FASTQ to FASTA", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "fasta"
+                }
+            ], 
+            "position": {
+                "left": 408, 
+                "top": 405.3833312988281
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastq_to_fasta/cshl_fastq_to_fasta/1.0.0", 
+            "tool_state": "{\"input\": \"null\", \"RENAMESEQ\": \"\\\"-r\\\"\", \"SKIPN\": \"\\\"\\\"\", \"__rerun_remap_job_id__\": null, \"__page__\": 0}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "2": {
+            "annotation": "", 
+            "id": 2, 
+            "input_connections": {
+                "input_fasta": {
+                    "id": 1, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Minia", 
+            "outputs": [
+                {
+                    "name": "test", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 666.9999694824219, 
+                "top": 443.38330078125
+            }, 
+            "post_job_actions": {
+                "HideDatasetActiontest": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "test"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "Minia", 
+            "tool_state": "{\"__page__\": 0, \"estimated_genome_size\": \"\\\"3000000000\\\"\", \"input_fasta\": \"null\", \"__rerun_remap_job_id__\": null, \"min_abundance\": \"\\\"3\\\"\", \"k_mer_size\": \"\\\"32\\\"\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "3": {
+            "annotation": "", 
+            "id": 3, 
+            "input_connections": {
+                "input": {
+                    "id": 2, 
+                    "output_name": "test"
+                }
+            }, 
+            "inputs": [], 
+            "name": "FASTA-to-Tabular", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 948.1166687011719, 
+                "top": 432
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "fasta2tab", 
+            "tool_state": "{\"__page__\": 0, \"keep_first\": \"\\\"0\\\"\", \"descr_columns\": \"\\\"1\\\"\", \"input\": \"null\", \"chromInfo\": \"\\\"/opt/galaxy-dist/database/files/000/dataset_229.dat\\\"\", \"__rerun_remap_job_id__\": null}", 
+            "tool_version": "1.1.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "4": {
+            "annotation": "", 
+            "id": 4, 
+            "input_connections": {
+                "fasta_file": {
+                    "id": 2, 
+                    "output_name": "test"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Combine FASTA and QUAL", 
+            "outputs": [
+                {
+                    "name": "output_file", 
+                    "type": "fastqsanger"
+                }
+            ], 
+            "position": {
+                "left": 938.1166687011719, 
+                "top": 606
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "fastq_combiner", 
+            "tool_state": "{\"__page__\": 0, \"fasta_file\": \"null\", \"force_quality_encoding\": \"\\\"ascii\\\"\", \"__rerun_remap_job_id__\": null, \"qual_file\": \"null\"}", 
+            "tool_version": "1.0.1", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "5": {
+            "annotation": "", 
+            "id": 5, 
+            "input_connections": {
+                "input": {
+                    "id": 3, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Convert", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 1168.1166687011719, 
+                "top": 432
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "Convert characters1", 
+            "tool_state": "{\"__page__\": 0, \"convert_from\": \"\\\"U\\\"\", \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/opt/galaxy-dist/database/files/000/dataset_229.dat\\\"\", \"input\": \"null\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "6": {
+            "annotation": "", 
+            "id": 6, 
+            "input_connections": {
+                "input": {
+                    "id": 5, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Summary Statistics", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 1395.1166687011719, 
+                "top": 332
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "Summary_Statistics1", 
+            "tool_state": "{\"__page__\": 0, \"cond\": \"\\\"c3\\\"\", \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/opt/galaxy-dist/database/files/000/dataset_229.dat\\\"\", \"input\": \"null\"}", 
+            "tool_version": "1.1.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "7": {
+            "annotation": "", 
+            "id": 7, 
+            "input_connections": {
+                "input": {
+                    "id": 5, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Filter", 
+                    "name": "cond"
+                }
+            ], 
+            "name": "Filter", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 1518.1166687011719, 
+                "top": 456
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "testtoolshed.g2.bx.psu.edu/repos/greg/gregs_filter/Filter1/3.3.0", 
+            "tool_state": "{\"__page__\": 0, \"cond\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/opt/galaxy-dist/database/files/000/dataset_229.dat\\\"\", \"input\": \"null\"}", 
+            "tool_version": "3.3.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "8": {
+            "annotation": "", 
+            "id": 8, 
+            "input_connections": {
+                "input": {
+                    "id": 7, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Summary Statistics", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 1892.1166687011719, 
+                "top": 356
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "Summary_Statistics1", 
+            "tool_state": "{\"__page__\": 0, \"cond\": \"\\\"c3\\\"\", \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/opt/galaxy-dist/database/files/000/dataset_229.dat\\\"\", \"input\": \"null\"}", 
+            "tool_version": "1.1.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "9": {
+            "annotation": "", 
+            "id": 9, 
+            "input_connections": {
+                "input": {
+                    "id": 7, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Histogram", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "png"
+                }
+            ], 
+            "position": {
+                "left": 1913.1166687011719, 
+                "top": 466
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "histogram_rpy", 
+            "tool_state": "{\"xlab\": \"\\\"contig size\\\"\", \"density\": \"\\\"True\\\"\", \"__page__\": 0, \"breaks\": \"\\\"100\\\"\", \"numerical_column\": \"{\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": \\\"3\\\"}\", \"frequency\": \"\\\"True\\\"\", \"input\": \"null\", \"title\": \"\\\"Histogram of B-P contigs size distribultion after minia assembly\\\"\", \"chromInfo\": \"\\\"/opt/galaxy-dist/database/files/000/dataset_229.dat\\\"\", \"__rerun_remap_job_id__\": null}", 
+            "tool_version": "1.0.3", 
+            "type": "tool", 
+            "user_outputs": []
+        }
+    }
+}

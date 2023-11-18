@@ -1,0 +1,142 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE entity PUBLIC "-//UC Berkeley//DTD MoML 1//EN"
+    "http://ptolemy.eecs.berkeley.edu/xml/dtd/MoML_1.dtd">
+<entity name="pi_calculation" class="ptolemy.actor.TypedCompositeActor">
+    <property name="_createdBy" class="ptolemy.kernel.attributes.VersionAttribute" value="8.1.devel">
+    </property>
+    <property name="derivedFrom" class="org.kepler.moml.NamedObjIdReferralList" value="urn:lsid:gamma.msi.ucsb.edu/OpenAuth/:278:632:550:urn:lsid:gamma.msi.ucsb.edu/OpenAuth/:3493:9:121:urn:lsid:gamma.msi.ucsb.edu/OpenAuth/:7802:32:111:urn:lsid:gamma.msi.ucsb.edu/OpenAuth/:7802:84:76:urn:lsid:gamma.msi.ucsb.edu/OpenAuth/:7802:89:11:urn:lsid:gamma.msi.ucsb.edu/OpenAuth/:7802:92:78">
+    </property>
+    <property name="entityId" class="org.kepler.moml.NamedObjId" value="urn:lsid:gamma.msi.ucsb.edu/OpenAuth/:7802:453:59">
+    </property>
+    <property name="_windowProperties" class="ptolemy.actor.gui.WindowPropertiesAttribute" value="{bounds={1, 1, 1278, 767}, maximized=false}">
+    </property>
+    <property name="_vergilSize" class="ptolemy.actor.gui.SizeAttribute" value="[957, 608]">
+    </property>
+    <property name="_vergilZoomFactor" class="ptolemy.data.expr.ExpertParameter" value="1.0">
+    </property>
+    <property name="_vergilCenter" class="ptolemy.data.expr.ExpertParameter" value="{366.5, 128.0}">
+    </property>
+    <property name="ComadDirector" class="org.kepler.domains.ComadDirector">
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[-5.0, -85.0]">
+        </property>
+    </property>
+    <property name="iteration_number" class="ptolemy.data.expr.Parameter" value="100">
+<property name="KeplerDocumentation" class="ptolemy.vergil.basic.KeplerDocumentationAttribute">
+<property name="description" class="ptolemy.kernel.util.ConfigurableAttribute"><configure>null</configure></property>
+<property name="author" class="ptolemy.kernel.util.ConfigurableAttribute"><configure>null</configure></property>
+<property name="version" class="ptolemy.kernel.util.ConfigurableAttribute"><configure>null</configure></property>
+<property name="userLevelDocumentation" class="ptolemy.kernel.util.ConfigurableAttribute"><configure>null</configure></property>
+</property>        <property name="entityId" class="org.kepler.moml.NamedObjId" value="urn:lsid:kepler-project.org:actor:420:1">
+        </property>
+        <property name="class" class="ptolemy.kernel.util.StringAttribute" value="ptolemy.data.expr.Parameter">
+            <property name="id" class="ptolemy.kernel.util.StringAttribute" value="urn:lsid:kepler-project.org:class:1184:1">
+            </property>
+        </property>
+        <property name="semanticType00" class="org.kepler.sms.SemanticType" value="urn:lsid:localhost:onto:1:1#Parameter">
+        </property>
+        <property name="semanticType11" class="org.kepler.sms.SemanticType" value="urn:lsid:localhost:onto:2:1#Parameter">
+        </property>
+        <property name="_hideName" class="ptolemy.kernel.util.SingletonAttribute">
+        </property>
+        <property name="_icon" class="ptolemy.vergil.icon.ValueIcon">
+            <property name="_color" class="ptolemy.actor.gui.ColorAttribute" value="{0.0, 0.0, 1.0, 1.0}">
+            </property>
+        </property>
+        <property name="_smallIconDescription" class="ptolemy.kernel.util.SingletonConfigurableAttribute">
+            <configure>
+      <svg>
+        <text x="20" style="font-size:14; font-family:SansSerif; fill:blue" y="20">-P-</text>
+      </svg>
+    </configure>
+        </property>
+        <property name="_editorFactory" class="ptolemy.vergil.toolbox.VisibleParameterEditorFactory">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[155.0, -65.0]">
+        </property>
+    </property>
+    <entity name="CollectionComposer" class="org.kepler.coactors.CollectionComposer">
+        <property name="collectionXml" class="ptolemy.data.expr.StringParameter" value="&lt;Collection label=&quot;PI&quot;&gt;&#10;	&lt;Annotation key=&quot;iterationNum&quot;&gt;0&lt;/Annotation&gt;&#10;	&lt;Data&gt;0.0&lt;/Data&gt;&#10;&lt;/Collection&gt;	">
+            <display name="Collection XML"/>
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[-40.0, 55.0]">
+        </property>
+    </entity>
+    <entity name="StartLoop" class="org.kepler.coactors.StartLoop">
+        <property name="ReadScope" class="ptolemy.data.expr.StringParameter" value="/">
+        </property>
+        <property name="loopCollectionLabel" class="ptolemy.data.expr.StringParameter" value="PI">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[145.0, 65.0]">
+        </property>
+        <port name="loopback" class="ptolemy.actor.TypedIOPort">
+            <property name="input"/>
+            <property name="_type" class="ptolemy.actor.TypeAttribute" value="general">
+            </property>
+        </port>
+    </entity>
+    <entity name="EndLoop" class="org.kepler.coactors.EndLoop">
+        <property name="ReadScope" class="ptolemy.data.expr.StringParameter" value="/">
+        </property>
+        <property name="loopCollectionLabel" class="ptolemy.data.expr.StringParameter" value="PI">
+        </property>
+        <property name="maxLoopCount" class="ptolemy.data.expr.Parameter" value="iteration_number">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="{420.0, 65.0}">
+        </property>
+        <port name="loopback" class="ptolemy.actor.TypedIOPort">
+            <property name="output"/>
+            <property name="_type" class="ptolemy.actor.TypeAttribute" value="general">
+            </property>
+        </port>
+    </entity>
+    <entity name="PICalculator" class="org.kepler.demo.PICalculation.PICalculator">
+        <property name="ReadScope" class="ptolemy.data.expr.StringParameter" value="/PI">
+        </property>
+        <property name="DB_input_iteration_number" class="org.kepler.types.DataBindingParameter" value="/{-d}DoubleToken/@iterationNum">
+            <display name="input_iteration_number"/>
+        </property>
+        <property name="DB_input_pi_value" class="org.kepler.types.DataBindingParameter" value="/DoubleToken">
+            <display name="input_pi_value"/>
+        </property>
+        <property name="DB_output_iteration_number" class="org.kepler.types.DataBindingParameter" value="#output_pi_value[0]/@iterationNum">
+            <display name="output_iteration_number"/>
+        </property>
+        <property name="DB_output_pi_value" class="org.kepler.types.DataBindingParameter" value="/DoubleToken[@label==&quot;value&quot;]">
+            <display name="output_pi_value"/>
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[280.0, 65.0]">
+        </property>
+    </entity>
+    <entity name="CollectionDisplay" class="org.kepler.coactors.CollectionDisplay">
+        <property name="ReadScope" class="ptolemy.data.expr.StringParameter" value="/">
+        </property>
+        <property name="showProvenance" class="ptolemy.data.expr.Parameter" value="false">
+        </property>
+        <property name="remapIds" class="ptolemy.data.expr.Parameter" value="false">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="[580.0, 55.0]">
+        </property>
+    </entity>
+    <relation name="relation4" class="ptolemy.actor.TypedIORelation">
+        <vertex name="vertex1" value="[310.0, 160.0]">
+        </vertex>
+    </relation>
+    <relation name="relation" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation3" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation5" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <relation name="relation2" class="ptolemy.actor.TypedIORelation">
+    </relation>
+    <link port="CollectionComposer.output" relation="relation5"/>
+    <link port="StartLoop.input" relation="relation5"/>
+    <link port="StartLoop.output" relation="relation"/>
+    <link port="StartLoop.loopback" relation="relation4"/>
+    <link port="EndLoop.input" relation="relation3"/>
+    <link port="EndLoop.output" relation="relation2"/>
+    <link port="EndLoop.loopback" relation="relation4"/>
+    <link port="PICalculator.input" relation="relation"/>
+    <link port="PICalculator.output" relation="relation3"/>
+    <link port="CollectionDisplay.input" relation="relation2"/>
+</entity>

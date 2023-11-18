@@ -1,0 +1,271 @@
+{
+    "a_galaxy_workflow": "true", 
+    "annotation": "", 
+    "format-version": "0.1", 
+    "name": "Eukaryotic Single-End Analysis", 
+    "steps": {
+        "0": {
+            "annotation": "", 
+            "id": 0, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "Input Dataset"
+                }
+            ], 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 274.890625, 
+                "top": 426.578125
+            }, 
+            "tool_errors": null, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"Input Dataset\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "user_outputs": []
+        }, 
+        "1": {
+            "annotation": "", 
+            "id": 1, 
+            "input_connections": {
+                "singlePaired|input1": {
+                    "id": 0, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Tophat2", 
+                    "name": "refGenomeSource"
+                }
+            ], 
+            "name": "Tophat2", 
+            "outputs": [
+                {
+                    "name": "align_summary", 
+                    "type": "txt"
+                }, 
+                {
+                    "name": "fusions", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "insertions", 
+                    "type": "bed"
+                }, 
+                {
+                    "name": "deletions", 
+                    "type": "bed"
+                }, 
+                {
+                    "name": "junctions", 
+                    "type": "bed"
+                }, 
+                {
+                    "name": "accepted_hits", 
+                    "type": "bam"
+                }
+            ], 
+            "position": {
+                "left": 338, 
+                "top": 521
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "tophat2", 
+            "tool_state": "{\"__page__\": 0, \"singlePaired\": \"{\\\"sPaired\\\": \\\"single\\\", \\\"input1\\\": null, \\\"__current_case__\\\": 0}\", \"__rerun_remap_job_id__\": null, \"readGroup\": \"{\\\"__current_case__\\\": 1, \\\"specReadGroup\\\": \\\"no\\\"}\", \"params\": \"{\\\"settingsType\\\": \\\"preSet\\\", \\\"__current_case__\\\": 0}\", \"refGenomeSource\": \"{\\\"genomeSource\\\": \\\"indexed\\\", \\\"index\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 0}\"}", 
+            "tool_version": "2.0.10", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "2": {
+            "annotation": "", 
+            "id": 2, 
+            "input_connections": {
+                "input": {
+                    "id": 1, 
+                    "output_name": "accepted_hits"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Cufflinks", 
+                    "name": "library_type"
+                }, 
+                {
+                    "description": "runtime parameter for tool Cufflinks", 
+                    "name": "min_isoform_fraction"
+                }, 
+                {
+                    "description": "runtime parameter for tool Cufflinks", 
+                    "name": "max_bundle_frags"
+                }, 
+                {
+                    "description": "runtime parameter for tool Cufflinks", 
+                    "name": "multiread_correct"
+                }, 
+                {
+                    "description": "runtime parameter for tool Cufflinks", 
+                    "name": "pre_mrna_fraction"
+                }, 
+                {
+                    "description": "runtime parameter for tool Cufflinks", 
+                    "name": "max_intron_len"
+                }, 
+                {
+                    "description": "runtime parameter for tool Cufflinks", 
+                    "name": "overlap_radius"
+                }, 
+                {
+                    "description": "runtime parameter for tool Cufflinks", 
+                    "name": "reference_annotation"
+                }, 
+                {
+                    "description": "runtime parameter for tool Cufflinks", 
+                    "name": "reference_annotation"
+                }, 
+                {
+                    "description": "runtime parameter for tool Cufflinks", 
+                    "name": "do_normalization"
+                }
+            ], 
+            "name": "Cufflinks", 
+            "outputs": [
+                {
+                    "name": "genes_expression", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "transcripts_expression", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "assembled_isoforms", 
+                    "type": "gtf"
+                }, 
+                {
+                    "name": "total_map_mass", 
+                    "type": "txt"
+                }
+            ], 
+            "position": {
+                "left": 755, 
+                "top": 152
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "cufflinks_euk", 
+            "tool_state": "{\"library_type\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"min_isoform_fraction\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"max_bundle_frags\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"multiread_correct\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__page__\": 0, \"__rerun_remap_job_id__\": null, \"pre_mrna_fraction\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"bias_correction\": \"{\\\"do_bias_correction\\\": \\\"Yes\\\", \\\"seq_source\\\": {\\\"index_source\\\": \\\"cached\\\", \\\"__current_case__\\\": 0}, \\\"__current_case__\\\": 0}\", \"max_intron_len\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"overlap_radius\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"reference_annotation\": \"{\\\"index\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"use_ref\\\": \\\"indexed\\\", \\\"reference_use\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 2}\", \"global_model\": \"null\", \"do_normalization\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"input\": \"null\"}", 
+            "tool_version": "2.0.2", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "3": {
+            "annotation": "", 
+            "id": 3, 
+            "input_connections": {
+                "align": {
+                    "id": 1, 
+                    "output_name": "accepted_hits"
+                }
+            }, 
+            "inputs": [], 
+            "name": "BAM to BigWig", 
+            "outputs": [
+                {
+                    "name": "out", 
+                    "type": "bigwig"
+                }
+            ], 
+            "position": {
+                "left": 797.5, 
+                "top": 706
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "bam_to_bigwig", 
+            "tool_state": "{\"__page__\": 0, \"align\": \"null\", \"__rerun_remap_job_id__\": null, \"strand\": \"\\\"+\\\"\"}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "4": {
+            "annotation": "", 
+            "id": 4, 
+            "input_connections": {
+                "input": {
+                    "id": 1, 
+                    "output_name": "accepted_hits"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Create a BedGraph of genome coverage", 
+                    "name": "zero_regions"
+                }, 
+                {
+                    "description": "runtime parameter for tool Create a BedGraph of genome coverage", 
+                    "name": "scale"
+                }, 
+                {
+                    "description": "runtime parameter for tool Create a BedGraph of genome coverage", 
+                    "name": "split"
+                }, 
+                {
+                    "description": "runtime parameter for tool Create a BedGraph of genome coverage", 
+                    "name": "strand"
+                }
+            ], 
+            "name": "Create a BedGraph of genome coverage", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "bedgraph"
+                }
+            ], 
+            "position": {
+                "left": 728, 
+                "top": 921
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "bedtools_genomecoveragebed_bedgraph", 
+            "tool_state": "{\"zero_regions\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__page__\": 0, \"scale\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"split\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"input\": \"null\", \"strand\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "5": {
+            "annotation": "", 
+            "id": 5, 
+            "input_connections": {
+                "align": {
+                    "id": 1, 
+                    "output_name": "accepted_hits"
+                }
+            }, 
+            "inputs": [], 
+            "name": "BAM to BigWig", 
+            "outputs": [
+                {
+                    "name": "out", 
+                    "type": "bigwig"
+                }
+            ], 
+            "position": {
+                "left": 1030.5, 
+                "top": 630
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "bam_to_bigwig", 
+            "tool_state": "{\"__page__\": 0, \"align\": \"null\", \"__rerun_remap_job_id__\": null, \"strand\": \"\\\"-\\\"\"}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }
+    }
+}

@@ -1,0 +1,89 @@
+{
+    "a_galaxy_workflow": "true", 
+    "annotation": "", 
+    "format-version": "0.1", 
+    "name": "NGS : Filtrer fastq reads with N", 
+    "steps": {
+        "0": {
+            "annotation": "", 
+            "id": 0, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "Fasta file"
+                }
+            ], 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 191.38333129882812, 
+                "top": 406.3833312988281
+            }, 
+            "tool_errors": null, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"Fasta file\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "user_outputs": []
+        }, 
+        "1": {
+            "annotation": "", 
+            "id": 1, 
+            "input_connections": {
+                "fasta_file": {
+                    "id": 0, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Combine FASTA and QUAL", 
+            "outputs": [
+                {
+                    "name": "output_file", 
+                    "type": "fastqsanger"
+                }
+            ], 
+            "position": {
+                "left": 432, 
+                "top": 411
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "fastq_combiner", 
+            "tool_state": "{\"__page__\": 0, \"force_quality_encoding\": \"\\\"ascii\\\"\", \"fasta_file\": \"null\", \"qual_file\": \"null\", \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null}", 
+            "tool_version": "1.0.1", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "2": {
+            "annotation": "", 
+            "id": 2, 
+            "input_connections": {
+                "input_file": {
+                    "id": 1, 
+                    "output_name": "output_file"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Manipulate FASTQ", 
+            "outputs": [
+                {
+                    "name": "output_file", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 941, 
+                "top": 441
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "fastq_manipulation", 
+            "tool_state": "{\"__page__\": 0, \"input_file\": \"null\", \"__rerun_remap_job_id__\": null, \"manipulate_blocks\": \"[{\\\"__index__\\\": 0, \\\"manipulation_type\\\": {\\\"manipulation_type_selector\\\": \\\"miscellaneous\\\", \\\"__current_case__\\\": 3, \\\"manipulation\\\": {\\\"manipulation_selector\\\": \\\"remove\\\", \\\"__current_case__\\\": 0}}}]\", \"match_blocks\": \"[{\\\"__index__\\\": 0, \\\"match_type\\\": {\\\"match_type_selector\\\": \\\"sequence\\\", \\\"match\\\": {\\\"match_by\\\": \\\"N\\\", \\\"match_selector\\\": \\\"regex\\\", \\\"__current_case__\\\": 0}, \\\"__current_case__\\\": 1}}]\", \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "1.0.1", 
+            "type": "tool", 
+            "user_outputs": []
+        }
+    }
+}

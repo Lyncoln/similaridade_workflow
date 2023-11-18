@@ -1,0 +1,270 @@
+{
+    "a_galaxy_workflow": "true", 
+    "annotation": "Analyse clean population fastQ files (coming \nfrom Stacks : Process Radtag tool for example) without a reference genome and population information", 
+    "format-version": "0.1", 
+    "name": "NGS RAD : Population Genomics on RAD data without reference genome", 
+    "steps": {
+        "0": {
+            "annotation": "", 
+            "id": 0, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "SAM file(s) (or archive) from Alignment on clean demultiplexed fastQ file"
+                }
+            ], 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 153, 
+                "top": 276
+            }, 
+            "tool_errors": null, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"SAM file(s) (or archive) from Alignment on clean demultiplexed fastQ file\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "user_outputs": []
+        }, 
+        "1": {
+            "annotation": "", 
+            "id": 1, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "Population map"
+                }
+            ], 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 141, 
+                "top": 706
+            }, 
+            "tool_errors": null, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"Population map\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "user_outputs": []
+        }, 
+        "2": {
+            "annotation": "", 
+            "id": 2, 
+            "input_connections": {
+                "options_usage|individual_sample": {
+                    "id": 0, 
+                    "output_name": "output"
+                }, 
+                "options_usage|options_popmap|popmap": {
+                    "id": 1, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "STACKS : De novo map", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "txt"
+                }, 
+                {
+                    "name": "catalogsnps", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "catalogalleles", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "catalogtags", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "total_output", 
+                    "type": "zip"
+                }, 
+                {
+                    "name": "tags_output", 
+                    "type": "zip"
+                }, 
+                {
+                    "name": "snps_output", 
+                    "type": "zip"
+                }, 
+                {
+                    "name": "alleles_output", 
+                    "type": "zip"
+                }, 
+                {
+                    "name": "matches_output", 
+                    "type": "zip"
+                }
+            ], 
+            "position": {
+                "left": 466.38330078125, 
+                "top": 133.38333129882812
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "dev-galaxy.genouest.org:9009/repos/cmonjeau/stacks_toolsuite/STACKSdenovomap/1.0.0", 
+            "tool_state": "{\"__page__\": 0, \"output_compress\": \"\\\"total\\\"\", \"snp_options\": \"{\\\"snp_options_selector\\\": \\\"default\\\", \\\"__current_case__\\\": 0}\", \"__rerun_remap_job_id__\": null, \"options_usage\": \"{\\\"individual_sample\\\": null, \\\"options_usage_selector\\\": \\\"population\\\", \\\"options_popmap\\\": {\\\"popmap_selector\\\": \\\"yes\\\", \\\"popmap\\\": null, \\\"__current_case__\\\": 1}, \\\"__current_case__\\\": 1}\", \"advanced_options\": \"{\\\"advanced_options_selector\\\": \\\"default\\\", \\\"__current_case__\\\": 0}\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "3": {
+            "annotation": "", 
+            "id": 3, 
+            "input_connections": {
+                "STACKS_archive": {
+                    "id": 2, 
+                    "output_name": "total_output"
+                }, 
+                "popmap": {
+                    "id": 1, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "STACKS : populations", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "txt"
+                }, 
+                {
+                    "name": "sumstatssum", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "sumstats", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "outfst", 
+                    "type": "zip"
+                }, 
+                {
+                    "name": "outvcf", 
+                    "type": "vcf"
+                }, 
+                {
+                    "name": "outphylip", 
+                    "type": "phylip"
+                }, 
+                {
+                    "name": "outphyliplog", 
+                    "type": "txt"
+                }, 
+                {
+                    "name": "outunphasedlog", 
+                    "type": "txt"
+                }, 
+                {
+                    "name": "outfasta", 
+                    "type": "fasta"
+                }, 
+                {
+                    "name": "outstructure", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "outplinkped", 
+                    "type": "txt"
+                }, 
+                {
+                    "name": "outplinkmap", 
+                    "type": "txt"
+                }, 
+                {
+                    "name": "outgenepop", 
+                    "type": "txt"
+                }, 
+                {
+                    "name": "outphase", 
+                    "type": "zip"
+                }, 
+                {
+                    "name": "outbeagle", 
+                    "type": "zip"
+                }, 
+                {
+                    "name": "outmarkers", 
+                    "type": "zip"
+                }
+            ], 
+            "position": {
+                "left": 798, 
+                "top": 418
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "dev-galaxy.genouest.org:9009/repos/cmonjeau/stacks_toolsuite/STACKSpopulation/1.0.0", 
+            "tool_state": "{\"options_kernel\": \"{\\\"options_kernel_selector\\\": \\\"2\\\", \\\"__current_case__\\\": 1}\", \"__page__\": 0, \"options_output\": \"{\\\"write_single_snp\\\": \\\"False\\\", \\\"phylip_var\\\": \\\"False\\\", \\\"plink\\\": \\\"False\\\", \\\"vcf\\\": \\\"True\\\", \\\"phylip\\\": \\\"False\\\", \\\"genepop\\\": \\\"False\\\", \\\"beagle\\\": \\\"False\\\", \\\"options_output_selector\\\": \\\"1\\\", \\\"__current_case__\\\": 0, \\\"phase\\\": \\\"False\\\", \\\"fasta\\\": \\\"False\\\", \\\"structure\\\": \\\"True\\\"}\", \"options_enzyme\": \"{\\\"options_enzyme_selector\\\": \\\"2\\\", \\\"__current_case__\\\": 1}\", \"__rerun_remap_job_id__\": null, \"popmap\": \"null\", \"batchid\": \"\\\"1\\\"\", \"advanced_options\": \"{\\\"advanced_options_selector\\\": \\\"default\\\", \\\"__current_case__\\\": 0}\", \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"STACKS_archive\": \"null\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "4": {
+            "annotation": "", 
+            "id": 4, 
+            "input_connections": {
+                "input": {
+                    "id": 3, 
+                    "output_name": "outstructure"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Remove beginning", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 1111, 
+                "top": 463
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "Remove beginning1", 
+            "tool_state": "{\"input\": \"null\", \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"num_lines\": \"\\\"2\\\"\", \"__page__\": 0}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "5": {
+            "annotation": "", 
+            "id": 5, 
+            "input_connections": {
+                "input": {
+                    "id": 4, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Transpose_tabular", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 1399, 
+                "top": 489
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "transposeTabular", 
+            "tool_state": "{\"input\": \"null\", \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__page__\": 0}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }
+    }
+}

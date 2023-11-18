@@ -1,0 +1,190 @@
+{
+    "a_galaxy_workflow": "true", 
+    "annotation": "", 
+    "format-version": "0.1", 
+    "name": "Tuto Pair reads assembly with Velvet Workflow", 
+    "steps": {
+        "0": {
+            "annotation": "", 
+            "id": 0, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "Fastq paired /1"
+                }
+            ], 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 128, 
+                "top": 232
+            }, 
+            "tool_errors": null, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"Fastq paired /1\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "user_outputs": []
+        }, 
+        "1": {
+            "annotation": "", 
+            "id": 1, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "Fastq paired /2"
+                }
+            ], 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 124, 
+                "top": 353
+            }, 
+            "tool_errors": null, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"Fastq paired /2\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "user_outputs": []
+        }, 
+        "2": {
+            "annotation": "", 
+            "id": 2, 
+            "input_connections": {
+                "input_file": {
+                    "id": 0, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "FASTQ Groomer", 
+            "outputs": [
+                {
+                    "name": "output_file", 
+                    "type": "fastqsanger"
+                }
+            ], 
+            "position": {
+                "left": 350.79998779296875, 
+                "top": 162.3000030517578
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "fastq_groomer", 
+            "tool_state": "{\"__page__\": 0, \"input_type\": \"\\\"sanger\\\"\", \"__rerun_remap_job_id__\": null, \"options_type\": \"{\\\"options_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"input_file\": \"null\"}", 
+            "tool_version": "1.0.4", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "3": {
+            "annotation": "", 
+            "id": 3, 
+            "input_connections": {
+                "input_file": {
+                    "id": 1, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "FASTQ Groomer", 
+            "outputs": [
+                {
+                    "name": "output_file", 
+                    "type": "fastqsanger"
+                }
+            ], 
+            "position": {
+                "left": 351.79998779296875, 
+                "top": 400.29998779296875
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "fastq_groomer", 
+            "tool_state": "{\"__page__\": 0, \"input_type\": \"\\\"sanger\\\"\", \"__rerun_remap_job_id__\": null, \"options_type\": \"{\\\"options_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"input_file\": \"null\"}", 
+            "tool_version": "1.0.4", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "4": {
+            "annotation": "", 
+            "id": 4, 
+            "input_connections": {
+                "inputs_0|format_test|read_type_test|separate_test|input2": {
+                    "id": 3, 
+                    "output_name": "output_file"
+                }, 
+                "inputs_0|format_test|read_type_test|separate_test|input3": {
+                    "id": 2, 
+                    "output_name": "output_file"
+                }
+            }, 
+            "inputs": [], 
+            "name": "velveth by MIGALE", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "velvet"
+                }
+            ], 
+            "position": {
+                "left": 655, 
+                "top": 221
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "velveth_jgi", 
+            "tool_state": "{\"inputs\": \"[{\\\"__index__\\\": 0, \\\"format_test\\\": {\\\"read_type_test\\\": {\\\"read_type\\\": \\\"-shortPaired\\\", \\\"__current_case__\\\": 0, \\\"separate_test\\\": {\\\"input2\\\": null, \\\"input3\\\": null, \\\"__current_case__\\\": 0, \\\"separate\\\": \\\"-separate\\\"}}, \\\"__current_case__\\\": 1, \\\"file_format\\\": \\\"-fastq\\\"}}]\", \"__page__\": 0, \"strand_specific\": \"\\\"False\\\"\", \"__rerun_remap_job_id__\": null, \"hash_length\": \"\\\"21\\\"\", \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"ref\": \"null\"}", 
+            "tool_version": "1.2.07", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "5": {
+            "annotation": "", 
+            "id": 5, 
+            "input_connections": {
+                "velveth": {
+                    "id": 4, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "velvetg by MIGALE", 
+            "outputs": [
+                {
+                    "name": "velvetg_outfile", 
+                    "type": "txt"
+                }, 
+                {
+                    "name": "contigs_outfile", 
+                    "type": "fasta"
+                }, 
+                {
+                    "name": "stats_outfile", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "unused_reads_outfile", 
+                    "type": "fasta"
+                }, 
+                {
+                    "name": "amos_outfile", 
+                    "type": "txt"
+                }
+            ], 
+            "position": {
+                "left": 894, 
+                "top": 225
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "velvetg_jgi", 
+            "tool_state": "{\"amos_file\": \"\\\"True\\\"\", \"velveth\": \"null\", \"ins_length2_sd\": \"\\\"auto\\\"\", \"min_contig_lgth\": \"\\\"-1\\\"\", \"exp_cov\": \"\\\"auto\\\"\", \"exportFiltered\": \"\\\"False\\\"\", \"long_mult_cutoff\": \"\\\"2\\\"\", \"__rerun_remap_job_id__\": null, \"min_pair_count\": \"\\\"10\\\"\", \"read_trkg\": \"\\\"True\\\"\", \"max_divergence\": \"\\\"0.2\\\"\", \"alignments\": \"\\\"False\\\"\", \"long_cov_cutoff\": \"\\\"-1.0\\\"\", \"__page__\": 0, \"ins_length_long\": \"\\\"auto\\\"\", \"ins_length2\": \"\\\"auto\\\"\", \"ins_length_sd\": \"\\\"auto\\\"\", \"max_coverage\": \"\\\"-1.0\\\"\", \"cov_cutoff\": \"\\\"auto\\\"\", \"scaffolding\": \"\\\"True\\\"\", \"max_gap_count\": \"\\\"3\\\"\", \"ins_length_long_sd\": \"\\\"auto\\\"\", \"ins_length\": \"\\\"auto\\\"\", \"max_branch_length\": \"\\\"100\\\"\", \"unused_reads\": \"\\\"True\\\"\", \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "1.2.07", 
+            "type": "tool", 
+            "user_outputs": []
+        }
+    }
+}

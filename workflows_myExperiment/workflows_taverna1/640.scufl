@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<s:scufl xmlns:s="http://org.embl.ebi.escience/xscufl/0.1alpha" version="0.2" log="0">
+  <s:workflowdescription lsid="urn:lsid:net.sf.taverna:wfDefinition:a4dcb628-46ad-4dd5-befb-688a2ad3d3a9" author="" title="feat_workflow_remi_group" />
+  <s:processor name="empty" boring="true">
+    <s:stringconstant>""</s:stringconstant>
+  </s:processor>
+  <s:processor name="feat_group_description" boring="true">
+    <s:stringconstant>https://ws1.grid.sara.nl/~glatard/feat_descriptions/feat_group_noroi.xml</s:stringconstant>
+  </s:processor>
+  <s:processor name="roi_stats_description" boring="true">
+    <s:stringconstant>https://ws1.grid.sara.nl/~glatard/feat_descriptions/roi_stats.xml</s:stringconstant>
+  </s:processor>
+  <s:processor name="convertString">
+    <s:beanshell>
+      <s:scriptvalue>import java.io.File;
+import java.lang.reflect.Array;
+
+if(input.startsWith("lfn://")){
+		String[] sp = input.split("/");
+		String path = "";
+		int len = Array.getLength(sp);
+		if(len &lt;4)
+		    output="Error in conversion: input must be in the form lfn://lfc_host/path";
+		    else{
+			for (int i=3;i&lt;len;i++){
+			    path+=sp[i];
+			    if(i&lt;len-1)
+				path+="/";
+			}
+			File in = new File(path);
+			String base = (in.getName()).substring(0,in.getName().indexOf(".tgz"));
+			String imagedir = in.getParent();
+			String taskname = (new File(imagedir)).getName();
+			String taskdir = (new File(imagedir)).getParent();
+			String rootdir = (new File(taskdir)).getParent()+"/group_"+taskname;
+			String filename=taskname+"_"+"group.tgz";
+			output=sp[0]+"/"+sp[1]+"/"+sp[2]+"/"+rootdir+"/"+filename;
+		    }
+	    }
+	    else output="Error in conversion: input does not start with lfn://";</s:scriptvalue>
+      <s:beanshellinputlist>
+        <s:beanshellinput s:syntactictype="'text/plain'">input</s:beanshellinput>
+      </s:beanshellinputlist>
+      <s:beanshelloutputlist>
+        <s:beanshelloutput s:syntactictype="'text/plain'">output</s:beanshelloutput>
+      </s:beanshelloutputlist>
+      <s:dependencies s:classloader="iteration" />
+    </s:beanshell>
+  </s:processor>
+  <s:processor name="roi_stats" workers="100">
+    <s:description>Service definition of function ns__GASWexecution</s:description>
+    <s:arbitrarywsdl>
+      <s:wsdl>http://egee1.unice.fr/wsdl/gasw_service.wsdl</s:wsdl>
+      <s:operation>GASWexecution</s:operation>
+    </s:arbitrarywsdl>
+    <s:iterationstrategy>
+      <i:cross xmlns:i="http://org.embl.ebi.escience/xscufliteration/0.1beta10">
+        <i:iterator name="input1" />
+        <i:dot>
+          <i:iterator name="input0" />
+          <i:iterator name="input2" />
+        </i:dot>
+        <i:iterator name="config-file" />
+        <i:iterator name="command-line" />
+        <i:iterator name="input3" />
+        <i:iterator name="input4" />
+      </i:cross>
+    </s:iterationstrategy>
+  </s:processor>
+  <s:processor name="feat_group" workers="100">
+    <s:description>Service definition of function ns__GASWexecution</s:description>
+    <s:arbitrarywsdl>
+      <s:wsdl>http://egee1.unice.fr/wsdl/gasw_service_16_6.wsdl</s:wsdl>
+      <s:operation>GASWexecution</s:operation>
+    </s:arbitrarywsdl>
+    <s:iterationstrategy>
+      <i:cross xmlns:i="http://org.embl.ebi.escience/xscufliteration/0.1beta10">
+        <i:dot>
+          <i:iterator name="input1" />
+          <i:iterator name="input2" />
+          <i:iterator name="input3" />
+          <i:iterator name="input4" />
+          <i:iterator name="input5" />
+          <i:iterator name="input6" />
+          <i:iterator name="input7" />
+          <i:iterator name="input8" />
+          <i:iterator name="input9" />
+          <i:iterator name="input10" />
+          <i:iterator name="input0" />
+        </i:dot>
+        <i:iterator name="config-file" />
+        <i:iterator name="input12" />
+        <i:iterator name="command-line" />
+        <i:iterator name="input11" />
+        <i:iterator name="input13" />
+        <i:iterator name="input14" />
+        <i:iterator name="input15" />
+      </i:cross>
+    </s:iterationstrategy>
+  </s:processor>
+  <s:link source="designFile_template" sink="feat_group:input11" />
+  <s:link source="feat_files_1" sink="feat_group:input0" />
+  <s:link source="feat_files_10" sink="feat_group:input9" />
+  <s:link source="feat_files_11" sink="feat_group:input10" />
+  <s:link source="feat_files_2" sink="feat_group:input1" />
+  <s:link source="feat_files_3" sink="feat_group:input2" />
+  <s:link source="feat_files_4" sink="feat_group:input3" />
+  <s:link source="feat_files_5" sink="feat_group:input4" />
+  <s:link source="feat_files_6" sink="feat_group:input5" />
+  <s:link source="feat_files_7" sink="feat_group:input6" />
+  <s:link source="feat_files_8" sink="feat_group:input7" />
+  <s:link source="feat_files_9" sink="feat_group:input8" />
+  <s:link source="convertString:output" sink="roi_stats:input0" />
+  <s:link source="empty:value" sink="feat_group:command-line" />
+  <s:link source="empty:value" sink="feat_group:input12" />
+  <s:link source="empty:value" sink="feat_group:input13" />
+  <s:link source="empty:value" sink="feat_group:input14" />
+  <s:link source="empty:value" sink="feat_group:input15" />
+  <s:link source="feat_files_1" sink="feat_group:input0" />
+  <s:link source="empty:value" sink="roi_stats:command-line" />
+  <s:link source="empty:value" sink="roi_stats:input3" />
+  <s:link source="empty:value" sink="roi_stats:input4" />
+  <s:link source="feat_group:result0" sink="convertString:input" />
+  <s:link source="region_of_interest" sink="roi_stats:input1" />
+  <s:link source="convertString:output" sink="fmri_outputdir" />
+  <s:link source="convertString:output" sink="roi_stats:input2" />
+  <s:link source="feat_group_description:value" sink="feat_group:config-file" />
+  <s:link source="roi_stats:result0" sink="mean" />
+  <s:link source="roi_stats:result1" sink="max" />
+  <s:link source="roi_stats:result2" sink="stdev" />
+  <s:link source="roi_stats_description:value" sink="roi_stats:config-file" />
+  <s:source name="feat_files_1" />
+  <s:source name="feat_files_2" />
+  <s:source name="feat_files_3" />
+  <s:source name="feat_files_4" />
+  <s:source name="feat_files_5" />
+  <s:source name="feat_files_6" />
+  <s:source name="feat_files_7" />
+  <s:source name="feat_files_8" />
+  <s:source name="feat_files_9" />
+  <s:source name="feat_files_10" />
+  <s:source name="feat_files_11" />
+  <s:source name="designFile_template" />
+  <s:source name="region_of_interest" />
+  <s:sink name="fmri_outputdir" />
+  <s:sink name="mean" />
+  <s:sink name="max" />
+  <s:sink name="stdev" />
+</s:scufl>
+

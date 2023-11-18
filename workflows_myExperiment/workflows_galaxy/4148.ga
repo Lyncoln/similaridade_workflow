@@ -1,0 +1,521 @@
+{
+    "a_galaxy_workflow": "true", 
+    "annotation": "Create a tree from a multifastafile using ClustalW, PhylipDNAdist, PhylipNeighbor, PhylipDrawtree and Treevector, for interactive visualization in Phyloviz or static on pdf or svg format. Then, using the same multifasta file, handling sequences file, use blast on a reference genome and filter results to have sequences with more than 90% identity.", 
+    "format-version": "0.1", 
+    "name": "Tuto Galaxy 2013 : GenOuest, from Fasta to Phylip to Tree to Blast to Filter", 
+    "steps": {
+        "0": {
+            "annotation": "", 
+            "id": 0, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "Multifasta file & query"
+                }
+            ], 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 125, 
+                "top": 620
+            }, 
+            "tool_errors": null, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"Multifasta file & query\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "user_outputs": []
+        }, 
+        "1": {
+            "annotation": "", 
+            "id": 1, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "Reference genome in Fasta format"
+                }
+            ], 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 1313, 
+                "top": 1026
+            }, 
+            "tool_errors": null, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"Reference genome in Fasta format\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "user_outputs": []
+        }, 
+        "2": {
+            "annotation": "", 
+            "id": 2, 
+            "input_connections": {
+                "input": {
+                    "id": 0, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "ClustalW", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "clustal"
+                }, 
+                {
+                    "name": "outlog", 
+                    "type": "txt"
+                }
+            ], 
+            "position": {
+                "left": 511, 
+                "top": 257
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "clustalw", 
+            "tool_state": "{\"__page__\": 0, \"outname\": \"\\\"Clustal_run\\\"\", \"__rerun_remap_job_id__\": null, \"range\": \"{\\\"mode\\\": \\\"complete\\\", \\\"__current_case__\\\": 0}\", \"dnarna\": \"\\\"DNA\\\"\", \"outcontrol\": \"{\\\"outform\\\": \\\"phylip\\\", \\\"__current_case__\\\": 1}\", \"out_order\": \"\\\"ALIGNED\\\"\", \"input\": \"null\", \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "0.1", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "3": {
+            "annotation": "Delete the seventh sequence", 
+            "id": 3, 
+            "input_connections": {
+                "input": {
+                    "id": 0, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Delines", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "data"
+                }
+            ], 
+            "position": {
+                "left": 457, 
+                "top": 607
+            }, 
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput": {
+                    "action_arguments": {
+                        "newtype": "fasta"
+                    }, 
+                    "action_type": "ChangeDatatypeAction", 
+                    "output_name": "output"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "delines_id", 
+            "tool_state": "{\"input2\": \"\\\"14\\\"\", \"__page__\": 0, \"input1\": \"\\\"13\\\"\", \"__rerun_remap_job_id__\": null, \"input\": \"null\", \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "4": {
+            "annotation": "", 
+            "id": 4, 
+            "input_connections": {
+                "infile": {
+                    "id": 2, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "PhylipDNADist", 
+            "outputs": [
+                {
+                    "name": "outfile", 
+                    "type": "txt"
+                }
+            ], 
+            "position": {
+                "left": 846, 
+                "top": 272
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "PhylipDNADist", 
+            "tool_state": "{\"__page__\": 0, \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"infile\": \"null\", \"option\": \"\\\"1\\\"\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "5": {
+            "annotation": "", 
+            "id": 5, 
+            "input_connections": {
+                "input": {
+                    "id": 3, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "FASTA Width", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 739.5, 
+                "top": 630
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fasta_formatter/cshl_fasta_formatter/1.0.0", 
+            "tool_state": "{\"__page__\": 0, \"input\": \"null\", \"__rerun_remap_job_id__\": null, \"width\": \"\\\"0\\\"\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "6": {
+            "annotation": "", 
+            "id": 6, 
+            "input_connections": {
+                "infile": {
+                    "id": 4, 
+                    "output_name": "outfile"
+                }
+            }, 
+            "inputs": [], 
+            "name": "PhylipNeighbor", 
+            "outputs": [
+                {
+                    "name": "outfile", 
+                    "type": "txt"
+                }, 
+                {
+                    "name": "treefile", 
+                    "type": "nhx"
+                }
+            ], 
+            "position": {
+                "left": 1112, 
+                "top": 290
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "PhylipNJ", 
+            "tool_state": "{\"__page__\": 0, \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"infile\": \"null\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "7": {
+            "annotation": "", 
+            "id": 7, 
+            "input_connections": {
+                "input": {
+                    "id": 5, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Reverse-Complement", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 986, 
+                "top": 650
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastx_reverse_complement/cshl_fastx_reverse_complement/1.0.0", 
+            "tool_state": "{\"input\": \"null\", \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__page__\": 0}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "8": {
+            "annotation": "", 
+            "id": 8, 
+            "input_connections": {
+                "tree": {
+                    "id": 6, 
+                    "output_name": "treefile"
+                }
+            }, 
+            "inputs": [], 
+            "name": "TreeVector", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "svg"
+                }
+            ], 
+            "position": {
+                "left": 1373, 
+                "top": 200
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "tree_vector", 
+            "tool_state": "{\"__page__\": 0, \"__rerun_remap_job_id__\": null, \"tree\": \"null\", \"shape\": \"\\\"square\\\"\", \"length\": \"\\\"phylo\\\"\", \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "1.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "9": {
+            "annotation": "", 
+            "id": 9, 
+            "input_connections": {
+                "infile": {
+                    "id": 6, 
+                    "output_name": "treefile"
+                }
+            }, 
+            "inputs": [], 
+            "name": "PhylipDrawtree", 
+            "outputs": [
+                {
+                    "name": "plotfile", 
+                    "type": "pdf"
+                }
+            ], 
+            "position": {
+                "left": 1370, 
+                "top": 321
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "PhylipDrawtree", 
+            "tool_state": "{\"__page__\": 0, \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"infile\": \"null\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "10": {
+            "annotation": "", 
+            "id": 10, 
+            "input_connections": {
+                "db_opts|subject": {
+                    "id": 1, 
+                    "output_name": "output"
+                }, 
+                "query": {
+                    "id": 7, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "NCBI BLAST+ blastn", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 1335, 
+                "top": 634
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "ncbi_blastn_wrapper", 
+            "tool_state": "{\"out_format\": \"\\\"6\\\"\", \"evalue_cutoff\": \"\\\"0.1\\\"\", \"__page__\": 0, \"db_opts\": \"{\\\"db_opts_selector\\\": \\\"file\\\", \\\"subject\\\": null, \\\"__current_case__\\\": 1, \\\"database\\\": \\\"\\\"}\", \"__rerun_remap_job_id__\": null, \"adv_opts\": \"{\\\"cost_to_extend\\\": \\\"2\\\", \\\"penalty_nt_mismatch\\\": \\\"-3\\\", \\\"adv_opts_selector\\\": \\\"advanced\\\", \\\"cost_to_open\\\": \\\"5\\\", \\\"ungapped\\\": \\\"False\\\", \\\"filter_query\\\": \\\"True\\\", \\\"word_size\\\": \\\"0\\\", \\\"__current_case__\\\": 1, \\\"parse_deflines\\\": \\\"False\\\", \\\"reward_nt_match\\\": \\\"1\\\", \\\"strand\\\": \\\"-strand both\\\", \\\"max_hits\\\": \\\"10\\\"}\", \"blast_type\": \"\\\"blastn\\\"\", \"query\": \"null\", \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "1.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "11": {
+            "annotation": "", 
+            "id": 11, 
+            "input_connections": {
+                "input": {
+                    "id": 10, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Filter", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 1621, 
+                "top": 615
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "testtoolshed.g2.bx.psu.edu/repos/greg/gregs_filter/Filter1/3.3.0", 
+            "tool_state": "{\"__page__\": 0, \"__rerun_remap_job_id__\": null, \"cond\": \"\\\"c3>=90\\\"\", \"input\": \"null\", \"header_lines\": \"\\\"0\\\"\", \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "3.3.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "12": {
+            "annotation": "", 
+            "id": 12, 
+            "input_connections": {
+                "input": {
+                    "id": 11, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Cut", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 1852, 
+                "top": 684
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "Cut1", 
+            "tool_state": "{\"__page__\": 0, \"__rerun_remap_job_id__\": null, \"delimiter\": \"\\\"T\\\"\", \"columnList\": \"\\\"c2\\\"\", \"input\": \"null\", \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "1.0.2", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "13": {
+            "annotation": "", 
+            "id": 13, 
+            "input_connections": {
+                "infile": {
+                    "id": 1, 
+                    "output_name": "output"
+                }, 
+                "input_table": {
+                    "id": 12, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Filter fasta sequences", 
+            "outputs": [
+                {
+                    "name": "selected", 
+                    "type": "fasta"
+                }, 
+                {
+                    "name": "unselected", 
+                    "type": "fasta"
+                }
+            ], 
+            "position": {
+                "left": 1856, 
+                "top": 924
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "get_seqs", 
+            "tool_state": "{\"__page__\": 0, \"input_table\": \"null\", \"__rerun_remap_job_id__\": null, \"outselect\": \"\\\"selected\\\"\", \"infile\": \"null\", \"ignorecase\": \"\\\"False\\\"\", \"paired\": \"\\\"False\\\"\", \"filters\": \"[]\", \"cosorted\": \"\\\"False\\\"\", \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"id_column\": \"{\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": \\\"1\\\"}\"}", 
+            "tool_version": "1.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "14": {
+            "annotation": "", 
+            "id": 14, 
+            "input_connections": {
+                "input": {
+                    "id": 13, 
+                    "output_name": "selected"
+                }
+            }, 
+            "inputs": [], 
+            "name": "FASTA-to-Tabular", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 2194, 
+                "top": 955
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "fasta2tab", 
+            "tool_state": "{\"__page__\": 0, \"keep_first\": \"\\\"0\\\"\", \"descr_columns\": \"\\\"1\\\"\", \"input\": \"null\", \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null}", 
+            "tool_version": "1.1.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "15": {
+            "annotation": "", 
+            "id": 15, 
+            "input_connections": {
+                "input1": {
+                    "id": 14, 
+                    "output_name": "output"
+                }, 
+                "input2": {
+                    "id": 10, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Join two Datasets", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 2401, 
+                "top": 796
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "join1", 
+            "tool_state": "{\"input2\": \"null\", \"__page__\": 0, \"field1\": \"{\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": \\\"1\\\"}\", \"partial\": \"\\\"\\\"\", \"field2\": \"{\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": \\\"2\\\"}\", \"__rerun_remap_job_id__\": null, \"fill_empty_columns\": \"{\\\"fill_empty_columns_switch\\\": \\\"no_fill\\\", \\\"__current_case__\\\": 0}\", \"unmatched\": \"\\\"\\\"\", \"input1\": \"null\", \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "2.0.2", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "16": {
+            "annotation": "", 
+            "id": 16, 
+            "input_connections": {
+                "input": {
+                    "id": 15, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Tabular-to-FASTA", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "fasta"
+                }
+            ], 
+            "position": {
+                "left": 2618, 
+                "top": 780
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "tab2fasta", 
+            "tool_state": "{\"title_col\": \"{\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": [\\\"1\\\", \\\"3\\\"]}\", \"__page__\": 0, \"seq_col\": \"{\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": \\\"2\\\"}\", \"__rerun_remap_job_id__\": null, \"input\": \"null\", \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "1.1.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }
+    }
+}

@@ -1,0 +1,230 @@
+{
+    "a_galaxy_workflow": "true", 
+    "annotation": "", 
+    "format-version": "0.1", 
+    "name": "NGS : FastQ Quality check and FastQ manipulation", 
+    "steps": {
+        "0": {
+            "annotation": "", 
+            "id": 0, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "reads in FastQ format"
+                }
+            ], 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 215, 
+                "top": 414
+            }, 
+            "tool_errors": null, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"reads in FastQ format\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "user_outputs": []
+        }, 
+        "1": {
+            "annotation": "", 
+            "id": 1, 
+            "input_connections": {
+                "input_file": {
+                    "id": 0, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "FastQC:Read QC", 
+            "outputs": [
+                {
+                    "name": "html_file", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 472, 
+                "top": 256
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "fastqc", 
+            "tool_state": "{\"__page__\": 0, \"input_file\": \"null\", \"__rerun_remap_job_id__\": null, \"out_prefix\": \"\\\"FastQC\\\"\", \"contaminants\": \"null\", \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "0.52", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "2": {
+            "annotation": "", 
+            "id": 2, 
+            "input_connections": {
+                "input_file": {
+                    "id": 0, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "FASTQ Groomer", 
+            "outputs": [
+                {
+                    "name": "output_file", 
+                    "type": "fastqsanger"
+                }
+            ], 
+            "position": {
+                "left": 470, 
+                "top": 430
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "fastq_groomer", 
+            "tool_state": "{\"__page__\": 0, \"input_file\": \"null\", \"input_type\": \"\\\"sanger\\\"\", \"__rerun_remap_job_id__\": null, \"options_type\": \"{\\\"options_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "1.0.4", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "3": {
+            "annotation": "", 
+            "id": 3, 
+            "input_connections": {
+                "input_file": {
+                    "id": 2, 
+                    "output_name": "output_file"
+                }
+            }, 
+            "inputs": [], 
+            "name": "FASTQ Summary Statistics", 
+            "outputs": [
+                {
+                    "name": "output_file", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 781, 
+                "top": 309
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "fastq_stats", 
+            "tool_state": "{\"__page__\": 0, \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"input_file\": \"null\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "4": {
+            "annotation": "", 
+            "id": 4, 
+            "input_connections": {
+                "input_file": {
+                    "id": 2, 
+                    "output_name": "output_file"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Filter FASTQ", 
+                    "name": "max_num_deviants"
+                }, 
+                {
+                    "description": "runtime parameter for tool Filter FASTQ", 
+                    "name": "paired_end"
+                }, 
+                {
+                    "description": "runtime parameter for tool Filter FASTQ", 
+                    "name": "min_size"
+                }, 
+                {
+                    "description": "runtime parameter for tool Filter FASTQ", 
+                    "name": "max_quality"
+                }, 
+                {
+                    "description": "runtime parameter for tool Filter FASTQ", 
+                    "name": "max_size"
+                }, 
+                {
+                    "description": "runtime parameter for tool Filter FASTQ", 
+                    "name": "min_quality"
+                }
+            ], 
+            "name": "Filter FASTQ", 
+            "outputs": [
+                {
+                    "name": "output_file", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 802, 
+                "top": 440
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "fastq_filter", 
+            "tool_state": "{\"__page__\": 0, \"max_num_deviants\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"paired_end\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"input_file\": \"null\", \"__rerun_remap_job_id__\": null, \"min_size\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"max_quality\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"fastq_filters\": \"[]\", \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"max_size\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"min_quality\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "5": {
+            "annotation": "", 
+            "id": 5, 
+            "input_connections": {
+                "input_file": {
+                    "id": 3, 
+                    "output_name": "output_file"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Boxplot", 
+            "outputs": [
+                {
+                    "name": "output_file", 
+                    "type": "png"
+                }
+            ], 
+            "position": {
+                "left": 1082, 
+                "top": 311
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "qual_stats_boxplot", 
+            "tool_state": "{\"__page__\": 0, \"xcol\": \"{\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": \\\"1\\\"}\", \"use_outliers\": \"{\\\"use_outliers_type\\\": \\\"use_outliers\\\", \\\"outliercol\\\": {\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": \\\"13\\\"}, \\\"__current_case__\\\": 0}\", \"rwcol\": \"{\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": \\\"12\\\"}\", \"input_file\": \"null\", \"q1col\": \"{\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": \\\"7\\\"}\", \"medcol\": \"{\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": \\\"8\\\"}\", \"title\": \"\\\"Ind29_2.fastq Box plot Quality\\\"\", \"__rerun_remap_job_id__\": null, \"xlabel\": \"\\\"X Axis Label\\\"\", \"ylabel\": \"\\\"Score Value\\\"\", \"lwcol\": \"{\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": \\\"11\\\"}\", \"q3col\": \"{\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": \\\"9\\\"}\", \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"graph_size\": \"\\\"2048,768\\\"\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "6": {
+            "annotation": "", 
+            "id": 6, 
+            "input_connections": {
+                "input_file": {
+                    "id": 4, 
+                    "output_name": "output_file"
+                }
+            }, 
+            "inputs": [], 
+            "name": "FastQC:Read QC", 
+            "outputs": [
+                {
+                    "name": "html_file", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 1022, 
+                "top": 440
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "fastqc", 
+            "tool_state": "{\"__page__\": 0, \"input_file\": \"null\", \"__rerun_remap_job_id__\": null, \"out_prefix\": \"\\\"FastQC on filtered Ind29_1.fastq\\\"\", \"contaminants\": \"null\", \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "0.52", 
+            "type": "tool", 
+            "user_outputs": []
+        }
+    }
+}

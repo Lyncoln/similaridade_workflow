@@ -1,0 +1,176 @@
+{
+    "a_galaxy_workflow": "true", 
+    "annotation": "", 
+    "format-version": "0.1", 
+    "name": "Advanced FastQ manipulation", 
+    "steps": {
+        "0": {
+            "annotation": "", 
+            "id": 0, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "Input Dataset"
+                }
+            ], 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 10, 
+                "top": 10
+            }, 
+            "tool_errors": null, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"Input Dataset\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "user_outputs": []
+        }, 
+        "1": {
+            "annotation": "", 
+            "id": 1, 
+            "input_connections": {
+                "input_file": {
+                    "id": 0, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "FASTQ Groomer", 
+            "outputs": [
+                {
+                    "name": "output_file", 
+                    "type": "fastqsanger"
+                }
+            ], 
+            "position": {
+                "left": 230, 
+                "top": 10
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "fastq_groomer", 
+            "tool_state": "{\"__page__\": 0, \"input_type\": \"\\\"sanger\\\"\", \"chromInfo\": \"\\\"/galaxy/home/g2test/galaxy_test/tool-data/shared/ucsc/chrom/?.len\\\"\", \"options_type\": \"{\\\"options_type_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"input_file\": \"null\"}", 
+            "tool_version": null, 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "2": {
+            "annotation": "", 
+            "id": 2, 
+            "input_connections": {
+                "input_file": {
+                    "id": 1, 
+                    "output_name": "output_file"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Filter FASTQ", 
+            "outputs": [
+                {
+                    "name": "output_file", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 450, 
+                "top": 10
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "fastq_filter", 
+            "tool_state": "{\"__page__\": 0, \"max_num_deviants\": \"\\\"0\\\"\", \"paired_end\": \"\\\"False\\\"\", \"input_file\": \"null\", \"min_size\": \"\\\"0\\\"\", \"max_quality\": \"\\\"0.0\\\"\", \"fastq_filters\": \"[]\", \"chromInfo\": \"\\\"/galaxy/home/g2test/galaxy_test/tool-data/shared/ucsc/chrom/?.len\\\"\", \"max_size\": \"\\\"0\\\"\", \"min_quality\": \"\\\"20.0\\\"\"}", 
+            "tool_version": null, 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "3": {
+            "annotation": "", 
+            "id": 3, 
+            "input_connections": {
+                "input_file": {
+                    "id": 2, 
+                    "output_name": "output_file"
+                }
+            }, 
+            "inputs": [], 
+            "name": "FASTQ Trimmer", 
+            "outputs": [
+                {
+                    "name": "output_file", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 670, 
+                "top": 10
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "fastq_trimmer", 
+            "tool_state": "{\"__page__\": 0, \"keep_zero_length\": \"\\\"False\\\"\", \"input_file\": \"null\", \"chromInfo\": \"\\\"/galaxy/home/g2test/galaxy_test/tool-data/shared/ucsc/chrom/?.len\\\"\", \"offset_type\": \"{\\\"right_column_offset\\\": \\\"10\\\", \\\"left_column_offset\\\": \\\"0\\\", \\\"base_offset_type\\\": \\\"offsets_absolute\\\", \\\"__current_case__\\\": 0}\"}", 
+            "tool_version": null, 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "4": {
+            "annotation": "", 
+            "id": 4, 
+            "input_connections": {
+                "input_file": {
+                    "id": 3, 
+                    "output_name": "output_file"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Manipulate FASTQ", 
+            "outputs": [
+                {
+                    "name": "output_file", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 890, 
+                "top": 10
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "fastq_manipulation", 
+            "tool_state": "{\"match_blocks\": \"[]\", \"manipulate_blocks\": \"[{\\\"__index__\\\": 0, \\\"manipulation_type\\\": {\\\"manipulation_type_selector\\\": \\\"sequence\\\", \\\"__current_case__\\\": 1, \\\"manipulation\\\": {\\\"manipulation_selector\\\": \\\"dna_to_rna\\\", \\\"__current_case__\\\": 4}}}]\", \"__page__\": 0, \"chromInfo\": \"\\\"/galaxy/home/g2test/galaxy_test/tool-data/shared/ucsc/chrom/?.len\\\"\", \"input_file\": \"null\"}", 
+            "tool_version": null, 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "5": {
+            "annotation": "", 
+            "id": 5, 
+            "input_connections": {
+                "input_file": {
+                    "id": 4, 
+                    "output_name": "output_file"
+                }
+            }, 
+            "inputs": [], 
+            "name": "FASTQ to FASTA", 
+            "outputs": [
+                {
+                    "name": "output_file", 
+                    "type": "fasta"
+                }
+            ], 
+            "position": {
+                "left": 1110, 
+                "top": 10
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "fastq_to_fasta_python", 
+            "tool_state": "{\"__page__\": 0, \"chromInfo\": \"\\\"/galaxy/home/g2test/galaxy_test/tool-data/shared/ucsc/chrom/?.len\\\"\", \"input_file\": \"null\"}", 
+            "tool_version": null, 
+            "type": "tool", 
+            "user_outputs": []
+        }
+    }
+}

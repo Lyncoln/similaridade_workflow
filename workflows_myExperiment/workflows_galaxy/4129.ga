@@ -1,0 +1,116 @@
+{
+    "a_galaxy_workflow": "true", 
+    "annotation": "Flank SNP regions using interval format file and a fasta reference file", 
+    "format-version": "0.1", 
+    "name": "NGS : flanking SNP regions", 
+    "steps": {
+        "0": {
+            "annotation": "", 
+            "id": 0, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "Interval dataset"
+                }
+            ], 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 204, 
+                "top": 206
+            }, 
+            "tool_errors": null, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"Interval dataset\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "user_outputs": []
+        }, 
+        "1": {
+            "annotation": "", 
+            "id": 1, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "Fasta genome reference file"
+                }
+            ], 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 200, 
+                "top": 320
+            }, 
+            "tool_errors": null, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"Fasta genome reference file\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "user_outputs": []
+        }, 
+        "2": {
+            "annotation": "", 
+            "id": 2, 
+            "input_connections": {
+                "input": {
+                    "id": 0, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Get flanks", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "interval"
+                }
+            ], 
+            "position": {
+                "left": 425, 
+                "top": 207
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "get_flanks1", 
+            "tool_state": "{\"__page__\": 0, \"direction\": \"\\\"Both\\\"\", \"region\": \"\\\"whole\\\"\", \"offset\": \"\\\"0\\\"\", \"input\": \"null\", \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null, \"size\": \"\\\"50\\\"\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "3": {
+            "annotation": "", 
+            "id": 3, 
+            "input_connections": {
+                "input": {
+                    "id": 2, 
+                    "output_name": "out_file1"
+                }, 
+                "seq_source|ref_file": {
+                    "id": 1, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Extract Genomic DNA", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 640, 
+                "top": 200
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "Extract genomic DNA 1", 
+            "tool_state": "{\"out_format\": \"\\\"interval\\\"\", \"__page__\": 0, \"interpret_features\": \"\\\"yes\\\"\", \"__rerun_remap_job_id__\": null, \"seq_source\": \"{\\\"index_source\\\": \\\"history\\\", \\\"ref_file\\\": null, \\\"__current_case__\\\": 1}\", \"input\": \"null\", \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/hg18.len\\\"\"}", 
+            "tool_version": "2.2.2", 
+            "type": "tool", 
+            "user_outputs": []
+        }
+    }
+}

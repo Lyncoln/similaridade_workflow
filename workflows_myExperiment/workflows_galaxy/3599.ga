@@ -1,0 +1,1756 @@
+{
+    "a_galaxy_workflow": "true", 
+    "annotation": "", 
+    "format-version": "1.1", 
+    "name": "Detrprok", 
+    "steps": {
+        "0": {
+            "annotation": "Select here the GFF annotation file containing coding genes, tRNAs, rRNAs and known ncRNAs. You can download it from GJI (http://genome.jgi.doe.gov) or NCBI (http://ftp.ncbi.nih.gov/genomes/Bacteria). Caution: 1srt column should have exactly the same identifier as the genome sequence used for mapping.", 
+            "id": 0, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "Select here the GFF annotation file containing coding genes, tRNAs, rRNAs and known ncRNAs. You can download it from GJI (http://genome.jgi.doe.gov) or NCBI (http://ftp.ncbi.nih.gov/genomes/Bacteria). Caution: 1srt column should have exactly the same identifier as the genome sequence used for mapping.", 
+                    "name": "genome annotations"
+                }
+            ], 
+            "label": null, 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 206, 
+                "top": 152
+            }, 
+            "tool_errors": null, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"genome annotations\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "user_outputs": [], 
+            "uuid": "8b700d1d-acf8-423e-92e3-d125a2a96526"
+        }, 
+        "1": {
+            "annotation": "Select here the bam file resulting from the mapping of RNA-seq reads on the genome sequence. You may use Bowtie or another mapper (use appropriate mapping option to retain only uniquely mapping reads).", 
+            "id": 1, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "Select here the bam file resulting from the mapping of RNA-seq reads on the genome sequence. You may use Bowtie or another mapper (use appropriate mapping option to retain only uniquely mapping reads).", 
+                    "name": "read alignments on genome"
+                }
+            ], 
+            "label": null, 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 200, 
+                "top": 403
+            }, 
+            "tool_errors": null, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"read alignments on genome\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "user_outputs": [], 
+            "uuid": "00d8d4c6-aca2-4eed-8844-cfa3cf9aa12c"
+        }, 
+        "2": {
+            "annotation": "Select here the GFF file features that will be considered as initial annotations. Any term added here will cause pre-existing features with this term not to be predicted again by the workflow. Please use a comma separated list and use \"CDS\" rather than \"gene\" for protein coding genes. Suggested value: rRNA,tRNA,ncRNA,CDS", 
+            "id": 2, 
+            "input_connections": {
+                "formatType|inputFileName": {
+                    "id": 0, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool clean transcript file", 
+                    "name": "optionType"
+                }
+            ], 
+            "label": null, 
+            "name": "clean transcript file", 
+            "outputs": [
+                {
+                    "name": "outputFile", 
+                    "type": "gtf"
+                }
+            ], 
+            "position": {
+                "left": 239, 
+                "top": 219
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutputFile": {
+                    "action_arguments": {
+                        "newname": "annotation selection"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "outputFile"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "CleanTranscriptFile", 
+            "tool_state": "{\"optionType\": \"{\\\"type\\\": \\\"Yes\\\", \\\"value\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 0}\", \"__rerun_remap_job_id__\": null, \"formatType\": \"{\\\"inputFileName\\\": null, \\\"__current_case__\\\": 0, \\\"FormatInputFileName\\\": \\\"gff\\\"}\", \"chromInfo\": \"\\\"/srv/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__page__\": 0}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "2b9e3fb2-d39f-4e92-8390-5c4fd1a00f89"
+        }, 
+        "3": {
+            "annotation": "Technical step : counts the identical reads", 
+            "id": 3, 
+            "input_connections": {
+                "formatType|inputFileName": {
+                    "id": 1, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "collapse reads", 
+            "outputs": [
+                {
+                    "name": "outputFileGff", 
+                    "type": "gff3"
+                }
+            ], 
+            "position": {
+                "left": 265, 
+                "top": 469
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutputFileGff": {
+                    "action_arguments": {
+                        "newname": "collapsed reads"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "collapseReads", 
+            "tool_state": "{\"__page__\": 0, \"__rerun_remap_job_id__\": null, \"formatType\": \"{\\\"inputFileName\\\": null, \\\"__current_case__\\\": 5, \\\"FormatInputFileName\\\": \\\"bam\\\"}\", \"strand\": \"\\\"False\\\"\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "1f99ee31-2986-4f92-a4b3-735cef140ec3"
+        }, 
+        "4": {
+            "annotation": "Clusters annotated proximal genes into operons. Parameter to be set: op_gap. Genes separated by a gap smaller than op_gap are clustered (suggested value: 10 to 150).", 
+            "id": 4, 
+            "input_connections": {
+                "formatType|inputFileName": {
+                    "id": 2, 
+                    "output_name": "outputFile"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool clusterize", 
+                    "name": "distance"
+                }
+            ], 
+            "label": null, 
+            "name": "clusterize", 
+            "outputs": [
+                {
+                    "name": "outputFileGff", 
+                    "type": "gff3"
+                }
+            ], 
+            "position": {
+                "left": 364, 
+                "top": 321
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutputFileGff": {
+                    "action_arguments": {
+                        "newname": "Annotation with operon-like features"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "MergingDataClusterize", 
+            "tool_state": "{\"normalize\": \"\\\"False\\\"\", \"__page__\": 0, \"formatType\": \"{\\\"inputFileName\\\": null, \\\"__current_case__\\\": 1, \\\"FormatInputFileName\\\": \\\"gff\\\"}\", \"distance\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"colinear\": \"\\\"True\\\"\", \"chromInfo\": \"\\\"/srv/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "61747a89-c0ed-4263-b712-829701eb0cf4"
+        }, 
+        "5": {
+            "annotation": "Clusters overlapping or proximal reads to produce read clusters. Parameter to be set: clust_gap. Reads separated by a gap smaller than clust_gap are clustered (suggested value: 0 to 20 ; a value of 0 will cluster only overlapping reads while a value of 20 will cluster reads even if they are 20-nt apart)", 
+            "id": 5, 
+            "input_connections": {
+                "formatType|inputFileName": {
+                    "id": 3, 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool clusterize", 
+                    "name": "distance"
+                }
+            ], 
+            "label": null, 
+            "name": "clusterize", 
+            "outputs": [
+                {
+                    "name": "outputFileGff", 
+                    "type": "gff3"
+                }
+            ], 
+            "position": {
+                "left": 454, 
+                "top": 556
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutputFileGff": {
+                    "action_arguments": {
+                        "newname": "Read clusters (with exon)"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "MergingDataClusterize", 
+            "tool_state": "{\"normalize\": \"\\\"False\\\"\", \"__page__\": 0, \"formatType\": \"{\\\"inputFileName\\\": null, \\\"__current_case__\\\": 3, \\\"FormatInputFileName\\\": \\\"gff3\\\"}\", \"distance\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"colinear\": \"\\\"True\\\"\", \"chromInfo\": \"\\\"/srv/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "697ecb7a-3150-44b8-9f63-5b9af850ea23"
+        }, 
+        "6": {
+            "annotation": "Technical step: suppresses unwanted \"exon\" features created by the previous clustering step.", 
+            "id": 6, 
+            "input_connections": {
+                "formatType|inputFileName": {
+                    "id": 4, 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "remove introns", 
+            "outputs": [
+                {
+                    "name": "outputFile", 
+                    "type": "gff3"
+                }
+            ], 
+            "position": {
+                "left": 532, 
+                "top": 349
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutputFile": {
+                    "action_arguments": {
+                        "newname": "Annotation with operon-like (without exon)"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "outputFile"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "removeIntrons", 
+            "tool_state": "{\"__page__\": 0, \"__rerun_remap_job_id__\": null, \"formatType\": \"{\\\"inputFileName\\\": null, \\\"__current_case__\\\": 3, \\\"FormatInputFileName\\\": \\\"gff3\\\"}\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "c6689578-b46b-4130-975f-0f9c98f49d86"
+        }, 
+        "7": {
+            "annotation": "Technical step: suppresses unwanted \"exon\" features created by the previous clustering step.", 
+            "id": 7, 
+            "input_connections": {
+                "formatType|inputFileName": {
+                    "id": 5, 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "remove introns", 
+            "outputs": [
+                {
+                    "name": "outputFile", 
+                    "type": "gff3"
+                }
+            ], 
+            "position": {
+                "left": 641, 
+                "top": 580
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutputFile": {
+                    "action_arguments": {
+                        "newname": "Read clusters"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "outputFile"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "removeIntrons", 
+            "tool_state": "{\"__page__\": 0, \"__rerun_remap_job_id__\": null, \"formatType\": \"{\\\"inputFileName\\\": null, \\\"__current_case__\\\": 3, \\\"FormatInputFileName\\\": \\\"gff3\\\"}\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "80de78b2-d861-41c6-acd5-900513a62176"
+        }, 
+        "8": {
+            "annotation": "Selects read clusters that overlap annotations in the same direction. Parameter to be set: RNA_gap. A read cluster separated from an annotation by a gap smaller than RNA_gap is selected (suggested value: 25).", 
+            "id": 8, 
+            "input_connections": {
+                "formatType2|inputFileName2": {
+                    "id": 6, 
+                    "output_name": "outputFile"
+                }, 
+                "formatType|inputFileName1": {
+                    "id": 7, 
+                    "output_name": "outputFile"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool compare overlapping small query", 
+                    "name": "OptionDistance"
+                }
+            ], 
+            "label": null, 
+            "name": "compare overlapping small query", 
+            "outputs": [
+                {
+                    "name": "outputFileGff", 
+                    "type": "gff3"
+                }
+            ], 
+            "position": {
+                "left": 773, 
+                "top": 421
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutputFileGff": {
+                    "action_arguments": {
+                        "newname": "Read clusters overlapping annotation"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "CompareOverlappingSmallQuery", 
+            "tool_state": "{\"OptionInclusionQuery\": \"\\\"False\\\"\", \"NotOverlapping\": \"\\\"False\\\"\", \"formatType\": \"{\\\"FormatInputFileName1\\\": \\\"gff3\\\", \\\"inputFileName1\\\": null, \\\"__current_case__\\\": 3}\", \"InvertMatch\": \"\\\"False\\\"\", \"__page__\": 0, \"OptionInclusionRef\": \"\\\"False\\\"\", \"__rerun_remap_job_id__\": null, \"OptionDistance\": \"{\\\"distance\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"Dist\\\": \\\"Yes\\\", \\\"__current_case__\\\": 0}\", \"formatType2\": \"{\\\"FormatInputFileName2\\\": \\\"gff3\\\", \\\"inputFileName2\\\": null, \\\"__current_case__\\\": 3}\", \"OptionPcOverlapQuery\": \"{\\\"present\\\": \\\"No\\\", \\\"__current_case__\\\": 1}\", \"OptionMinOverlap\": \"\\\"1\\\"\", \"OptionCollinearOrAntiSens\": \"{\\\"__current_case__\\\": 0, \\\"OptionCA\\\": \\\"Collinear\\\"}\", \"OptionPcOverlapRef\": \"{\\\"present\\\": \\\"No\\\", \\\"__current_case__\\\": 1}\", \"OptionCA\": \"\\\"Collinear\\\"\", \"chromInfo\": \"\\\"/srv/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "165e6a12-e326-449b-ac85-6194771099ee"
+        }, 
+        "9": {
+            "annotation": "Selects read clusters that form new independent annotations. Parameter to be set: RNA_gap. Read clusters at a distance from existing annotations larger than RNA_gap are selected.  Caution: use same RNA_gap value as in previous step!", 
+            "id": 9, 
+            "input_connections": {
+                "formatType2|inputFileName2": {
+                    "id": 6, 
+                    "output_name": "outputFile"
+                }, 
+                "formatType|inputFileName1": {
+                    "id": 7, 
+                    "output_name": "outputFile"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool compare overlapping small query", 
+                    "name": "OptionDistance"
+                }
+            ], 
+            "label": null, 
+            "name": "compare overlapping small query", 
+            "outputs": [
+                {
+                    "name": "outputFileGff", 
+                    "type": "gff3"
+                }
+            ], 
+            "position": {
+                "left": 950, 
+                "top": 592
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutputFileGff": {
+                    "action_arguments": {
+                        "newname": "Read clusters not overlapping annotation"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "CompareOverlappingSmallQuery", 
+            "tool_state": "{\"OptionInclusionQuery\": \"\\\"False\\\"\", \"NotOverlapping\": \"\\\"False\\\"\", \"formatType\": \"{\\\"FormatInputFileName1\\\": \\\"gff3\\\", \\\"inputFileName1\\\": null, \\\"__current_case__\\\": 3}\", \"InvertMatch\": \"\\\"True\\\"\", \"__page__\": 0, \"OptionInclusionRef\": \"\\\"False\\\"\", \"__rerun_remap_job_id__\": null, \"OptionDistance\": \"{\\\"distance\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"Dist\\\": \\\"Yes\\\", \\\"__current_case__\\\": 0}\", \"formatType2\": \"{\\\"FormatInputFileName2\\\": \\\"gff3\\\", \\\"inputFileName2\\\": null, \\\"__current_case__\\\": 3}\", \"OptionPcOverlapQuery\": \"{\\\"present\\\": \\\"No\\\", \\\"__current_case__\\\": 1}\", \"OptionMinOverlap\": \"\\\"1\\\"\", \"OptionCollinearOrAntiSens\": \"{\\\"__current_case__\\\": 0, \\\"OptionCA\\\": \\\"Collinear\\\"}\", \"OptionPcOverlapRef\": \"{\\\"present\\\": \\\"No\\\", \\\"__current_case__\\\": 1}\", \"OptionCA\": \"\\\"Collinear\\\"\", \"chromInfo\": \"\\\"/srv/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "fc06dc62-6eb6-46c1-8618-d4ba72672da5"
+        }, 
+        "10": {
+            "annotation": "Technical step: merging of annotations and their overlapping read clusters. This will be used to extend annotation.", 
+            "id": 10, 
+            "input_connections": {
+                "input1": {
+                    "id": 6, 
+                    "output_name": "outputFile"
+                }, 
+                "queries_0|input2": {
+                    "id": 8, 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Concatenate datasets", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 1055, 
+                "top": 349
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "Annotations and read clusters overlapping them"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "cat1", 
+            "tool_state": "{\"__page__\": 0, \"__rerun_remap_job_id__\": null, \"input1\": \"null\", \"chromInfo\": \"\\\"/srv/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"queries\": \"[{\\\"input2\\\": null, \\\"__index__\\\": 0}]\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "571096fa-857a-4e57-a724-526bcd23e912"
+        }, 
+        "11": {
+            "annotation": "Extend annotations with overlapping or proximal read clusters in the same direction. Parameter to be set: RNA_gap. Read cluster and annotations separated by a gap smaller than RNA_gap are clustered. Caution: use the same RNA_gap value as previous step!", 
+            "id": 11, 
+            "input_connections": {
+                "formatType|inputFileName": {
+                    "id": 10, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool clusterize", 
+                    "name": "distance"
+                }
+            ], 
+            "label": null, 
+            "name": "clusterize", 
+            "outputs": [
+                {
+                    "name": "outputFileGff", 
+                    "type": "gff3"
+                }
+            ], 
+            "position": {
+                "left": 1239, 
+                "top": 361
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutputFileGff": {
+                    "action_arguments": {
+                        "newname": "Extended annotation (with exon)"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "MergingDataClusterize", 
+            "tool_state": "{\"normalize\": \"\\\"False\\\"\", \"__page__\": 0, \"formatType\": \"{\\\"inputFileName\\\": null, \\\"__current_case__\\\": 3, \\\"FormatInputFileName\\\": \\\"gff3\\\"}\", \"distance\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"colinear\": \"\\\"True\\\"\", \"chromInfo\": \"\\\"/srv/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "831cc38a-25ac-4e02-b7a7-cf8c27a3c857"
+        }, 
+        "12": {
+            "annotation": "Technical step: suppresses unwanted \"exon\" features created by the previous clustering step.", 
+            "id": 12, 
+            "input_connections": {
+                "formatType|inputFileName": {
+                    "id": 11, 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "remove introns", 
+            "outputs": [
+                {
+                    "name": "outputFile", 
+                    "type": "gff3"
+                }
+            ], 
+            "position": {
+                "left": 1257, 
+                "top": 454
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutputFile": {
+                    "action_arguments": {
+                        "newname": "Extended annotation"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "outputFile"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "removeIntrons", 
+            "tool_state": "{\"__page__\": 0, \"__rerun_remap_job_id__\": null, \"formatType\": \"{\\\"inputFileName\\\": null, \\\"__current_case__\\\": 3, \\\"FormatInputFileName\\\": \\\"gff3\\\"}\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "dabcab35-55b8-4253-9d76-ddf3391dbe98"
+        }, 
+        "13": {
+            "annotation": "Technical step: orders extended annotations by positions.", 
+            "id": 13, 
+            "input_connections": {
+                "formatType|inputFileName": {
+                    "id": 12, 
+                    "output_name": "outputFile"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "collapse reads", 
+            "outputs": [
+                {
+                    "name": "outputFileGff", 
+                    "type": "gff3"
+                }
+            ], 
+            "position": {
+                "left": 1418, 
+                "top": 405
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutputFileGff": {
+                    "action_arguments": {
+                        "newname": "Ordrered and extended annotation"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "collapseReads", 
+            "tool_state": "{\"__page__\": 0, \"__rerun_remap_job_id__\": null, \"formatType\": \"{\\\"inputFileName\\\": null, \\\"__current_case__\\\": 3, \\\"FormatInputFileName\\\": \\\"gff3\\\"}\", \"chromInfo\": \"\\\"/srv/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"strand\": \"\\\"False\\\"\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "f83ca57c-8169-4c9d-a71e-287e5a435264"
+        }, 
+        "14": {
+            "annotation": "Selection of read clusters that are antisense of an extended annotation. This step produces a first list of antisense candidates.", 
+            "id": 14, 
+            "input_connections": {
+                "formatType2|inputFileName2": {
+                    "id": 13, 
+                    "output_name": "outputFileGff"
+                }, 
+                "formatType|inputFileName1": {
+                    "id": 9, 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "compare overlapping small query", 
+            "outputs": [
+                {
+                    "name": "outputFileGff", 
+                    "type": "gff3"
+                }
+            ], 
+            "position": {
+                "left": 1473, 
+                "top": 588
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutputFileGff": {
+                    "action_arguments": {
+                        "newname": "first list of asRNA"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "CompareOverlappingSmallQuery", 
+            "tool_state": "{\"OptionInclusionQuery\": \"\\\"False\\\"\", \"NotOverlapping\": \"\\\"False\\\"\", \"formatType\": \"{\\\"FormatInputFileName1\\\": \\\"gff3\\\", \\\"inputFileName1\\\": null, \\\"__current_case__\\\": 3}\", \"InvertMatch\": \"\\\"False\\\"\", \"__page__\": 0, \"OptionInclusionRef\": \"\\\"False\\\"\", \"__rerun_remap_job_id__\": null, \"OptionDistance\": \"{\\\"Dist\\\": \\\"No\\\", \\\"__current_case__\\\": 1}\", \"formatType2\": \"{\\\"FormatInputFileName2\\\": \\\"gff3\\\", \\\"inputFileName2\\\": null, \\\"__current_case__\\\": 3}\", \"OptionPcOverlapQuery\": \"{\\\"present\\\": \\\"Yes\\\", \\\"__current_case__\\\": 0, \\\"minOverlap\\\": \\\"1\\\"}\", \"OptionMinOverlap\": \"\\\"1\\\"\", \"OptionCollinearOrAntiSens\": \"{\\\"__current_case__\\\": 1, \\\"OptionCA\\\": \\\"AntiSens\\\"}\", \"OptionPcOverlapRef\": \"{\\\"present\\\": \\\"No\\\", \\\"__current_case__\\\": 1}\", \"OptionCA\": \"\\\"AntiSense\\\"\", \"chromInfo\": \"\\\"/srv/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "6983cc28-a450-442e-8539-407a8f26afd0"
+        }, 
+        "15": {
+            "annotation": "Selection of read clusters that are outside and not in antisense of an extended annotation. This step produces a first list of small RNAs.", 
+            "id": 15, 
+            "input_connections": {
+                "formatType2|inputFileName2": {
+                    "id": 13, 
+                    "output_name": "outputFileGff"
+                }, 
+                "formatType|inputFileName1": {
+                    "id": 9, 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "compare overlapping small query", 
+            "outputs": [
+                {
+                    "name": "outputFileGff", 
+                    "type": "gff3"
+                }
+            ], 
+            "position": {
+                "left": 1471, 
+                "top": 722
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutputFileGff": {
+                    "action_arguments": {
+                        "newname": "first list of sRNA"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "CompareOverlappingSmallQuery", 
+            "tool_state": "{\"OptionInclusionQuery\": \"\\\"False\\\"\", \"NotOverlapping\": \"\\\"False\\\"\", \"formatType\": \"{\\\"FormatInputFileName1\\\": \\\"gff3\\\", \\\"inputFileName1\\\": null, \\\"__current_case__\\\": 3}\", \"InvertMatch\": \"\\\"True\\\"\", \"__page__\": 0, \"OptionInclusionRef\": \"\\\"False\\\"\", \"__rerun_remap_job_id__\": null, \"OptionDistance\": \"{\\\"Dist\\\": \\\"No\\\", \\\"__current_case__\\\": 1}\", \"formatType2\": \"{\\\"FormatInputFileName2\\\": \\\"gff3\\\", \\\"inputFileName2\\\": null, \\\"__current_case__\\\": 3}\", \"OptionPcOverlapQuery\": \"{\\\"present\\\": \\\"Yes\\\", \\\"__current_case__\\\": 0, \\\"minOverlap\\\": \\\"1\\\"}\", \"OptionMinOverlap\": \"\\\"1\\\"\", \"OptionCollinearOrAntiSens\": \"{\\\"__current_case__\\\": 1, \\\"OptionCA\\\": \\\"AntiSens\\\"}\", \"OptionPcOverlapRef\": \"{\\\"present\\\": \\\"No\\\", \\\"__current_case__\\\": 1}\", \"OptionCA\": \"\\\"AntiSense\\\"\", \"chromInfo\": \"\\\"/srv/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "7edb15b7-403d-4abc-88a7-7f7f23a79846"
+        }, 
+        "16": {
+            "annotation": "Splits extended annotations into 5 or 3 prime extentions, CDS, and/or operon spacers.", 
+            "id": 16, 
+            "input_connections": {
+                "referenciesFile": {
+                    "id": 2, 
+                    "output_name": "outputFile"
+                }, 
+                "transcriptsFile": {
+                    "id": 13, 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "splitTranscriptGff", 
+            "outputs": [
+                {
+                    "name": "outputFile", 
+                    "type": "gff3"
+                }
+            ], 
+            "position": {
+                "left": 1646, 
+                "top": 328
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutputFile": {
+                    "action_arguments": {
+                        "newname": "extensions, CDSs and/or operons"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "outputFile"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/clairetn/detrprok_scripts/splitTranscriptGff/1.0.0", 
+            "tool_state": "{\"transcriptsFile\": \"null\", \"__page__\": 0, \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/srv/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"referenciesFile\": \"null\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "1bead8cd-6a5c-4e60-8611-3d1256282b4b"
+        }, 
+        "17": {
+            "annotation": "Filters antisense RNAs based on their size. Parameter to be set: as_min_size. as_min_size is the minimal size for calling an antisense RNA (suggestion: 50).", 
+            "id": 17, 
+            "input_connections": {
+                "formatType|inputFileName": {
+                    "id": 14, 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool restrict from size", 
+                    "name": "OptionMin"
+                }
+            ], 
+            "label": null, 
+            "name": "restrict from size", 
+            "outputs": [
+                {
+                    "name": "outputFileGff", 
+                    "type": "gff3"
+                }
+            ], 
+            "position": {
+                "left": 1738.199951171875, 
+                "top": 642.4666748046875
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutputFileGff": {
+                    "action_arguments": {
+                        "newname": "asRNA list modified (filtered on their size)"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "restrictFromSize", 
+            "tool_state": "{\"OptionMin\": \"{\\\"minimum\\\": \\\"Yes\\\", \\\"__current_case__\\\": 0, \\\"min\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}\", \"__page__\": 0, \"__rerun_remap_job_id__\": null, \"formatType\": \"{\\\"inputFileName\\\": null, \\\"__current_case__\\\": 4, \\\"FormatInputFileName\\\": \\\"gff3\\\"}\", \"OptionMax\": \"{\\\"maximum\\\": \\\"No\\\", \\\"__current_case__\\\": 1}\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "18530948-746d-469e-83d9-41835024bf2b"
+        }, 
+        "18": {
+            "annotation": "Filters small RNAs based on their size. Parameter to be set: sRNA_min_size. sRNA_min_size is the minimal size for calling a small RNA (suggestion: 50).", 
+            "id": 18, 
+            "input_connections": {
+                "formatType|inputFileName": {
+                    "id": 15, 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool restrict from size", 
+                    "name": "OptionMin"
+                }
+            ], 
+            "label": null, 
+            "name": "restrict from size", 
+            "outputs": [
+                {
+                    "name": "outputFileGff", 
+                    "type": "gff3"
+                }
+            ], 
+            "position": {
+                "left": 1747, 
+                "top": 776
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutputFileGff": {
+                    "action_arguments": {
+                        "newname": "sRNA list modified (filtered on their size)"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "restrictFromSize", 
+            "tool_state": "{\"__page__\": 0, \"formatType\": \"{\\\"inputFileName\\\": null, \\\"__current_case__\\\": 4, \\\"FormatInputFileName\\\": \\\"gff3\\\"}\", \"OptionMin\": \"{\\\"minimum\\\": \\\"Yes\\\", \\\"__current_case__\\\": 0, \\\"min\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}\", \"__rerun_remap_job_id__\": null, \"OptionMax\": \"{\\\"maximum\\\": \\\"No\\\", \\\"__current_case__\\\": 1}\", \"chromInfo\": \"\\\"/srv/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "4f921bf2-205d-49f7-bbe3-00476a9af5ab"
+        }, 
+        "19": {
+            "annotation": "Counts reads overlapping extensions, CDSs, and/or operon spacers in order to compute read coverage (with a minimal overlapping region of 10 nt between read and genetic element).", 
+            "id": 19, 
+            "input_connections": {
+                "formatType2|inputFileName2": {
+                    "id": 3, 
+                    "output_name": "outputFileGff"
+                }, 
+                "formatType|inputFileName1": {
+                    "id": 16, 
+                    "output_name": "outputFile"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "compare overlapping small reference", 
+            "outputs": [
+                {
+                    "name": "outputFileGff", 
+                    "type": "gff3"
+                }
+            ], 
+            "position": {
+                "left": 1766, 
+                "top": 482
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutputFileGff": {
+                    "action_arguments": {
+                        "newname": "extensions, CDSs and operons (with a nbOverlaps tag)"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "CompareOverlappingSmallRef", 
+            "tool_state": "{\"OptionInclusionQuery\": \"\\\"False\\\"\", \"NotOverlapping\": \"\\\"True\\\"\", \"formatType\": \"{\\\"FormatInputFileName1\\\": \\\"gff3\\\", \\\"inputFileName1\\\": null, \\\"__current_case__\\\": 3}\", \"InvertMatch\": \"\\\"False\\\"\", \"__page__\": 0, \"OptionInclusionRef\": \"\\\"False\\\"\", \"__rerun_remap_job_id__\": null, \"OptionDistance\": \"{\\\"Dist\\\": \\\"No\\\", \\\"__current_case__\\\": 1}\", \"formatType2\": \"{\\\"FormatInputFileName2\\\": \\\"gff3\\\", \\\"inputFileName2\\\": null, \\\"__current_case__\\\": 3}\", \"OptionPcOverlapQuery\": \"{\\\"present\\\": \\\"No\\\", \\\"__current_case__\\\": 1}\", \"OptionMinOverlap\": \"\\\"10\\\"\", \"OptionCollinearOrAntiSens\": \"{\\\"__current_case__\\\": 0, \\\"OptionCA\\\": \\\"Collinear\\\"}\", \"OptionPcOverlapRef\": \"{\\\"present\\\": \\\"No\\\", \\\"__current_case__\\\": 1}\", \"OptionCA\": \"\\\"Collinear\\\"\", \"chromInfo\": \"\\\"/srv/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "d3ed0ee5-10fc-42c9-939c-7480fbd5b869"
+        }, 
+        "20": {
+            "annotation": "Filters antisense RNA candidates based on their number of overlapping reads. Parameter to be set: as_min_reads. Antisense RNAs with a number of reads higher than as_min_reads are selected (suggested value: 22).", 
+            "id": 20, 
+            "input_connections": {
+                "formatType|inputFileName": {
+                    "id": 17, 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool select by tag", 
+                    "name": "OptionMin"
+                }
+            ], 
+            "label": null, 
+            "name": "select by tag", 
+            "outputs": [
+                {
+                    "name": "outputFileGff", 
+                    "type": "gff3"
+                }
+            ], 
+            "position": {
+                "left": 1900.199951171875, 
+                "top": 671.4666748046875
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutputFileGff": {
+                    "action_arguments": {
+                        "newname": "asRNA list modified (filtered on their number of overlapping reads)"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "SelectByTag", 
+            "tool_state": "{\"__page__\": 0, \"formatType\": \"{\\\"inputFileName\\\": null, \\\"__current_case__\\\": 2, \\\"FormatInputFileName\\\": \\\"gff3\\\"}\", \"OptionMin\": \"{\\\"minimum\\\": \\\"Yes\\\", \\\"__current_case__\\\": 0, \\\"min\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}\", \"__rerun_remap_job_id__\": null, \"Tag\": \"\\\"nbElements\\\"\", \"OptionMax\": \"{\\\"maximum\\\": \\\"No\\\", \\\"__current_case__\\\": 1}\", \"OptionValue\": \"{\\\"Value\\\": \\\"No\\\", \\\"__current_case__\\\": 1}\", \"OptionDefault\": \"{\\\"default\\\": \\\"Yes\\\", \\\"defaultValue\\\": \\\"0.0\\\", \\\"__current_case__\\\": 0}\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "a82f4082-6959-4898-92c9-55029cb5ea48"
+        }, 
+        "21": {
+            "annotation": "Filters sRNA candidates based on their number of overlapping reads. Parameter to be set: sRNA_min_reads. Small RNAs with a number of reads higher than sRNA_min_reads are selected (suggested value: 12).", 
+            "id": 21, 
+            "input_connections": {
+                "formatType|inputFileName": {
+                    "id": 18, 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool select by tag", 
+                    "name": "OptionMin"
+                }
+            ], 
+            "label": null, 
+            "name": "select by tag", 
+            "outputs": [
+                {
+                    "name": "outputFileGff", 
+                    "type": "gff3"
+                }
+            ], 
+            "position": {
+                "left": 1911, 
+                "top": 805
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutputFileGff": {
+                    "action_arguments": {
+                        "newname": "sRNA list modified (filtered on their number of overlapping reads)"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "SelectByTag", 
+            "tool_state": "{\"__page__\": 0, \"formatType\": \"{\\\"inputFileName\\\": null, \\\"__current_case__\\\": 2, \\\"FormatInputFileName\\\": \\\"gff3\\\"}\", \"OptionMin\": \"{\\\"minimum\\\": \\\"Yes\\\", \\\"__current_case__\\\": 0, \\\"min\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}\", \"__rerun_remap_job_id__\": null, \"Tag\": \"\\\"nbElements\\\"\", \"OptionMax\": \"{\\\"maximum\\\": \\\"No\\\", \\\"__current_case__\\\": 1}\", \"OptionValue\": \"{\\\"Value\\\": \\\"No\\\", \\\"__current_case__\\\": 1}\", \"chromInfo\": \"\\\"/srv/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"OptionDefault\": \"{\\\"default\\\": \\\"Yes\\\", \\\"defaultValue\\\": \\\"0.0\\\", \\\"__current_case__\\\": 0}\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "434404f9-6286-4c8f-9b4d-1fdd5c949183"
+        }, 
+        "22": {
+            "annotation": "Technical step: tag name change from nbOverlaps to nbOverlappingReads.", 
+            "id": 22, 
+            "input_connections": {
+                "formatType|inputFileName": {
+                    "id": 19, 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "change tag name", 
+            "outputs": [
+                {
+                    "name": "outputFileGff", 
+                    "type": "gff3"
+                }
+            ], 
+            "position": {
+                "left": 2059, 
+                "top": 470
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutputFileGff": {
+                    "action_arguments": {
+                        "newname": "extensions, CDSs and operons (with their number of overlapping reads)"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "changeTagName", 
+            "tool_state": "{\"__page__\": 0, \"formatType\": \"{\\\"inputFileName\\\": null, \\\"__current_case__\\\": 2, \\\"FormatInputFileName\\\": \\\"gff3\\\"}\", \"name\": \"\\\"nbOverlappingReads\\\"\", \"__rerun_remap_job_id__\": null, \"Tag\": \"\\\"nbOverlaps\\\"\", \"chromInfo\": \"\\\"/srv/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "c7464cbf-13b8-441b-84e7-008663cb8cbf"
+        }, 
+        "23": {
+            "annotation": "Clusters proximal antisense RNAs in the same direction. Parameter to be set: RNA_merge. Antisense RNAs located less than RNA_merge apart are merged (suggestion: 50).", 
+            "id": 23, 
+            "input_connections": {
+                "formatType|inputFileName": {
+                    "id": 20, 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool clusterize", 
+                    "name": "distance"
+                }
+            ], 
+            "label": null, 
+            "name": "clusterize", 
+            "outputs": [
+                {
+                    "name": "outputFileGff", 
+                    "type": "gff3"
+                }
+            ], 
+            "position": {
+                "left": 2076.38330078125, 
+                "top": 699.816650390625
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutputFileGff": {
+                    "action_arguments": {
+                        "newname": "asRNA list modified (asRNA clusters)"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "MergingDataClusterize", 
+            "tool_state": "{\"normalize\": \"\\\"False\\\"\", \"__page__\": 0, \"formatType\": \"{\\\"inputFileName\\\": null, \\\"__current_case__\\\": 3, \\\"FormatInputFileName\\\": \\\"gff3\\\"}\", \"distance\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"colinear\": \"\\\"True\\\"\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "9017a7fd-50b9-432d-a68d-a72c5a04c21a"
+        }, 
+        "24": {
+            "annotation": "Clusters proximal small RNAs in the same direction. Parameter to be set: RNA_merge. Small RNAs located less than RNA_merge apart are merged (suggestion: 50).", 
+            "id": 24, 
+            "input_connections": {
+                "formatType|inputFileName": {
+                    "id": 21, 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool clusterize", 
+                    "name": "distance"
+                }
+            ], 
+            "label": null, 
+            "name": "clusterize", 
+            "outputs": [
+                {
+                    "name": "outputFileGff", 
+                    "type": "gff3"
+                }
+            ], 
+            "position": {
+                "left": 2092, 
+                "top": 833
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutputFileGff": {
+                    "action_arguments": {
+                        "newname": "sRNA list modified (sRNA clusters)"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "MergingDataClusterize", 
+            "tool_state": "{\"normalize\": \"\\\"False\\\"\", \"__page__\": 0, \"formatType\": \"{\\\"inputFileName\\\": null, \\\"__current_case__\\\": 3, \\\"FormatInputFileName\\\": \\\"gff3\\\"}\", \"distance\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"colinear\": \"\\\"True\\\"\", \"chromInfo\": \"\\\"/srv/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "16f6b7d2-0b95-4e11-a250-f38a7746776d"
+        }, 
+        "25": {
+            "annotation": "Technical step:  extraction of 3 prime extension", 
+            "id": 25, 
+            "input_connections": {
+                "input": {
+                    "id": 22, 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Filter", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 2251, 
+                "top": 385
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "3 prime extension"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "Filter1", 
+            "tool_state": "{\"input\": \"null\", \"__rerun_remap_job_id__\": null, \"header_lines\": \"\\\"0\\\"\", \"cond\": \"\\\"c3=='utr3'\\\"\", \"__page__\": 0}", 
+            "tool_version": "1.1.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "812fe9a2-f0a1-4d75-8877-ef1640739278"
+        }, 
+        "26": {
+            "annotation": "Technical step:  extraction of 5 prime extension", 
+            "id": 26, 
+            "input_connections": {
+                "input": {
+                    "id": 22, 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Filter", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 2258, 
+                "top": 498
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "5 prime extension"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "Filter1", 
+            "tool_state": "{\"input\": \"null\", \"__rerun_remap_job_id__\": null, \"header_lines\": \"\\\"0\\\"\", \"cond\": \"\\\"c3=='utr5'\\\"\", \"__page__\": 0}", 
+            "tool_version": "1.1.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "056ac09c-92cd-4e8a-b97a-c8aebcb309f6"
+        }, 
+        "27": {
+            "annotation": "Technical step: operon spacer extraction", 
+            "id": 27, 
+            "input_connections": {
+                "input": {
+                    "id": 22, 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Filter", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 2258, 
+                "top": 598
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "operon"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "Filter1", 
+            "tool_state": "{\"input\": \"null\", \"__rerun_remap_job_id__\": null, \"header_lines\": \"\\\"0\\\"\", \"cond\": \"\\\"c3=='operon'\\\"\", \"__page__\": 0}", 
+            "tool_version": "1.1.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "70225015-d9a2-4e6f-beef-8592d255b545"
+        }, 
+        "28": {
+            "annotation": "Technical step: suppresses unwanted \"exon\" features created by the previous clustering step.", 
+            "id": 28, 
+            "input_connections": {
+                "formatType|inputFileName": {
+                    "id": 23, 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "remove introns", 
+            "outputs": [
+                {
+                    "name": "outputFile", 
+                    "type": "gff3"
+                }
+            ], 
+            "position": {
+                "left": 2247, 
+                "top": 727
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutputFile": {
+                    "action_arguments": {
+                        "newname": "asRNA list modified (without \"exon\" lines)"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "outputFile"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "removeIntrons", 
+            "tool_state": "{\"__page__\": 0, \"__rerun_remap_job_id__\": null, \"formatType\": \"{\\\"inputFileName\\\": null, \\\"__current_case__\\\": 3, \\\"FormatInputFileName\\\": \\\"gff3\\\"}\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "cf8f121f-eab6-424d-b8ac-9a809d69216e"
+        }, 
+        "29": {
+            "annotation": "Technical step: suppresses unwanted \"exon\" features created by the previous clustering step.", 
+            "id": 29, 
+            "input_connections": {
+                "formatType|inputFileName": {
+                    "id": 24, 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "remove introns", 
+            "outputs": [
+                {
+                    "name": "outputFile", 
+                    "type": "gff3"
+                }
+            ], 
+            "position": {
+                "left": 2269, 
+                "top": 860
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutputFile": {
+                    "action_arguments": {
+                        "newname": "sRNA list modified (without \"exon\" lines)"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "outputFile"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "removeIntrons", 
+            "tool_state": "{\"__page__\": 0, \"__rerun_remap_job_id__\": null, \"formatType\": \"{\\\"inputFileName\\\": null, \\\"__current_case__\\\": 3, \\\"FormatInputFileName\\\": \\\"gff3\\\"}\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "67c011f9-98ee-4b50-9a82-3003223ab412"
+        }, 
+        "30": {
+            "annotation": "Technical step: change feature name from utr3 to 3_extension", 
+            "id": 30, 
+            "input_connections": {
+                "inputFile": {
+                    "id": 25, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "change GFF features", 
+            "outputs": [
+                {
+                    "name": "outputFile", 
+                    "type": "gff"
+                }
+            ], 
+            "position": {
+                "left": 2440, 
+                "top": 413
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutputFile": {
+                    "action_arguments": {
+                        "newname": "3_extension list"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "outputFile"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "changeGffFeatures", 
+            "tool_state": "{\"__page__\": 0, \"inputFeature\": \"\\\"utr3\\\"\", \"__rerun_remap_job_id__\": null, \"outputFeature\": \"\\\"3_extension\\\"\", \"inputFile\": \"null\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "71c824ce-778d-4fa2-9f28-a4cd06681d9a"
+        }, 
+        "31": {
+            "annotation": "Technical step: change feature name from utr5 to 5_extension", 
+            "id": 31, 
+            "input_connections": {
+                "inputFile": {
+                    "id": 26, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "change GFF features", 
+            "outputs": [
+                {
+                    "name": "outputFile", 
+                    "type": "gff"
+                }
+            ], 
+            "position": {
+                "left": 2440, 
+                "top": 527
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutputFile": {
+                    "action_arguments": {
+                        "newname": "5 prime extension"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "outputFile"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "changeGffFeatures", 
+            "tool_state": "{\"__page__\": 0, \"inputFeature\": \"\\\"utr5\\\"\", \"__rerun_remap_job_id__\": null, \"outputFeature\": \"\\\"5_extension\\\"\", \"inputFile\": \"null\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "c42da5d5-cc1e-4691-8998-6c21ad5d33e8"
+        }, 
+        "32": {
+            "annotation": "", 
+            "id": 32, 
+            "input_connections": {
+                "inputFile": {
+                    "id": 27, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "change GFF features", 
+            "outputs": [
+                {
+                    "name": "outputFile", 
+                    "type": "gff"
+                }
+            ], 
+            "position": {
+                "left": 2439, 
+                "top": 628
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutputFile": {
+                    "action_arguments": {
+                        "newname": "operon_spacer list"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "outputFile"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "changeGffFeatures", 
+            "tool_state": "{\"__page__\": 0, \"inputFeature\": \"\\\"operon\\\"\", \"__rerun_remap_job_id__\": null, \"outputFeature\": \"\\\"operon_spacer\\\"\", \"inputFile\": \"null\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "278dea33-942c-4416-ae48-d933efe62113"
+        }, 
+        "33": {
+            "annotation": "Technical step: tag name change from nbElements to nbOverlappingReads", 
+            "id": 33, 
+            "input_connections": {
+                "formatType|inputFileName": {
+                    "id": 28, 
+                    "output_name": "outputFile"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "change tag name", 
+            "outputs": [
+                {
+                    "name": "outputFileGff", 
+                    "type": "gff3"
+                }
+            ], 
+            "position": {
+                "left": 2429.38330078125, 
+                "top": 755.816650390625
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutputFileGff": {
+                    "action_arguments": {
+                        "newname": "asRNA list modified (nbOverlappingReads)"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "changeTagName", 
+            "tool_state": "{\"__page__\": 0, \"__rerun_remap_job_id__\": null, \"Tag\": \"\\\"nbElements\\\"\", \"formatType\": \"{\\\"inputFileName\\\": null, \\\"__current_case__\\\": 2, \\\"FormatInputFileName\\\": \\\"gff3\\\"}\", \"name\": \"\\\"nbOverlappingReads\\\"\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "7edc7168-5351-4401-8a2c-2fb5eb357577"
+        }, 
+        "34": {
+            "annotation": "Technical step: tag name change from nbElements to nbOverlappingReads", 
+            "id": 34, 
+            "input_connections": {
+                "formatType|inputFileName": {
+                    "id": 29, 
+                    "output_name": "outputFile"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "change tag name", 
+            "outputs": [
+                {
+                    "name": "outputFileGff", 
+                    "type": "gff3"
+                }
+            ], 
+            "position": {
+                "left": 2449, 
+                "top": 888
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutputFileGff": {
+                    "action_arguments": {
+                        "newname": "sRNA list modified (nbOverlappingReads)"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "changeTagName", 
+            "tool_state": "{\"__page__\": 0, \"formatType\": \"{\\\"inputFileName\\\": null, \\\"__current_case__\\\": 2, \\\"FormatInputFileName\\\": \\\"gff3\\\"}\", \"name\": \"\\\"nbOverlappingReads\\\"\", \"__rerun_remap_job_id__\": null, \"Tag\": \"\\\"nbElements\\\"\", \"chromInfo\": \"\\\"/srv/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "f66079c2-6d20-4362-87e3-eeffc5dbf33e"
+        }, 
+        "35": {
+            "annotation": "Filters 5' extensions based on their size. Parameter to be set: 5_extension_min_size. 5' extensions larger than 5_extension_min_size are selected (suggestion value: 50).", 
+            "id": 35, 
+            "input_connections": {
+                "formatType|inputFileName": {
+                    "id": 31, 
+                    "output_name": "outputFile"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool restrict from size", 
+                    "name": "OptionMin"
+                }
+            ], 
+            "label": null, 
+            "name": "restrict from size", 
+            "outputs": [
+                {
+                    "name": "outputFileGff", 
+                    "type": "gff3"
+                }
+            ], 
+            "position": {
+                "left": 2622, 
+                "top": 555
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutputFileGff": {
+                    "action_arguments": {
+                        "newname": "long 5_extensions list modified (filtered on their size)"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "restrictFromSize", 
+            "tool_state": "{\"OptionMin\": \"{\\\"minimum\\\": \\\"Yes\\\", \\\"__current_case__\\\": 0, \\\"min\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}\", \"__page__\": 0, \"__rerun_remap_job_id__\": null, \"formatType\": \"{\\\"inputFileName\\\": null, \\\"__current_case__\\\": 2, \\\"FormatInputFileName\\\": \\\"gff\\\"}\", \"OptionMax\": \"{\\\"maximum\\\": \\\"No\\\", \\\"__current_case__\\\": 1}\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "ae211633-b80a-4b77-a5bd-f4377ac1c26a"
+        }, 
+        "36": {
+            "annotation": "Technical step: feature name change from transcript to asRNA", 
+            "id": 36, 
+            "input_connections": {
+                "inputFile": {
+                    "id": 33, 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "change GFF features", 
+            "outputs": [
+                {
+                    "name": "outputFile", 
+                    "type": "gff"
+                }
+            ], 
+            "position": {
+                "left": 2603, 
+                "top": 785.0333251953125
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutputFile": {
+                    "action_arguments": {
+                        "newname": "asRNA list modified (feature asRNA)"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "outputFile"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "changeGffFeatures", 
+            "tool_state": "{\"__page__\": 0, \"inputFeature\": \"\\\"transcript\\\"\", \"__rerun_remap_job_id__\": null, \"outputFeature\": \"\\\"asRNA\\\"\", \"inputFile\": \"null\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "a4a0463a-b98f-4f9c-af47-faf9b9b3adc4"
+        }, 
+        "37": {
+            "annotation": "Technical step: feature name change from transcript to asRNA", 
+            "id": 37, 
+            "input_connections": {
+                "inputFile": {
+                    "id": 34, 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "change GFF features", 
+            "outputs": [
+                {
+                    "name": "outputFile", 
+                    "type": "gff"
+                }
+            ], 
+            "position": {
+                "left": 2626, 
+                "top": 917.0333251953125
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutputFile": {
+                    "action_arguments": {
+                        "newname": "sRNA list modified (feature sRNA)"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "outputFile"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "changeGffFeatures", 
+            "tool_state": "{\"__page__\": 0, \"inputFeature\": \"\\\"transcript\\\"\", \"__rerun_remap_job_id__\": null, \"outputFeature\": \"\\\"sRNA\\\"\", \"inputFile\": \"null\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "1d58607e-9ffc-4d53-a546-c0a683e0e574"
+        }, 
+        "38": {
+            "annotation": "Filters long 5 prime extension candidates based on their number of overlapping reads. Parameter to be set: 5_UTR_min_reads. Long 5 prime extensions with a number of reads higher than 5UTR_min_reads are selected (suggested value: 10).", 
+            "id": 38, 
+            "input_connections": {
+                "formatType|inputFileName": {
+                    "id": 35, 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool select by tag", 
+                    "name": "OptionMin"
+                }
+            ], 
+            "label": null, 
+            "name": "select by tag", 
+            "outputs": [
+                {
+                    "name": "outputFileGff", 
+                    "type": "gff3"
+                }
+            ], 
+            "position": {
+                "left": 2797, 
+                "top": 583
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutputFileGff": {
+                    "action_arguments": {
+                        "newname": "long 5_extensions list modified (filtered on their number of overlapping reads)"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "SelectByTag", 
+            "tool_state": "{\"__page__\": 0, \"formatType\": \"{\\\"inputFileName\\\": null, \\\"__current_case__\\\": 0, \\\"FormatInputFileName\\\": \\\"gff\\\"}\", \"OptionMin\": \"{\\\"minimum\\\": \\\"Yes\\\", \\\"__current_case__\\\": 0, \\\"min\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}\", \"__rerun_remap_job_id__\": null, \"Tag\": \"\\\"nbOverlappingReads\\\"\", \"OptionMax\": \"{\\\"maximum\\\": \\\"No\\\", \\\"__current_case__\\\": 1}\", \"OptionValue\": \"{\\\"Value\\\": \\\"No\\\", \\\"__current_case__\\\": 1}\", \"OptionDefault\": \"{\\\"default\\\": \\\"No\\\", \\\"__current_case__\\\": 1}\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "8c1d96c7-cb65-42d4-a448-d18d20796fe2"
+        }, 
+        "39": {
+            "annotation": "Uses an RGB color tag for visualization of antisense RNAs in the Artemis environment.", 
+            "id": 39, 
+            "input_connections": {
+                "referenciesFile": {
+                    "id": 36, 
+                    "output_name": "outputFile"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "colorGff", 
+            "outputs": [
+                {
+                    "name": "outputFile", 
+                    "type": "gff"
+                }
+            ], 
+            "position": {
+                "left": 2779.38330078125, 
+                "top": 812.816650390625
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutputFile": {
+                    "action_arguments": {
+                        "newname": "asRNA list"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "outputFile"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/clairetn/detrprok_scripts/colorGff/1.0.0", 
+            "tool_state": "{\"__page__\": 0, \"__rerun_remap_job_id__\": null, \"RGBcolor\": \"\\\"147 112 219\\\"\", \"referenciesFile\": \"null\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "925d1cc1-e364-4fcb-840f-d1c1b521ec03"
+        }, 
+        "40": {
+            "annotation": "Uses an RGB color tag for visualization of small RNAs in the Artemis environment.", 
+            "id": 40, 
+            "input_connections": {
+                "referenciesFile": {
+                    "id": 37, 
+                    "output_name": "outputFile"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "colorGff", 
+            "outputs": [
+                {
+                    "name": "outputFile", 
+                    "type": "gff"
+                }
+            ], 
+            "position": {
+                "left": 2809, 
+                "top": 944
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutputFile": {
+                    "action_arguments": {
+                        "newname": "sRNA list"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "outputFile"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/clairetn/detrprok_scripts/colorGff/1.0.0", 
+            "tool_state": "{\"__page__\": 0, \"__rerun_remap_job_id__\": null, \"RGBcolor\": \"\\\"250 128 114\\\"\", \"referenciesFile\": \"null\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "d75da6e5-de44-45e9-927d-26c0d5ba0ffe"
+        }, 
+        "41": {
+            "annotation": "Technical step: change feature name from 5_extension to utr5", 
+            "id": 41, 
+            "input_connections": {
+                "inputFile": {
+                    "id": 38, 
+                    "output_name": "outputFileGff"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "change GFF features", 
+            "outputs": [
+                {
+                    "name": "outputFile", 
+                    "type": "gff"
+                }
+            ], 
+            "position": {
+                "left": 2974, 
+                "top": 612
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutputFile": {
+                    "action_arguments": {
+                        "newname": "long 5_extensions list modified (utr5)"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "outputFile"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "changeGffFeatures", 
+            "tool_state": "{\"__page__\": 0, \"inputFeature\": \"\\\"5_extension\\\"\", \"__rerun_remap_job_id__\": null, \"outputFeature\": \"\\\"utr5\\\"\", \"inputFile\": \"null\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "b5cdea2c-ec8b-48a0-bd81-dec757704a9e"
+        }, 
+        "42": {
+            "annotation": "Uses an RGB color tag for visualization of long 5'UTR in the Artemis environment.", 
+            "id": 42, 
+            "input_connections": {
+                "referenciesFile": {
+                    "id": 41, 
+                    "output_name": "outputFile"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "colorGff", 
+            "outputs": [
+                {
+                    "name": "outputFile", 
+                    "type": "gff"
+                }
+            ], 
+            "position": {
+                "left": 3158, 
+                "top": 641
+            }, 
+            "post_job_actions": {
+                "RenameDatasetActionoutputFile": {
+                    "action_arguments": {
+                        "newname": "long 5_UTR list"
+                    }, 
+                    "action_type": "RenameDatasetAction", 
+                    "output_name": "outputFile"
+                }
+            }, 
+            "tool_errors": null, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/clairetn/detrprok_scripts/colorGff/1.0.0", 
+            "tool_state": "{\"__page__\": 0, \"__rerun_remap_job_id__\": null, \"RGBcolor\": \"\\\"250 105 180\\\"\", \"referenciesFile\": \"null\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": [], 
+            "uuid": "78bb45b9-1d16-498a-bea8-40bf3447a4bd"
+        }
+    }, 
+    "uuid": "d190d09c-2654-4217-884e-a0ef7dbe05fc"
+}

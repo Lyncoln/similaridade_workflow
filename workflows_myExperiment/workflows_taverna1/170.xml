@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<s:scufl xmlns:s="http://org.embl.ebi.escience/xscufl/0.1alpha" version="0.2" log="0">
+  <s:workflowdescription lsid="urn:lsid:net.sf.taverna:wfDefinition:509c7913-1abd-4916-897d-67dffabc3177" author="Andrea Wiggins, James Howison &amp; Kevin Crowston" title="FLOSS Communication Centralization Plot, Unit Weighted">The analysis in this workflow represents the basis of the analysis in our paper, Social dynamics of FLOSS team communication across channels. This workflow uses WSDL components to select periodized data from the FLOSSmole database and generate sociomatrices. The workflow parses the threaded list structure into a communication network based on reply-to relationships.  In the analysis process, an unit weighting is applied to the edges. The weighted sociomatrices are then dichotomized according to a threshold, and their centralities are calculated using R’s sna package, and plotted in a time series. The final output demonstrates communication centralization trends over time in a FLOSS project.
+
+The analysis workflow allows users to set parameter values for the size of the sliding window, the date ranges covered, and the communication venues analyzed.  Data for the analysis in the paper examined dynamics in different communication channels; the data sets include up to 90 periods (with a 90-day sliding window) and 10K’s of email messages or forum posts. Date periods are currently only in months, and exception handling for empty periods is implemented both in the WSDL components and the RShell scripts. There are a couple of inelegant solutions involving temporary output files, which are configured based on a standard Mac file structure. Future development effort could focus on solving these issues and on optimizing performance.</s:workflowdescription>
+  <s:processor name="step" boring="true">
+    <s:description>Length of time period for each snapshot in the analysis; currently only a 30-day month step is supported.</s:description>
+    <s:stringconstant>month</s:stringconstant>
+  </s:processor>
+  <s:processor name="delist_dates">
+    <s:description>Shim to change from a list object into a text object.</s:description>
+    <s:defaults>
+      <s:default name="seperator" />
+    </s:defaults>
+    <s:local>org.embl.ebi.escience.scuflworkers.java.StringListMerge</s:local>
+  </s:processor>
+  <s:processor name="Unit_weight">
+    <s:description>R processor to assign a unit edge weighting to each event.</s:description>
+    <s:rshell s:hostname="localhost" s:port="6311" s:username="" s:password="" s:keepSessionAlive="false">
+      # A. Wiggins 11/6/2007
+# Unit weighting to produce a matrix where every event has equal weight
+weight &lt;- 1
+      <s:rshellInputPortList>
+        <s:rshellInputPort s:syntacticType="'text/plain'" s:symanticType="STRING">end_date</s:rshellInputPort>
+      </s:rshellInputPortList>
+      <s:rshellOutputPortList>
+        <s:rshellOutputPort s:syntacticType="'text/plain'" s:symanticType="DOUBLE">weight</s:rshellOutputPort>
+      </s:rshellOutputPortList>
+    </s:rshell>
+  </s:processor>
+  <s:processor name="delist_from">
+    <s:description>Shim to change from a list object into a text object.</s:description>
+    <s:defaults>
+      <s:default name="seperator" />
+    </s:defaults>
+    <s:local>org.embl.ebi.escience.scuflworkers.java.StringListMerge</s:local>
+  </s:processor>
+  <s:processor name="Centralization_Plot">
+    <s:description>Creates a time series plot of network centralizations, inserting the project names and some descriptive statistics into the labeling.</s:description>
+    <s:rshell s:hostname="localhost" s:port="6311" s:username="" s:password="" s:keepSessionAlive="false">
+      # takes the dates and centralizations for plotting
+library(Hmisc)
+#library(tseries)
+library(its)
+
+png(g, width=800);
+
+myDates &lt;-  as.POSIXct( strptime(date_list, # List of dates, each is a string
+                              format="%Y-%m-%d %H:%M:%S" )) # params for each application of the functio
+
+startLT &lt;- as.POSIXlt(myDates[1])
+
+startArray &lt;- c(startLT$year + 1900, startLT$mon + 1)
+
+seriesITS &lt;- its(as.matrix(cent_list), dates=myDates, start=startArray)
+
+# calculate mean and standard deviation of the centralizations ,rounded to two decimal places
+cent_mean &lt;- round(mean(cent_list), digits=2)
+cent_stdev &lt;- round(sd(cent_list), digits=2)
+# include the project name in the main title
+main_title &lt;- paste("Network centralization for", as.character(project_name), "over time")
+# put the mean &amp; standard deviation of the centralizations in the subtitle
+mean_stdev &lt;- paste("Mean =", cent_mean, ", Standard Deviation =", cent_stdev, "Unit edge weighting")
+# plot the irregular time series and add in the nice labels.
+g &lt;- plot(seriesITS, ylab="Network Centralization", type="o", pch=19, col="blue", yrange=c(0,1), format="%m-%Y")
+title(main=main_title, sub=mean_stdev, font.main=2, font.sub=1, cex.sub=1.2, cex.main=1.3)
+
+centralizations &lt;- paste(myDates,cent_list,sep=",",collapse="\n")
+
+dev.off();
+      <s:rshellInputPortList>
+        <s:rshellInputPort s:syntacticType="l('text/plain')" s:symanticType="STRING_LIST">date_list</s:rshellInputPort>
+        <s:rshellInputPort s:syntacticType="l('text/plain')" s:symanticType="DOUBLE_LIST">cent_list</s:rshellInputPort>
+        <s:rshellInputPort s:syntacticType="'text/plain'" s:symanticType="STRING">project_name</s:rshellInputPort>
+      </s:rshellInputPortList>
+      <s:rshellOutputPortList>
+        <s:rshellOutputPort s:syntacticType="'image/png'" s:symanticType="PNG_FILE">g</s:rshellOutputPort>
+        <s:rshellOutputPort s:syntacticType="'text/plain'" s:symanticType="STRING">centralizations</s:rshellOutputPort>
+      </s:rshellOutputPortList>
+    </s:rshell>
+  </s:processor>
+  <s:processor name="Split_to_single_events">
+    <s:description>Splits the list of events returned by the web service into a single event.</s:description>
+    <s:defaults>
+      <s:default name="xpath">//item</s:default>
+    </s:defaults>
+    <s:local>net.sourceforge.taverna.scuflworkers.xml.XPathTextWorker</s:local>
+  </s:processor>
+  <s:processor name="Calculate_Centralization">
+    <s:rshell s:hostname="localhost" s:port="6311" s:username="" s:password="" s:keepSessionAlive="false">
+      #Andrea Wiggins 12/13/07
+#updated to remove ~/temp.data file 3/6/08
+
+# Check for an empty matrix. (James Howison; updated 3/6/08 A. Wiggins)
+if (filecontents == "EMPTY\n0*") {
+  output &lt;- -1
+} else { 
+  library(sna)
+  
+#procedure to read in sociomatrix. (Kevin Crowston)
+dataframe &lt;- read.csv(textConnection(filecontents))
+data &lt;- as.matrix(dataframe)
+  
+  #calculate centralization (dichotomized)
+  sociomatrix&lt;-event2dichot(data,method="quantile",thresh=0.8)
+  cent &lt;- (centralization(sociomatrix,degree,cmode="outdegree", diag=TRUE,normalize=TRUE))
+  #calculate outdegree centralization (undichotomized)
+  #cent &lt;- (centralization(data,degree,cmode="outdegree", diag=TRUE,normalize=TRUE))
+
+  #logical test to assure that 0 will be output instead of "NaN"
+  if (is.na(cent)) {cent &lt;- 0} else {cent}
+  output &lt;- cent
+}
+      <s:rshellInputPortList>
+        <s:rshellInputPort s:syntacticType="'text/plain'" s:symanticType="STRING">filecontents</s:rshellInputPort>
+      </s:rshellInputPortList>
+      <s:rshellOutputPortList>
+        <s:rshellOutputPort s:syntacticType="'text/plain'" s:symanticType="DOUBLE">output</s:rshellOutputPort>
+      </s:rshellOutputPortList>
+    </s:rshell>
+  </s:processor>
+  <s:processor name="delist_to">
+    <s:description>Shim to change from a list object into a text object.</s:description>
+    <s:defaults>
+      <s:default name="seperator" />
+    </s:defaults>
+    <s:local>org.embl.ebi.escience.scuflworkers.java.StringListMerge</s:local>
+  </s:processor>
+  <s:processor name="Extract_period_end" boring="true">
+    <s:description>Extracts the period end date for the event.</s:description>
+    <s:defaults>
+      <s:default name="xpath">//period_end</s:default>
+    </s:defaults>
+    <s:local>net.sourceforge.taverna.scuflworkers.xml.XPathTextWorker</s:local>
+  </s:processor>
+  <s:processor name="delist_period_end">
+    <s:description>Shim to change from a list object into a text object.</s:description>
+    <s:defaults>
+      <s:default name="seperator" />
+    </s:defaults>
+    <s:local>org.embl.ebi.escience.scuflworkers.java.StringListMerge</s:local>
+  </s:processor>
+  <s:processor name="Remove_duplicate_strings">
+    <s:description>Shim to remove duplicate values.</s:description>
+    <s:local>org.embl.ebi.escience.scuflworkers.java.StringStripDuplicates</s:local>
+  </s:processor>
+  <s:processor name="Extract_From" boring="true">
+    <s:description>Shim to extract the sender for the event.</s:description>
+    <s:defaults>
+      <s:default name="xpath">//from</s:default>
+    </s:defaults>
+    <s:local>net.sourceforge.taverna.scuflworkers.xml.XPathTextWorker</s:local>
+  </s:processor>
+  <s:processor name="MergeProjectNames">
+    <s:description>Shim to concatenate the project names for insertion into the plot labeling.</s:description>
+    <s:defaults>
+      <s:default name="seperator">+</s:default>
+    </s:defaults>
+    <s:local>org.embl.ebi.escience.scuflworkers.java.StringListMerge</s:local>
+  </s:processor>
+  <s:processor name="GetPeriods">
+    <s:description>Web service that calculates the period beginning and end dates taking into account the sliding window.</s:description>
+    <s:arbitrarywsdl>
+      <s:wsdl>http://flosseb.floss.syr.edu/taverna/wsdl</s:wsdl>
+      <s:operation>GetPeriods</s:operation>
+    </s:arbitrarywsdl>
+  </s:processor>
+  <s:processor name="MatrixBuilderR">
+    <s:description>Web service that creates a sociomatrix appropriate for analysis in R from a pairlist and unit edge weightings.</s:description>
+    <s:arbitrarywsdl>
+      <s:wsdl>http://flosseb.floss.syr.edu/taverna/wsdl</s:wsdl>
+      <s:operation>MatrixBuilderR</s:operation>
+    </s:arbitrarywsdl>
+    <s:iterationstrategy>
+      <i:dot xmlns:i="http://org.embl.ebi.escience/xscufliteration/0.1beta10">
+        <i:iterator name="weight_list" />
+        <i:iterator name="to_list" />
+        <i:iterator name="from_list" />
+      </i:dot>
+    </s:iterationstrategy>
+  </s:processor>
+  <s:processor name="split_periods">
+    <s:description>Shim to split the text returned from the web service into a list of period dates.</s:description>
+    <s:local>
+      org.embl.ebi.escience.scuflworkers.java.XMLOutputSplitter
+      <s:extensions>
+        <s:arraytype optional="false" unbounded="false" wrapped="false" typename="PeriodXMLArray" name="return" qname="{urn:ActionWebService}PeriodXMLArray">
+          <s:elementtype>
+            <s:complextype optional="false" unbounded="false" typename="PeriodXML" name="" qname="{urn:ActionWebService}PeriodXML">
+              <s:elements>
+                <s:basetype optional="false" unbounded="false" typename="string" name="start_date" qname="PeriodXML&gt;start_date" />
+                <s:basetype optional="false" unbounded="false" typename="string" name="end_date" qname="PeriodXML&gt;end_date" />
+              </s:elements>
+            </s:complextype>
+          </s:elementtype>
+        </s:arraytype>
+      </s:extensions>
+    </s:local>
+  </s:processor>
+  <s:processor name="EventsForProjectsInPeriod">
+    <s:description>Web service that extracts the events for the projects and time frame from the FLOSSEventBrowser database.</s:description>
+    <s:defaults>
+      <s:default name="merge_anon">true</s:default>
+    </s:defaults>
+    <s:arbitrarywsdl>
+      <s:wsdl>http://flosseb.floss.syr.edu/taverna/wsdl</s:wsdl>
+      <s:operation>EventsForProjectsInPeriod</s:operation>
+    </s:arbitrarywsdl>
+  </s:processor>
+  <s:processor name="Extract_To" boring="true">
+    <s:description>Shim that extracts the recipient for the event.</s:description>
+    <s:defaults>
+      <s:default name="xpath">//to</s:default>
+    </s:defaults>
+    <s:local>net.sourceforge.taverna.scuflworkers.xml.XPathTextWorker</s:local>
+  </s:processor>
+  <s:link source="End_Date" sink="GetPeriods:end_date" />
+  <s:link source="Calculate_Centralization:output" sink="Centralization_Plot:cent_list" />
+  <s:link source="Extract_From:nodelist" sink="delist_from:stringlist" />
+  <s:link source="Extract_To:nodelist" sink="delist_to:stringlist" />
+  <s:link source="Extract_period_end:nodelist" sink="delist_period_end:stringlist" />
+  <s:link source="GetPeriods:return" sink="split_periods:input" />
+  <s:link source="MatrixBuilderR:return" sink="Calculate_Centralization:filecontents" />
+  <s:link source="Project_list" sink="EventsForProjectsInPeriod:project_list" />
+  <s:link source="Remove_duplicate_strings:strippedlist" sink="delist_dates:stringlist" />
+  <s:link source="Split_to_single_events:nodelistAsXML" sink="Extract_From:xml-text" />
+  <s:link source="Split_to_single_events:nodelistAsXML" sink="Extract_To:xml-text" />
+  <s:link source="Split_to_single_events:nodelistAsXML" sink="Extract_period_end:xml-text" />
+  <s:link source="Start_Date" sink="GetPeriods:start_date" />
+  <s:link source="Unit_weight:weight" sink="MatrixBuilderR:weight_list" />
+  <s:link source="delist_dates:concatenated" sink="Centralization_Plot:date_list" />
+  <s:link source="delist_from:concatenated" sink="MatrixBuilderR:from_list" />
+  <s:link source="delist_period_end:concatenated" sink="Remove_duplicate_strings:stringlist" />
+  <s:link source="delist_period_end:concatenated" sink="Unit_weight:end_date" />
+  <s:link source="delist_to:concatenated" sink="MatrixBuilderR:to_list" />
+  <s:link source="sliding_window" sink="GetPeriods:extend_window_back_by" />
+  <s:link source="EventsForProjectsInPeriod:return" sink="Split_to_single_events:xml-text" />
+  <s:link source="Project_list" sink="MergeProjectNames:stringlist" />
+  <s:link source="MergeProjectNames:concatenated" sink="Centralization_Plot:project_name" />
+  <s:link source="split_periods:return" sink="EventsForProjectsInPeriod:period_xml" />
+  <s:link source="step:value" sink="GetPeriods:step" />
+  <s:link source="Centralization_Plot:centralizations" sink="centralizations" />
+  <s:link source="Centralization_Plot:g" sink="PNGoutput" />
+  <s:source name="Start_Date">
+    <s:metadata>
+      <s:description>Start date for the time period of analysis. Input format should be yyyy-mm-dd</s:description>
+    </s:metadata>
+  </s:source>
+  <s:source name="End_Date">
+    <s:metadata>
+      <s:description>End date for the time period of analysis. Input format should be yyyy-mm-dd.</s:description>
+    </s:metadata>
+  </s:source>
+  <s:source name="Project_list">
+    <s:metadata>
+      <s:description>Listing multiple project names for analysis is additive.
+
+Project names with available data as of 2/15/08 include: 
+fire-tracker-feature-requests
+fire-tracker-translations
+fire-talk
+fire-core
+fire-development
+gaim-cabal
+gaim-devel
+gaim-forum-users-helping-users
+gaim-tracker-plugins
+gaim-tracker-patches
+gaim-tracker-smileys
+gaim-tracker-rej-patches</s:description>
+    </s:metadata>
+  </s:source>
+  <s:source name="sliding_window">
+    <s:metadata>
+      <s:description>Number of time periods to extend the analysis period backward: 0 for no sliding window, 1 for a 60-day sliding window, 2 for a 90-day sliding window, etc.</s:description>
+    </s:metadata>
+  </s:source>
+  <s:sink name="PNGoutput">
+    <s:metadata>
+      <s:description>Time series plot of network centralizations with measures of central tendency included in the graph labels.</s:description>
+    </s:metadata>
+  </s:sink>
+  <s:sink name="centralizations">
+    <s:metadata>
+      <s:description>Text list of dates and centralizations for analysis in other applications.</s:description>
+    </s:metadata>
+  </s:sink>
+</s:scufl>
+

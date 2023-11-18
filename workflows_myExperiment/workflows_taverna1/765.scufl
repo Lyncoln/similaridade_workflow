@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<s:scufl xmlns:s="http://org.embl.ebi.escience/xscufl/0.1alpha" version="0.2" log="0">
+  <s:workflowdescription lsid="urn:lsid:net.sf.taverna:wfDefinition:f95caf7b-300d-4e75-8dc9-b41f963ce251" author="" title="real_cardiac" />
+  <s:processor name="config" boring="true">
+    <s:stringconstant>lfn://lfc-biomed.in2p3.fr/grid/biomed/gwendia/cardiac/gasw/Segmentation.xml</s:stringconstant>
+  </s:processor>
+  <s:processor name="mhd2qc_description" boring="true">
+    <s:stringconstant>lfn://lfc-biomed.in2p3.fr/grid/biomed/gwendia/cardiac/gasw/mhd2qc.xml</s:stringconstant>
+  </s:processor>
+  <s:processor name="init_desc" boring="true">
+    <s:stringconstant>lfn://lfc-biomed.in2p3.fr/grid/biomed/gwendia/cardiac/gasw/mhd2qcAndCannyAndDistMapAndInit_light.xml</s:stringconstant>
+  </s:processor>
+  <s:processor name="mhd2qc" workers="10">
+    <s:description>Service definition of function ns__GASWexecution</s:description>
+    <s:arbitrarywsdl>
+      <s:wsdl>http://egee1.unice.fr/wsdl/gasw_service.wsdl</s:wsdl>
+      <s:operation>GASWexecution</s:operation>
+    </s:arbitrarywsdl>
+  </s:processor>
+  <s:processor name="det3D4" workers="10">
+    <s:description>Service definition of function ns__GASWexecution</s:description>
+    <s:arbitrarywsdl>
+      <s:wsdl>http://egee1.unice.fr/wsdl/gasw_service_10_6.wsdl</s:wsdl>
+      <s:operation>GASWexecution</s:operation>
+    </s:arbitrarywsdl>
+    <s:iterationstrategy>
+      <i:cross xmlns:i="http://org.embl.ebi.escience/xscufliteration/0.1beta10">
+        <i:iterator name="input6" />
+        <i:iterator name="config-file" />
+        <i:dot>
+          <i:iterator name="input5" />
+          <i:iterator name="input4" />
+          <i:iterator name="input3" />
+          <i:iterator name="input2" />
+          <i:iterator name="input1" />
+          <i:iterator name="input0" />
+        </i:dot>
+      </i:cross>
+    </s:iterationstrategy>
+  </s:processor>
+  <s:processor name="cannyAndDistanceMapAndInitModel" workers="10">
+    <s:description>Service definition of function ns__GASWexecution</s:description>
+    <s:arbitrarywsdl>
+      <s:wsdl>http://egee1.unice.fr/wsdl/gasw_service_10_6.wsdl</s:wsdl>
+      <s:operation>GASWexecution</s:operation>
+    </s:arbitrarywsdl>
+    <s:iterationstrategy>
+      <i:cross xmlns:i="http://org.embl.ebi.escience/xscufliteration/0.1beta10">
+        <i:iterator name="input5" />
+        <i:iterator name="input2" />
+        <i:iterator name="input6" />
+        <i:iterator name="input4" />
+        <i:iterator name="config-file" />
+        <i:iterator name="input3" />
+        <i:dot>
+          <i:iterator name="input1" />
+          <i:iterator name="input0" />
+        </i:dot>
+      </i:cross>
+    </s:iterationstrategy>
+  </s:processor>
+  <s:processor name="putOnWebServer">
+    <s:beanshell>
+      <s:scriptvalue>try{
+        System.out.println("Transferring LFN "+lfn );
+
+        File dir = new File("./data");
+        if(!dir.exists())
+            dir.mkdir();
+
+        if(lfn.startsWith("lfn://")){
+            lfn=lfn.replaceAll("lfn://lfc-biomed.in2p3.fr","");
+            System.out.println("Tweaking lfn to  "+lfn);
+        }
+
+
+        Runtime rt = Runtime.getRuntime();
+        String [] cmd1 = new String [4];
+        cmd1[0] = "lcg-cp";
+        cmd1[1] = "-v";
+        cmd1[2]="lfn:"+lfn;
+        cmd1[3]="file:data/"+(new File(lfn)).getName();
+
+	Process p1 = rt.exec(cmd1);
+	p1.waitFor();
+
+	BufferedReader in = new BufferedReader(new InputStreamReader(p1.getInputStream()));
+
+	String line ="";
+	while((line=in.readLine())!=null){
+            System.out.println(line);
+	}
+
+        BufferedReader err = new BufferedReader(new InputStreamReader(p1.getErrorStream()));
+
+	String lineerr ="";
+	while((lineerr = err.readLine())!=null){
+            System.out.println(lineerr);
+	}
+
+        p1.getErrorStream().close();
+	p1.getInputStream().close();
+	p1.getOutputStream().close();
+	}
+        catch(Exception e){
+            e.printStackTrace();
+	}
+	String pwd = System.getenv("PWD");
+        String localMachine = "";
+        try {
+            localMachine = java.net.InetAddress.getLocalHost().getCanonicalHostName();
+        }
+        catch(java.net.UnknownHostException ex) {
+        }
+        out = "https://"+localMachine+"/workflows/"+(new File(pwd)).getName()+"/data/"+(new File(lfn)).getName();</s:scriptvalue>
+      <s:beanshellinputlist>
+        <s:beanshellinput s:syntactictype="'text/plain'">lfn</s:beanshellinput>
+      </s:beanshellinputlist>
+      <s:beanshelloutputlist>
+        <s:beanshelloutput s:syntactictype="'text/plain'">out</s:beanshelloutput>
+      </s:beanshelloutputlist>
+      <s:dependencies s:classloader="iteration" />
+    </s:beanshell>
+  </s:processor>
+  <s:processor name="putOnWebServer1">
+    <s:beanshell>
+      <s:scriptvalue>try{
+        System.out.println("Transferring LFN "+lfn );
+
+        File dir = new File("./data");
+        if(!dir.exists())
+            dir.mkdir();
+
+        if(lfn.startsWith("lfn://")){
+            lfn=lfn.replaceAll("lfn://lfc-biomed.in2p3.fr","");
+            System.out.println("Tweaking lfn to  "+lfn);
+        }
+
+
+        Runtime rt = Runtime.getRuntime();
+        String [] cmd1 = new String [4];
+        cmd1[0] = "lcg-cp";
+        cmd1[1] = "-v";
+        cmd1[2]="lfn:"+lfn;
+        cmd1[3]="file:data/"+(new File(lfn)).getName();
+
+	Process p1 = rt.exec(cmd1);
+	p1.waitFor();
+
+	BufferedReader in = new BufferedReader(new InputStreamReader(p1.getInputStream()));
+
+	String line ="";
+	while((line=in.readLine())!=null){
+            System.out.println(line);
+	}
+
+        BufferedReader err = new BufferedReader(new InputStreamReader(p1.getErrorStream()));
+
+	String lineerr ="";
+	while((lineerr = err.readLine())!=null){
+            System.out.println(lineerr);
+	}
+
+        p1.getErrorStream().close();
+	p1.getInputStream().close();
+	p1.getOutputStream().close();
+	}
+        catch(Exception e){
+            e.printStackTrace();
+	}
+	String pwd = System.getenv("PWD");
+        String localMachine = "";
+        try {
+            localMachine = java.net.InetAddress.getLocalHost().getCanonicalHostName();
+        }
+        catch(java.net.UnknownHostException ex) {
+        }
+        out = "https://"+localMachine+"/workflows/"+(new File(pwd)).getName()+"/data/"+(new File(lfn)).getName();</s:scriptvalue>
+      <s:beanshellinputlist>
+        <s:beanshellinput s:syntactictype="'text/plain'">lfn</s:beanshellinput>
+      </s:beanshellinputlist>
+      <s:beanshelloutputlist>
+        <s:beanshelloutput s:syntactictype="'text/plain'">out</s:beanshelloutput>
+      </s:beanshelloutputlist>
+      <s:dependencies s:classloader="iteration" />
+    </s:beanshell>
+  </s:processor>
+  <s:link source="cannyAndDistanceMapAndInitModel:result1" sink="det3D4:input5" />
+  <s:link source="cannyAndDistanceMapAndInitModel:result3" sink="det3D4:input4" />
+  <s:link source="cannyAndDistanceMapAndInitModel:result4" sink="det3D4:input3" />
+  <s:link source="cannyAndDistanceMapAndInitModel:result5" sink="det3D4:input2" />
+  <s:link source="config:value" sink="det3D4:config-file" />
+  <s:link source="force_factor" sink="det3D4:input6" />
+  <s:link source="image_mhd" sink="mhd2qc:input0" />
+  <s:link source="init_desc:value" sink="cannyAndDistanceMapAndInitModel:config-file" />
+  <s:link source="mhd2qc:result0" sink="cannyAndDistanceMapAndInitModel:input0" />
+  <s:link source="mhd2qc:result0" sink="det3D4:input0" />
+  <s:link source="mhd2qc:result1" sink="det3D4:input1" />
+  <s:link source="model_r0_best_resolution_vtk" sink="cannyAndDistanceMapAndInitModel:input2" />
+  <s:link source="model_r1_vtk" sink="cannyAndDistanceMapAndInitModel:input4" />
+  <s:link source="model_r2_vtk" sink="cannyAndDistanceMapAndInitModel:input5" />
+  <s:link source="model_r3_worst_resolution_vtk" sink="cannyAndDistanceMapAndInitModel:input6" />
+  <s:link source="template_init_par" sink="cannyAndDistanceMapAndInitModel:input3" />
+  <s:link source="cannyAndDistanceMapAndInitModel:result5" sink="putOnWebServer1:lfn" />
+  <s:link source="det3D4:result1" sink="putOnWebServer:lfn" />
+  <s:link source="mhd2qc:result1" sink="cannyAndDistanceMapAndInitModel:input1" />
+  <s:link source="mhd2qc_description:value" sink="mhd2qc:config-file" />
+  <s:link source="cannyAndDistanceMapAndInitModel:result0" sink="initialized_surface_r0" />
+  <s:link source="cannyAndDistanceMapAndInitModel:result1" sink="initialized_volume_r0" />
+  <s:link source="cannyAndDistanceMapAndInitModel:result2" sink="initialized_image" />
+  <s:link source="cannyAndDistanceMapAndInitModel:result3" sink="initialized_volume_r1" />
+  <s:link source="cannyAndDistanceMapAndInitModel:result4" sink="initialized_volume_r2" />
+  <s:link source="det3D4:result0" sink="results_tgz" />
+  <s:link source="mhd2qc:result0" sink="image_header" />
+  <s:link source="mhd2qc:result1" sink="image_vol" />
+  <s:link source="putOnWebServer1:out" sink="initialized_volume_r3" />
+  <s:link source="putOnWebServer:out" sink="result_mesh_vtk" />
+  <s:source name="image_mhd" />
+  <s:source name="model_r0_best_resolution_vtk" />
+  <s:source name="model_r1_vtk" />
+  <s:source name="model_r2_vtk" />
+  <s:source name="model_r3_worst_resolution_vtk" />
+  <s:source name="template_init_par" />
+  <s:source name="force_factor" />
+  <s:sink name="results_tgz" />
+  <s:sink name="result_mesh_vtk" />
+  <s:sink name="initialized_surface_r0" />
+  <s:sink name="initialized_volume_r3" />
+  <s:sink name="initialized_image" />
+  <s:sink name="initialized_volume_r2" />
+  <s:sink name="initialized_volume_r1" />
+  <s:sink name="initialized_volume_r0" />
+  <s:sink name="image_header" />
+  <s:sink name="image_vol" />
+</s:scufl>
+

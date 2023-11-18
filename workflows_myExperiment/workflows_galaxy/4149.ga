@@ -1,0 +1,294 @@
+{
+    "a_galaxy_workflow": "true", 
+    "annotation": "Filter and group reads from a mapping Bam file", 
+    "format-version": "0.1", 
+    "name": "NGS : Group and filter mapped reads", 
+    "steps": {
+        "0": {
+            "annotation": "", 
+            "id": 0, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "Reference genome"
+                }
+            ], 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 231.00003051757812, 
+                "top": 252.38333129882812
+            }, 
+            "tool_errors": null, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"Reference genome\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "user_outputs": []
+        }, 
+        "1": {
+            "annotation": "", 
+            "id": 1, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "BAM file"
+                }
+            ], 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 200.00003051757812, 
+                "top": 469.3833312988281
+            }, 
+            "tool_errors": null, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"BAM file\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "user_outputs": []
+        }, 
+        "2": {
+            "annotation": "", 
+            "id": 2, 
+            "input_connections": {
+                "refOrHistory|input1": {
+                    "id": 1, 
+                    "output_name": "output"
+                }, 
+                "refOrHistory|ownFile": {
+                    "id": 0, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Generate pileup", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 492.61669921875, 
+                "top": 200
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/sam_pileup/sam_pileup/1.1.1", 
+            "tool_state": "{\"__page__\": 0, \"c\": \"{\\\"__current_case__\\\": 1, \\\"phredProb\\\": \\\"40\\\", \\\"consensus\\\": \\\"yes\\\", \\\"hapNum\\\": \\\"2\\\", \\\"fraction\\\": \\\"0.001\\\", \\\"theta\\\": \\\"0.85\\\"}\", \"indels\": \"\\\"no\\\"\", \"refOrHistory\": \"{\\\"input1\\\": null, \\\"reference\\\": \\\"history\\\", \\\"__current_case__\\\": 1, \\\"ownFile\\\": null}\", \"chromInfo\": \"\\\"/opt/galaxy-dist/database/files/000/dataset_229.dat\\\"\", \"__rerun_remap_job_id__\": null, \"lastCol\": \"\\\"yes\\\"\", \"mapCap\": \"\\\"60\\\"\"}", 
+            "tool_version": "1.1.1", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "3": {
+            "annotation": "", 
+            "id": 3, 
+            "input_connections": {
+                "input1": {
+                    "id": 1, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "BAM-to-SAM", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "sam"
+                }
+            ], 
+            "position": {
+                "left": 696.61669921875, 
+                "top": 495
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bam_to_sam/bam_to_sam/1.0.3", 
+            "tool_state": "{\"header\": \"\\\"False\\\"\", \"__rerun_remap_job_id__\": null, \"input1\": \"null\", \"chromInfo\": \"\\\"/opt/galaxy-dist/database/files/000/dataset_229.dat\\\"\", \"__page__\": 0}", 
+            "tool_version": "1.0.3", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "4": {
+            "annotation": "", 
+            "id": 4, 
+            "input_connections": {
+                "input1": {
+                    "id": 2, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Group", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 780.61669921875, 
+                "top": 219
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "Grouping1", 
+            "tool_state": "{\"operations\": \"[{\\\"opcol\\\": {\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": \\\"8\\\"}, \\\"__index__\\\": 0, \\\"optype\\\": \\\"mean\\\", \\\"opround\\\": \\\"no\\\"}]\", \"__page__\": 0, \"input1\": \"null\", \"groupcol\": \"{\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": \\\"1\\\"}\", \"__rerun_remap_job_id__\": null, \"ignorecase\": \"\\\"False\\\"\", \"chromInfo\": \"\\\"/opt/galaxy-dist/database/files/000/dataset_229.dat\\\"\"}", 
+            "tool_version": "2.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "5": {
+            "annotation": "", 
+            "id": 5, 
+            "input_connections": {
+                "input": {
+                    "id": 4, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Filter", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 984.61669921875, 
+                "top": 218
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "testtoolshed.g2.bx.psu.edu/repos/greg/gregs_filter/Filter1/3.3.0", 
+            "tool_state": "{\"__page__\": 0, \"cond\": \"\\\"c2>19\\\"\", \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/opt/galaxy-dist/database/files/000/dataset_229.dat\\\"\", \"input\": \"null\"}", 
+            "tool_version": "3.3.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "6": {
+            "annotation": "", 
+            "id": 6, 
+            "input_connections": {
+                "input1": {
+                    "id": 5, 
+                    "output_name": "out_file1"
+                }, 
+                "input2": {
+                    "id": 3, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Join two Datasets", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 1160.61669921875, 
+                "top": 355
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "join1", 
+            "tool_state": "{\"input2\": \"null\", \"__page__\": 0, \"field1\": \"{\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": \\\"1\\\"}\", \"partial\": \"\\\"-p\\\"\", \"field2\": \"{\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": \\\"3\\\"}\", \"__rerun_remap_job_id__\": null, \"fill_empty_columns\": \"{\\\"fill_empty_columns_switch\\\": \\\"no_fill\\\", \\\"__current_case__\\\": 0}\", \"unmatched\": \"\\\"-u\\\"\", \"input1\": \"null\", \"chromInfo\": \"\\\"/opt/galaxy-dist/database/files/000/dataset_229.dat\\\"\"}", 
+            "tool_version": "2.0.2", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "7": {
+            "annotation": "", 
+            "id": 7, 
+            "input_connections": {
+                "input1": {
+                    "id": 6, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Group", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 1386.61669921875, 
+                "top": 322
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "Grouping1", 
+            "tool_state": "{\"operations\": \"[{\\\"opcol\\\": {\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": \\\"3\\\"}, \\\"__index__\\\": 0, \\\"optype\\\": \\\"length\\\", \\\"opround\\\": \\\"no\\\"}]\", \"__page__\": 0, \"input1\": \"null\", \"groupcol\": \"{\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": \\\"1\\\"}\", \"__rerun_remap_job_id__\": null, \"ignorecase\": \"\\\"False\\\"\", \"chromInfo\": \"\\\"/opt/galaxy-dist/database/files/000/dataset_229.dat\\\"\"}", 
+            "tool_version": "2.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "8": {
+            "annotation": "", 
+            "id": 8, 
+            "input_connections": {
+                "input": {
+                    "id": 6, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Filter", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 1369.61669921875, 
+                "top": 478
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "testtoolshed.g2.bx.psu.edu/repos/greg/gregs_filter/Filter1/3.3.0", 
+            "tool_state": "{\"__page__\": 0, \"cond\": \"\\\"c7>19\\\"\", \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/opt/galaxy-dist/database/files/000/dataset_229.dat\\\"\", \"input\": \"null\"}", 
+            "tool_version": "3.3.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "9": {
+            "annotation": "", 
+            "id": 9, 
+            "input_connections": {
+                "input1": {
+                    "id": 8, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Group", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 1631.61669921875, 
+                "top": 445
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "Grouping1", 
+            "tool_state": "{\"operations\": \"[{\\\"opcol\\\": {\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": \\\"3\\\"}, \\\"__index__\\\": 0, \\\"optype\\\": \\\"unique\\\", \\\"opround\\\": \\\"no\\\"}]\", \"__page__\": 0, \"input1\": \"null\", \"groupcol\": \"{\\\"__class__\\\": \\\"UnvalidatedValue\\\", \\\"value\\\": \\\"1\\\"}\", \"__rerun_remap_job_id__\": null, \"ignorecase\": \"\\\"False\\\"\", \"chromInfo\": \"\\\"/opt/galaxy-dist/database/files/000/dataset_229.dat\\\"\"}", 
+            "tool_version": "2.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }
+    }
+}
